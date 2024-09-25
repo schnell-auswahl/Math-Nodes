@@ -1,5 +1,5 @@
 function _1(md){return(
-md`# LiteGraph Example 1
+md`# LiteGraph Example 1.1
 Here is a simple [Litegraph.js@0.7.8](https://github.com/jagenjo/litegraph.js) example demonstrating Observable integration and how to create a custom operation (multiplication).
 
 Graph values will update in real time.  Tweaking the numbers in either \`Const Number\` node will change results in \`Watch\`. You can also add/remove nodes using the right-click context menu to create more complex behaviours.`
