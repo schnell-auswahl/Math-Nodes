@@ -1,0 +1,14 @@
+{
+  "name": "@jerdak/litegraph-example",
+  "main": "Litegraph_Test2.js",
+  "version": "207.0.0",
+  "homepage": "https://observablehq.com/@jerdak/litegraph-example",
+  "author": {
+    "name": "j.carson",
+    "url": "https://observablehq.com/@jerdak"
+  },
+  "type": "module",
+  "peerDependencies": {
+    "@observablehq/runtime": "4 - 5"
+  }
+}
