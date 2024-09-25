@@ -53,6 +53,182 @@ class CustomMultNode {
 
 
 
+
+
+// function _MathFormula(){return(
+// class MathFormula {
+//   constructor(){
+//     this.addInput("x", "number");
+//     this.addInput("y", "number");
+//     this.addOutput("", "number");
+//     this.properties = { x: 1.0, y: 1.0, formula: "x+y" };
+//     this.code_widget = this.addWidget(
+//         "text",
+//         "F(x,y)",
+//         this.properties.formula,
+//         function(v, canvas, node) {
+//             node.properties.formula = v;
+//         }
+//     );
+//     this.addWidget("toggle", "allow", LiteGraph.allow_scripts, function(v) {
+//         LiteGraph.allow_scripts = v;
+//     });
+//     this._func = null;
+  
+
+//   this.title = "Formula";
+//   this.desc = "Compute formula";
+//   this.size = [160, 100];
+//   }
+
+// // MathAverageFilter.prototype.onPropertyChanged = function(name, value) {
+// //   if (name == "formula") {
+// //       this.code_widget.value = value;
+// //   }
+// // };
+
+//   onExecute(){
+//   // if (!LiteGraph.allow_scripts) {
+//   //     return;
+//   // }
+
+//     var x = this.getInputData(0);
+//     var y = this.getInputData(1);
+//     if (x != null) {
+//         this.properties["x"] = x;
+//     } else {
+//         x = this.properties["x"];
+//     }
+
+//     if (y != null) {
+//         this.properties["y"] = y;
+//     } else {
+//         y = this.properties["y"];
+//     }
+
+//     var f = this.properties["formula"];
+
+//     var value;
+//     try {
+//         if (!this._func || this._func_code != this.properties.formula) {
+//             this._func = new Function(
+//                 "x",
+//                 "y",
+//                 "TIME",
+//                 "return " + this.properties.formula
+//             );
+//             this._func_code = this.properties.formula;
+//         }
+//         value = this._func(x, y, this.graph.globaltime);
+//         this.boxcolor = null;
+//     } catch (err) {
+//         this.boxcolor = "red";
+//     }
+//     this.setOutputData(0, value);
+//   };
+
+//   getTitle() {
+//     return this._func_code || "Formula";
+//   };
+
+//   onDrawBackground() {
+//     var f = this.properties["formula"];
+//     if (this.outputs && this.outputs.length) {
+//       this.outputs[0].label = f;
+//     }
+//   };
+// })}
+
+// function _MathFormula(){return(
+// class MathFormula {
+//   constructor(){
+function _FunctionNode() {return(
+class FunctionNode {
+  constructor() {
+  this.addInput("in", "object");
+  this.addOutput("", "object");
+  this.properties = { x: 1.0, formula: "x^2", str: "x^2" };
+  this.code_widget = this.addWidget(
+      "text",
+      "F(x,y)",
+      this.properties.formula,
+      function(v, canvas, node) {
+          node.properties.formula = v;
+      }
+  );
+  // this.addWidget("toggle", "allow", LiteGraph.allow_scripts, function(v) {
+  //     LiteGraph.allow_scripts = v;
+  // });
+  this._func = null;
+
+  this.title = "Func";
+  this.desc = "Compute formula";
+  this.size = [160, 100];
+  }
+
+// MathAverageFilter.prototype.onPropertyChanged = function(name, value) {
+//     if (name == "formula") {
+//         this.code_widget.value = value;
+//     }
+// };
+
+  onExecute() {
+    // if (!LiteGraph.allow_scripts) {
+    //     return;
+    // }
+
+    var x = this.getInputData(0)["value"];
+    // var y = this.getInputData(1);
+    var str = this.getInputData(0)["str"];
+    if (x != null) {
+        this.properties["x"] = x;
+    } else {
+        x = this.properties["x"];
+    }
+
+    if (str != null) {
+        this.properties["str"] = str;
+    } else {
+        str = this.properties["str"];
+    }
+
+    var f = this.properties["formula"];
+
+    var value;
+    try {
+        if (!this._func || this._func_code != this.properties.formula) {
+            this._func = new Function(
+                "x",
+                "t",
+                "return " + this.properties.formula
+            );
+            this._func_code = this.properties.formula;
+        }
+        value = this._func(x, this.graph.globaltime);
+        this.boxcolor = null;
+    } catch (err) {
+        this.boxcolor = "red";
+    }
+    this.setOutputData(0, value);
+  };
+
+  getTitle() {
+  // TODO: Display math nicely
+    return this._func_code || "Funktion";
+  };
+
+  onDrawBackground() {
+  // TODO: Change this to something like "f(x)"
+    var f = this.properties["formula"];
+    if (this.outputs && this.outputs.length) {
+        this.outputs[0].label = f;
+    }
+  };
+})};
+
+
+
+
 function _ObservableNode(){return(
 class ObservableNode {
   constructor(mutator){
@@ -76,14 +252,17 @@ class ObservableNode {
   }
 }
 )}
-
-function _graph(graphCell,LiteGraph,CustomMultNode,ObservableNode,$0)
+function _graph(graphCell,LiteGraph,CustomMultNode,ObservableNode,FunctionNode,$0)
+// function _graph(graphCell,LiteGraph,CustomMultNode,ObservableNode,$0)
+// function _graph(graphCell,LiteGraph,CustomMultNode,ObservableNode,MathFormula,$0)
 {
   graphCell;
   
   // Register our new custom node
   LiteGraph.registerNodeType("custom/multiply",CustomMultNode);
   LiteGraph.registerNodeType("custom/observable",ObservableNode);
+  LiteGraph.registerNodeType("custom/func", FunctionNode);
+  // LiteGraph.registerNodeType("custom/formula", MathFormula);
   
   var graph = new LiteGraph.LGraph();
   var canvas = new LiteGraph.LGraphCanvas("#graphDiv", graph);
@@ -157,7 +336,11 @@ export default function define(runtime, observer) {
   main.variable(observer()).define(["md"], _5);
   main.variable(observer("CustomMultNode")).define("CustomMultNode", _CustomMultNode);
   main.variable(observer("ObservableNode")).define("ObservableNode", _ObservableNode);
-  main.variable(observer("graph")).define("graph", ["graphCell","LiteGraph","CustomMultNode","ObservableNode","mutable results"], _graph);
+  // main.variable(observer("MathFormula")).define("MathFormula", _MathFormula);
+  main.variable(observer("FunctionNode")).define("FunctionNode", _FunctionNode);
+  // main.variable(observer("graph")).define("graph", ["graphCell","LiteGraph","CustomMultNode","ObservableNode","mutable results"], _graph);
+  // main.variable(observer("graph")).define("graph", ["graphCell","LiteGraph","CustomMultNode","ObservableNode","MathFormula","mutable results"], _graph);
+  main.variable(observer("graph")).define("graph", ["graphCell","LiteGraph","CustomMultNode","ObservableNode","FunctionNode","mutable results"], _graph);
   main.variable(observer("LiteGraph")).define("LiteGraph", ["require"], _LiteGraph);
   return main;
 }

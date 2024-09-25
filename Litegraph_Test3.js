@@ -70,27 +70,27 @@ function _CustomGRANode(){return(
 
 
 function _ObservableNode(){return(
-class ObservableNode {
-  constructor(mutator){
-    this.title = "ObservableNode";
-    this.addInput("A","number");
-    this.addOutput("A","number");
-    this.properties = { precision: 0.1 };
-    this.mutator = mutator;
+  class ObservableNode {
+    constructor(mutator){
+      this.title = "ObservableNode";
+      this.addInput("A","number");
+      this.addOutput("A","number");
+      this.properties = { precision: 0.1 };
+      this.mutator = mutator;
+      
+      console.log("Created");
+    }
     
-    console.log("Created");
+    setMutator(callback){
+      this.mutator = callback;
+    }
+    
+    onExecute(){
+      let a = this.getInputData(0) || 0;
+      if(this.mutator)this.mutator(a);
+      this.setOutputData(0,a);
+    }
   }
-  
-  setMutator(callback){
-    this.mutator = callback;
-  }
-  
-  onExecute(){
-    let a = this.getInputData(0) || 0;
-    if(this.mutator)this.mutator(a);
-    this.setOutputData(0,a);
-  }
-}
 )}
 
 function _graph(graphCell,LiteGraph,CustomMultNode,ObservableNode, CustomGRANode, $0)
