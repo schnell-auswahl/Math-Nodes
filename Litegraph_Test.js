@@ -234,14 +234,14 @@ function _CustNumberNode(){ return(
     constructor() {
       this.addOutput("value", "object");
       // this.addProperty("value", 1.0);
-      this.properties = { value: 1.0 }
+      this.properties = { value: 1.0, str: "a" };
       this.widget = this.addWidget("number","value",1,"value");
       this.widgets_up = true;
       this.size = [180, 30];
     };
 
     onExecute() {
-      var output = {value: parseFloat(this.properties["value"]),  str: "a"}
+      var output = {value: parseFloat(this.properties["value"]),  str: this.properties["str"]}
       this.setOutputData(0, output);
     };
 
@@ -264,10 +264,6 @@ function _CustNumberNode(){ return(
     };
   }
 )}
-
-
-
-
 
 
 
@@ -303,15 +299,19 @@ function _graph(graphCell,LiteGraph,CustomMultNode,FunctionNode,CustNumberNode,$
    canvas.prompt = (title,value,callback,event)=>{ return null; };
 
   // Set up a simple example multipling A*B (where A & B are const numeric inputs)
-  var nodeConstA = LiteGraph.createNode("basic/const");
-  nodeConstA.pos = [200,200];
-  nodeConstA.setValue(4.5);
-  graph.add(nodeConstA);
+  // var nodeConstA = LiteGraph.createNode("basic/const");
+  // nodeConstA.pos = [200,200];
+  // nodeConstA.setValue(4.5);
+  // graph.add(nodeConstA);
 
-  var nodeConstB = LiteGraph.createNode("basic/const");
-  nodeConstB.pos = [200,300];
-  nodeConstB.setValue(1.5);
-  graph.add(nodeConstB);
+  // var nodeConstB = LiteGraph.createNode("basic/const");
+  // nodeConstB.pos = [200,300];
+  // nodeConstB.setValue(1.5);
+  // graph.add(nodeConstB);
+
+  var nodeCustConst = LiteGraph.createNode("custom/cconst");
+  nodeCustConst.pos = [200,200];
+  graph.add(nodeCustConst);
   
   var nodeMult = LiteGraph.createNode("custom/multiply");
   nodeMult.pos = [500,250];
@@ -323,22 +323,22 @@ function _graph(graphCell,LiteGraph,CustomMultNode,FunctionNode,CustNumberNode,$
 
   // All nodes must be in the graph before connections can be made.
   //nodeConstA.connect(0,nodeMult,0);
-  nodeConstB.connect(0,nodeMult,1);
+  // nodeConstB.connect(0,nodeMult,1);
   
   var nodeWatch = LiteGraph.createNode("basic/watch");
   nodeWatch.pos = [700,250];
   graph.add(nodeWatch);
 
   // Create an Observable mutate wrapper to copy the results of our multiplcation in to the `results` var
-  var nodeObserve = LiteGraph.createNode("custom/observable");
-  nodeObserve.setMutator((value)=>{
-    $0.value = value;
-  });
-  nodeObserve.pos = [700,350];
-  graph.add(nodeObserve);
+  // var nodeObserve = LiteGraph.createNode("custom/observable");
+  // nodeObserve.setMutator((value)=>{
+  //   $0.value = value;
+  // });
+  // nodeObserve.pos = [700,350];
+  // graph.add(nodeObserve);
   
   nodeMult.connect(0, nodeWatch, 0 );
-  nodeMult.connect(0, nodeObserve, 0 );
+  // nodeMult.connect(0, nodeObserve, 0 );
   
   graph.start()
   return graph;
