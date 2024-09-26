@@ -43,6 +43,7 @@ class CustomMultNode {
   }
   
   onExecute(){
+    // console.log("osjdbfsodnfb")
     let a = this.getInputData(0) || 0;
     let b = this.getInputData(1) || 0;
     
@@ -147,7 +148,7 @@ class FunctionNode {
   constructor() {
   this.addInput("in", "object");
   this.addOutput("", "object");
-  this.properties = { x: 1.0, formula: "x^2", str: "x^2" };
+  this.properties = { x: 1.0, formula: "x**2", str: "x**2" };
   this.code_widget = this.addWidget(
       "text",
       "F(x,y)",
@@ -176,40 +177,42 @@ class FunctionNode {
     // if (!LiteGraph.allow_scripts) {
     //     return;
     // }
+    if(this.getInputData(0)) {
+      var x = this.getInputData(0)["value"];
+      // var y = this.getInputData(1);
+      var str = this.getInputData(0)["str"];
+      if (x != null) {
+          this.properties["x"] = x;
+      } else {
+          x = this.properties["x"];
+      }
 
-    var x = this.getInputData(0)["value"];
-    // var y = this.getInputData(1);
-    var str = this.getInputData(0)["str"];
-    if (x != null) {
-        this.properties["x"] = x;
-    } else {
-        x = this.properties["x"];
+      if (str != null) {
+          this.properties["str"] = str;
+      } else {
+          str = this.properties["str"];
+      }
+
+      var f = this.properties["formula"];
+
+      var value;
+      try {
+          if (!this._func || this._func_code != this.properties.formula) {
+              this._func = new Function(
+                  "x",
+                  "t",
+                  "return " + this.properties.formula
+              );
+              this._func_code = this.properties.formula;
+          }
+          value = this._func(x, this.graph.globaltime);
+          this.boxcolor = null;
+      } catch (err) {
+          this.boxcolor = "red";
+      }
+      this.setOutputData(0, {value: value, str: this.properties["str"]});
+      // this.setOutputData(0, value);
     }
-
-    if (str != null) {
-        this.properties["str"] = str;
-    } else {
-        str = this.properties["str"];
-    }
-
-    var f = this.properties["formula"];
-
-    var value;
-    try {
-        if (!this._func || this._func_code != this.properties.formula) {
-            this._func = new Function(
-                "x",
-                "t",
-                "return " + this.properties.formula
-            );
-            this._func_code = this.properties.formula;
-        }
-        value = this._func(x, this.graph.globaltime);
-        this.boxcolor = null;
-    } catch (err) {
-        this.boxcolor = "red";
-    }
-    this.setOutputData(0, value);
   };
 
   getTitle() {
@@ -226,33 +229,49 @@ class FunctionNode {
   };
 })};
 
+function _CustNumberNode(){ return(
+  class CustNumberNode {
+    constructor() {
+      this.addOutput("value", "object");
+      // this.addProperty("value", 1.0);
+      this.properties = { value: 1.0 }
+      this.widget = this.addWidget("number","value",1,"value");
+      this.widgets_up = true;
+      this.size = [180, 30];
+    };
 
+    onExecute() {
+      var output = {value: parseFloat(this.properties["value"]),  str: "a"}
+      this.setOutputData(0, output);
+    };
 
+    getTitle() {
+      if (this.flags.collapsed) {
+          return this.properties.value;
+      }
+      return this.title;
+    };
 
-function _ObservableNode(){return(
-class ObservableNode {
-  constructor(mutator){
-    this.title = "ObservableNode";
-    this.addInput("A","number");
-    this.addOutput("A","number");
-    this.properties = { precision: 0.1 };
-    this.mutator = mutator;
-    
-    console.log("Created");
+    setValue(v) {
+      this.setProperty("value",v);
+      console.log("in setValue");
+    }
+
+    onDrawBackground() {
+      //show the current value
+      this.outputs[0].label = this.properties["value"].toFixed(3);
+      // console.log("in drawBackground");
+    };
   }
-  
-  setMutator(callback){
-    this.mutator = callback;
-  }
-  
-  onExecute(){
-    let a = this.getInputData(0) || 0;
-    if(this.mutator)this.mutator(a);
-    this.setOutputData(0,a);
-  }
-}
 )}
-function _graph(graphCell,LiteGraph,CustomMultNode,ObservableNode,FunctionNode,$0)
+
+
+
+
+
+
+
+function _graph(graphCell,LiteGraph,CustomMultNode,FunctionNode,CustNumberNode,$0)
 // function _graph(graphCell,LiteGraph,CustomMultNode,ObservableNode,$0)
 // function _graph(graphCell,LiteGraph,CustomMultNode,ObservableNode,MathFormula,$0)
 {
@@ -260,9 +279,10 @@ function _graph(graphCell,LiteGraph,CustomMultNode,ObservableNode,FunctionNode,$
   
   // Register our new custom node
   LiteGraph.registerNodeType("custom/multiply",CustomMultNode);
-  LiteGraph.registerNodeType("custom/observable",ObservableNode);
+  // LiteGraph.registerNodeType("custom/observable",ObservableNode);
   LiteGraph.registerNodeType("custom/func", FunctionNode);
   // LiteGraph.registerNodeType("custom/formula", MathFormula);
+  LiteGraph.registerNodeType("custom/cconst", CustNumberNode);
   
   var graph = new LiteGraph.LGraph();
   var canvas = new LiteGraph.LGraphCanvas("#graphDiv", graph);
@@ -339,12 +359,13 @@ export default function define(runtime, observer) {
   main.variable(observer("results")).define("results", ["mutable results"], _ => _.generator);
   main.variable(observer()).define(["md"], _5);
   main.variable(observer("CustomMultNode")).define("CustomMultNode", _CustomMultNode);
-  main.variable(observer("ObservableNode")).define("ObservableNode", _ObservableNode);
+  // main.variable(observer("ObservableNode")).define("ObservableNode", _ObservableNode);
   // main.variable(observer("MathFormula")).define("MathFormula", _MathFormula);
   main.variable(observer("FunctionNode")).define("FunctionNode", _FunctionNode);
+  main.variable(observer("CustNumberNode")).define("CustNumberNode", _CustNumberNode);
   // main.variable(observer("graph")).define("graph", ["graphCell","LiteGraph","CustomMultNode","ObservableNode","mutable results"], _graph);
   // main.variable(observer("graph")).define("graph", ["graphCell","LiteGraph","CustomMultNode","ObservableNode","MathFormula","mutable results"], _graph);
-  main.variable(observer("graph")).define("graph", ["graphCell","LiteGraph","CustomMultNode","ObservableNode","FunctionNode","mutable results"], _graph);
+  main.variable(observer("graph")).define("graph", ["graphCell","LiteGraph","CustomMultNode","FunctionNode","CustNumberNode","mutable results"], _graph);
   main.variable(observer("LiteGraph")).define("LiteGraph", ["require"], _LiteGraph);
   return main;
 }
