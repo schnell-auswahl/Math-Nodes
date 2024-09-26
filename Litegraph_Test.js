@@ -163,7 +163,7 @@ class FunctionNode {
 
   this.title = "Func";
   this.desc = "Compute formula";
-  this.size = [160, 100];
+  this.size = [160, 70];
   }
 
 // MathAverageFilter.prototype.onPropertyChanged = function(name, value) {
@@ -296,6 +296,10 @@ function _graph(graphCell,LiteGraph,CustomMultNode,ObservableNode,FunctionNode,$
   var nodeMult = LiteGraph.createNode("custom/multiply");
   nodeMult.pos = [500,250];
   graph.add(nodeMult);
+
+  var nodeFunc1 = LiteGraph.createNode("custom/func");
+  nodeFunc1.pos = [500,350];
+  graph.add(nodeFunc1);
 
   // All nodes must be in the graph before connections can be made.
   //nodeConstA.connect(0,nodeMult,0);
