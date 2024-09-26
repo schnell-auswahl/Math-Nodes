@@ -59,7 +59,7 @@ class FunctionNode {
   constructor() {
   this.addInput("in", "object");
   this.addOutput("", "object");
-  this.properties = { x: 1.0, formula: "x**2", str: "x**2" };
+  this.properties = { x: 1.0, formula: "x**2", str: "x**2", uvName: "x" };
   this.code_widget = this.addWidget(
       "text",
       "F(x,y)",
@@ -92,6 +92,7 @@ class FunctionNode {
       var x = this.getInputData(0)["value"];
       // var y = this.getInputData(1);
       var str = this.getInputData(0)["str"];
+      var uvName = this.getInputData(0)["uvName"];
       if (x != null) {
           this.properties["x"] = x;
       } else {
@@ -102,6 +103,12 @@ class FunctionNode {
           this.properties["str"] = str;
       } else {
           str = this.properties["str"];
+      }
+
+      if (uvName != null) {
+          this.properties["uvName"] = uvName;
+      } else {
+          uvName = this.properties["uvName"];
       }
 
       var f = this.properties["formula"];
@@ -121,7 +128,7 @@ class FunctionNode {
       } catch (err) {
           this.boxcolor = "red";
       }
-      this.setOutputData(0, {value: value, str: this.properties["str"]});
+      this.setOutputData(0, {value: value, str: this.properties["str"], uvName: this.properties["uvName"]});
       // this.setOutputData(0, value);
     }
   };
@@ -145,14 +152,18 @@ function _CustNumberNode(){ return(
     constructor() {
       this.addOutput("value", "object");
       // this.addProperty("value", 1.0);
-      this.properties = { value: 1.0, str: "a" };
+      this.properties = { value: 1.0, str: "x"};
       this.widget = this.addWidget("number","value",1,"value");
       this.widgets_up = true;
       this.size = [180, 30];
     };
 
     onExecute() {
-      var output = {value: parseFloat(this.properties["value"]),  str: this.properties["str"]}
+      var output = {
+        value: parseFloat(this.properties["value"]),
+        str: this.properties["str"],
+        uvName: this.properties["str"]
+      }
       this.setOutputData(0, output);
     };
 
@@ -180,13 +191,54 @@ function _CustNumberNode(){ return(
 // function _CustNumberNode(){ return(
 //   class CustNumberNode {
 //     constructor() {
-function _CustWatchNode() { return(
-  class CustWatchNode {
+function _CustWatchNodeString() { return(
+  class CustWatchNodeString {
     constructor() {
       this.size = [60, 30];
       this.addInput("value", 0, { label: "" });
       this.value = 0;
-      this.title = "Watch";
+      this.title = "Gleichung";
+      this.desc = "Show value of input";
+    }
+
+    onExecute() {
+      if (this.inputs[0]) {
+          this.value = this.getInputData(0);
+      }
+    };
+
+    getTitle() {
+      if (this.flags.collapsed) {
+          return this.inputs[0].label;
+      }
+      return this.title;
+    };
+
+    toString = function(o) {
+      if (o == null) {
+          return "null";
+      } else if (!o["str"]) {
+        return "null";
+      } else {
+          return "f(" + o["uvName"] + ") = " + o["str"];
+      }
+    };
+
+    onDrawBackground = function(ctx) {
+      //show the current value
+      this.inputs[0].label = this.toString(this.value);
+      // this.inputs[0].label = "Hi Nico"
+    };
+  }
+)}
+
+function _CustWatchNodeValue() { return(
+  class CustWatchNodeValue {
+    constructor() {
+      this.size = [60, 30];
+      this.addInput("value", 0, { label: "" });
+      this.value = 0;
+      this.title = "Wert";
       this.desc = "Show value of input";
     }
 
@@ -208,19 +260,14 @@ function _CustWatchNode() { return(
           return "null";
       } else if (o.constructor === Number) {
           return o.toFixed(3);
-      } else if (o.constructor === Array) {
-          var str = "[";
-          for (var i = 0; i < o.length; ++i) {
-              str += Watch.toString(o[i]) + (i + 1 != o.length ? "," : "");
-          }
-          str += "]";
-          return str;
+      } else if (!o["value"]) {
+          return "null";
       } else {
           // return String(o);
           // Math.round((num + Number.EPSILON) * 100) / 100
           var num = o["value"];
           num = Math.round((num + Number.EPSILON) * 100) / 100;
-          return "Value: " + num + ", String: " + o["str"];
+          return num;
       }
     };
 
@@ -235,8 +282,7 @@ function _CustWatchNode() { return(
 
 
 
-
-function _graph(graphCell,LiteGraph,CustomMultNode,FunctionNode,CustNumberNode,CustWatchNode,$0)
+function _graph(graphCell,LiteGraph,CustomMultNode,FunctionNode,CustNumberNode,CustWatchNodeString,CustWatchNodeValue,$0)
 // function _graph(graphCell,LiteGraph,CustomMultNode,ObservableNode,$0)
 // function _graph(graphCell,LiteGraph,CustomMultNode,ObservableNode,MathFormula,$0)
 {
@@ -248,7 +294,8 @@ function _graph(graphCell,LiteGraph,CustomMultNode,FunctionNode,CustNumberNode,C
   LiteGraph.registerNodeType("custom/func", FunctionNode);
   // LiteGraph.registerNodeType("custom/formula", MathFormula);
   LiteGraph.registerNodeType("custom/cconst", CustNumberNode);
-  LiteGraph.registerNodeType("custom/cwatch", CustWatchNode);
+  LiteGraph.registerNodeType("custom/cwatchS", CustWatchNodeString);
+  LiteGraph.registerNodeType("custom/cwatchV", CustWatchNodeValue);
   
   var graph = new LiteGraph.LGraph();
   var canvas = new LiteGraph.LGraphCanvas("#graphDiv", graph);
@@ -291,9 +338,13 @@ function _graph(graphCell,LiteGraph,CustomMultNode,FunctionNode,CustNumberNode,C
   nodeFunc1.pos = [500,350];
   graph.add(nodeFunc1);
 
-  var nodeCustWatch = LiteGraph.createNode("custom/cwatch");
-  nodeCustWatch.pos = [500,100];
-  graph.add(nodeCustWatch);
+  var nodeCustWatchS = LiteGraph.createNode("custom/cwatchS");
+  nodeCustWatchS.pos = [500,100];
+  graph.add(nodeCustWatchS);
+
+  var nodeCustWatchV = LiteGraph.createNode("custom/cwatchV");
+  nodeCustWatchV.pos = [500,170];
+  graph.add(nodeCustWatchV);
 
   // All nodes must be in the graph before connections can be made.
   //nodeConstA.connect(0,nodeMult,0);
@@ -337,10 +388,11 @@ export default function define(runtime, observer) {
   // main.variable(observer("MathFormula")).define("MathFormula", _MathFormula);
   main.variable(observer("FunctionNode")).define("FunctionNode", _FunctionNode);
   main.variable(observer("CustNumberNode")).define("CustNumberNode", _CustNumberNode);
-  main.variable(observer("CustWatchNode")).define("CustWatchNode", _CustWatchNode);
+  main.variable(observer("CustWatchNodeString")).define("CustWatchNodeString", _CustWatchNodeString);
+  main.variable(observer("CustWatchNodeValue")).define("CustWatchNodeValue", _CustWatchNodeValue);
   // main.variable(observer("graph")).define("graph", ["graphCell","LiteGraph","CustomMultNode","ObservableNode","mutable results"], _graph);
   // main.variable(observer("graph")).define("graph", ["graphCell","LiteGraph","CustomMultNode","ObservableNode","MathFormula","mutable results"], _graph);
-  main.variable(observer("graph")).define("graph", ["graphCell","LiteGraph","CustomMultNode","FunctionNode","CustNumberNode","CustWatchNode","mutable results"], _graph);
+  main.variable(observer("graph")).define("graph", ["graphCell","LiteGraph","CustomMultNode","FunctionNode","CustNumberNode","CustWatchNodeString","CustWatchNodeValue","mutable results"], _graph);
   main.variable(observer("LiteGraph")).define("LiteGraph", ["require"], _LiteGraph);
   return main;
 }
