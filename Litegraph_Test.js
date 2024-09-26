@@ -59,18 +59,19 @@ class FunctionNode {
   constructor() {
   this.addInput("in", "object");
   this.addOutput("", "object");
-  this.properties = { x: 1.0, formula: "x**2", str: "x**2", uvName: "x" };
+  this.properties = { x: 1.0, formula: "x**2", str: "x", uvName: ""};
   this.code_widget = this.addWidget(
       "text",
-      "F(x,y)",
-      this.properties.formula,
+      "",
+      // this.properties.formula,
+      "Funktionsgleichung",
       function(v, canvas, node) {
-          node.properties.formula = v;
+          var splitted = v.split("(")
+          node.properties["funcName"] = splitted[0];
+          node.properties["uvName"] = splitted[1][0];
+          node.properties.formula = v.split("=")[1];
       }
   );
-  // this.addWidget("toggle", "allow", LiteGraph.allow_scripts, function(v) {
-  //     LiteGraph.allow_scripts = v;
-  // });
   this._func = null;
 
   this.title = "Func";
@@ -111,41 +112,77 @@ class FunctionNode {
           uvName = this.properties["uvName"];
       }
 
-      var f = this.properties["formula"];
+      // var f = this.properties["formula"];
 
       var value;
+      var newString = this.properties["str"];
       try {
           if (!this._func || this._func_code != this.properties.formula) {
-              this._func = new Function(
-                  "x",
-                  "t",
-                  "return " + this.properties.formula
-              );
-              this._func_code = this.properties.formula;
+            this._func = new Function(
+                "x",
+                "t",
+                "return " + this.properties.formula
+            );
+            this._func_code = this.properties.formula;
           }
           value = this._func(x, this.graph.globaltime);
+          newString = this._insertString(this.properties["str"], this.properties["formula"], this.properties["uvName"]);
           this.boxcolor = null;
       } catch (err) {
           this.boxcolor = "red";
       }
-      this.setOutputData(0, {value: value, str: this.properties["str"], uvName: this.properties["uvName"]});
+      this.setOutputData(0, {value: value, str: newString, uvName: this.properties["uvName"]});
       // this.setOutputData(0, value);
     }
   };
 
   getTitle() {
-  // TODO: Display math nicely
-    return this._func_code || "Funktion";
+    // TODO: Display math nicely
+    // var title;
+    // if(this._func_code) {
+    //   title = "f(" + this.properties["uvName"] + ") = " + this._func_code;
+    //   return title;
+    // }
+    // return "Funktion";
+    if(this.properties["formula"] && this.properties["uvName"] && this.properties["funcName"]){
+      let title = this.properties["funcName"] + "(" + this.properties["uvName"] + ") = " + this.properties["formula"];
+      return title
+    } else {
+      return "Funktion"
+    }
   };
 
+  _insertString(oldString, formula, uvName){
+    if(oldString.length <= 1) {
+      return formula;
+    }
+    var outputString = "";
+    var parts = formula.split(uvName);
+    for (let i=0; i < parts.length -1; i++){
+      outputString = outputString + parts[i] + "(" + oldString + ")";
+    }
+    outputString = outputString + parts[parts.length-1];
+    return outputString;
+  }
+
   onDrawBackground() {
-  // TODO: Change this to something like "f(x)"
-    var f = this.properties["formula"];
-    if (this.outputs && this.outputs.length) {
-        this.outputs[0].label = f;
+    // var outlabel = this.properties["formula"];
+    // if (this.outputs && this.outputs.length) {
+    //     this.outputs[0].label = outlabel;
+    // }
+    if(this.properties["uvName"]){
+      this.inputs[0].label = this.properties["uvName"];
+    } else {
+      this.inputs[0].label = "";
+    }
+    if(this.properties["uvName"] && this.properties["funcName"]){
+      this.outputs[0].label = this.properties["funcName"] + "(" + this.properties["uvName"] + ")";
     }
   };
 })};
+
+
+
 
 function _CustNumberNode(){ return(
   class CustNumberNode {
@@ -153,25 +190,32 @@ function _CustNumberNode(){ return(
       this.addOutput("value", "object");
       // this.addProperty("value", 1.0);
       this.properties = { value: 1.0, str: "x"};
-      this.widget = this.addWidget("number","value",1,"value");
+      this.numberWidget = this.addWidget("number","Wert",1,"value", {precision: 2});
+      this.nameWidget = this.addWidget("text","Variablenname","x","str");
       this.widgets_up = true;
-      this.size = [180, 30];
+      this.size = [180, 60];
     };
 
     onExecute() {
       var output = {
         value: parseFloat(this.properties["value"]),
         str: this.properties["str"],
-        uvName: this.properties["str"]
+        uvName: this.properties["str"],
+        // funcList: ""
       }
       this.setOutputData(0, output);
     };
 
     getTitle() {
-      if (this.flags.collapsed) {
-          return this.properties.value;
+      // if (this.flags.collapsed) {
+      //     return this.properties.value;
+      // }
+      // return this.title;
+      let title = "Variable"
+      if(this.properties["str"]){
+        title = title + " " + this.properties["str"];
       }
-      return this.title;
+      return title;
     };
 
     setValue(v) {
@@ -313,7 +357,7 @@ function _graph(graphCell,LiteGraph,CustomMultNode,FunctionNode,CustNumberNode,C
    * There's no flag to disable so instead this snippet replaces
    * the `prompt` function to keep LiteGraph spawning a pop-up.
    */
-   canvas.prompt = (title,value,callback,event)=>{ return null; };
+  //  canvas.prompt = (title,value,callback,event)=>{ return null; };
 
   // Set up a simple example multipling A*B (where A & B are const numeric inputs)
   // var nodeConstA = LiteGraph.createNode("basic/const");
