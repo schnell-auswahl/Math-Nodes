@@ -60,21 +60,22 @@ function _FunctionNode() {
     class FunctionNode {
       constructor() {
         // Hauptinput und Ausgabe
-        this.addInput("in", "object");
+        this.addInput("UV", "object");
         this.addOutput("", "object");
 
         // Zusätzliche Eingänge für Parameter (4 Eingänge)
         for (let i = 0; i < 4; i++) {
-          this.addInput("param" + (i + 1), "object");
+          // this.addInput("param" + (i + 1), "object");
+          this.addInput("", "object");
         }
 
         // Initiale Eigenschaften
         this.properties = {
-          x: 1.0,
-          formula: "x**2", // Initiale Formel
-          str: "x",
+          //x: 1.0,
+          formula: "", 
+          glgr: "",
           uvName: "",
-          paramNames: [],  // Speichert die Parameternamen (a, b, ...)
+          paramNames: ["", "", "", ""],  // Speichert die Parameternamen (a, b, ...)
           paramValues: {}  // Speichert die Parameterwerte
         };
 
@@ -87,22 +88,68 @@ function _FunctionNode() {
             var splitted = v.split("(");
             node.properties["funcName"] = splitted[0];
             node.properties["uvName"] = splitted[1][0];
-            node.properties.formula = v.split("=")[1]; // Speichert die Formel
+            node.properties.formula = v.split("=")[1]; // Speichert die rechte Seite der Funktionsgleichung
+           // node.properties.formulal = v.split("=")[0]; // Speichert die linke Seite der Funktionsgleichung. Nötig wegen funcname?
           }
         );
 
         this._func = null;
+        this.oldParamNames = [];
 
-        this.title = "Func";
+        this.title = "Funktion";
         this.desc = "Compute formula";
-        this.size = [160, 100];
+        this.size = [160, 150];
       }
+
+
+      //Hiermit werden die Gleichungen zusammengeführt 
+      _insertString(oldString, formula, uvName){
+        if(oldString.length <= 1) {
+          return formula;
+        }
+        var outputString = "";
+        var parts = formula.split(uvName);
+        for (let i=0; i < parts.length -1; i++){
+          outputString = outputString + parts[i] + "(" + oldString + ")";
+        }
+        outputString = outputString + parts[parts.length-1];
+        return outputString;
+      }
+
+      getTitle() {
+        if(this.properties["formula"] && this.properties["uvName"] && this.properties["funcName"]){
+          let title = this.properties["funcName"] + "(" + this.properties["uvName"] + ") = " + this.properties["formula"];
+          return title
+        } else {
+          return "Funktion"
+        }
+      };
+
+      onDrawBackground() {
+        if(this.properties["uvName"]){
+          this.inputs[0].label = this.properties["uvName"];
+        } else {
+          this.inputs[0].label = "UV";
+        }
+        for(let i=1; i<5; i++){
+          this.inputs[i].label = this.properties["paramNames"][i]
+        }
+        // if(this.properties["paramNames"].length > 0){
+        //   this.inputs[0].label = this.properties[""];
+        // } else {
+        //   this.inputs[0].label = "UV";
+        // }
+        if(this.properties["uvName"] && this.properties["funcName"]){
+          this.outputs[0].label = this.properties["funcName"] + "(" + this.properties["uvName"] + ")";
+        }
+      };
+    
 
       onExecute() {
         if (this.getInputData(0)) {
           var inputData = this.getInputData(0);
-          var x = inputData["value"];
-          var str = inputData["str"];
+          var x = inputData["value"]; //Die interne Benennung scheint hier das Problem zu sein
+          var glgr = inputData["glgr"];
           var uvName = inputData["uvName"];
 
           // Speichern der Hauptvariablen
@@ -112,52 +159,67 @@ function _FunctionNode() {
             x = this.properties["x"];
           }
 
-          if (str != null) {
-            this.properties["str"] = str;
+          if (glgr != null) {
+            this.properties["glgr"] = glgr;
           } else {
-            str = this.properties["str"];
+            glgr = this.properties["glgr"];
           }
 
-          // Zusätzliche Parameter von den Eingängen holen
-          let paramNames = [];
-          let paramValues = {};
-          for (let i = 0; i < 4; i++) {
-            const paramInput = this.getInputData(i + 1); // Daten vom jeweiligen Parametereingang holen
-            if (paramInput) {
-              const paramName = paramInput["str"];  // Parametername aus dem Eingang
-              const paramValue = paramInput["value"]; // Wert des Parameters
+          // check if wrong variable is connected
+          if (this.properties["uvName"].length > 0 && this.properties["uvName"] != uvName){
+            this.boxcolor = "red";
+            var newString = this._insertString(this.properties["glgr"], this.properties["formula"], this.properties["uvName"]);
+            this.setOutputData(0, {value: null, glgr: newString, uvName: this.properties["uvName"]});
+          } else {
 
-              if (paramName && paramValue !== undefined) {
-                paramNames.push(paramName);           // Parameternamen speichern
-                paramValues[paramName] = paramValue;  // Wert dem Parameternamen zuordnen
+            // Zusätzliche Parameter von den Eingängen holen
+            let paramNames = [];
+            let paramValues = {};
+            for (let i = 0; i < 4; i++) {
+              const paramInput = this.getInputData(i + 1); // Daten vom jeweiligen Parametereingang holen
+              if (paramInput) {
+                const paramName = paramInput["glgr"];  // Parametername aus dem Eingang
+                const paramValue = paramInput["value"]; // Wert des Parameters
+
+                if (paramName && paramValue !== undefined) {
+                  paramNames.push(paramName);           // Parameternamen speichern
+                  this.properties["paramNames"][i + 1] = paramName;
+                  paramValues[paramName] = paramValue;  // Wert dem Parameternamen zuordnen
+                } 
+                // else {
+                //   this.properties["paramNames"][i + 1] = "";
+                // }
               }
             }
-          }
 
-          this.properties["paramNames"] = paramNames;
-          this.properties["paramValues"] = paramValues;
+            // this.properties["paramNames"] = paramNames;
+            this.properties["paramValues"] = paramValues;
 
-          // Dynamische Formel mit Parametern ausführen
-          let formula = this.properties.formula;
-          try {
-            // Erstellen der Funktionsdefinition mit dynamischen Parametern
-            if (!this._func || this._func_code !== formula) {
-              const funcBody = `return ${formula};`;
-              this._func = new Function("x", "TIME", ...paramNames, funcBody);
-              this._func_code = formula;
+            // Dynamische Formel mit Parametern ausführen
+            let formula = this.properties.formula;
+            let newString = this._insertString(this.properties["glgr"], this.properties["formula"], this.properties["uvName"]);
+            try {
+              // Erstellen der Funktionsdefinition mit dynamischen Parametern
+              if (!this._func || this._func_code !== formula || this.oldParamNames != paramNames) {
+                const funcBody = `return ${formula};`;
+                this._func = new Function(this.properties["uvName"], ...paramNames, funcBody);
+                this.oldParamNames = paramNames;
+                this._func_code = formula;
+              }
+
+              // Funktionsausführung: x, globale Zeit und zusätzliche Parameter übergeben
+              let paramValuesArray = paramNames.map(name => paramValues[name]);
+              // console.log(paramValuesArray);
+              let value = this._func(x, ...paramValuesArray);
+
+              // Ausgabe setzen
+              this.setOutputData(0, { value: value, glgr: newString, uvName: this.properties.uvName });
+              this.boxcolor = null;
+            } catch (err) {
+              console.error("Fehler in der Formel:", err);
+              this.boxcolor = "red";
+              this.setOutputData(0, { value: null, glgr: newString, uvName: this.properties.uvName });
             }
-
-            // Funktionsausführung: x, globale Zeit und zusätzliche Parameter übergeben
-            let paramValuesArray = paramNames.map(name => paramValues[name]);
-            let value = this._func(x, this.graph.globaltime, ...paramValuesArray);
-
-            // Ausgabe setzen
-            this.setOutputData(0, { value: value, str: this.properties.str, uvName: this.properties.uvName });
-            this.boxcolor = null;
-          } catch (err) {
-            console.error("Fehler in der Formel:", err);
-            this.boxcolor = "red";
-            this.setOutputData(0, { value: null, str: this.properties.str, uvName: this.properties.uvName });
           }
         }
       }
@@ -168,154 +230,15 @@ function _FunctionNode() {
 
 
 
-
-// function _FunctionNode() {return(
-// class FunctionNode {
-//   constructor() {
-//   this.addInput("in", "object");
-//   this.addOutput("", "object");
-//   this.properties = { x: 1.0, formula: "x**2", str: "x", uvName: ""};
-//   this.code_widget = this.addWidget(
-//       "text",
-//       "",
-//       // this.properties.formula,
-//       "Funktionsgleichung",
-//       function(v, canvas, node) {
-//           var splitted = v.split("(")
-//           node.properties["funcName"] = splitted[0];
-//           node.properties["uvName"] = splitted[1][0];
-//           node.properties.formula = v.split("=")[1];
-//       }
-//   );
-//   this._func = null;
-
-//   this.title = "Func";
-//   this.desc = "Compute formula";
-//   this.size = [160, 70];
-//   }
-
-// // MathAverageFilter.prototype.onPropertyChanged = function(name, value) {
-// //     if (name == "formula") {
-// //         this.code_widget.value = value;
-// //     }
-// // };
-
-//   onExecute() {
-//     // if (!LiteGraph.allow_scripts) {
-//     //     return;
-//     // }
-//     if(this.getInputData(0)) {
-//       var x = this.getInputData(0)["value"];
-//       // var y = this.getInputData(1);
-//       var str = this.getInputData(0)["str"];
-
-//       var uvName = this.getInputData(0)["uvName"];
-      
-//       if (x != null) {
-//           this.properties["x"] = x;
-//       } else {
-//           x = this.properties["x"];
-//       }
-
-//       if (str != null) {
-//           this.properties["str"] = str;
-//       } else {
-//           str = this.properties["str"];
-//       }
-
-//       // if wrong variable is connected
-//       if (this.properties["uvName"].length > 0 && this.properties["uvName"] != uvName){
-//         this.boxcolor = "red";
-//         var newString = this._insertString(this.properties["str"], this.properties["formula"], this.properties["uvName"]);
-//         this.setOutputData(0, {value: null, str: newString, uvName: this.properties["uvName"]});
-//       } else {
-//         if (uvName != null) {
-//             this.properties["uvName"] = uvName;
-//         } else {
-//             uvName = this.properties["uvName"];
-//         }
-
-//         // var f = this.properties["formula"];
-
-//         var value;
-//         var newString = this._insertString(this.properties["str"], this.properties["formula"], this.properties["uvName"]);
-//         try {
-//             if (!this._func || this._func_code != this.properties.formula) {
-//               this._func = new Function(
-//                   "x",
-//                   "TIME",
-//                   "return " + this.properties.formula
-//               );
-//               this._func_code = this.properties.formula;
-//             }
-//             value = this._func(x, this.graph.globaltime);
-//             this.boxcolor = null;
-//         } catch (err) {
-//             this.boxcolor = "red";
-//             this.setOutputData(0, {value: null, str: newString, uvName: this.properties["uvName"]});
-//         }
-//         this.setOutputData(0, {value: value, str: newString, uvName: this.properties["uvName"]});
-//         // this.setOutputData(0, value);
-//       }
-//     }
-//   };
-
-//   getTitle() {
-//     // TODO: Display math nicely
-//     // var title;
-//     // if(this._func_code) {
-//     //   title = "f(" + this.properties["uvName"] + ") = " + this._func_code;
-//     //   return title;
-//     // }
-//     // return "Funktion";
-//     if(this.properties["formula"] && this.properties["uvName"] && this.properties["funcName"]){
-//       let title = this.properties["funcName"] + "(" + this.properties["uvName"] + ") = " + this.properties["formula"];
-//       return title
-//     } else {
-//       return "Funktion"
-//     }
-//   };
-
-//   _insertString(oldString, formula, uvName){
-//     if(oldString.length <= 1) {
-//       return formula;
-//     }
-//     var outputString = "";
-//     var parts = formula.split(uvName);
-//     for (let i=0; i < parts.length -1; i++){
-//       outputString = outputString + parts[i] + "(" + oldString + ")";
-//     }
-//     outputString = outputString + parts[parts.length-1];
-//     return outputString;
-//   }
-
-//   onDrawBackground() {
-//     // var outlabel = this.properties["formula"];
-//     // if (this.outputs && this.outputs.length) {
-//     //     this.outputs[0].label = outlabel;
-//     // }
-//     if(this.properties["uvName"]){
-//       this.inputs[0].label = this.properties["uvName"];
-//     } else {
-//       this.inputs[0].label = "";
-//     }
-//     if(this.properties["uvName"] && this.properties["funcName"]){
-//       this.outputs[0].label = this.properties["funcName"] + "(" + this.properties["uvName"] + ")";
-//     }
-//   };
-// })};
-
-
-
-
 function _CustomTimeNode() { return (
   class CustomTimeNode {
     constructor() {
-      this.addOutput("in ms", "number");
-      this.addOutput("in sec", "number");
-      this.properties = { str: "x"};
+      this.addOutput("in ms", "object");
+      this.addOutput("in sec", "object");
+      this.properties = { glgr: "t", glgl: "", uvName: "t"};
+    
 
-      this.nameWidget = this.addWidget("text","Variablenname","x","str");
+      this.nameWidget = this.addWidget("text","Variablenname","t","glgr");
 
       this.title = "Time";
       this.desc = "Time";
@@ -324,31 +247,27 @@ function _CustomTimeNode() { return (
     onExecute = function() {
       var outputSec = {
         value: this.graph.globaltime,
-        str: this.properties["str"],
-        uvName: this.properties["str"],
+        glgr: this.properties["glgr"],
+        glgl: this.properties["glgl"], 
+        uvName: this.properties["glgr"],
       }
       var outputMil = {
         value: this.graph.globaltime * 1000,
-        str: this.properties["str"],
-        uvName: this.properties["str"],
+        glgr: this.properties["glgr"],
+        glgl: this.properties["glgl"],
+        uvName: this.properties["glgr"],
       }
       this.setOutputData(0, outputMil);
       this.setOutputData(1, outputSec);
     };
 
     getTitle() {
-      let title = "Variable"
-      if(this.properties["str"]){
-        title = title + " " + this.properties["str"];
+      let title = "Zeit"
+      if(this.properties["glgr"]){
+        title = title + " " + this.properties["glgr"];
       }
       return title;
     };
-
-    // onDrawBackground() {
-    //   //show the current value
-    //   // this.outputs[0].label = this.properties["value"].toFixed(3);
-    //   // console.log("in drawBackground");
-    // };
   }
 )}
 
@@ -361,9 +280,9 @@ function _CustNumberNode(){ return(
     constructor() {
       this.addOutput("value", "object");
       // this.addProperty("value", 1.0);
-      this.properties = { value: 1.0, str: "x"};
+      this.properties = { value: 1.0, glgr: "x"};
       this.numberWidget = this.addWidget("number","Wert",1,"value", {precision: 2});
-      this.nameWidget = this.addWidget("text","Variablenname","x","str");
+      this.nameWidget = this.addWidget("text","Variablenname","x","glgr");
       this.widgets_up = true;
       this.size = [180, 60];
     };
@@ -371,8 +290,9 @@ function _CustNumberNode(){ return(
     onExecute() {
       var output = {
         value: parseFloat(this.properties["value"]),
-        str: this.properties["str"],
-        uvName: this.properties["str"],
+        glgr: this.properties["glgr"],
+        glgl: "",
+        uvName: this.properties["glgr"],
         // funcList: ""
       }
       this.setOutputData(0, output);
@@ -384,8 +304,8 @@ function _CustNumberNode(){ return(
       // }
       // return this.title;
       let title = "Variable"
-      if(this.properties["str"]){
-        title = title + " " + this.properties["str"];
+      if(this.properties["glgr"]){
+        title = title + " " + this.properties["glgr"];
       }
       return title;
     };
@@ -430,10 +350,10 @@ function _CustWatchNodeString() { return(
     toString = function(o) {
       if (o == null) {
           return "";
-      } else if (!o["str"] || o["str"] == null) {
+      } else if (!o["glgr"] || o["glgr"] == null) {
         return "Fehler";
       } else {
-          return "f(" + o["uvName"] + ") = " + o["str"];
+          return "f(" + o["uvName"] + ") = " + o["glgr"];
       }
     };
 
@@ -613,7 +533,7 @@ function _CustomGraphicsPlot(){
         }
 
         // Hole die Funktionsgleichung aus dem Eingang
-        var equation = this.getInputData(0)["str"];  // Funktionsgleichung als String
+        var equation = this.getInputData(0)["glgr"];  // Funktionsgleichung als String
         
         // Falls keine Gleichung eingegeben wurde, nicht weiter ausführen
         if (!equation) return;
