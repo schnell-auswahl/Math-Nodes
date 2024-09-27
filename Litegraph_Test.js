@@ -93,6 +93,7 @@ class FunctionNode {
       var x = this.getInputData(0)["value"];
       // var y = this.getInputData(1);
       var str = this.getInputData(0)["str"];
+
       var uvName = this.getInputData(0)["uvName"];
       if (x != null) {
           this.properties["x"] = x;
@@ -106,33 +107,41 @@ class FunctionNode {
           str = this.properties["str"];
       }
 
-      if (uvName != null) {
-          this.properties["uvName"] = uvName;
+      // if wrong variable is connected
+      if (this.properties["uvName"].length > 0 && this.properties["uvName"] != uvName){
+        console.log("-----");
+        this.boxcolor = "red";
+        var newString = this._insertString(this.properties["str"], this.properties["formula"], this.properties["uvName"]);
+        this.setOutputData(0, {value: null, str: newString, uvName: this.properties["uvName"]});
       } else {
-          uvName = this.properties["uvName"];
-      }
+        if (uvName != null) {
+            this.properties["uvName"] = uvName;
+        } else {
+            uvName = this.properties["uvName"];
+        }
 
-      // var f = this.properties["formula"];
+        // var f = this.properties["formula"];
 
-      var value;
-      var newString = this.properties["str"];
-      try {
-          if (!this._func || this._func_code != this.properties.formula) {
-            this._func = new Function(
-                "x",
-                "t",
-                "return " + this.properties.formula
-            );
-            this._func_code = this.properties.formula;
-          }
-          value = this._func(x, this.graph.globaltime);
-          newString = this._insertString(this.properties["str"], this.properties["formula"], this.properties["uvName"]);
-          this.boxcolor = null;
-      } catch (err) {
-          this.boxcolor = "red";
+        var value;
+        var newString = this._insertString(this.properties["str"], this.properties["formula"], this.properties["uvName"]);
+        try {
+            if (!this._func || this._func_code != this.properties.formula) {
+              this._func = new Function(
+                  "x",
+                  "TIME",
+                  "return " + this.properties.formula
+              );
+              this._func_code = this.properties.formula;
+            }
+            value = this._func(x, this.graph.globaltime);
+            this.boxcolor = null;
+        } catch (err) {
+            this.boxcolor = "red";
+            this.setOutputData(0, {value: null, str: newString, uvName: this.properties["uvName"]});
+        }
+        this.setOutputData(0, {value: value, str: newString, uvName: this.properties["uvName"]});
+        // this.setOutputData(0, value);
       }
-      this.setOutputData(0, {value: value, str: newString, uvName: this.properties["uvName"]});
-      // this.setOutputData(0, value);
     }
   };
 
@@ -260,9 +269,9 @@ function _CustWatchNodeString() { return(
 
     toString = function(o) {
       if (o == null) {
-          return "null";
-      } else if (!o["str"]) {
-        return "null";
+          return "";
+      } else if (!o["str"] || o["str"] == null) {
+        return "Fehler";
       } else {
           return "f(" + o["uvName"] + ") = " + o["str"];
       }
@@ -301,11 +310,11 @@ function _CustWatchNodeValue() { return(
 
     toString = function(o) {
       if (o == null) {
-          return "null";
-      } else if (o.constructor === Number) {
-          return o.toFixed(3);
-      } else if (!o["value"]) {
-          return "null";
+          return "";
+      // } else if (o.constructor === Number) {
+      //     return o.toFixed(3);
+      } else if (!o["value"] || o["value"] == null) {
+          return "Fehler";
       } else {
           // return String(o);
           // Math.round((num + Number.EPSILON) * 100) / 100
@@ -371,32 +380,36 @@ function _graph(graphCell,LiteGraph,CustomMultNode,FunctionNode,CustNumberNode,C
   // graph.add(nodeConstB);
 
   var nodeCustConst = LiteGraph.createNode("custom/cconst");
-  nodeCustConst.pos = [200,200];
+  nodeCustConst.pos = [100,200];
   graph.add(nodeCustConst);
   
-  var nodeMult = LiteGraph.createNode("custom/multiply");
-  nodeMult.pos = [500,250];
-  graph.add(nodeMult);
+  // var nodeMult = LiteGraph.createNode("custom/multiply");
+  // nodeMult.pos = [500,250];
+  // graph.add(nodeMult);
 
   var nodeFunc1 = LiteGraph.createNode("custom/func");
-  nodeFunc1.pos = [500,350];
+  nodeFunc1.pos = [400,200];
   graph.add(nodeFunc1);
 
+  var nodeFunc2 = LiteGraph.createNode("custom/func");
+  nodeFunc2.pos = [300,400];
+  graph.add(nodeFunc2);
+
   var nodeCustWatchS = LiteGraph.createNode("custom/cwatchS");
-  nodeCustWatchS.pos = [500,100];
+  nodeCustWatchS.pos = [650,250];
   graph.add(nodeCustWatchS);
 
   var nodeCustWatchV = LiteGraph.createNode("custom/cwatchV");
-  nodeCustWatchV.pos = [500,170];
+  nodeCustWatchV.pos = [650,320];
   graph.add(nodeCustWatchV);
 
   // All nodes must be in the graph before connections can be made.
   //nodeConstA.connect(0,nodeMult,0);
   // nodeConstB.connect(0,nodeMult,1);
   
-  var nodeWatch = LiteGraph.createNode("basic/watch");
-  nodeWatch.pos = [700,250];
-  graph.add(nodeWatch);
+  // var nodeWatch = LiteGraph.createNode("basic/watch");
+  // nodeWatch.pos = [700,250];
+  // graph.add(nodeWatch);
 
   // Create an Observable mutate wrapper to copy the results of our multiplcation in to the `results` var
   // var nodeObserve = LiteGraph.createNode("custom/observable");
@@ -406,7 +419,7 @@ function _graph(graphCell,LiteGraph,CustomMultNode,FunctionNode,CustNumberNode,C
   // nodeObserve.pos = [700,350];
   // graph.add(nodeObserve);
   
-  nodeMult.connect(0, nodeWatch, 0 );
+  // nodeMult.connect(0, nodeWatch, 0 );
   // nodeMult.connect(0, nodeObserve, 0 );
   
   graph.start()
