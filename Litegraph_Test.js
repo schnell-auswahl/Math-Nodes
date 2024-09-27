@@ -193,6 +193,54 @@ class FunctionNode {
 
 
 
+function _CustomTimeNode() { return (
+  class CustomTimeNode {
+    constructor() {
+      this.addOutput("in ms", "number");
+      this.addOutput("in sec", "number");
+      this.properties = { str: "x"};
+
+      this.nameWidget = this.addWidget("text","Variablenname","x","str");
+
+      this.title = "Time";
+      this.desc = "Time";
+    }
+
+    onExecute = function() {
+      var outputSec = {
+        value: this.graph.globaltime,
+        str: this.properties["str"],
+        uvName: this.properties["str"],
+      }
+      var outputMil = {
+        value: this.graph.globaltime * 1000,
+        str: this.properties["str"],
+        uvName: this.properties["str"],
+      }
+      this.setOutputData(0, outputMil);
+      this.setOutputData(1, outputSec);
+    };
+
+    getTitle() {
+      let title = "Variable"
+      if(this.properties["str"]){
+        title = title + " " + this.properties["str"];
+      }
+      return title;
+    };
+
+    // onDrawBackground() {
+    //   //show the current value
+    //   // this.outputs[0].label = this.properties["value"].toFixed(3);
+    //   // console.log("in drawBackground");
+    // };
+  }
+)}
+
+
+
+
+
 function _CustNumberNode(){ return(
   class CustNumberNode {
     constructor() {
@@ -579,7 +627,7 @@ function _CustomGraphicsPlot(){
 
 
 
-function _graph(graphCell,LiteGraph,CustomMultNode,FunctionNode,CustNumberNode,CustWatchNodeString,CustWatchNodeValue,CustomGraphicsPlot,$0)
+function _graph(graphCell,LiteGraph,CustomMultNode,FunctionNode,CustNumberNode,CustWatchNodeString,CustWatchNodeValue,CustomGraphicsPlot,CustomTimeNode,$0)
 // function _graph(graphCell,LiteGraph,CustomMultNode,ObservableNode,$0)
 // function _graph(graphCell,LiteGraph,CustomMultNode,ObservableNode,MathFormula,$0)
 {
@@ -594,6 +642,7 @@ function _graph(graphCell,LiteGraph,CustomMultNode,FunctionNode,CustNumberNode,C
   LiteGraph.registerNodeType("custom/cwatchS", CustWatchNodeString);
   LiteGraph.registerNodeType("custom/cwatchV", CustWatchNodeValue);
   LiteGraph.registerNodeType("custom/plot", CustomGraphicsPlot);
+  LiteGraph.registerNodeType("custom/time", CustomTimeNode);
   
   var graph = new LiteGraph.LGraph();
   var canvas = new LiteGraph.LGraphCanvas("#graphDiv", graph);
@@ -693,9 +742,10 @@ export default function define(runtime, observer) {
   main.variable(observer("CustWatchNodeString")).define("CustWatchNodeString", _CustWatchNodeString);
   main.variable(observer("CustWatchNodeValue")).define("CustWatchNodeValue", _CustWatchNodeValue);
   main.variable(observer("CustomGraphicsPlot")).define("CustomGraphicsPlot", _CustomGraphicsPlot);
+  main.variable(observer("CustomTimeNode")).define("CustomTimeNode", _CustomTimeNode);
   // main.variable(observer("graph")).define("graph", ["graphCell","LiteGraph","CustomMultNode","ObservableNode","mutable results"], _graph);
   // main.variable(observer("graph")).define("graph", ["graphCell","LiteGraph","CustomMultNode","ObservableNode","MathFormula","mutable results"], _graph);
-  main.variable(observer("graph")).define("graph", ["graphCell","LiteGraph","CustomMultNode","FunctionNode","CustNumberNode","CustWatchNodeString","CustWatchNodeValue","CustomGraphicsPlot","mutable results"], _graph);
+  main.variable(observer("graph")).define("graph", ["graphCell","LiteGraph","CustomMultNode","FunctionNode","CustNumberNode","CustWatchNodeString","CustWatchNodeValue","CustomGraphicsPlot","CustomTimeNode","mutable results"], _graph);
   main.variable(observer("LiteGraph")).define("LiteGraph", ["require"], _LiteGraph);
   return main;
 }
