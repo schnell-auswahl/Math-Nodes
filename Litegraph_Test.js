@@ -241,9 +241,6 @@ function _CustNumberNode(){ return(
 )}
 
 
-// function _CustNumberNode(){ return(
-//   class CustNumberNode {
-//     constructor() {
 function _CustWatchNodeString() { return(
   class CustWatchNodeString {
     constructor() {
@@ -332,10 +329,257 @@ function _CustWatchNodeValue() { return(
   }
 )}
 
+// function _CustomGraphicsPlot(){return(
+//   class CustomGraphicsPlot {
+//     constructor(){
+//       this.addInput("A", "Number");
+//       this.addInput("B", "Number");
+//       this.addInput("C", "Number");
+//       this.addInput("D", "Number");
+    
+//       this.values = [[], [], [], []];
+//       this.properties = { xscale: 1, yscale: 2 };
+    
+//       this.title = "Plot";
+//       this.desc = "Plots data over time";
+//       this.colors = ["#FFF", "#F99", "#9F9", "#99F"];
+//     };
+
+//     onExecute(ctx) {
+//       if (this.flags.collapsed) {
+//           return;
+//       }
+
+//       var size = this.size;
+
+//       for (var i = 0; i < 4; ++i) {
+//           var v = this.getInputData(i);
+//           if (v == null) {
+//               continue;
+//           }
+//           var values = this.values[i];
+//           values.push(v);
+//           if (values.length > size[0]) {
+//               values.shift();
+//           }
+//       }
+//     };
+
+//     clamp(v, a, b) {
+//       return a > v ? a : b < v ? b : v;
+//     };
+
+//     onDrawBackground(ctx) {
+//       if (this.flags.collapsed) {
+//           return;
+//       }
+
+//       var size = this.size;
+
+//       var yscale = (0.5 * size[1]) / this.properties.yscale;
+//       var xscale = this.properties.xscale;
+//       var colors = this.colors;
+//       var offset = size[1] * 0.5;
+
+//       ctx.fillStyle = "#000";
+//       ctx.fillRect(0, 0, size[0], size[1]);
+//       ctx.strokeStyle = "#555";
+//       ctx.beginPath();
+//       ctx.moveTo(0, offset);
+//       ctx.lineTo(size[0], offset);
+//       ctx.stroke();
+
+//       if (this.inputs) {
+//           for (var i = 0; i < 4; ++i) {
+//               var values = this.values[i];
+//               if (!this.inputs[i] || !this.inputs[i].link) {
+//                   continue;
+//               }
+//               ctx.strokeStyle = colors[i];
+//               ctx.beginPath();
+//               var v = values[0] * yscale * -1 + offset;
+//               ctx.moveTo(0, this.clamp(v, 0, size[1]));
+//               for (var j = 1; j < values.length && j < size[0]; ++j) {
+//                   var v = values[j] * yscale * -1 + offset;
+//                   ctx.lineTo(j, this.clamp(v, 0, size[1]));
+//               }
+//               ctx.stroke();
+//           }
+//       }
+//     };
+// })};
+function _CustomGraphicsPlot(){
+  return (
+    class CustomGraphicsPlot {
+      constructor(){
+        this.addInput("Input", "object");  // Eingang für Funktionsgleichung (als String)
+        
+        // Skalierung und Bereich
+        this.properties = { 
+          xRange: [-10, 10],  // X-Bereich
+          yRange: [-10, 10],  // Y-Bereich
+          scaleX: 1,          // Skalierung für X-Achse
+          scaleY: 1,          // Skalierung für Y-Achse
+          gridSize: 5         // Abstand zwischen Gitternetzlinien
+        };
+
+        this.title = "Function Plot with Grid";
+        this.desc = "Plots a mathematical function with grid and labels";
+        this.colors = ["#FFF", "#F99"];
+      }
+
+      // Funktion aus String evaluieren
+      evaluateFunction(equation, x) {
+        try {
+          const safeEquation = equation.replace("^", "**");  // Konvertiere Potenzen
+          const func = new Function("x", `return ${safeEquation};`);  // Funktionsausdruck in JS-Function konvertieren
+          return func(x);  // Evaluiere Funktion für gegebenen X-Wert
+        } catch (error) {
+          console.error("Fehler bei der Auswertung der Funktion:", error);
+          return null;
+        }
+      }
+
+      clamp(v, a, b) {
+        return a > v ? a : b < v ? b : v;
+      };
+
+      onExecute = function() {
+        if (this.flags.collapsed || !this.getInputData(0)) {
+            return;
+        }
+
+        // Hole die Funktionsgleichung aus dem Eingang
+        var equation = this.getInputData(0)["str"];  // Funktionsgleichung als String
+        
+        // Falls keine Gleichung eingegeben wurde, nicht weiter ausführen
+        if (!equation) return;
+        
+        this.equation = equation;  // Speichere die übergebene Gleichung
+      };
+
+      onDrawBackground = function(ctx) {
+        if (this.flags.collapsed || !this.equation) {
+            return;
+        }
+
+        var size = this.size;
+        var xRange = this.properties.xRange;
+        var yRange = this.properties.yRange;
+        var scaleX = size[0] / (xRange[1] - xRange[0]);  // Skalierung der X-Achse basierend auf dem Bereich
+        var scaleY = size[1] / (yRange[1] - yRange[0]);  // Skalierung der Y-Achse
+        var offsetX = -xRange[0] * scaleX;  // Verschiebung auf der X-Achse
+        var offsetY = size[1] - (-yRange[0] * scaleY);  // Verschiebung auf der Y-Achse
+
+        // Hintergrund zeichnen
+        ctx.fillStyle = "#000";
+        ctx.fillRect(0, 0, size[0], size[1]);
+
+        // Gitternetzlinien zeichnen
+        this.drawGrid(ctx, size, scaleX, scaleY, offsetX, offsetY);
+
+        // Funktionswerte berechnen und plotten
+        ctx.strokeStyle = this.colors[1];  // Farbe der Linie
+        ctx.beginPath();
+
+        // Starte bei minimalem X-Wert
+        var step = (xRange[1] - xRange[0]) / size[0];  // Schrittweite entlang der X-Achse
+        var x = xRange[0];
+        var y = this.evaluateFunction(this.equation, x);  // Evaluiere Funktion
+
+        if (y !== null) {
+          var plotX = (x - xRange[0]) * scaleX;  // X-Koordinate im Plot
+          var plotY = (yRange[1] - y) * scaleY;  // Y-Koordinate im Plot
+          ctx.moveTo(this.clamp(plotX, 0, size[0]), this.clamp(plotY, 0, size[1]));  // Starte den Plot bei diesem Punkt
+
+          // Schleife durch alle X-Werte im Plotbereich
+          for (var i = 1; i < size[0]; ++i) {
+            x += step;  // Erhöhe X
+            y = this.evaluateFunction(this.equation, x);  // Evaluiere Y für neues X
+            if (y === null) continue;
+
+            plotX = (x - xRange[0]) * scaleX;
+            plotY = (yRange[1] - y) * scaleY;
+            ctx.lineTo(this.clamp(plotX, 0, size[0]), this.clamp(plotY, 0, size[1]));
+          }
+
+          ctx.stroke();
+        }
+
+        // Achsenbeschriftungen hinzufügen
+        this.drawLabels(ctx, size, scaleX, scaleY, offsetX, offsetY, xRange, yRange);
+      };
+
+      // Gitternetzlinien zeichnen
+      drawGrid(ctx, size, scaleX, scaleY, offsetX, offsetY) {
+        ctx.strokeStyle = "#555";
+        ctx.lineWidth = 0.5;
+
+        // Vertikale Linien für X
+        var gridSize = this.properties.gridSize;
+        for (var x = Math.floor(this.properties.xRange[0] / gridSize) * gridSize; x <= this.properties.xRange[1]; x += gridSize) {
+          var plotX = (x - this.properties.xRange[0]) * scaleX;
+          ctx.beginPath();
+          ctx.moveTo(plotX, 0);
+          ctx.lineTo(plotX, size[1]);
+          ctx.stroke();
+        }
+
+        // Horizontale Linien für Y
+        for (var y = Math.floor(this.properties.yRange[0] / gridSize) * gridSize; y <= this.properties.yRange[1]; y += gridSize) {
+          var plotY = (this.properties.yRange[1] - y) * scaleY;
+          ctx.beginPath();
+          ctx.moveTo(0, plotY);
+          ctx.lineTo(size[0], plotY);
+          ctx.stroke();
+        }
+
+        // Achsen (X=0 und Y=0) betonen
+        ctx.strokeStyle = "#FFF";
+        ctx.lineWidth = 1.0;
+
+        // X-Achse
+        ctx.beginPath();
+        ctx.moveTo(0, offsetY);
+        ctx.lineTo(size[0], offsetY);
+        ctx.stroke();
+
+        // Y-Achse
+        ctx.beginPath();
+        ctx.moveTo(offsetX, 0);
+        ctx.lineTo(offsetX, size[1]);
+        ctx.stroke();
+      }
+
+      // Beschriftungen für Achsen und Gitternetzlinien
+      drawLabels(ctx, size, scaleX, scaleY, offsetX, offsetY, xRange, yRange) {
+        ctx.fillStyle = "#FFF";
+        ctx.font = "10px Arial";
+        ctx.textAlign = "center";
+
+        // X-Achse beschriften
+        var gridSize = this.properties.gridSize;
+        for (var x = Math.floor(xRange[0] / gridSize) * gridSize; x <= xRange[1]; x += gridSize) {
+          var plotX = (x - xRange[0]) * scaleX;
+          ctx.fillText(x.toFixed(1), plotX, offsetY + 10);
+        }
+
+        // Y-Achse beschriften
+        ctx.textAlign = "right";
+        for (var y = Math.floor(yRange[0] / gridSize) * gridSize; y <= yRange[1]; y += gridSize) {
+          var plotY = (yRange[1] - y) * scaleY;
+          ctx.fillText(y.toFixed(1), offsetX - 5, plotY + 3);
+        }
+      }
+    }
+  );
+}
 
 
 
-function _graph(graphCell,LiteGraph,CustomMultNode,FunctionNode,CustNumberNode,CustWatchNodeString,CustWatchNodeValue,$0)
+
+
+function _graph(graphCell,LiteGraph,CustomMultNode,FunctionNode,CustNumberNode,CustWatchNodeString,CustWatchNodeValue,CustomGraphicsPlot,$0)
 // function _graph(graphCell,LiteGraph,CustomMultNode,ObservableNode,$0)
 // function _graph(graphCell,LiteGraph,CustomMultNode,ObservableNode,MathFormula,$0)
 {
@@ -349,6 +593,7 @@ function _graph(graphCell,LiteGraph,CustomMultNode,FunctionNode,CustNumberNode,C
   LiteGraph.registerNodeType("custom/cconst", CustNumberNode);
   LiteGraph.registerNodeType("custom/cwatchS", CustWatchNodeString);
   LiteGraph.registerNodeType("custom/cwatchV", CustWatchNodeValue);
+  LiteGraph.registerNodeType("custom/plot", CustomGraphicsPlot);
   
   var graph = new LiteGraph.LGraph();
   var canvas = new LiteGraph.LGraphCanvas("#graphDiv", graph);
@@ -447,9 +692,10 @@ export default function define(runtime, observer) {
   main.variable(observer("CustNumberNode")).define("CustNumberNode", _CustNumberNode);
   main.variable(observer("CustWatchNodeString")).define("CustWatchNodeString", _CustWatchNodeString);
   main.variable(observer("CustWatchNodeValue")).define("CustWatchNodeValue", _CustWatchNodeValue);
+  main.variable(observer("CustomGraphicsPlot")).define("CustomGraphicsPlot", _CustomGraphicsPlot);
   // main.variable(observer("graph")).define("graph", ["graphCell","LiteGraph","CustomMultNode","ObservableNode","mutable results"], _graph);
   // main.variable(observer("graph")).define("graph", ["graphCell","LiteGraph","CustomMultNode","ObservableNode","MathFormula","mutable results"], _graph);
-  main.variable(observer("graph")).define("graph", ["graphCell","LiteGraph","CustomMultNode","FunctionNode","CustNumberNode","CustWatchNodeString","CustWatchNodeValue","mutable results"], _graph);
+  main.variable(observer("graph")).define("graph", ["graphCell","LiteGraph","CustomMultNode","FunctionNode","CustNumberNode","CustWatchNodeString","CustWatchNodeValue","CustomGraphicsPlot","mutable results"], _graph);
   main.variable(observer("LiteGraph")).define("LiteGraph", ["require"], _LiteGraph);
   return main;
 }
