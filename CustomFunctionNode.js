@@ -67,9 +67,9 @@ export function _FunctionNode() {
       // Liefert den Titel des Knotens basierend auf der Funktionsgleichung
       getTitle() {
         // Wenn die Funktionsgleichung, unabhängige Variable und Funktionsname vorhanden sind
-        if(this.properties["formula"] && this.properties["uvName"] && this.properties["funcName"]){
+        if(this.properties["formulaausgewert"] && this.properties["uvName"] && this.properties["funcName"]){
           // Setze den Titel entsprechend der vollständigen Funktionsbeschreibung
-          let title = this.properties["funcName"] + "(" + this.properties["uvName"] + ") = " + this.properties["formula"];
+          let title = this.properties["funcName"] + "(" + this.properties["uvName"] + ") = " + this.properties["formulaausgewert"];
           return title;
         } else {
           // Standardtitel, falls nicht alle Informationen vorhanden sind
@@ -131,7 +131,8 @@ export function _FunctionNode() {
           if (this.properties["uvName"].length > 0 && this.properties["uvName"] != uvName){
             this.boxcolor = "red"; // Markiere den Knoten rot, wenn ein Fehler vorliegt
             // Erstelle eine neue Gleichung basierend auf der alten und gebe sie aus
-            var newString = this._insertString(this.properties["glgr"], this.properties["formula"], this.properties["uvName"]);
+            var newString = this._insertString(this.properties["glgr"], this.properties["formulaausgewert"], this.properties["uvName"]);
+            //var newString = this._insertString(this.properties["glgr"], this.properties["formula"], this.properties["uvName"]);
             this.setOutputData(0, {value: null, glgl: this.properties["glgl"], glgr: newString, uvName: this.properties["uvName"]});
           } else {
 
@@ -191,7 +192,7 @@ export function _FunctionNode() {
 
 
 
-            let newString = this._insertString(this.properties["glgr"], this.properties["formula"], this.properties["uvName"]);
+            let newString = this._insertString(this.properties["glgr"], this.properties["formulaausgewert"], this.properties["uvName"]);
             try {
               // Wenn die Funktion noch nicht definiert ist oder sich die Formel/Parameter geändert haben, erstelle die Funktion neu
               // if (!this._func || this._func_code !== formula || this.oldParamNames != paramNames) {
