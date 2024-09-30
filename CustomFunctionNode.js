@@ -20,7 +20,8 @@ export function _FunctionNode() {
           glgr: "",    // Rechte Seite der Gleichung -> Wird von anderen Funktionen verwendet
           uvName: "",  // Name der unabhängigen Variable -> Wird über formeleingabe definitiert und mit Empfangener abgeglichen
           paramNames: ["", "", "", ""],  // Namen der Parameter (Platzhalter für bis zu 4 Parameter)
-          paramValues: {}  // Objekt, das die Werte der Parameter speichert
+          paramValues: {},  // Objekt, das die Werte der Parameter speichert
+          formulaausgewert: ""  // Neu: Hinzufügen der Property für die ausgewertete Formel
         };
 
         // Widget für die Eingabe der Funktionsgleichung
@@ -154,17 +155,59 @@ export function _FunctionNode() {
             // Speichere die Parameterwerte in den Eigenschaften des Knotens
             this.properties["paramValues"] = paramValues;
 
+            
+
+            
             // Dynamische Ausführung der Formel
             let formula = this.properties.formula;
+
+            // Neue Property: 'formulaausgewert'
+            // Kopiere die originale Formel
+            let formulaausgewert = formula;
+
+            // // Ersetze Parameternamen in der Formel durch die entsprechenden 'glgl'-Werte
+            // paramNames.forEach(paramName => {
+            // if (paramValues[paramName] !== undefined) {
+            // // Ersetze alle Vorkommen des Parameternamens durch den empfangenen Wert 
+            //   formulaausgewert = formulaausgewert.replace(new RegExp(paramName, 'g'), paramValues[paramName]);
+            //   } 
+            // });
+
+            paramNames.forEach(paramName => {
+              if (paramValues[paramName] !== undefined) {
+                // Escape Klammern in den Parameternamen, damit sie im regulären Ausdruck korrekt funktionieren
+                let escapedParamName = paramName.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');  // Maskiere alle speziellen Zeichen
+            
+                // Ersetze alle Vorkommen des Parameternamens durch den empfangenen Wert
+                formulaausgewert = formulaausgewert.replace(new RegExp(escapedParamName, 'g'), paramValues[paramName]);
+              }
+            });
+
+            // Speichere die ausgewertete Formel in der neuen Property
+            this.properties["formulaausgewert"] = formulaausgewert;
+
+
+
+
+
+
             let newString = this._insertString(this.properties["glgr"], this.properties["formula"], this.properties["uvName"]);
             try {
               // Wenn die Funktion noch nicht definiert ist oder sich die Formel/Parameter geändert haben, erstelle die Funktion neu
-              if (!this._func || this._func_code !== formula || this.oldParamNames != paramNames) {
-                const funcBody = `return ${formula};`; // Der Funktionskörper basiert auf der Formel
+              // if (!this._func || this._func_code !== formula || this.oldParamNames != paramNames) {
+              //   const funcBody = `return ${formula};`; // Der Funktionskörper basiert auf der Formel
+              //   // Erstelle eine neue Funktion, die die unabhängige Variable und die Parameter verwendet
+              //   this._func = new Function(this.properties["uvName"], ...paramNames, funcBody);
+              //   this.oldParamNames = paramNames; // Speichere die aktuellen Parameternamen
+              //   this._func_code = formula;      // Speichere die aktuelle Formel
+              // }
+
+              if (!this._func || this._func_code !== formulaausgewert || this.oldParamNames != paramNames) {
+                const funcBody = `return ${formulaausgewert};`; // Der Funktionskörper basiert auf der Formel
                 // Erstelle eine neue Funktion, die die unabhängige Variable und die Parameter verwendet
-                this._func = new Function(this.properties["uvName"], ...paramNames, funcBody);
+                this._func = new Function(this.properties["uvName"], funcBody);
                 this.oldParamNames = paramNames; // Speichere die aktuellen Parameternamen
-                this._func_code = formula;      // Speichere die aktuelle Formel
+                this._func_code = formulaausgewert;      // Speichere die aktuelle Formel
               }
 
               // Führe die Funktion aus, indem die Werte von x und den Parametern übergeben werden
@@ -172,7 +215,8 @@ export function _FunctionNode() {
               let value = this._func(x, ...paramValuesArray); // Berechne den Funktionswert
 
               // Setze das Ergebnis als Output des Knotens
-              this.setOutputData(0, { value: value, glgl: this.properties["glgl"], glgr: newString, uvName: this.properties.uvName });
+              //this.setOutputData(0, { value: value, glgl: this.properties["glgl"], glgr: newString, uvName: this.properties.uvName });
+              this.setOutputData(0, { value: value, glgl: this.properties["glgl"], glgr: newString, uvName: this.properties.uvName, formulaausgewert: this.properties["formulaausgewert"] });
               this.boxcolor = null; // Zurücksetzen der Farbe bei Erfolg
             } catch (err) {
               console.error("Fehler in der Formel:", err); // Fehlerbehandlung bei Problemen mit der Formel
