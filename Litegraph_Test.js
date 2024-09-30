@@ -119,7 +119,7 @@ function _CustNumberNode(){ return(
       var output = {
         value: parseFloat(this.properties["value"]),
         glgr: this.properties["glgr"],
-        glgl: "",
+        glgl: this.properties["glgr"],
         uvName: this.properties["glgr"],
         // funcList: ""
       }
@@ -155,11 +155,11 @@ function _CustNumberNode(){ return(
 function _CustWatchNodeString() { return(
   class CustWatchNodeString {
     constructor() {
-      this.size = [60, 30];
+      this.size = [80, 30];
       this.addInput("value", 0, { label: "" });
       this.value = 0;
       this.title = "Gleichung";
-      this.desc = "Show value of input";
+      this.desc = "Show Equation of input";
     }
 
     onExecute() {
@@ -181,7 +181,8 @@ function _CustWatchNodeString() { return(
       } else if (!o["glgr"] || o["glgr"] == null) {
         return "Fehler";
       } else {
-          return "f(" + o["uvName"] + ") = " + o["glgr"];
+          //return "f(" + o["uvName"] + ") = " + o["glgr"];
+          return o["glgl"] + " = " + o["glgr"];
       }
     };
 

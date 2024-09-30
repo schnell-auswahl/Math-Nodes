@@ -15,9 +15,10 @@ export function _FunctionNode() {
 
         // Initialisierung der Eigenschaften
         this.properties = {
-          formula: "", // Die Funktionsgleichung als String
-          glgr: "",    // Zusatzinformation für die Gleichung
-          uvName: "",  // Name der unabhängigen Variable
+          formula: "", // Die Funktionsgleichung als String für Widget-Eingabe
+          glgl: "",
+          glgr: "",    // Rechte Seite der Gleichung -> Wird von anderen Funktionen verwendet
+          uvName: "",  // Name der unabhängigen Variable -> Wird über formeleingabe definitiert und mit Empfangener abgeglichen
           paramNames: ["", "", "", ""],  // Namen der Parameter (Platzhalter für bis zu 4 Parameter)
           paramValues: {}  // Objekt, das die Werte der Parameter speichert
         };
@@ -48,7 +49,7 @@ export function _FunctionNode() {
 
       // Diese Methode fügt eine alte Gleichung an die neue Gleichung an, basierend auf der unabhängigen Variablen
       _insertString(oldString, formula, uvName){
-        if(oldString.length <= 1) { // Wenn keine alte Gleichung vorhanden ist, gib die aktuelle Formel zurück
+        if(oldString.length < 1) { // Wenn keine alte Gleichung vorhanden ist, gib die aktuelle Formel zurück
           return formula;
         }
         var outputString = ""; // Initialisiere den Ergebnisstring
@@ -99,6 +100,7 @@ export function _FunctionNode() {
         if (this.getInputData(0)) {
           var inputData = this.getInputData(0);
           var x = inputData["value"]; // Wert der unabhängigen Variablen (x)
+          var receivedGlgl = inputData["glgl"];  // Neu: empfange glgl
           var glgr = inputData["glgr"]; // Zusatzinformationen zur Gleichung
           var uvName = inputData["uvName"]; // Name der unabhängigen Variablen
 
@@ -115,12 +117,21 @@ export function _FunctionNode() {
             glgr = this.properties["glgr"];
           }
 
+         // Definiere glgl als funcName(glgl)
+          if (this.properties["funcName"]) { //Wenn funcName definiert ist, ist glg funcName(übergebener funcName)
+            this.properties["glgl"] = `${this.properties["funcName"]}(${receivedGlgl})`;
+          }
+
+
+
+
+
           // Überprüfe, ob eine falsche Variable angeschlossen ist (UV-Name stimmt nicht überein)
           if (this.properties["uvName"].length > 0 && this.properties["uvName"] != uvName){
             this.boxcolor = "red"; // Markiere den Knoten rot, wenn ein Fehler vorliegt
             // Erstelle eine neue Gleichung basierend auf der alten und gebe sie aus
             var newString = this._insertString(this.properties["glgr"], this.properties["formula"], this.properties["uvName"]);
-            this.setOutputData(0, {value: null, glgr: newString, uvName: this.properties["uvName"]});
+            this.setOutputData(0, {value: null, glgl: this.properties["glgl"], glgr: newString, uvName: this.properties["uvName"]});
           } else {
 
             // Verarbeite die zusätzlichen Parameter, die von den Eingängen geliefert werden
@@ -129,7 +140,7 @@ export function _FunctionNode() {
             for (let i = 0; i < 4; i++) {
               const paramInput = this.getInputData(i + 1); // Hole die Daten vom jeweiligen Eingang
               if (paramInput) {
-                const paramName = paramInput["glgr"];  // Name des Parameters
+                const paramName = paramInput["glgl"];  // Name des Parameters
                 const paramValue = paramInput["value"]; // Wert des Parameters
 
                 if (paramName && paramValue !== undefined) {
@@ -161,12 +172,12 @@ export function _FunctionNode() {
               let value = this._func(x, ...paramValuesArray); // Berechne den Funktionswert
 
               // Setze das Ergebnis als Output des Knotens
-              this.setOutputData(0, { value: value, glgr: newString, uvName: this.properties.uvName });
+              this.setOutputData(0, { value: value, glgl: this.properties["glgl"], glgr: newString, uvName: this.properties.uvName });
               this.boxcolor = null; // Zurücksetzen der Farbe bei Erfolg
             } catch (err) {
               console.error("Fehler in der Formel:", err); // Fehlerbehandlung bei Problemen mit der Formel
               this.boxcolor = "red"; // Fehlerfarbmarkierung
-              this.setOutputData(0, { value: null, glgr: newString, uvName: this.properties.uvName });
+              this.setOutputData(0, { value: null, glgl: this.properties["glgl"], glgr: newString, uvName: this.properties.uvName });
             }
           }
         }
