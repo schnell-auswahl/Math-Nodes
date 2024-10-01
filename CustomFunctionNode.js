@@ -1,3 +1,6 @@
+// To do: Klammersetzung ist noch nicht richtig. Es werden Klammern um die UV gesetzt, aber noch nicht um als parameter eingefügte Funktionen
+
+
 export function _FunctionNode() {
   return (
     class FunctionNode {
@@ -46,6 +49,8 @@ export function _FunctionNode() {
         this.title = "Funktion";
         this.desc = "Compute formula"; // Beschreibung des Knotens
         this.size = [160, 150]; // Größe des Knotens in Pixeln
+        this.color = "#4C7468"; //Titelfarbe
+        this.bgcolor = "#7E8692"; //Hintergrundfarbe
       }
 
       // Diese Methode fügt eine alte Gleichung an die neue Gleichung an, basierend auf der unabhängigen Variablen
