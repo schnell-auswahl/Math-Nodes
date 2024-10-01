@@ -53,6 +53,7 @@ export function _FunctionNode() {
         if(oldString.length < 1) { // Wenn keine alte Gleichung vorhanden ist, gib die aktuelle Formel zurück
           return formula;
         }
+       
         var outputString = ""; // Initialisiere den Ergebnisstring
         var parts = formula.split(uvName); // Teile die Formel an den Positionen der unabhängigen Variablen
         for (let i=0; i < parts.length - 1; i++){
@@ -174,15 +175,50 @@ export function _FunctionNode() {
             //   } 
             // });
 
-            paramNames.forEach(paramName => {
+            // paramNames.forEach(paramName => {
+            //   if (paramValues[paramName] !== undefined) {
+            //     // Escape Klammern in den Parameternamen, damit sie im regulären Ausdruck korrekt funktionieren
+            //     let escapedParamName = paramName.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');  // Maskiere alle speziellen Zeichen
+            
+            //     // Ersetze alle Vorkommen des Parameternamens durch den empfangenen Wert
+            //     formulaausgewert = formulaausgewert.replace(new RegExp(escapedParamName, 'g'), paramValues[paramName]);
+            //   }
+            // });
+
+            //Variante, die überprüft, ob funktion der uv oder parameter angeschlossen ist
+            paramNames.forEach((paramName, index) => {
+              // Loggen des Parameternamens und des uvName zum Debuggen
+              console.log("Checking paramName:", paramName, "against uvName:", this.properties["uvName"]);
+            
               if (paramValues[paramName] !== undefined) {
                 // Escape Klammern in den Parameternamen, damit sie im regulären Ausdruck korrekt funktionieren
                 let escapedParamName = paramName.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');  // Maskiere alle speziellen Zeichen
-            
-                // Ersetze alle Vorkommen des Parameternamens durch den empfangenen Wert
-                formulaausgewert = formulaausgewert.replace(new RegExp(escapedParamName, 'g'), paramValues[paramName]);
+                
+                // Prüfe, ob der ParamName den uvName enthält
+                if (paramName.includes(this.properties["uvName"])) {
+                  // Log, falls der paramName den uvName enthält
+                  console.log(`ParamName ${paramName} enthält uvName ${this.properties["uvName"]}.`);
+                  
+                  // Ersetze den Parameternamen durch das entsprechende 'glgr', das am Eingang empfangen wurde
+                  let receivedGlgr = this.getInputData(index + 1)["glgr"]; // Hole das empfangene 'glgr' vom entsprechenden Eingang
+                  if (receivedGlgr !== undefined) {
+                    formulaausgewert = formulaausgewert.replace(new RegExp(escapedParamName, 'g'), receivedGlgr);
+                    // Log nach der Ersetzung
+                    console.log(`Ersetze ${paramName} durch glgr: ${receivedGlgr}`);
+                  }
+                } else {
+                  // Log, falls der paramName nicht den uvName enthält
+                  console.log(`ParamName ${paramName} enthält NICHT uvName. Ersetze durch paramValues.`);
+                  
+                  // Ersetze den Parameternamen durch den Wert aus paramValues
+                  formulaausgewert = formulaausgewert.replace(new RegExp(escapedParamName, 'g'), paramValues[paramName]);
+                  // Log nach der Ersetzung
+                  console.log(`Ersetze ${paramName} durch paramValues: ${paramValues[paramName]}`);
+                }
               }
             });
+
+
 
             // Speichere die ausgewertete Formel in der neuen Property
             this.properties["formulaausgewert"] = formulaausgewert;
