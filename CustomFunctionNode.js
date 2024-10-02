@@ -24,7 +24,8 @@ export function _FunctionNode() {
           uvName: "",  // Name der unabhängigen Variable -> Wird über formeleingabe definitiert und mit Empfangener abgeglichen
           paramNames: ["", "", "", ""],  // Namen der Parameter (Platzhalter für bis zu 4 Parameter)
           paramValues: {},  // Objekt, das die Werte der Parameter speichert
-          formulaausgewert: ""  // Neu: Hinzufügen der Property für die ausgewertete Formel
+          formulaausgewert: "",   // Neu: Hinzufügen der Property für die ausgewertete Formel
+          uvError: false // Status für UV-Fehler
         };
 
         // Widget für die Eingabe der Funktionsgleichung
@@ -63,7 +64,12 @@ export function _FunctionNode() {
         var parts = formula.split(uvName); // Teile die Formel an den Positionen der unabhängigen Variablen
         for (let i=0; i < parts.length - 1; i++){
           // Füge die Teile der neuen Gleichung mit der alten an den Stellen der unabhängigen Variablen ein
-          outputString = outputString + parts[i] + "(" + oldString + ")";
+          if (oldString == uvName){
+            outputString = outputString + parts[i] + oldString;
+          }
+          else {
+            outputString = outputString + parts[i] + "(" + oldString + ")";
+          }
         }
         // Füge den letzten Teil der Formel hinzu
         outputString = outputString + parts[parts.length-1];
@@ -72,8 +78,13 @@ export function _FunctionNode() {
 
       // Liefert den Titel des Knotens basierend auf der Funktionsgleichung
       getTitle() {
-        // Wenn die Funktionsgleichung, unabhängige Variable und Funktionsname vorhanden sind
-        if(this.properties["formulaausgewert"] && this.properties["uvName"] && this.properties["funcName"]){
+        // Wenn ein Fehler mit der UV aufgetreten ist, setze den Titel auf "Fehler mit UV"
+        if (this.properties.uvError) {
+          return "UV stimmt nicht";
+        }
+        
+        // Wenn die Funktionsgleichung, UV und Funktionsname vorhanden sind
+        if (this.properties["formulaausgewert"] && this.properties["uvName"] && this.properties["funcName"]) {
           // Setze den Titel entsprechend der vollständigen Funktionsbeschreibung
           let title = this.properties["funcName"] + "(" + this.properties["uvName"] + ") = " + this.properties["formulaausgewert"];
           return title;
@@ -103,6 +114,7 @@ export function _FunctionNode() {
 
       // Führt die Berechnung durch, wenn die Eingabedaten vorliegen
       onExecute() {
+        
         // Überprüfe, ob Daten im ersten Eingang vorhanden sind (für UV)
         if (this.getInputData(0)) {
           var inputData = this.getInputData(0);
@@ -110,6 +122,8 @@ export function _FunctionNode() {
           var receivedGlgl = inputData["glgl"];  // Neu: empfange glgl
           var glgr = inputData["glgr"]; // Zusatzinformationen zur Gleichung
           var uvName = inputData["uvName"]; // Name der unabhängigen Variablen
+
+          
 
           // Speichere die Hauptunabhängige Variable (x) und Zusatzinfos in den Eigenschaften
           if (x != null) {
@@ -134,14 +148,17 @@ export function _FunctionNode() {
 
 
           // Überprüfe, ob eine falsche Variable angeschlossen ist (UV-Name stimmt nicht überein)
-          if (this.properties["uvName"].length > 0 && this.properties["uvName"] != uvName){
+          //if (this.properties["uvName"].length > 0 && this.properties["uvName"] != uvName){
+           // console.log(`uvName: '${uvName}'`, `this.properties["uvName"]: '${this.properties["uvName"]}'`);
+          if (this.properties["uvName"] != uvName ){
             this.boxcolor = "red"; // Markiere den Knoten rot, wenn ein Fehler vorliegt
+            this.properties.uvError = true;  // Setze den Fehlerstatus auf "true"
             // Erstelle eine neue Gleichung basierend auf der alten und gebe sie aus
-            var newString = this._insertString(this.properties["glgr"], this.properties["formulaausgewert"], this.properties["uvName"]);
+            //var newString = this._insertString(this.properties["glgr"], this.properties["formulaausgewert"], this.properties["uvName"]);
             //var newString = this._insertString(this.properties["glgr"], this.properties["formula"], this.properties["uvName"]);
-            this.setOutputData(0, {value: null, glgl: this.properties["glgl"], glgr: newString, uvName: this.properties["uvName"]});
+            //this.setOutputData(0, {value: null, glgl: this.properties["glgl"], glgr: newString, uvName: this.properties["uvName"]});
           } else {
-
+            this.properties.uvError = false;
             // Verarbeite die zusätzlichen Parameter, die von den Eingängen geliefert werden
             let paramNames = [];
             let paramValues = {};
@@ -161,34 +178,13 @@ export function _FunctionNode() {
 
             // Speichere die Parameterwerte in den Eigenschaften des Knotens
             this.properties["paramValues"] = paramValues;
-
-            
-
             
             // Dynamische Ausführung der Formel
             let formula = this.properties.formula;
-
             // Neue Property: 'formulaausgewert'
             // Kopiere die originale Formel
             let formulaausgewert = formula;
 
-            // // Ersetze Parameternamen in der Formel durch die entsprechenden 'glgl'-Werte
-            // paramNames.forEach(paramName => {
-            // if (paramValues[paramName] !== undefined) {
-            // // Ersetze alle Vorkommen des Parameternamens durch den empfangenen Wert 
-            //   formulaausgewert = formulaausgewert.replace(new RegExp(paramName, 'g'), paramValues[paramName]);
-            //   } 
-            // });
-
-            // paramNames.forEach(paramName => {
-            //   if (paramValues[paramName] !== undefined) {
-            //     // Escape Klammern in den Parameternamen, damit sie im regulären Ausdruck korrekt funktionieren
-            //     let escapedParamName = paramName.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');  // Maskiere alle speziellen Zeichen
-            
-            //     // Ersetze alle Vorkommen des Parameternamens durch den empfangenen Wert
-            //     formulaausgewert = formulaausgewert.replace(new RegExp(escapedParamName, 'g'), paramValues[paramName]);
-            //   }
-            // });
 
             //Variante, die überprüft, ob funktion der uv oder parameter angeschlossen ist
             paramNames.forEach((paramName, index) => {
@@ -236,13 +232,6 @@ export function _FunctionNode() {
             let newString = this._insertString(this.properties["glgr"], this.properties["formulaausgewert"], this.properties["uvName"]);
             try {
               // Wenn die Funktion noch nicht definiert ist oder sich die Formel/Parameter geändert haben, erstelle die Funktion neu
-              // if (!this._func || this._func_code !== formula || this.oldParamNames != paramNames) {
-              //   const funcBody = `return ${formula};`; // Der Funktionskörper basiert auf der Formel
-              //   // Erstelle eine neue Funktion, die die unabhängige Variable und die Parameter verwendet
-              //   this._func = new Function(this.properties["uvName"], ...paramNames, funcBody);
-              //   this.oldParamNames = paramNames; // Speichere die aktuellen Parameternamen
-              //   this._func_code = formula;      // Speichere die aktuelle Formel
-              // }
 
               if (!this._func || this._func_code !== formulaausgewert || this.oldParamNames != paramNames) {
                 const funcBody = `return ${formulaausgewert};`; // Der Funktionskörper basiert auf der Formel

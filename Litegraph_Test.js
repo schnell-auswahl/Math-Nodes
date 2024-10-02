@@ -11,7 +11,7 @@ html`<link href="https://unpkg.com/litegraph.js@0.7.8/css/litegraph.css" rel="st
 
 function _graphCell(html)
 {
-  return html`<div ><canvas width=1000 height=600 id="graphDiv"></canvas></div>`
+  return html`<div ><canvas width=1400 height=800 id="graphDiv"></canvas></div>`
 }
 
 
@@ -32,28 +32,8 @@ md`## Controls
 `
 )}
 
-// function _CustomMultNode(){return(
-// class CustomMultNode {
-//   constructor(){
-//     this.title = "Multiplication";
-//     this.addInput("A","number");
-//     this.addInput("B","number");
-//     this.addOutput("A*B","number");
-//     this.properties = { precision: 0.1 };
-//   }
-  
-//   onExecute(){
-//     // console.log("osjdbfsodnfb")
-//     let a = this.getInputData(0) || 0;
-//     let b = this.getInputData(1) || 0;
-    
-//     this.setOutputData(0,a*b);
-//   }
-// }
-// )}
 
-
-// FunctionNode in separate Datei ausgelagert
+// CustomNodes in separate Datei ausgelagert
 
 import { _FunctionNode } from './CustomFunctionNode.js';
 
@@ -72,16 +52,13 @@ import { _CustomGraphicsPlot } from './CustomGraphicsPlotNode.js'
 
 
 function _graph(graphCell,LiteGraph,FunctionNode,CustNumberNode,CustWatchNodeString,CustWatchNodeValue,CustomGraphicsPlot,CustomTimeNode,$0)
-// function _graph(graphCell,LiteGraph,CustomMultNode,ObservableNode,$0)
-// function _graph(graphCell,LiteGraph,CustomMultNode,ObservableNode,MathFormula,$0)
 {
   graphCell;
   
   // Register our new custom node
-  //LiteGraph.registerNodeType("custom/multiply",CustomMultNode);
-  // LiteGraph.registerNodeType("custom/observable",ObservableNode);
+  
+
   LiteGraph.registerNodeType("custom/func", FunctionNode);
-  // LiteGraph.registerNodeType("custom/formula", MathFormula);
   LiteGraph.registerNodeType("custom/cconst", CustNumberNode);
   LiteGraph.registerNodeType("custom/cwatchS", CustWatchNodeString);
   LiteGraph.registerNodeType("custom/cwatchV", CustWatchNodeValue);
@@ -106,24 +83,12 @@ function _graph(graphCell,LiteGraph,FunctionNode,CustNumberNode,CustWatchNodeStr
    */
   //  canvas.prompt = (title,value,callback,event)=>{ return null; };
 
-  // Set up a simple example multipling A*B (where A & B are const numeric inputs)
-  // var nodeConstA = LiteGraph.createNode("basic/const");
-  // nodeConstA.pos = [200,200];
-  // nodeConstA.setValue(4.5);
-  // graph.add(nodeConstA);
 
-  // var nodeConstB = LiteGraph.createNode("basic/const");
-  // nodeConstB.pos = [200,300];
-  // nodeConstB.setValue(1.5);
-  // graph.add(nodeConstB);
 
   var nodeCustConst = LiteGraph.createNode("custom/cconst");
   nodeCustConst.pos = [100,200];
   graph.add(nodeCustConst);
-  
-  // var nodeMult = LiteGraph.createNode("custom/multiply");
-  // nodeMult.pos = [500,250];
-  // graph.add(nodeMult);
+
 
   var nodeFunc1 = LiteGraph.createNode("custom/func");
   nodeFunc1.pos = [400,200];
@@ -178,17 +143,14 @@ export default function define(runtime, observer) {
   main.variable(observer("mutable results")).define("mutable results", ["Mutable", "initial results"], (M, _) => new M(_));
   main.variable(observer("results")).define("results", ["mutable results"], _ => _.generator);
   main.variable(observer()).define(["md"], _5);
-  //main.variable(observer("CustomMultNode")).define("CustomMultNode", _CustomMultNode);
-  // main.variable(observer("ObservableNode")).define("ObservableNode", _ObservableNode);
-  // main.variable(observer("MathFormula")).define("MathFormula", _MathFormula);
+
   main.variable(observer("FunctionNode")).define("FunctionNode", _FunctionNode);
   main.variable(observer("CustNumberNode")).define("CustNumberNode", _CustNumberNode);
   main.variable(observer("CustWatchNodeString")).define("CustWatchNodeString", _CustWatchNodeString);
   main.variable(observer("CustWatchNodeValue")).define("CustWatchNodeValue", _CustWatchNodeValue);
   main.variable(observer("CustomGraphicsPlot")).define("CustomGraphicsPlot", _CustomGraphicsPlot);
   main.variable(observer("CustomTimeNode")).define("CustomTimeNode", _CustomTimeNode);
-  // main.variable(observer("graph")).define("graph", ["graphCell","LiteGraph","CustomMultNode","ObservableNode","mutable results"], _graph);
-  // main.variable(observer("graph")).define("graph", ["graphCell","LiteGraph","CustomMultNode","ObservableNode","MathFormula","mutable results"], _graph);
+  
   main.variable(observer("graph")).define("graph", ["graphCell","LiteGraph","FunctionNode","CustNumberNode","CustWatchNodeString","CustWatchNodeValue","CustomGraphicsPlot","CustomTimeNode","mutable results"], _graph);
   main.variable(observer("LiteGraph")).define("LiteGraph", ["require"], _LiteGraph);
   return main;
