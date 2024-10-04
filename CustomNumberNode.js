@@ -9,10 +9,10 @@ export function _CustNumberNode() {
         this.numberWidget = this.addWidget("number", "Wert", 1, "value", { precision: 2 });
         this.nameWidget = this.addWidget("text", "Variablenname", "x", "rightSide");
         this.widgets_up = true;
-        this.size = [180, 60];
         //this.color = "#4C7468"; //Titelfarbe
         //this.bgcolor = "#9FA8B4"; //Hintergrundfarbe
          this.shape = LiteGraph.ROUND_SHAPE; // Runde Ecken
+         this.size = [180, 60];
       }
 
       onExecute() {

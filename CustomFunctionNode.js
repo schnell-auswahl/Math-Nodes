@@ -163,9 +163,18 @@ export function _FunctionNode() {
               let escapedParamName = paramName.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');  // Maskiere alle speziellen Zeichen
               if (paramName.includes(this.properties["uvName"])) {
                 let rightSideFromInput = this.getInputData(index + 1)["rightSide"];
-                evaluatedFormula = evaluatedFormula.replace(new RegExp(escapedParamName, 'g'), rightSideFromInput);
+                evaluatedFormula = evaluatedFormula.replace(new RegExp(escapedParamName, 'g'), "(" + rightSideFromInput + ")" );
               } else {
-                evaluatedFormula = evaluatedFormula.replace(new RegExp(escapedParamName, 'g'), paramValues[paramName]);
+                if (paramValues[paramName] > 0) {
+                  evaluatedFormula = evaluatedFormula.replace(new RegExp(escapedParamName, 'g'), paramValues[paramName]);
+                } 
+                // else if (paramValues[paramName] == 0) {
+                //   evaluatedFormula = evaluatedFormula.replace(new RegExp(escapedParamName, 'g'), "");
+                // }                 
+                else {
+                  evaluatedFormula = evaluatedFormula.replace(new RegExp(escapedParamName, 'g'),"(" + paramValues[paramName]+ ")");
+                }
+
               }
             });
 
