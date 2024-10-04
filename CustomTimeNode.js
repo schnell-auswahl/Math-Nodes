@@ -4,10 +4,10 @@ export function _CustomTimeNode() { return (
     constructor() {
       this.addOutput("in ms", "object");
       this.addOutput("in sec", "object");
-      this.properties = { glgr: "t", glgl: "", uvName: "t"};
+      this.properties = { rightSide: "t", leftSide: "", uvName: "t"};
     
 
-      this.nameWidget = this.addWidget("text","Variablenname","t","glgr");
+      this.nameWidget = this.addWidget("text","Variablenname","t","rightSide");
 
       this.title = "Time";
       this.desc = "Time";
@@ -16,15 +16,15 @@ export function _CustomTimeNode() { return (
     onExecute = function() {
       var outputSec = {
         value: this.graph.globaltime,
-        glgr: this.properties["glgr"],
-        glgl: this.properties["glgl"], 
-        uvName: this.properties["glgr"],
+        rightSide: this.properties["rightSide"],
+        leftSide: this.properties["leftSide"], 
+        uvName: this.properties["rightSide"],
       }
       var outputMil = {
         value: this.graph.globaltime * 1000,
-        glgr: this.properties["glgr"],
-        glgl: this.properties["glgl"],
-        uvName: this.properties["glgr"],
+        rightSide: this.properties["rightSide"],
+        leftSide: this.properties["leftSide"],
+        uvName: this.properties["rightSide"],
       }
       this.setOutputData(0, outputMil);
       this.setOutputData(1, outputSec);
@@ -32,8 +32,8 @@ export function _CustomTimeNode() { return (
 
     getTitle() {
       let title = "Zeit"
-      if(this.properties["glgr"]){
-        title = title + " " + this.properties["glgr"];
+      if(this.properties["rightSide"]){
+        title = title + " " + this.properties["rightSide"];
       }
       return title;
     };

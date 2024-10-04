@@ -5,13 +5,13 @@ export function _CustNumberNode() {
     class CustNumberNode {
       constructor() {
         this.addOutput("value", "object");
-        this.properties = { value: 1.0, glgr: "x"};
+        this.properties = { value: 1.0, rightSide: "x"};
         this.numberWidget = this.addWidget("number", "Wert", 1, "value", { precision: 2 });
-        this.nameWidget = this.addWidget("text", "Variablenname", "x", "glgr");
+        this.nameWidget = this.addWidget("text", "Variablenname", "x", "rightSide");
         this.widgets_up = true;
         this.size = [180, 60];
-        this.color = "#4C7468"; //Titelfarbe
-        this.bgcolor = "#7E8692"; //Hintergrundfarbe
+        //this.color = "#4C7468"; //Titelfarbe
+        //this.bgcolor = "#9FA8B4"; //Hintergrundfarbe
          this.shape = LiteGraph.ROUND_SHAPE; // Runde Ecken
       }
 
@@ -21,9 +21,9 @@ export function _CustNumberNode() {
 
         var output = {
           value: roundedValue,
-          glgr: this.properties["glgr"],
-          glgl: this.properties["glgr"],
-          uvName: this.properties["glgr"],
+          rightSide: this.properties["rightSide"],
+          leftSide: this.properties["rightSide"],
+          uvName: this.properties["rightSide"],
           // funcList: ""
         }
         this.setOutputData(0, output);
@@ -31,8 +31,8 @@ export function _CustNumberNode() {
 
       getTitle() {
         let title = "Variable"
-        if (this.properties["glgr"]) {
-          title = title + " " + this.properties["glgr"];
+        if (this.properties["rightSide"]) {
+          title = title + " " + this.properties["rightSide"];
         }
         return title;
       }

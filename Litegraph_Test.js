@@ -98,6 +98,10 @@ function _graph(graphCell,LiteGraph,FunctionNode,CustNumberNode,CustWatchNodeStr
   nodeFunc2.pos = [300,400];
   graph.add(nodeFunc2);
 
+  var nodeFunc3 = LiteGraph.createNode("custom/func");
+  nodeFunc3.pos = [700,500];
+  graph.add(nodeFunc3);
+
   var nodeCustWatchS = LiteGraph.createNode("custom/cwatchS");
   nodeCustWatchS.pos = [650,250];
   graph.add(nodeCustWatchS);
@@ -130,9 +134,10 @@ function _graph(graphCell,LiteGraph,FunctionNode,CustNumberNode,CustWatchNodeStr
 }
 
 
-function _LiteGraph(require){return(
-require('litegraph.js@0.7.8/build/litegraph.js').catch(() => window["LiteGraph"])
-)}
+function _LiteGraph(require){
+  return window["LiteGraph"];  // Da die Datei im HTML geladen wird, ist LiteGraph global verfügbar
+//return(require('litegraph.js@0.7.8/build/litegraph.js').catch(() => window["LiteGraph"]))
+}
 
 export default function define(runtime, observer) {
   const main = runtime.module();

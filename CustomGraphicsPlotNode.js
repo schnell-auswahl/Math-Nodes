@@ -44,7 +44,7 @@ export function _CustomGraphicsPlot(){
           }
   
           // Hole die Funktionsgleichung aus dem Eingang
-          var equation = this.getInputData(0)["glgr"];  // Funktionsgleichung als String
+          var equation = this.getInputData(0)["rightSide"];  // Funktionsgleichung als String
           
           // Falls keine Gleichung eingegeben wurde, nicht weiter ausführen
           if (!equation) return;

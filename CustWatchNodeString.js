@@ -29,11 +29,11 @@ export function _CustWatchNodeString() { return(
     toString = function(o) {
       if (o == null) {
           return "";
-      } else if (!o["glgr"] || o["glgr"] == null) {
+      } else if (!o["rightSide"] || o["rightSide"] == null) {
         return "Fehler";
       } else {
-          //return "f(" + o["uvName"] + ") = " + o["glgr"];
-          return o["glgl"] + " = " + o["glgr"];
+          //return "f(" + o["uvName"] + ") = " + o["rightSide"];
+          return o["leftSide"] + " = " + o["rightSide"];
       }
     };
 
