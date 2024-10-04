@@ -11,7 +11,7 @@ html`<link href="https://unpkg.com/litegraph.js@0.7.8/css/litegraph.css" rel="st
 
 function _graphCell(html)
 {
-  return html`<div ><canvas width=1400 height=800 id="graphDiv"></canvas></div>`
+  return html`<div ><canvas width=1400 height=800 id="graphDiv" style="position: absolute;"></canvas></div>`
 }
 
 
@@ -47,7 +47,20 @@ import { _CustWatchNodeValue } from './CustWatchNodeValue.js'
 
 import { _CustomGraphicsPlot } from './CustomGraphicsPlotNode.js'
 
+function renderEquationToSVG(equation, targetElementId) {
+  try {
+      const targetElement = document.getElementById(targetElementId);
+      const svg = katex.renderToString(equation, {
+          throwOnError: false,
+          output: 'html',
+          displayMode: true
+      });
 
+      targetElement.innerHTML = svg;
+  } catch (err) {
+      console.error("Error rendering equation: ", err);
+  }
+}
 
 
 

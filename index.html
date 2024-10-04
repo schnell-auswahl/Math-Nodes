@@ -1,20 +1,43 @@
 <!DOCTYPE html>
-<meta charset="utf-8">
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LiteGraph Example with KaTeX</title>
 
-<title>LiteGraph Example</title>
-<link rel="stylesheet" type="text/css" href="./inspector.css">
+    <!-- Einbinden der KaTeX CSS-Datei, um mathematische Ausdrücke korrekt zu stylen -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.13.11/dist/katex.min.css">
+    
+    <!-- Einbinden der KaTeX JavaScript-Datei, die für das Rendern von mathematischen Ausdrücken verantwortlich ist -->
+    <script src="https://cdn.jsdelivr.net/npm/katex@0.13.11/dist/katex.min.js"></script>
+    
+    <!-- Stile für den LiteGraph Inspector (kann angepasst werden) -->
+    <link rel="stylesheet" type="text/css" href="./inspector.css">
+</head>
+
 <body>
 
- <!-- Einbinden der LiteGraph.js Datei -->
-<script src="./litegraph.js"></script> <!-- Pfad zu deiner lokal gespeicherten litegraph.js Datei -->
+    <!-- Dies ist das HTML-Canvas, das für das Zeichnen des LiteGraph verwendet wird -->
+    <div>
+        <canvas id="graphDiv" width="1400" height="800" style="position: relative;"></canvas>
+    </div>
 
+    <!-- Einbinden der lokal gespeicherten LiteGraph.js Datei -->
+    <script src="./litegraph.js"></script>
 
-<script type="module">
+    <!-- Hauptskript, das das Projekt startet und die KaTeX-Integration vorbereitet -->
+    <script type="module">
 
-import define from "./index.js";
-import {Runtime, Library, Inspector} from "./runtime.js";
+        // Importiere das Hauptmodul aus der Datei "index.js", das den LiteGraph aufbaut
+        import define from "./index.js";
 
-const runtime = new Runtime();
-const main = runtime.module(define, Inspector.into(document.body));
+        // Importiere den Runtime und Inspector, um die Module auszuführen und zu überwachen
+        import { Runtime, Library, Inspector } from "./runtime.js";
 
-</script>
+        // Initialisiere den Runtime und weise den Graphen dem Inspector zu
+        const runtime = new Runtime();
+        const main = runtime.module(define, Inspector.into(document.body));
+
+    </script>
+</body>
+</html>

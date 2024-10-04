@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>MathJax Test</title>
+
+    <!-- MathJax einbinden -->
+    <script id="MathJax-script" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+
+    <!-- Einfaches Div-Element mit einer LaTeX-Gleichung -->
+    <div id="math-container">
+        \(x^2 + y^2 = z^2\)
+    </div>
+
+    <script>
+        // Starte MathJax, um die Gleichung im Div zu rendern
+        MathJax.typesetPromise().then(() => {
+            console.log("MathJax hat die Gleichung gerendert!");
+        }).catch((err) => console.log(err));
+    </script>
+
+</body>
+</html>

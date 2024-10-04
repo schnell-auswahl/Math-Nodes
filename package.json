@@ -10,5 +10,9 @@
   "type": "module",
   "peerDependencies": {
     "@observablehq/runtime": "4 - 5"
+  },
+  "dependencies": {
+    "@curriculumassociates/canvas-latex": "github:CurriculumAssociates/canvas-latex",
+    "mathjax": "^3.2.2"
   }
 }
