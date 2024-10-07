@@ -62,6 +62,8 @@ function renderEquationToSVG(equation, targetElementId) {
   }
 }
 
+window.renderEquationToSVG = renderEquationToSVG;
+
 // Beispiel mit MathJS
 function convertToLatex(expression) {
   try {
@@ -115,6 +117,8 @@ function _graph(graphCell,LiteGraph,FunctionNode,CustNumberNode,CustWatchNodeStr
   
   // Search box triggers "Blocked autofocusing on a <input> element in a cross-origin subframe."
   canvas.allow_searchbox = false;   
+  canvas.allow_dragcanvas = false; // Prevent dragging the canvas
+  canvas.allow_zoom = false; // Prevent zooming in/out
 
   /** Disable LiteGraph Input prompts
    *

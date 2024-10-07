@@ -80,39 +80,72 @@ export function _FunctionNode() {
         if (this.properties.uvError) {
           return "UV stimmt nicht";
         }
-        
+      
         // Wenn die Funktionsgleichung, UV und Funktionsname vorhanden sind
         if (this.properties["evaluatedFormula"] && this.properties["uvName"] && this.properties["funcName"]) {
-          // Setze den Titel entsprechend der vollständigen Funktionsbeschreibung
-          return `${this.properties["funcName"]}(${this.properties["uvName"]}) = ${this.properties["evaluatedFormula"]}`;
-          //return `${this.properties["leftSide"]} = ${this.properties["evaluatedFormula"]}`;
+          const equation = `${this.properties["funcName"]}(${this.properties["uvName"]}) = ${this.properties["evaluatedFormula"]}`;
+          const latexEquation = convertToLatex(equation);
+          return latexEquation; // Dies wird unsichtbar gemacht
         } else {
-          // Standardtitel, falls nicht alle Informationen vorhanden sind
-          return "Funktion";
+          return "Funktion"; // Standardtitel, falls nicht alle Informationen vorhanden sind
         }
       }
 
       // Zeichnet den Hintergrund und passt die Labels der Eingänge/Ausgänge dynamisch an
-      onDrawBackground() {
+      onDrawForeground(ctx) {
+        // Hole die Eingabedaten für die unabhängige Variable (UV)
         var inputData = this.getInputData(0);
-        //console.log(inputData)
+      
         // Setze das Label des ersten Eingangs basierend auf der unabhängigen Variablen (UV)
-        if(this.properties["uvName"] && inputData == null){
+        if (this.properties["uvName"] && inputData == null) {
           this.inputs[0].label = this.properties["uvName"];
-        } else if(this.properties["uvName"] && inputData != null) {
-          this.inputs[0].label = inputData["leftSide"]
+        } else if (this.properties["uvName"] && inputData != null) {
+          this.inputs[0].label = inputData["leftSide"];
         } else {
-          this.inputs[0].label = "UV"; // Standardmäßig "UV", falls kein Name gesetzt ist
+          this.inputs[0].label = "UV";  // Standardmäßig "UV", falls kein Name gesetzt ist
         }
+      
         // Setze die Labels der Parameter-Eingänge basierend auf den Parameternamen
-        for(let i=1; i<5; i++){
+        for (let i = 1; i < 5; i++) {
           this.inputs[i].label = this.properties["paramNames"][i];
         }
+      
         // Setze das Label des Ausgangs basierend auf der Funktionsgleichung
-        if(this.properties["uvName"] && this.properties["funcName"]){
+        if (this.properties["uvName"] && this.properties["funcName"]) {
           this.outputs[0].label = this.properties["leftSide"];
         }
-      }
+      
+         // Hole die generierte LaTeX-Gleichung aus dem Titel
+    const equation = this.getTitle();
+
+    // Dynamische Aktualisierung der Position des Latex-Titels basierend auf der aktuellen Node-Position
+    const canvasRect = ctx.canvas.getBoundingClientRect();
+    
+    // Berechne die Position des Nodes relativ zum Canvas
+    const offsetX = this.pos[0] + canvasRect.left * ctx.scaleX;  // X-Position mit Berücksichtigung des Scales
+    const offsetY = this.pos[1] + canvasRect.top * ctx.scaleY;   // Y-Position mit Berücksichtigung des Scales
+    
+    // Setze eine ID für das Ziel-Element, um KaTeX zu rendern
+    const targetElementId = `title-${this.id}`;
+    
+    // Falls das Div für den Titel noch nicht existiert, erstelle es
+    let titleDiv = document.getElementById(targetElementId);
+    if (!titleDiv) {
+        titleDiv = document.createElement("div");
+        titleDiv.id = targetElementId;
+        titleDiv.style.position = "absolute";
+        titleDiv.style.fontSize = "13px";
+        titleDiv.style.zIndex = "1000";  // Stellt sicher, dass es im Vordergrund bleibt
+        titleDiv.style.color = "white";  // Setzt die Schriftfarbe auf Weiß
+        document.body.appendChild(titleDiv);
+    }
+
+    // Aktualisiere die Position des Divs bei jeder Node-Bewegung
+    titleDiv.style.transform = `translate(${offsetX}px, ${offsetY}px)`;
+
+    // Render die LaTeX-Gleichung als KaTeX-SVG
+    renderEquationToSVG(equation, targetElementId);
+    }   
 
       // Führt die Berechnung durch, wenn die Eingabedaten vorliegen
       onExecute() {
