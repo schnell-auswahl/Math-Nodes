@@ -55,13 +55,17 @@ export function _CustWatchNodeString() {
         // Die Gleichung als String
         let equation = this.toString(this.value);
     
+        // Konvertiere den mathematischen Ausdruck in LaTeX mit MathJS
+        let latexEquation = convertToLatex(equation);
+    
         // Stelle sicher, dass ein Div-Element für KaTeX vorhanden ist
         if (!this.latexDiv) {
             this.latexDiv = document.createElement("div");
             this.latexDiv.style.position = "absolute";
             this.latexDiv.style.fontSize = "13px";
             this.latexDiv.style.zIndex = "1000";  // Stellt sicher, dass es im Vordergrund bleibt
-            //this.latexDiv.style.backgroundColor = "rgba(255,255,255,0.8)";  // Leicht transparenter Hintergrund
+            // Optional: Hintergrund für bessere Sichtbarkeit
+            // this.latexDiv.style.backgroundColor = "rgba(255,255,255,0.8)";  // Leicht transparenter Hintergrund
             document.body.appendChild(this.latexDiv);
         }
     
@@ -73,11 +77,11 @@ export function _CustWatchNodeString() {
         this.latexDiv.style.left = (this.pos[0] + canvasRect.left) + "px";  // Aktualisiert die X-Position
     
         this.latexDiv.style.transform = `translate(${offsetX}px, ${offsetY}px)`;
-
-        // Render die Gleichung als KaTeX in das Div-Element
-        this.renderEquationWithKaTeX(equation, this.latexDiv);
     
-        // Warte, bis das KaTeX-Inhalts gerendert wurde, um die Größe zu ermitteln
+        // Render die konvertierte LaTeX-Gleichung als KaTeX in das Div-Element
+        this.renderEquationWithKaTeX(latexEquation, this.latexDiv);
+    
+        // Warte, bis der KaTeX-Inhalt gerendert wurde, um die Größe zu ermitteln
         setTimeout(() => {
             const rect = this.latexDiv.getBoundingClientRect();  // Hol die Größe des gerenderten Inhalts
             // Aktualisiere die Node-Größe entsprechend der Größe der gerenderten Gleichung

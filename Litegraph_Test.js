@@ -62,6 +62,38 @@ function renderEquationToSVG(equation, targetElementId) {
   }
 }
 
+// Beispiel mit MathJS
+function convertToLatex(expression) {
+  try {
+      let leftSide = '';
+      let rightSide = expression;
+
+      // Falls der Ausdruck ein Gleichheitszeichen enthält, splitte in linken und rechten Teil
+      if (expression.includes('=')) {
+          const parts = expression.split('=');
+          leftSide = parts[0].trim();   // Linke Seite der Gleichung (z.B. f(x))
+          rightSide = parts[1].trim();  // Rechte Seite der Gleichung (z.B. x-2)
+      }
+
+      // Parsen und Umwandeln nur des rechten Teils
+      const node = math.parse(rightSide);  // Parsen des rechten Teils
+      const latexRightSide = node.toTex();  // Umwandeln des rechten Teils in LaTeX
+
+      // Rückgabe des zusammengesetzten Ausdrucks
+      if (leftSide) {
+          return `${leftSide} = ${latexRightSide}`;  // Zusammensetzen der beiden Teile
+      } else {
+          return latexRightSide;  // Falls kein Gleichheitszeichen vorhanden ist, nur die LaTeX-Umwandlung des Ausdrucks
+      }
+  } catch (err) {
+      console.error("Fehler beim Parsen des Ausdrucks:", err);
+      return expression;  // Falls Fehler, gib den ursprünglichen Ausdruck zurück
+  }
+}
+
+// Macht die Funktion global verfügbar
+window.convertToLatex = convertToLatex;
+
 
 
 function _graph(graphCell,LiteGraph,FunctionNode,CustNumberNode,CustWatchNodeString,CustWatchNodeValue,CustomGraphicsPlot,CustomTimeNode,$0)
