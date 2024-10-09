@@ -200,6 +200,7 @@ graph.add(nodeTime1);
   nodePlot1.pos = [800,500];
   graph.add(nodePlot1);
 
+
   // All nodes must be in the graph before connections can be made.
 
   //Verbindungen:
@@ -233,7 +234,15 @@ graph.add(nodeTime1);
   // nodeMult.connect(0, nodeWatch, 0 );
   // nodeMult.connect(0, nodeObserve, 0 );
   
-  graph.start()
+  graph.start(30);
+
+  function loop() {
+    graph.runStep();
+    canvas.draw(true, true);  // Redraw every frame
+    requestAnimationFrame(loop);
+}
+loop();  // Start the loop
+
   return graph;
 }
 

@@ -49,6 +49,14 @@ export function _CustWatchNodeString() {
         }
       }
 
+      // Wenn der Node gelöscht wird, entferne das zugehörige LaTeX-Div
+      onRemoved() {
+        if (this.latexDiv && this.latexDiv.parentNode) {
+          this.latexDiv.parentNode.removeChild(this.latexDiv);
+          console.log("LaTeX-Div wurde entfernt.");
+        }
+      }
+
       onDrawForeground(ctx) {
         if (!this.value) return;
     

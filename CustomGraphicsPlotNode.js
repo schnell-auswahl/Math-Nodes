@@ -1,171 +1,241 @@
-export function _CustomGraphicsPlot(){
-    return (
-      class CustomGraphicsPlot {
-        constructor(){
-          this.addInput("Input", "object");  // Eingang für Funktionsgleichung (als String)
-          
-          // Skalierung und Bereich
-          this.properties = { 
-            xRange: [-10, 10],  // X-Bereich
-            yRange: [-10, 10],  // Y-Bereich
-            scaleX: 1,          // Skalierung für X-Achse
-            scaleY: 1,          // Skalierung für Y-Achse
-            gridSize: 5         // Abstand zwischen Gitternetzlinien
-          };
-  
-          this.title = "Function Plot with Grid";
-          this.desc = "Plots a mathematical function with grid and labels";
-          this.colors = ["#FFA", "#F99"];
-          this.size = [250, 250];
-          this.color = "#CE8A53"; //Titelfarbe
-          this.bgcolor = "#FFFFFF"; //Hintergrundfarbe
+export function _CustomGraphicsPlot() {
+  return (
+    class CustomGraphicsPlot {
+      constructor() {
+        // Füge vier Eingänge für vier verschiedene Funktionen hinzu
+        this.addInput("", "object");
+        this.addInput("", "object");
+        this.addInput("", "object");
+        this.addInput("", "object");
 
-        }
-  
-        // Funktion aus String evaluieren
-        evaluateFunction(equation, x) {
-          try {
-            const safeEquation = equation.replace("^", "**");  // Konvertiere Potenzen
-            const func = new Function("x", `return ${safeEquation};`);  // Funktionsausdruck in JS-Function konvertieren
-            return func(x);  // Evaluiere Funktion für gegebenen X-Wert
-          } catch (error) {
-            console.error("Fehler bei der Auswertung der Funktion:", error);
-            return null;
-          }
-        }
-  
-        clamp(v, a, b) {
-          return a > v ? a : b < v ? b : v;
+        // Standard-Eigenschaften und Skalierungsparameter
+        this.properties = {
+          xRangeValue: 10,     // Der Wert des Knobs für die X-Achse
+          yRangeValue: 10,     // Der Wert des Knobs für die Y-Achse
+          scaleX: 1,           // Skalierung für X-Achse
+          scaleY: 1,           // Skalierung für Y-Achse
+          gridSize: 2,         // Abstand zwischen Gitternetzlinien
+          discontinuityThreshold: 100,  // Grenzwert für Diskontinuitäten
+          margin: 30,          // Randgröße für die linken, rechten und unteren Seiten
+          marginTop: 80,       // Spezielle Randgröße für den oberen Rand
+          xRange: [-10, 10],   // Standardwert für xRange
+          yRange: [-10, 10]    // Standardwert für yRange
         };
-  
-        onExecute = function() {
-          if (this.flags.collapsed || !this.getInputData(0)) {
-              return;
+
+        // Widgets für xRange und yRange als Knobs
+        this.addWidget("slider", "xRange", this.properties.xRangeValue, (value) => {
+          this.properties.xRangeValue = Math.round((value + Number.EPSILON) * 10) / 10;
+          //const roundedValue = Math.round((parseFloat(this.properties["value"]) + Number.EPSILON) * 100) / 100;
+
+          this.properties.xRange = [-this.properties.xRangeValue, this.properties.xRangeValue];  // Erstelle die symmetrische Range
+          if (this.properties.xRangeValue >= this.properties.yRangeValue){
+            this.properties.gridSize = this.properties.xRangeValue / 10; 
           }
-  
-          // Hole die Funktionsgleichung aus dem Eingang
-          var equation = this.getInputData(0)["rightSide"];  // Funktionsgleichung als String
-          
-          // Falls keine Gleichung eingegeben wurde, nicht weiter ausführen
-          if (!equation) return;
-          
-          this.equation = equation;  // Speichere die übergebene Gleichung
-        };
-  
-        onDrawBackground = function(ctx) {
-          if (this.flags.collapsed || !this.equation) {
-              return;
+        }, { min: 0.1, max: 100, step: 0.1, precision: 1 });
+
+        this.addWidget("slider", "yRange", this.properties.yRangeValue, (value) => {
+          this.properties.yRangeValue = Math.round((value + Number.EPSILON) * 10) / 10;
+          this.properties.yRange = [-this.properties.yRangeValue, this.properties.yRangeValue];  // Erstelle die symmetrische Range
+          if (this.properties.yRangeValue >= this.properties.xRangeValue){
+            this.properties.gridSize = this.properties.yRangeValue / 10; 
           }
-  
-          var size = this.size;
-          var xRange = this.properties.xRange;
-          var yRange = this.properties.yRange;
-          var scaleX = size[0] / (xRange[1] - xRange[0]);  // Skalierung der X-Achse basierend auf dem Bereich
-          var scaleY = size[1] / (yRange[1] - yRange[0]);  // Skalierung der Y-Achse
-          var offsetX = -xRange[0] * scaleX;  // Verschiebung auf der X-Achse
-          var offsetY = size[1] - (-yRange[0] * scaleY);  // Verschiebung auf der Y-Achse
-  
-          // Hintergrund zeichnen
-          ctx.fillStyle = "#000";
-          ctx.fillRect(0, 0, size[0], size[1]);
-  
-          // Gitternetzlinien zeichnen
-          this.drawGrid(ctx, size, scaleX, scaleY, offsetX, offsetY);
-  
-          // Funktionswerte berechnen und plotten
-          ctx.strokeStyle = this.colors[1];  // Farbe der Linie
-          ctx.beginPath();
-  
-          // Starte bei minimalem X-Wert
-          var step = (xRange[1] - xRange[0]) / size[0];  // Schrittweite entlang der X-Achse
-          var x = xRange[0];
-          var y = this.evaluateFunction(this.equation, x);  // Evaluiere Funktion
-  
-          if (y !== null) {
-            var plotX = (x - xRange[0]) * scaleX;  // X-Koordinate im Plot
-            var plotY = (yRange[1] - y) * scaleY;  // Y-Koordinate im Plot
-            ctx.moveTo(this.clamp(plotX, 0, size[0]), this.clamp(plotY, 0, size[1]));  // Starte den Plot bei diesem Punkt
-  
-            // Schleife durch alle X-Werte im Plotbereich
-            for (var i = 1; i < size[0]; ++i) {
-              x += step;  // Erhöhe X
-              y = this.evaluateFunction(this.equation, x);  // Evaluiere Y für neues X
-              if (y === null) continue;
-  
-              plotX = (x - xRange[0]) * scaleX;
-              plotY = (yRange[1] - y) * scaleY;
-              ctx.lineTo(this.clamp(plotX, 0, size[0]), this.clamp(plotY, 0, size[1]));
+        }, { min: 0.1, max: 100, step: 0.1, precision: 1 });
+
+        this.widgets_start_y = 10; //Widgets sitzen neben ins
+
+        // Node-Eigenschaften
+        this.title = "Multi-Function Plot with Grid";
+        this.desc = "Plots up to 4 mathematical functions with different colors";
+        this.colors = ["#FFA", "#F99", "#9F9", "#99F"];  // Vier Farben für vier Funktionen
+        this.size = [350, 380];  // Vergrößertes Plot-Fenster
+        this.color = "#CE8A53";
+        this.bgcolor = "#FFFFFF";
+
+        this.equations = [];  // Array für die Gleichungen der vier Eingänge
+        this.uvNames = [];    // Array für die UV-Namen der vier Eingänge
+      }
+
+      // Funktion aus String evaluieren
+      evaluateFunction(equation, uvValue, uvName) {
+        try {
+          const safeEquation = equation.replace("^", "**");
+          const func = new Function(uvName, `return ${safeEquation};`);
+          return func(uvValue);
+        } catch (error) {
+          console.error("Fehler bei der Auswertung der Funktion:", error);
+          return null;
+        }
+      }
+
+      clamp(v, a, b) {
+        return a > v ? a : b < v ? b : v;
+      }
+
+      onExecute() {
+        this.equations = [];
+        this.uvNames = [];
+
+        // Überprüfe alle vier Eingänge
+        for (let i = 0; i < 4; i++) {
+          const inputData = this.getInputData(i);
+          if (inputData) {
+            const equation = inputData["rightSide"];
+            const uvName = inputData["uvName"] || "x";
+
+            if (equation) {
+              this.equations.push(equation);
+              this.uvNames.push(uvName);
             }
-  
-            ctx.stroke();
-          }
-  
-          // Achsenbeschriftungen hinzufügen
-          this.drawLabels(ctx, size, scaleX, scaleY, offsetX, offsetY, xRange, yRange);
-        };
-  
-        // Gitternetzlinien zeichnen
-        drawGrid(ctx, size, scaleX, scaleY, offsetX, offsetY) {
-          ctx.strokeStyle = "#555";
-          ctx.lineWidth = 0.5;
-  
-          // Vertikale Linien für X
-          var gridSize = this.properties.gridSize;
-          for (var x = Math.floor(this.properties.xRange[0] / gridSize) * gridSize; x <= this.properties.xRange[1]; x += gridSize) {
-            var plotX = (x - this.properties.xRange[0]) * scaleX;
-            ctx.beginPath();
-            ctx.moveTo(plotX, 0);
-            ctx.lineTo(plotX, size[1]);
-            ctx.stroke();
-          }
-  
-          // Horizontale Linien für Y
-          for (var y = Math.floor(this.properties.yRange[0] / gridSize) * gridSize; y <= this.properties.yRange[1]; y += gridSize) {
-            var plotY = (this.properties.yRange[1] - y) * scaleY;
-            ctx.beginPath();
-            ctx.moveTo(0, plotY);
-            ctx.lineTo(size[0], plotY);
-            ctx.stroke();
-          }
-  
-          // Achsen (X=0 und Y=0) betonen
-          ctx.strokeStyle = "#FFF";
-          ctx.lineWidth = 1.0;
-  
-          // X-Achse
-          ctx.beginPath();
-          ctx.moveTo(0, offsetY);
-          ctx.lineTo(size[0], offsetY);
-          ctx.stroke();
-  
-          // Y-Achse
-          ctx.beginPath();
-          ctx.moveTo(offsetX, 0);
-          ctx.lineTo(offsetX, size[1]);
-          ctx.stroke();
-        }
-  
-        // Beschriftungen für Achsen und Gitternetzlinien
-        drawLabels(ctx, size, scaleX, scaleY, offsetX, offsetY, xRange, yRange) {
-          ctx.fillStyle = "#FFF";
-          ctx.font = "10px Arial";
-          ctx.textAlign = "center";
-  
-          // X-Achse beschriften
-          var gridSize = this.properties.gridSize;
-          for (var x = Math.floor(xRange[0] / gridSize) * gridSize; x <= xRange[1]; x += gridSize) {
-            var plotX = (x - xRange[0]) * scaleX;
-            ctx.fillText(x.toFixed(1), plotX, offsetY + 10);
-          }
-  
-          // Y-Achse beschriften
-          ctx.textAlign = "right";
-          for (var y = Math.floor(yRange[0] / gridSize) * gridSize; y <= yRange[1]; y += gridSize) {
-            var plotY = (yRange[1] - y) * scaleY;
-            ctx.fillText(y.toFixed(1), offsetX - 5, plotY + 3);
           }
         }
       }
-    );
-  }
-  
+
+      onDrawForeground(ctx) {
+        if (this.flags.collapsed || this.equations.length === 0) {
+          return;
+        }
+
+        const size = this.size;
+        const margin = this.properties.margin;          // Rand links, rechts, unten
+        const marginTop = this.properties.marginTop;    // Spezielle Randgröße oben
+        const xRange = this.properties.xRange || [-10, 10];  // Fallback-Werte für xRange
+        const yRange = this.properties.yRange || [-10, 10];  // Fallback-Werte für yRange
+        const scaleX = (size[0] - 2 * margin) / (xRange[1] - xRange[0]);  // Skalierung der X-Achse
+        const scaleY = (size[1] - margin - marginTop) / (yRange[1] - yRange[0]);  // Skalierung der Y-Achse
+        const offsetX = -xRange[0] * scaleX + margin;  // Verschiebung auf der X-Achse
+        const offsetY = size[1] - (-yRange[0] * scaleY + margin);  // Verschiebung auf der Y-Achse
+
+        // Hintergrund zeichnen
+        ctx.fillStyle = "#000";
+        ctx.fillRect(0, 0, size[0], size[1]);
+
+        // Gitternetzlinien zeichnen
+        this.drawGrid(ctx, size, scaleX, scaleY, offsetX, offsetY, marginTop);
+
+        // Plotte jede Funktion in einer anderen Farbe
+        for (let i = 0; i < this.equations.length; i++) {
+          const equation = this.equations[i];
+          const uvName = this.uvNames[i];
+          const color = this.colors[i];
+
+          ctx.strokeStyle = color;
+          ctx.beginPath();
+
+          let step = (xRange[1] - xRange[0]) / (size[0] - 2 * margin);
+          let uvValue = xRange[0];
+          let y = this.evaluateFunction(equation, uvValue, uvName);
+          let previousY = y;
+
+          if (y !== null) {
+            let plotX = (uvValue - xRange[0]) * scaleX + margin;
+            let plotY = (yRange[1] - y) * scaleY + marginTop;
+            ctx.moveTo(this.clamp(plotX, margin, size[0] - margin), this.clamp(plotY, marginTop, size[1] - margin));
+
+            for (let j = 1; j < size[0] - 2 * margin; ++j) {
+              uvValue += step;
+              y = this.evaluateFunction(equation, uvValue, uvName);
+
+              if (y === null) continue;
+
+              plotX = (uvValue - xRange[0]) * scaleX + margin;
+              plotY = (yRange[1] - y) * scaleY + marginTop;
+
+              // Prüfe, ob der Punkt innerhalb des sichtbaren Bereichs liegt
+              if (plotY >= marginTop && plotY <= size[1] - margin) {
+               // Prüfe auf Diskontinuität anhand des Änderungswertes von y
+              if (Math.abs(y - previousY) > this.properties.discontinuityThreshold) {
+                 ctx.moveTo(this.clamp(plotX, margin, size[0] - margin), this.clamp(plotY, marginTop, size[1] - margin));
+              } else {
+               // Zeichne Linie nur, wenn der aktuelle Punkt im sichtbaren Bereich ist
+                ctx.lineTo(this.clamp(plotX, margin, size[0] - margin), this.clamp(plotY, marginTop, size[1] - margin));
+              }
+              } else {
+               // Beginne einen neuen Pfad, sobald die Funktion wieder im sichtbaren Bereich ist
+                ctx.moveTo(this.clamp(plotX, margin, size[0] - margin), this.clamp(plotY, marginTop, size[1] - margin));
+              }
+
+              previousY = y;
+            }
+
+            ctx.stroke();
+          }
+        }
+
+        // Achsenbeschriftungen hinzufügen
+        this.drawLabels(ctx, size, scaleX, scaleY, offsetX, offsetY, xRange, yRange, margin, marginTop);
+      }
+
+      // Gitternetzlinien zeichnen
+      drawGrid(ctx, size, scaleX, scaleY, offsetX, offsetY, marginTop) {
+        const margin = this.properties.margin;
+        ctx.strokeStyle = "#555";
+        ctx.lineWidth = 0.5;
+
+        const gridSize = this.properties.gridSize * Math.max(this.properties.scaleX, this.properties.scaleY); // Gitter passt sich der Skalierung an
+        for (let x = Math.floor(this.properties.xRange[0] / gridSize) * gridSize; x <= this.properties.xRange[1]; x += gridSize) {
+          const plotX = (x - this.properties.xRange[0]) * scaleX + margin;
+          if (plotX >= margin && plotX <= size[0] - margin) {  // Verhindert Zeichnen außerhalb des Bereichs
+            ctx.beginPath();
+            ctx.moveTo(plotX, marginTop);
+            ctx.lineTo(plotX, size[1] - margin);
+            ctx.stroke();
+          }
+        }
+
+        for (let y = Math.floor(this.properties.yRange[0] / gridSize) * gridSize; y <= this.properties.yRange[1]; y += gridSize) {
+          const plotY = (this.properties.yRange[1] - y) * scaleY + marginTop;
+          if (plotY >= marginTop && plotY <= size[1] - margin) {  // Verhindert Zeichnen außerhalb des Bereichs
+            ctx.beginPath();
+            ctx.moveTo(margin, plotY);
+            ctx.lineTo(size[0] - margin, plotY);
+            ctx.stroke();
+          }
+        }
+
+        ctx.strokeStyle = "#FFF";
+        ctx.lineWidth = 1.0;
+
+        // X-Achse
+        ctx.beginPath();
+        ctx.moveTo(margin, offsetY);
+        ctx.lineTo(size[0] - margin, offsetY);
+        ctx.stroke();
+
+        // Y-Achse
+        ctx.beginPath();
+        ctx.moveTo(offsetX, marginTop);
+        ctx.lineTo(offsetX, size[1] - margin);
+        ctx.stroke();
+      }
+
+      // Beschriftungen für Achsen und Gitternetzlinien
+      drawLabels(ctx, size, scaleX, scaleY, offsetX, offsetY, xRange, yRange, margin, marginTop) {
+        ctx.fillStyle = "#FFF";
+        ctx.font = "10px Arial";
+        ctx.textAlign = "center";
+
+        const gridSize = this.properties.gridSize * Math.max(this.properties.scaleX, this.properties.scaleY);
+        for (let x = Math.floor(xRange[0] / gridSize) * gridSize; x <= xRange[1]; x += gridSize) {
+          const plotX = (x - xRange[0]) * scaleX + margin;
+          if (plotX >= margin && plotX <= size[0] - margin) {  // Nur Beschriftungen innerhalb des Bereichs
+            if (Math.max(this.properties.xRangeValue,this.properties.yRangeValue)< 10){
+              ctx.fillText(x.toFixed(1), plotX, offsetY + 10);
+            } else
+            ctx.fillText(x.toFixed(0), plotX, offsetY + 10);
+          }
+        }
+
+        ctx.textAlign = "right";
+        for (let y = Math.floor(yRange[0] / gridSize) * gridSize; y <= yRange[1]; y += gridSize) {
+          const plotY = (yRange[1] - y) * scaleY + marginTop;
+          if (plotY >= marginTop && plotY <= size[1] - margin) {  // Nur Beschriftungen innerhalb des Bereichs
+            if (Math.max(this.properties.xRangeValue,this.properties.yRangeValue)< 10){
+              ctx.fillText(y.toFixed(1), offsetX - 5, plotY + 3);
+            } else
+            ctx.fillText(y.toFixed(0), offsetX - 5, plotY + 3);
+          }
+        }
+      }
+    }
+  );
+}
