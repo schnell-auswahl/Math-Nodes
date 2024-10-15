@@ -15,6 +15,7 @@ export function _FunctionNode() {
 
         // Initialisierung der Eigenschaften
         this.properties = {
+          funcName: "", 
           formula: "", // Die Funktionsgleichung als String für Widget-Eingabe
           leftSide: "", // Linke Seite der Gleichung -> Wird dynamisch erzeugt
           rightSide: "",    // Rechte Seite der Gleichung -> Wird von der Eingabe extrahiert
