@@ -172,15 +172,14 @@ export function _FunctionNode() {
                 evaluatedFormula = evaluatedFormula.replace(new RegExp(escapedParamName, 'g'), "(" + rightSideFromInput + ")" );
               } else {
                 if (paramValues[paramName] > 0) {
-                  evaluatedFormula = evaluatedFormula.replace(new RegExp(escapedParamName, 'g'), paramValues[paramName]);
+                  evaluatedFormula = evaluatedFormula.replace(new RegExp('\\b' + escapedParamName + '\\b', 'g'), paramValues[paramName]);
                 } 
                 // else if (paramValues[paramName] == 0) {
                 //   evaluatedFormula = evaluatedFormula.replace(new RegExp(escapedParamName, 'g'), "");
                 // }                 
                 else {
-                  evaluatedFormula = evaluatedFormula.replace(new RegExp(escapedParamName, 'g'),"(" + paramValues[paramName]+ ")");
+                  evaluatedFormula = evaluatedFormula.replace(new RegExp('\\b' + escapedParamName + '\\b', 'g'),"(" + paramValues[paramName]+ ")");
                 }
-
               }
             });
 

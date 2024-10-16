@@ -19,7 +19,8 @@ export function _CustomGraphicsPlot() {
           margin: 30,          // Randgröße für die linken, rechten und unteren Seiten
           marginTop: 80,       // Spezielle Randgröße für den oberen Rand
           xRange: [-10, 10],   // Standardwert für xRange
-          yRange: [-10, 10]    // Standardwert für yRange
+          yRange: [-10, 10],    // Standardwert für yRange
+          equations: []
         };
 
         // Widgets für xRange und yRange als Knobs
@@ -85,6 +86,7 @@ export function _CustomGraphicsPlot() {
             if (equation) {
               this.equations.push(equation);
               this.uvNames.push(uvName);
+              this.properties.equations = this.equations;
             }
           }
         }
