@@ -203,12 +203,12 @@ export function _FunctionNode() {
               let value = this._func(uvValue, ...paramValuesArray);
 
               // Setze das Ergebnis als Output des Knotens
-              this.setOutputData(0, { value: value, leftSide: this.properties["leftSide"], rightSide: finalEquation, uvName: this.properties.uvName, evaluatedFormula: this.properties["evaluatedFormula"] });
+              this.setOutputData(0, {   uvValue: inputData["uvValue"],value: value, leftSide: this.properties["leftSide"], rightSide: finalEquation, uvName: this.properties.uvName, evaluatedFormula: this.properties["evaluatedFormula"] });
               this.boxcolor = null; // Zurücksetzen der Farbe bei Erfolg
             } catch (err) {
               console.error("Fehler in der Formel:", err); // Fehlerbehandlung bei Problemen mit der Formel
               this.boxcolor = "red"; // Fehlerfarbmarkierung
-              this.setOutputData(0, { value: null, leftSide: this.properties["leftSide"], rightSide: finalEquation, uvName: this.properties.uvName });
+              this.setOutputData(0, { uvValue: inputData["uvValue"], value: null, leftSide: this.properties["leftSide"], rightSide: finalEquation, uvName: this.properties.uvName });
             }
           }
         }

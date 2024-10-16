@@ -21,6 +21,7 @@ export function _CustNumberNode() {
 
         var output = {
           value: roundedValue,
+          uvValue: roundedValue,
           rightSide: this.properties["rightSide"],
           leftSide: this.properties["rightSide"],
           uvName: this.properties["rightSide"],

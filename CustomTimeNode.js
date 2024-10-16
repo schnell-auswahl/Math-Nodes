@@ -5,7 +5,7 @@ export function _CustomTimeNode() { return (
       this.addOutput("in ms", "object");
       this.addOutput("in sec", "object");
       this.properties = { rightSide: "t", leftSide: "t", uvName: "t"};
-      console.log(this.lastbtpress); 
+      //console.log(this.lastbtpress); 
 
       this.nameWidget = this.addWidget("text","Variablenname","t","rightSide");
       this.lastbtpress = 0;
@@ -18,7 +18,7 @@ export function _CustomTimeNode() { return (
         "t=0",             // Beschriftung auf dem Button
         null,              // Kein Standardwert notwendig
         () => {            // Callback-Funktion für den Button
-          console.log("Button gedrückt!");  // Aktion, die bei einem Klick auf den Button ausgeführt wird
+          //console.log("Button gedrückt!");  // Aktion, die bei einem Klick auf den Button ausgeführt wird
           this.lastbtpress = this.graph.globaltime            // Ruft eine Methode auf, die die Funktion ausführt
         }
       );
@@ -34,12 +34,14 @@ export function _CustomTimeNode() { return (
         rightSide: this.properties["rightSide"],
         leftSide: this.properties["leftSide"], 
         uvName: this.properties["rightSide"],
+        uvValue: this.time,
       }
       var outputMil = {
         value: this.time * 1000,
         rightSide: this.properties["rightSide"],
         leftSide: this.properties["leftSide"],
         uvName: this.properties["rightSide"],
+        uvValue: this.time * 1000,
       }
       this.setOutputData(0, outputMil);
       this.setOutputData(1, outputSec);

@@ -41,7 +41,7 @@ export function _CustWatchNodeValue() { return(
         if (this.getInputData(0)) {
           this.inputData = this.getInputData(0);
           this.properties.FormulaFromInput = this.inputData["rightSide"];
-          this.properties.uvValueFromInput = this.inputData["value"]; // Gegen UV Value tauschen
+          this.properties.uvValueFromInput = this.inputData["uvValue"]; // Gegen UV Value tauschen
           this.properties.uvNameFromInput = this.inputData["uvName"]; 
 
           if ( this.oldFormula != this.properties.FormulaFromInput || this.olduvValue != this.properties.uvValueFromInput || this.olduvNameFromInput != this.properties.uvNameFromInput) {
