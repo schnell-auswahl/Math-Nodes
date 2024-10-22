@@ -154,14 +154,15 @@ export function _FunctionNode() {
           .replace(/Math\.PI/g, "π")      // Ersetzt Math.PI durch das Symbol π
           .replace(/Math\.E/g, "e");      // Ersetzt Math.E durch das Symbol e
       
-        // Erkennung und Umwandlung von Potenzierungen (x^(...)) und (x^2)
-        // Erster Fall: Potenzierungen mit Klammern
-        formulaForTitle = formulaForTitle.replace(/(\w+)\^\(([^()]*|\((?:[^()]*|\([^()]*\))*\))\)/g, (match, base, exponent) => {
+          // Erkennung und Umwandlung von Potenzierungen (x^(...)) und (x^2)
+                
+        // Erster Fall: Potenzierungen mit Klammern um den Exponenten
+        formulaForTitle = formulaForTitle.replace(/(\(.+?\)|\w+)\^\(([^()]*|\((?:[^()]*|\([^()]*\))*\))\)/g, (match, base, exponent) => {
           return base + this.toSuperscript(exponent); // Verwende 'this.toSuperscript'
         });
 
-        // Zweiter Fall: Potenzierungen ohne Klammern
-        formulaForTitle = formulaForTitle.replace(/(\w+)\^(\w)/g, (match, base, exponent) => {
+        // Zweiter Fall: Potenzierungen ohne Klammern um den Exponenten
+        formulaForTitle = formulaForTitle.replace(/(\(.+?\)|\w+)\^(\w+)/g, (match, base, exponent) => {
           return base + this.toSuperscript(exponent); // Verwende 'this.toSuperscript'
         });
 
@@ -298,11 +299,11 @@ export function _FunctionNode() {
             
             try {
               // Erstelle die Funktion dynamisch, wenn sich die Formel oder Parameter geändert haben
-              if (!this._func || this._func_code !== evaluatedFormula || this.oldParamNames != paramNames) {
-                const funcBody = `return ${evaluatedFormula};`; // Der Funktionskörper basiert auf der Formel
+              if (!this._func || this._func_code !== finalEquation || this.oldParamNames != paramNames) {
+                const funcBody = `return ${finalEquation};`; // Der Funktionskörper basiert auf der Formel
                 this._func = new Function(this.properties["uvName"], funcBody); // Erstelle neue Funktion
                 this.oldParamNames = paramNames; // Speichere die aktuellen Parameternamen
-                this._func_code = evaluatedFormula; // Speichere die aktuelle Formel
+                this._func_code = finalEquation; // Speichere die aktuelle Formel
               }
 
               // Führe die Funktion aus und berechne das Ergebnis

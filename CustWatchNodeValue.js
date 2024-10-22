@@ -1,7 +1,7 @@
 export function _CustWatchNodeValue() { return(
     class CustWatchNodeValue {
       constructor() {
-        this.size = [60, 30];
+        this.size = [100, 30];
         this.color = "#CE8A53"; //Titelfarbe
         this.bgcolor = "#FFFFFF"; //Hintergrundfarbe
 
@@ -91,8 +91,22 @@ export function _CustWatchNodeValue() { return(
   
       onDrawBackground = function(ctx) {
         //show the current value
-        this.inputs[0].label = this.toString(this.properties.displayValue);
-        // this.inputs[0].label = "Hi Nico"
+        let displayString = this.toString(this.properties.displayValue).toString();
+        this.inputs[0].label = displayString;
+        const lableLength = displayString.length;
+        console.log(displayString);
+        console.log(lableLength);
+        const minWidth = 100; // Standardbreite des Knotens
+        const extraWidthPerChar = 8; // Zusätzliche Breite pro Zeichen über der Standardlänge
+
+        // Berechne die neue Breite, wenn der Titel länger ist als 20 Zeichen
+        const newWidth = lableLength > 10 ? minWidth + (lableLength - 10) * extraWidthPerChar : minWidth;
+
+        //Setze die Knotengröße neu
+        if (this.size[0] < newWidth){
+          this.size = [newWidth, this.size[1]];
+        }
+
       };
     }
   )}
