@@ -11,6 +11,12 @@ export function _CustWatchNodeString() {
         this.title = "Gleichung";
         this.desc = "Show Equation of input";
         this.latexDiv = null;  // Für die MathJax-Darstellung
+
+        this.properties = {
+          GleichungvorMathJax: "",
+          GleichungvorKaTex: ""
+        };
+
       }
 
       onExecute() {
@@ -32,7 +38,21 @@ export function _CustWatchNodeString() {
         } else if (!o["rightSide"] || o["rightSide"] == null) {
           return "Fehler";
         } else {
-          return o["leftSide"] + " = " + o["rightSide"];  // Gib die Gleichung in Textform zurück
+          let formulaForDisplay =  o["rightSide"]
+            .replace(/\*\*/g, "^")          // Ersetzt Potenzierung zurück
+            //.replace(/\*/g, "\\cdot ")              // setzt schönen Malpunkt <- Wichtig: Muss nach Potenzersetzung kommen
+            .replace(/Math\.sin/g, "\sin ") // Ersetzt Sinus zurück
+            .replace(/Math\.cos/g, "\cos ") // Ersetzt Kosinus zurück
+            .replace(/Math\.tan/g, "\tan ") // Ersetzt Tangens zurück
+            .replace(/Math\.sqrt/g, "\sqrt ") // Ersetzt Quadratwurzel zurück
+            .replace(/Math\.log10/g, "\log ") // Ersetzt Logarithmus zur Basis 10 zurück
+            .replace(/Math\.log\b/g, "\ln ")  // Ersetzt natürlicher Logarithmus zurück
+            .replace(/Math\.exp/g, "\exp ")   // Ersetzt Exponentialfunktion zurück
+            .replace(/Math\.abs\(([^()]*|\((?:[^()]*|\([^()]*\))*\))\)/g, "|$1|")  // Ersetzt Absolutbetrag und umschließt Inhalt mit |...|
+            .replace(/Math\.PI/g, "\pi ")      // Ersetzt Math.PI durch das Symbol π
+            .replace(/Math\.E/g, "e");      // Ersetzt Math.E durch das Symbol e
+          
+          return o["leftSide"] + " = " + formulaForDisplay;  // Gib die Gleichung in Textform zurück
         }
       }
 
@@ -62,9 +82,11 @@ export function _CustWatchNodeString() {
     
         // Die Gleichung als String
         let equation = this.toString(this.value);
+        this.properties.GleichungvorMathJax = equation;
     
         // Konvertiere den mathematischen Ausdruck in LaTeX mit MathJS
         let latexEquation = convertToLatex(equation);
+        this.properties.GleichungvorKaTex = latexEquation;
     
         // Stelle sicher, dass ein Div-Element für KaTeX vorhanden ist
         if (!this.latexDiv) {
@@ -93,8 +115,10 @@ export function _CustWatchNodeString() {
         setTimeout(() => {
             const rect = this.latexDiv.getBoundingClientRect();  // Hol die Größe des gerenderten Inhalts
             // Aktualisiere die Node-Größe entsprechend der Größe der gerenderten Gleichung
-            this.size[0] = rect.width + 30;  // Padding hinzufügen, damit es nicht zu eng ist
-            this.size[1] = rect.height + 20; // Padding hinzufügen, damit es nicht zu eng ist
+            if (this.size[0] < rect.width + 30){
+              this.size[0] = rect.width + 30;  // Padding hinzufügen, damit es nicht zu eng ist
+              this.size[1] = rect.height + 20; // Padding hinzufügen, damit es nicht zu eng ist
+            }
         }, 100);  // Ein kleines Timeout, um sicherzustellen, dass die Gleichung bereits gerendert ist
       }
     }
