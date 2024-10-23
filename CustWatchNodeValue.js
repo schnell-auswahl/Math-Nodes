@@ -94,8 +94,8 @@ export function _CustWatchNodeValue() { return(
         let displayString = this.toString(this.properties.displayValue).toString();
         this.inputs[0].label = displayString;
         const lableLength = displayString.length;
-        console.log(displayString);
-        console.log(lableLength);
+        //console.log(displayString);
+        //console.log(lableLength);
         const minWidth = 100; // Standardbreite des Knotens
         const extraWidthPerChar = 8; // Zusätzliche Breite pro Zeichen über der Standardlänge
 

@@ -41,11 +41,13 @@ import { _CustomTimeNode } from './CustomTimeNode.js';
 
 import { _CustNumberNode } from './CustomNumberNode.js';
 
-import { _CustWatchNodeString } from './CustWatchNodeString.js'
+import { _CustWatchNodeString } from './CustWatchNodeString.js';
 
-import { _CustWatchNodeValue } from './CustWatchNodeValue.js'
+import { _CustWatchNodeValue } from './CustWatchNodeValue.js';
 
-import { _CustomGraphicsPlot } from './CustomGraphicsPlotNode.js'
+import { _CustomGraphicsPlot } from './CustomGraphicsPlotNode.js';
+
+import { _OperationNode } from './CustOperationNode.js';
 
 function renderEquationToSVG(equation, targetElementId) {
   try {
@@ -98,7 +100,7 @@ window.convertToLatex = convertToLatex;
 
 
 
-function _graph(graphCell,LiteGraph,FunctionNode,CustNumberNode,CustWatchNodeString,CustWatchNodeValue,CustomGraphicsPlot,CustomTimeNode,$0)
+function _graph(graphCell,LiteGraph,FunctionNode,CustNumberNode,CustWatchNodeString,CustWatchNodeValue,CustomGraphicsPlot,CustomTimeNode,OperationNode,$0)
 {
   graphCell;
   
@@ -111,6 +113,7 @@ function _graph(graphCell,LiteGraph,FunctionNode,CustNumberNode,CustWatchNodeStr
   LiteGraph.registerNodeType("custom/cwatchV", CustWatchNodeValue);
   LiteGraph.registerNodeType("custom/plot", CustomGraphicsPlot);
   LiteGraph.registerNodeType("custom/time", CustomTimeNode);
+  LiteGraph.registerNodeType("custom/Operation", OperationNode);
   
   var graph = new LiteGraph.LGraph();
   var canvas = new LiteGraph.LGraphCanvas("#graphDiv", graph);
@@ -169,6 +172,9 @@ graph.add(nodeTime1);
   }
   graph.add(nodeFunc1);
 
+  var nodeOper1 = LiteGraph.createNode("custom/Operation");
+  nodeOper1.pos = [600,500];
+  graph.add(nodeOper1);
 
   var nodeFunc2 = LiteGraph.createNode("custom/func");
   nodeFunc2.pos = [600,200];
@@ -243,8 +249,8 @@ graph.add(nodeTime1);
     graph.runStep();
     canvas.draw(true, true);  // Redraw every frame
     requestAnimationFrame(loop);
-}
-loop();  // Start the loop
+  }
+  loop();  // Start the loop
 
   return graph;
 }
@@ -271,8 +277,9 @@ export default function define(runtime, observer) {
   main.variable(observer("CustWatchNodeValue")).define("CustWatchNodeValue", _CustWatchNodeValue);
   main.variable(observer("CustomGraphicsPlot")).define("CustomGraphicsPlot", _CustomGraphicsPlot);
   main.variable(observer("CustomTimeNode")).define("CustomTimeNode", _CustomTimeNode);
+  main.variable(observer("OperationNode")).define("OperationNode", _OperationNode);
   
-  main.variable(observer("graph")).define("graph", ["graphCell","LiteGraph","FunctionNode","CustNumberNode","CustWatchNodeString","CustWatchNodeValue","CustomGraphicsPlot","CustomTimeNode","mutable results"], _graph);
+  main.variable(observer("graph")).define("graph", ["graphCell","LiteGraph","FunctionNode","CustNumberNode","CustWatchNodeString","CustWatchNodeValue","CustomGraphicsPlot","CustomTimeNode","OperationNode","mutable results"], _graph);
   main.variable(observer("LiteGraph")).define("LiteGraph", ["require"], _LiteGraph);
   return main;
 }
