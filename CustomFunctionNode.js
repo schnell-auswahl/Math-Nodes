@@ -234,7 +234,7 @@ export function _FunctionNode() {
           var uvNameFromInput = inputData["uvName"]; // Name der unabhängigen Variablen
 
           // Speichere die Hauptunabhängige Variable (x) und Zusatzinfos in den Eigenschaften
-          this.properties["x"] = uvValue ?? this.properties["x"];
+          //this.properties["x"] = uvValue ?? this.properties["x"];
           this.properties["rightSide"] = rightSideEquation ?? this.properties["rightSide"];
 
           // Definiere die linke Seite der Gleichung als funcName(leftSide)

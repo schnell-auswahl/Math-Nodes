@@ -202,6 +202,14 @@ graph.add(nodeTime1);
   nodeCustWatchV.pos = [800,330];
   graph.add(nodeCustWatchV);
 
+  var nodeCustWatchS2 = LiteGraph.createNode("custom/cwatchS");
+  nodeCustWatchS2.pos = [900,400];
+  graph.add(nodeCustWatchS2);
+
+  var nodeCustWatchV2 = LiteGraph.createNode("custom/cwatchV");
+  nodeCustWatchV2.pos = [800,600];
+  graph.add(nodeCustWatchV2);
+
   var nodePlot1 = LiteGraph.createNode("custom/plot");
   nodePlot1.pos = [1000,350];
   graph.add(nodePlot1);
@@ -217,10 +225,16 @@ graph.add(nodeTime1);
 
   nodeFunc3.connect(0,nodeFunc2,1);
   nodeFunc3.connect(0,nodePlot1,2);
+  nodeFunc3.connect(0,nodeOper1,1);
 
   nodeFunc2.connect(0,nodeCustWatchS,0);
   nodeFunc2.connect(0,nodeCustWatchV,0);
   nodeFunc2.connect(0,nodePlot1,0);
+  nodeFunc2.connect(0,nodeOper1,0);
+
+
+  nodeOper1.connect(0,nodeCustWatchS2,0);
+  nodeOper1.connect(0,nodeCustWatchV2,0);
 
 
 
