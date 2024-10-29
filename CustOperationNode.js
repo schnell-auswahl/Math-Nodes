@@ -54,9 +54,9 @@ export function _OperationNode(){
 
 
             getTitle() {
-                if (this.properties["Fehlermeldung"] = "durch 0 geteilt"){
+                if (this.properties["Fehlermeldung"] == "durch 0 geteilt"){
                      return "Durch 0 geteilt"
-                } else if(this.properties["Fehlermeldung"] = "UV unterschiedlich"){
+                } else if(this.properties["Fehlermeldung"] == "UV unterschiedlich"){
                     return "UV unterschiedlich"
                 } else if( this.properties["Operation"]){
                     if (this.properties["Operation"] == "*"){
@@ -90,24 +90,32 @@ export function _OperationNode(){
                     var In1_UV = In1_inputData["uvName"];
                     var In2_UV = In2_inputData["uvName"];
 
-                    this.properties["Out_leftSideOfEquation"] = "(" + In1_leftSideOfEquation + ")" + " " + this.properties["Operation"] + " " + "(" + In2_leftSideOfEquation + ")"  ;
+                    var In1_isNumberNode = In1_inputData["isNumberNode"];
+                    var In2_isNumberNode = In2_inputData["isNumberNode"];
+
+
+                    
+                    this.properties["Out_leftSideOfEquation"] =  In1_leftSideOfEquation + " " + this.properties["Operation"] + " " + In2_leftSideOfEquation ;
                     this.properties["Out_rightSideOfEquation"] = "(" + In1_rightSideOfEquation + ")"+ " " + this.properties["Operation"] + " " + "(" + In2_rightSideOfEquation+ ")";
 
-                    if (In1_UV == In2_UV){
+                    if (In1_inputData && In1_inputData && In1_UV == In2_UV || In1_inputData && In1_inputData && In1_UV == "" || In1_inputData && In1_inputData && In2_UV == "" ){
                         switch (this.properties["Operation"]) {
                             case "+":
                                 this.properties["Result_Value"] = In1_Value + In2_Value;
+                                this.properties["Fehlermeldung"] = "";
                                 break;
                             case "-":
                                 this.properties["Result_Value"] = In1_Value - (In2_Value);
+                                this.properties["Fehlermeldung"] = "";
                                 break;
                             case "*":
                                 this.properties["Result_Value"] = In1_Value * In2_Value;
+                                this.properties["Fehlermeldung"] = "";
                                 break;
                             case "/":
                                 if (In2_Value == 0){
                                     this.boxcolor = "red"; // Fehlerfarbmarkierung
-                                    this.properties["Fehlermeldung"] = "durch 0 geteilt"
+                                    this.properties["Fehlermeldung"] = "durch 0 geteilt";
                                 }
                                 this.properties["Result_Value"] = In2_Value !== 0 ? In1_Value / In2_Value : 0; // Division durch 0 vermeiden
                                 break;
@@ -115,17 +123,16 @@ export function _OperationNode(){
                                 console.error("Keine Operation gewählt");
                                 this.properties["Result_Value"] = 0;
                                 break;
-                        
-                        }
-                        this.setOutputData(0, { uvValue: In1_inputData["uvValue"], value: this.properties["Result_Value"], leftSide:   this.properties["Out_leftSideOfEquation"], rightSide:   this.properties["Out_rightSideOfEquation"], uvName: In1_UV });
-                        this.boxcolor = null; // Zurücksetzen der Farbe bei Erfolg  
+                        } 
                     } else { 
                         this.properties["Fehlermeldung"] = "UV unterschiedlich"
-                        this.boxcolor = "red"; // Fehlerfarbmarkierung
-                        
+                        this.boxcolor = "red"; // Fehlerfarbmarkierung   
                     }    
-
-
+                    
+                    if (this.properties["Fehlermeldung"] == "") {
+                        this.setOutputData(0, { uvValue: In1_inputData["uvValue"], value: this.properties["Result_Value"], leftSide:   this.properties["Out_leftSideOfEquation"], rightSide:   this.properties["Out_rightSideOfEquation"], uvName: In1_UV });
+                        this.boxcolor = null; // Zurücksetzen der Farbe bei Erfolg 
+                    }
 
                 }
 

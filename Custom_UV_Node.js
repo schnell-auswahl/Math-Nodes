@@ -1,13 +1,13 @@
 
 
-export function _CustNumberNode() {
+export function _uvNode() {
   return (
-    class CustNumberNode {
+    class uvNode {
       constructor() {
         this.addOutput("value", "object");
         this.properties = { value: 1.0, rightSide: "x"};
         this.numberWidget = this.addWidget("number", "Wert", 1, "value", { precision: 2 });
-        this.nameWidget = this.addWidget("text", "Parametername", "x", "rightSide");
+        this.nameWidget = this.addWidget("text", "Unabhängige", "x", "rightSide");
         this.widgets_up = true;
         //this.color = "#4C7468"; //Titelfarbe
         //this.bgcolor = "#9FA8B4"; //Hintergrundfarbe
@@ -24,7 +24,7 @@ export function _CustNumberNode() {
           uvValue: roundedValue,
           rightSide: this.properties["rightSide"],
           leftSide: this.properties["rightSide"],
-          uvName: "",
+          uvName: this.properties["rightSide"],
           isNumberNode: true,
           // funcList: ""
         }
@@ -32,7 +32,7 @@ export function _CustNumberNode() {
       }
 
       getTitle() {
-        let title = "Parameter"
+        let title = "Unabhängige"
         if (this.properties["rightSide"]) {
           title = title + " " + this.properties["rightSide"];
         }

@@ -41,6 +41,8 @@ import { _CustomTimeNode } from './CustomTimeNode.js';
 
 import { _CustNumberNode } from './CustomNumberNode.js';
 
+import { _uvNode } from './Custom_UV_Node.js';
+
 import { _CustWatchNodeString } from './CustWatchNodeString.js';
 
 import { _CustWatchNodeValue } from './CustWatchNodeValue.js';
@@ -83,9 +85,13 @@ function convertToLatex(expression) {
       const node = math.parse(rightSide);  // Parsen des rechten Teils
       const latexRightSide = node.toTex();  // Umwandeln des rechten Teils in LaTeX
 
+      // Parsen und Umwandeln nur des linken Teils
+      const nodel = math.parse(leftSide);
+      const latexLeftSide = nodel.toTex();
+
       // Rückgabe des zusammengesetzten Ausdrucks
       if (leftSide) {
-          return `${leftSide} = ${latexRightSide}`;  // Zusammensetzen der beiden Teile
+          return `${latexLeftSide} = ${latexRightSide}`;  // Zusammensetzen der beiden Teile
       } else {
           return latexRightSide;  // Falls kein Gleichheitszeichen vorhanden ist, nur die LaTeX-Umwandlung des Ausdrucks
       }
@@ -100,7 +106,7 @@ window.convertToLatex = convertToLatex;
 
 
 
-function _graph(graphCell,LiteGraph,FunctionNode,CustNumberNode,CustWatchNodeString,CustWatchNodeValue,CustomGraphicsPlot,CustomTimeNode,OperationNode,$0)
+function _graph(graphCell,LiteGraph,FunctionNode,CustNumberNode,uvNode,CustWatchNodeString,CustWatchNodeValue,CustomGraphicsPlot,CustomTimeNode,OperationNode,$0)
 {
   graphCell;
   
@@ -109,6 +115,7 @@ function _graph(graphCell,LiteGraph,FunctionNode,CustNumberNode,CustWatchNodeStr
 
   LiteGraph.registerNodeType("custom/func", FunctionNode);
   LiteGraph.registerNodeType("custom/cconst", CustNumberNode);
+  LiteGraph.registerNodeType("custom/uvNode", uvNode);
   LiteGraph.registerNodeType("custom/cwatchS", CustWatchNodeString);
   LiteGraph.registerNodeType("custom/cwatchV", CustWatchNodeValue);
   LiteGraph.registerNodeType("custom/plot", CustomGraphicsPlot);
@@ -139,7 +146,7 @@ function _graph(graphCell,LiteGraph,FunctionNode,CustNumberNode,CustWatchNodeStr
 
 //Numbernodes
 
-  var nodeCustNum1 = LiteGraph.createNode("custom/cconst");
+  var nodeCustNum1 = LiteGraph.createNode("custom/uvNode");
   nodeCustNum1.pos = [100,200];
   nodeCustNum1.widgets[0].value = 42;  // Setze den Wert des ersten Widgets (Number Widget)
   nodeCustNum1.properties.value = 42;  
@@ -292,8 +299,9 @@ export default function define(runtime, observer) {
   main.variable(observer("CustomGraphicsPlot")).define("CustomGraphicsPlot", _CustomGraphicsPlot);
   main.variable(observer("CustomTimeNode")).define("CustomTimeNode", _CustomTimeNode);
   main.variable(observer("OperationNode")).define("OperationNode", _OperationNode);
+  main.variable(observer("uvNode")).define("uvNode", _uvNode);
   
-  main.variable(observer("graph")).define("graph", ["graphCell","LiteGraph","FunctionNode","CustNumberNode","CustWatchNodeString","CustWatchNodeValue","CustomGraphicsPlot","CustomTimeNode","OperationNode","mutable results"], _graph);
+  main.variable(observer("graph")).define("graph", ["graphCell","LiteGraph","FunctionNode","CustNumberNode","uvNode","CustWatchNodeString","CustWatchNodeValue","CustomGraphicsPlot","CustomTimeNode","OperationNode","mutable results"], _graph);
   main.variable(observer("LiteGraph")).define("LiteGraph", ["require"], _LiteGraph);
   return main;
 }
