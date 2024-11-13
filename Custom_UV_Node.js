@@ -25,7 +25,7 @@ export function _uvNode() {
           rightSide: this.properties["rightSide"],
           leftSide: this.properties["rightSide"],
           uvName: this.properties["rightSide"],
-          isNumberNode: true,
+          isNumberNode: "UV",
           // funcList: ""
         }
         this.setOutputData(0, output);

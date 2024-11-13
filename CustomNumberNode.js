@@ -22,10 +22,10 @@ export function _CustNumberNode() {
         var output = {
           value: roundedValue,
           uvValue: roundedValue,
-          rightSide: this.properties["rightSide"],
+          rightSide: roundedValue,
           leftSide: this.properties["rightSide"],
           uvName: "",
-          isNumberNode: true,
+          isNumberNode: "Parameter",
           // funcList: ""
         }
         this.setOutputData(0, output);

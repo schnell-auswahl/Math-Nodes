@@ -35,7 +35,7 @@ export function _CustomTimeNode() { return (
         leftSide: this.properties["leftSide"], 
         uvName: this.properties["rightSide"],
         uvValue: this.time,
-        isNumberNode: true,
+        isNumberNode: "UV",
       }
       var outputMil = {
         value: this.time * 1000,
@@ -43,7 +43,7 @@ export function _CustomTimeNode() { return (
         leftSide: this.properties["leftSide"],
         uvName: this.properties["rightSide"],
         uvValue: this.time * 1000,
-        isNumberNode: true,
+        isNumberNode: "UV",
       }
       this.setOutputData(0, outputMil);
       this.setOutputData(1, outputSec);

@@ -51,6 +51,9 @@ import { _CustomGraphicsPlot } from './CustomGraphicsPlotNode.js';
 
 import { _OperationNode } from './CustOperationNode.js';
 
+import { _AudioNode } from './AudioNode.js';
+
+
 function renderEquationToSVG(equation, targetElementId) {
   try {
       const targetElement = document.getElementById(targetElementId);
@@ -106,7 +109,7 @@ window.convertToLatex = convertToLatex;
 
 
 
-function _graph(graphCell,LiteGraph,FunctionNode,CustNumberNode,uvNode,CustWatchNodeString,CustWatchNodeValue,CustomGraphicsPlot,CustomTimeNode,OperationNode,$0)
+function _graph(graphCell,LiteGraph,FunctionNode,CustNumberNode,uvNode,CustWatchNodeString,CustWatchNodeValue,CustomGraphicsPlot,CustomTimeNode,OperationNode,AudioNode,$0)
 {
   graphCell;
   
@@ -121,6 +124,7 @@ function _graph(graphCell,LiteGraph,FunctionNode,CustNumberNode,uvNode,CustWatch
   LiteGraph.registerNodeType("custom/plot", CustomGraphicsPlot);
   LiteGraph.registerNodeType("custom/time", CustomTimeNode);
   LiteGraph.registerNodeType("custom/Operation", OperationNode);
+  LiteGraph.registerNodeType("custom/AudioNode", AudioNode);
   
   var graph = new LiteGraph.LGraph();
   var canvas = new LiteGraph.LGraphCanvas("#graphDiv", graph);
@@ -300,8 +304,9 @@ export default function define(runtime, observer) {
   main.variable(observer("CustomTimeNode")).define("CustomTimeNode", _CustomTimeNode);
   main.variable(observer("OperationNode")).define("OperationNode", _OperationNode);
   main.variable(observer("uvNode")).define("uvNode", _uvNode);
+  main.variable(observer("AudioNode")).define("AudioNode", _AudioNode);
   
-  main.variable(observer("graph")).define("graph", ["graphCell","LiteGraph","FunctionNode","CustNumberNode","uvNode","CustWatchNodeString","CustWatchNodeValue","CustomGraphicsPlot","CustomTimeNode","OperationNode","mutable results"], _graph);
+  main.variable(observer("graph")).define("graph", ["graphCell","LiteGraph","FunctionNode","CustNumberNode","uvNode","CustWatchNodeString","CustWatchNodeValue","CustomGraphicsPlot","CustomTimeNode","OperationNode","AudioNode","mutable results"], _graph);
   main.variable(observer("LiteGraph")).define("LiteGraph", ["require"], _LiteGraph);
   return main;
 }
