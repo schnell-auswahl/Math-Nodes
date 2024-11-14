@@ -54,23 +54,23 @@ md`## Controls
 
 // CustomNodes in separate Datei ausgelagert
 
-import { _FunctionNode } from './CustomFunctionNode.js';
+import { _FunctionNode } from './SynthNodes/CustomFunctionNode.js';
 
-import { _CustomTimeNode } from './CustomTimeNode.js';
+import { _CustomTimeNode } from './SynthNodes/CustomTimeNode.js';
 
-import { _CustNumberNode } from './CustomNumberNode.js';
+import { _CustNumberNode } from './SynthNodes/CustomNumberNode.js';
 
-import { _uvNode } from './Custom_UV_Node.js';
+import { _uvNode } from './SynthNodes/Custom_UV_Node.js';
 
-import { _CustWatchNodeString } from './CustWatchNodeString.js';
+import { _CustWatchNodeString } from './SynthNodes/CustWatchNodeString.js';
 
-import { _CustWatchNodeValue } from './CustWatchNodeValue.js';
+import { _CustWatchNodeValue } from './SynthNodes/CustWatchNodeValue.js';
 
-import { _CustomGraphicsPlot } from './CustomGraphicsPlotNode.js';
+import { _CustomGraphicsPlot } from './SynthNodes/CustomGraphicsPlotNode.js';
 
-import { _OperationNode } from './CustOperationNode.js';
+import { _OperationNode } from './SynthNodes/CustOperationNode.js';
 
-import { _AudioNode } from './AudioNode.js';
+import { _AudioNode } from './SynthNodes/AudioNode.js';
 
 
 function renderEquationToSVG(equation, targetElementId) {
@@ -190,7 +190,7 @@ function _graph(graphCell,LiteGraph,FunctionNode,CustNumberNode,uvNode,CustWatch
 //Time
 
 var nodeAudio = LiteGraph.createNode("custom/AudioNode");
-nodeAudio.pos = [350,50];
+nodeAudio.pos = [550,50];
 graph.add(nodeAudio);
 
 
@@ -234,7 +234,7 @@ graph.add(nodeTime1);
   graph.add(nodeFunc3);
 
   var nodeFunc4 = LiteGraph.createNode("custom/func");
-  nodeFunc4.pos = [50,50];
+  nodeFunc4.pos = [190,50];
   nodeFunc4.code_widget.value = "f(x) = sin (1000 * x)"; 
   if (nodeFunc4.code_widget.callback) {
     nodeFunc4.code_widget.callback(nodeFunc4.code_widget.value, null, nodeFunc4); // Manuelles Ausführen der Logik für das Widget, um die Berechnung zu starten

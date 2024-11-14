@@ -92,6 +92,35 @@ export function _CustWatchNodeValue() { return(
   
       onDrawBackground = function(ctx) {
         //show the current value
+        // Färbe den Eingang oder zeichne einen Kreis darum
+        const NODE_SLOT_HEIGHT = LiteGraph.NODE_SLOT_HEIGHT;
+
+        // Relativer x-Wert für Eingänge (meistens am linken Rand der Node)
+        const inputPosX = labelInputPosX;
+
+        // Relativer y-Wert basierend auf Titelhöhe und Slot-Höhe
+        const inputPosY = (0) * NODE_SLOT_HEIGHT + 14;
+
+          // Parameter für die Trichterform
+        const width = labelWidth; // Breite der Basis (linke Seite)
+        const height = labelHeight; // Höhe des Trichters (von Basis bis Spitze)
+
+        // Beginne mit dem Zeichnen des Dreiecks
+        ctx.beginPath();
+
+        // Input Trichter
+        ctx.moveTo(0, inputPosY - height / 2);
+        ctx.lineTo(inputPosX ,inputPosY - height / 2);
+        ctx.arc(inputPosX,inputPosY,height / 2 ,0, 2 * Math.PI)
+        ctx.lineTo(inputPosX ,inputPosY + height / 2);
+        ctx.lineTo(0 ,inputPosY + height / 2);
+        ctx.lineTo(0 ,inputPosY + height / 2);
+        ctx.closePath();
+
+        // Füllen des Trichters
+        ctx.fillStyle = inLabelsColor;
+        ctx.fill();
+
         let displayString = this.toString(this.properties.displayValue).toString();
         this.inputs[0].label = displayString;
         const lableLength = displayString.length;

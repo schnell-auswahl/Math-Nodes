@@ -51,6 +51,39 @@ export function _CustomTimeNode() { return (
       this.setOutputData(1, outputSec);
     };
 
+    onDrawBackground(ctx) {
+     
+              // Färbe den Eingang oder zeichne einen Kreis darum
+      const NODE_SLOT_HEIGHT = LiteGraph.NODE_SLOT_HEIGHT;
+      // Relativer x-Wert für Eingänge (meistens am linken Rand der Node)
+      const inputPosX = labelInputPosX;
+      const nodeWidth = this.size[0];      
+      const outputPosX = nodeWidth; // Rechter Rand der Node
+        // Parameter für die Trichterform
+      const width = labelWidth; // Breite der Basis (linke Seite)
+      const height = labelHeight; // Höhe des Trichters (von Basis bis Spitze)
+
+      const inputPosY = (0) * NODE_SLOT_HEIGHT + 14;
+
+      //Output:
+      for(let i=0; i<2; i++){
+
+        const inputPosY = (i) * NODE_SLOT_HEIGHT + 14;
+      // Berechnung der x-Position auf der rechten Seite der Node
+      ctx.beginPath();
+      ctx.moveTo(outputPosX, inputPosY - height / 2);              // Obere rechte Ecke
+      ctx.lineTo(outputPosX - width, inputPosY - height / 2);      // Nach links zur Basis
+      ctx.arc(outputPosX - width,inputPosY,height / 2 ,0, 2 * Math.PI,true)
+      ctx.lineTo(outputPosX - width, inputPosY + height / 2);      // Nach unten zur linken Unterkante
+      ctx.lineTo(outputPosX, inputPosY + height / 2); 
+      ctx.closePath();
+      ctx.fillStyle = outLabelsColor;
+      ctx.fill();
+      }
+
+      
+    }
+
     getTitle() {
       let title = "Zeit"
       if(this.properties["rightSide"]){

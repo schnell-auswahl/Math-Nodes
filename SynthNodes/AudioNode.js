@@ -128,7 +128,7 @@ export function _AudioNode() {
             ctx.closePath();
 
             // Füllen des Trichters
-            ctx.fillStyle = srcNodesColor;
+            ctx.fillStyle = inLabelsColor;
             ctx.fill();
             
         }
