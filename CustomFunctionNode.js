@@ -2,6 +2,8 @@ export function _FunctionNode() {
   return (
     class FunctionNode {
       constructor() {
+        this.color = opNodesColor;
+        this.bgcolor = bgColor2;
         // Füge den Hauptinput für die unabhängige Variable (UV) hinzu, Typ "object"
         this.addInput("UV", "object");
         
@@ -202,7 +204,7 @@ export function _FunctionNode() {
       }
 
       // Zeichnet den Hintergrund und passt die Labels der Eingänge/Ausgänge dynamisch an
-      onDrawBackground() {
+      onDrawBackground(ctx) {
         var inputData = this.getInputData(0);
         //console.log(inputData)
         // Setze das Label des ersten Eingangs basierend auf der unabhängigen Variablen (UV)
@@ -213,14 +215,77 @@ export function _FunctionNode() {
         } else {
           this.inputs[0].label = "UV"; // Standardmäßig "UV", falls kein Name gesetzt ist
         }
-        // Setze die Labels der Parameter-Eingänge basierend auf den Parameternamen
+
+         // Färbe den Eingang oder zeichne einen Kreis darum
+         const NODE_SLOT_HEIGHT = LiteGraph.NODE_SLOT_HEIGHT;
+         // Relativer x-Wert für Eingänge (meistens am linken Rand der Node)
+         const inputPosX = labelInputPosX;
+         const nodeWidth = this.size[0];      
+         const outputPosX = nodeWidth; // Rechter Rand der Node
+           // Parameter für die Trichterform
+         const width = labelWidth; // Breite der Basis (linke Seite)
+         const height = labelHeight; // Höhe des Trichters (von Basis bis Spitze)
+ 
+         const inputPosY = (0) * NODE_SLOT_HEIGHT + 14;
+
+         ctx.beginPath();
+           // Input Trichter
+           ctx.moveTo(0, inputPosY - height / 2);
+           ctx.lineTo(inputPosX ,inputPosY - height / 2);
+           ctx.arc(inputPosX,inputPosY,height / 2 ,0, 2 * Math.PI)
+           ctx.lineTo(inputPosX ,inputPosY + height / 2);
+           ctx.lineTo(0 ,inputPosY + height / 2);
+           ctx.lineTo(0 ,inputPosY + height / 2);
+         ctx.closePath();
+         // Füllen des Trichters
+         ctx.fillStyle = inLabelsColor;
+         ctx.fill();
+
+         //Output:
+          // Berechnung der x-Position auf der rechten Seite der Node
+                   ctx.beginPath();
+
+          // Ausgangstrichter spiegeln
+          ctx.moveTo(outputPosX, inputPosY - height / 2);              // Obere rechte Ecke
+          ctx.lineTo(outputPosX - width, inputPosY - height / 2);      // Nach links zur Basis
+          ctx.arc(outputPosX - width,inputPosY,height / 2 ,0, 2 * Math.PI,true)
+          ctx.lineTo(outputPosX - width, inputPosY + height / 2);      // Nach unten zur linken Unterkante
+          ctx.lineTo(outputPosX, inputPosY + height / 2); 
+                       // Nach rechts zur unteren rechten Ecke
+
+          // Schließe den Pfad und fülle die Trichterform
+          ctx.closePath();
+          ctx.fillStyle = outLabelsColor;
+          ctx.fill();
+
+        // Setze die Labels der Parameter-Eingänge basierend auf den Parameternamen und Zeichne die Formen darum
         for(let i=1; i<5; i++){
           this.inputs[i].label = this.properties["paramNames"][i];
+
+          const inputPosY = (i) * NODE_SLOT_HEIGHT + 14;
+
+          ctx.beginPath();
+            // Input Trichter
+            ctx.moveTo(0, inputPosY - height / 2);
+            ctx.lineTo(inputPosX ,inputPosY - height / 2);
+            ctx.arc(inputPosX,inputPosY,height / 2 ,0, 2 * Math.PI)
+            ctx.lineTo(inputPosX ,inputPosY + height / 2);
+            ctx.lineTo(0 ,inputPosY + height / 2);
+            ctx.lineTo(0 ,inputPosY + height / 2);
+          ctx.closePath();
+          // Füllen des Trichters
+          ctx.fillStyle = paramLabelsColor;
+          ctx.fill();
+
         }
         // Setze das Label des Ausgangs basierend auf der Funktionsgleichung
         if(this.properties["uvName"] && this.properties["funcName"]){
           this.outputs[0].label = this.properties["leftSide"];
         }
+
+       
+        
+            
       }
 
       // Führt die Berechnung durch, wenn die Eingabedaten vorliegen
@@ -316,7 +381,7 @@ export function _FunctionNode() {
             } catch (err) {
               console.error("Fehler in der Formel:", err); // Fehlerbehandlung bei Problemen mit der Formel
               this.boxcolor = "red"; // Fehlerfarbmarkierung
-              this.setOutputData(0, { uvValue: inputData["uvValue"], value: null, leftSide: this.properties["leftSide"], rightSide: finalEquation, uvName: this.properties.uvName });
+              //this.setOutputData(0, { uvValue: inputData["uvValue"], value: null, leftSide: this.properties["leftSide"], rightSide: finalEquation, uvName: this.properties.uvName });
             }
           }
         }

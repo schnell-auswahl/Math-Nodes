@@ -1,3 +1,22 @@
+// Farben
+
+window.fbNodesColor = "#A84008"; //Orange
+window.srcNodesColor = "#0079B5"; //Blau
+window.opNodesColor = "#43715D"; //Grün
+window.paramNodesColor = "#BFB700"; //Senfgelb
+window.bgColor1 = "#FFFFFF"; //Weiß
+window.bgColor2 = "#959EAA"; //Grau
+window.outLabelsColor = "#A84008"; //Orange
+window.inLabelsColor = "#43715D"; //Grün
+window.paramLabelsColor = "#BFB700"; //Senfgelb
+
+//Parameter der In und Output Labels:
+window.labelInputPosX = 10;
+window.labelWidth = 10; // Nur wichtig für out. sollte label inputpos x entsprechen
+window.labelHeight = 14; // Höhe des Trichters (von Basis bis Spitze)
+
+
+
 function _1(md){return(
 md`# LiteGraph Example 1.1
 Here is a simple [Litegraph.js@0.7.8](https://github.com/jagenjo/litegraph.js) example demonstrating Observable integration and how to create a custom operation (multiplication).
@@ -109,6 +128,8 @@ window.convertToLatex = convertToLatex;
 
 
 
+
+
 function _graph(graphCell,LiteGraph,FunctionNode,CustNumberNode,uvNode,CustWatchNodeString,CustWatchNodeValue,CustomGraphicsPlot,CustomTimeNode,OperationNode,AudioNode,$0)
 {
   graphCell;
@@ -151,7 +172,7 @@ function _graph(graphCell,LiteGraph,FunctionNode,CustNumberNode,uvNode,CustWatch
 //Numbernodes
 
   var nodeCustNum1 = LiteGraph.createNode("custom/uvNode");
-  nodeCustNum1.pos = [100,200];
+  nodeCustNum1.pos = [100,250];
   nodeCustNum1.widgets[0].value = 42;  // Setze den Wert des ersten Widgets (Number Widget)
   nodeCustNum1.properties.value = 42;  
   nodeCustNum1.widgets[1].value = "x"; // Setze den Wert des zweiten Widgets (Text Widget)
@@ -167,6 +188,10 @@ function _graph(graphCell,LiteGraph,FunctionNode,CustNumberNode,uvNode,CustWatch
   graph.add(nodeCustNum2);
 
 //Time
+
+var nodeAudio = LiteGraph.createNode("custom/AudioNode");
+nodeAudio.pos = [350,50];
+graph.add(nodeAudio);
 
 
 var nodeTime1 = LiteGraph.createNode("custom/time");
@@ -185,6 +210,10 @@ graph.add(nodeTime1);
 
   var nodeOper1 = LiteGraph.createNode("custom/Operation");
   nodeOper1.pos = [600,500];
+  nodeOper1.code_widget.value = "+"; 
+  if (nodeOper1.code_widget.callback) {
+    nodeOper1.code_widget.callback(nodeOper1.code_widget.value, null, nodeOper1); // Manuelles Ausführen der Logik für das Widget, um die Berechnung zu starten
+  }
   graph.add(nodeOper1);
 
   var nodeFunc2 = LiteGraph.createNode("custom/func");
@@ -204,13 +233,21 @@ graph.add(nodeTime1);
   }
   graph.add(nodeFunc3);
 
+  var nodeFunc4 = LiteGraph.createNode("custom/func");
+  nodeFunc4.pos = [50,50];
+  nodeFunc4.code_widget.value = "f(x) = sin (1000 * x)"; 
+  if (nodeFunc4.code_widget.callback) {
+    nodeFunc4.code_widget.callback(nodeFunc4.code_widget.value, null, nodeFunc4); // Manuelles Ausführen der Logik für das Widget, um die Berechnung zu starten
+  }
+  graph.add(nodeFunc4);
+
 
   var nodeCustWatchS = LiteGraph.createNode("custom/cwatchS");
   nodeCustWatchS.pos = [900,200];
   graph.add(nodeCustWatchS);
 
   var nodeCustWatchV = LiteGraph.createNode("custom/cwatchV");
-  nodeCustWatchV.pos = [800,330];
+  nodeCustWatchV.pos = [900,100];
   graph.add(nodeCustWatchV);
 
   var nodeCustWatchS2 = LiteGraph.createNode("custom/cwatchS");
@@ -222,7 +259,7 @@ graph.add(nodeTime1);
   graph.add(nodeCustWatchV2);
 
   var nodePlot1 = LiteGraph.createNode("custom/plot");
-  nodePlot1.pos = [1000,350];
+  nodePlot1.pos = [1000,550];
   graph.add(nodePlot1);
 
 
@@ -246,6 +283,9 @@ graph.add(nodeTime1);
 
   nodeOper1.connect(0,nodeCustWatchS2,0);
   nodeOper1.connect(0,nodeCustWatchV2,0);
+
+  nodeCustNum1.connect(0,nodeFunc4,0);
+  nodeFunc4.connect(0,nodeAudio,0);
 
 
 

@@ -3,8 +3,10 @@ export function _CustWatchNodeString() {
     class CustWatchNodeString {
       constructor() {
         this.size = [160, 80];  // Etwas größere Größe, damit genug Platz für die Gleichung ist
-        this.color = "#CE8A53"; //Titelfarbe
-        this.bgcolor = "#FFFFFF"; //Hintergrundfarbe
+        //this.color = "#CE8A53"; //Titelfarbe
+        this.color = fbNodesColor;
+        //this.bgcolor = "#FFFFFF"; //Hintergrundfarbe
+        this.bgcolor = bgColor1;
 
         this.addInput("value", 0, { label: "" });
         this.value = 0;

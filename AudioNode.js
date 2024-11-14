@@ -1,21 +1,25 @@
 export function _AudioNode() {
     return class AudioNode {
         constructor() {
-            console.log("AudioNode: Konstruktor aufgerufen");
-            
-            this.color = "#CE8A53"; //Titelfarbe
-            this.bgcolor = "#FFFFFF"; //Hintergrundfarbe
+
+            this.properties = {
+                FormulafromInput: "",
+              };
+
+            //this.color = "#CE8A53"; // Titelfarbe
+            this.color = fbNodesColor;
+            this.bgcolor = bgColor1; // Hintergrundfarbe
             this.context = new (window.AudioContext || window.webkitAudioContext)();
             this.isPlaying = false;
 
             // Lade den AudioWorkletProcessor
             this.context.audioWorklet.addModule('AudioProcessor.js').then(() => {
-                console.log("AudioNode: AudioProcessor erfolgreich geladen");
+                //console.log("AudioNode: AudioProcessor erfolgreich geladen");
                 this.workletNode = new AudioWorkletNode(this.context, 'audio-processor');
                 this.workletNode.connect(this.context.destination);
-                console.log("AudioNode: WorkletNode mit Audioausgang verbunden");
+                //console.log("AudioNode: WorkletNode mit Audioausgang verbunden");
             }).catch((error) => {
-                console.error("AudioNode: Fehler beim Laden des AudioWorklet", error);
+                //console.error("AudioNode: Fehler beim Laden des AudioWorklet", error);
             });
 
             // Füge den Eingabekanal für die Funktion hinzu
@@ -30,7 +34,7 @@ export function _AudioNode() {
                 }
             });
 
-            this.title = "Audio Node";
+            this.title = "Audio";
         }
 
         // Funktion zum Verarbeiten der Eingabedaten
@@ -39,21 +43,22 @@ export function _AudioNode() {
 
             if (inputData) {
                 const formula = inputData["rightSide"];
+                this.properties.FormulafromInput = inputData["rightSide"];
                 const uvName = inputData["uvName"];
-                const uvValue = inputData["uvValue"];
+                //const uvValue = inputData["uvValue"];
 
-                console.log("AudioNode: Eingabedaten erhalten:", inputData);
+                //console.log("AudioNode: Eingabedaten erhalten:", inputData);
 
                 // Wenn die Formel oder UV sich geändert haben, erstelle eine neue Funktion
                 if (formula && uvName) {
                     try {
                         const func = new Function(uvName, `return ${formula}`);
-                        console.log("AudioNode: Funktion erfolgreich ausgewertet");
+                        //console.log("AudioNode: Funktion erfolgreich ausgewertet");
 
                         // Sende die ausgewertete Funktion an den AudioProcessor
                         this.setFunction(func);
                     } catch (error) {
-                        console.error("AudioNode: Fehler beim Erstellen der Funktion", error);
+                        //console.error("AudioNode: Fehler beim Erstellen der Funktion", error);
                     }
                 }
             }
@@ -63,30 +68,69 @@ export function _AudioNode() {
         setFunction(func) {
             if (this.workletNode) {
                 this.workletNode.port.postMessage({ type: 'setFunction', func: func.toString() });
-                console.log("AudioNode: Funktion an AudioProcessor gesendet");
+                //console.log("AudioNode: Funktion an AudioProcessor gesendet");
             } else {
-                console.warn("AudioNode: WorkletNode ist noch nicht geladen");
+                //console.warn("AudioNode: WorkletNode ist noch nicht geladen");
             }
         }
 
-        // Startet die Audiowiedergabe
+        // Startet die Audiowiedergabe und ändert die Widget-Farbe zu Orange
         start() {
             this.context.resume().then(() => {
                 this.isPlaying = true;
-                console.log("AudioNode: Audiowiedergabe gestartet");
+                this.bgcolor = fbNodesColor; // Orange, wenn Wiedergabe aktiv
+                //console.log("AudioNode: Audiowiedergabe gestartet");
+                this.setDirtyCanvas(true); // Aktualisiere das Widget
             }).catch((error) => {
-                console.error("AudioNode: Fehler beim Starten des AudioContext", error);
+                //console.error("AudioNode: Fehler beim Starten des AudioContext", error);
             });
         }
 
-        // Stoppt die Audiowiedergabe
+        // Stoppt die Audiowiedergabe und ändert die Widget-Farbe zu Schwarz
         stop() {
             this.context.suspend().then(() => {
                 this.isPlaying = false;
-                console.log("AudioNode: Audiowiedergabe gestoppt");
+                this.bgcolor = "#FFFFFF"; // Schwarz, wenn Wiedergabe gestoppt
+                //console.log("AudioNode: Audiowiedergabe gestoppt");
+                this.setDirtyCanvas(true); // Aktualisiere das Widget
             }).catch((error) => {
-                console.error("AudioNode: Fehler beim Stoppen des AudioContext", error);
+                //console.error("AudioNode: Fehler beim Stoppen des AudioContext", error);
             });
+        }
+
+        // Aktualisiert die Hintergrundfarbe des Widgets, je nach Wiedergabestatus
+        onDrawBackground(ctx) {
+            this.bgcolor = this.isPlaying ? fbNodesColor : "#FFFFFF"; // Hintergrundfarbe des Widgets
+
+             // Färbe den Eingang oder zeichne einen Kreis darum
+                const NODE_SLOT_HEIGHT = LiteGraph.NODE_SLOT_HEIGHT;
+
+                // Relativer x-Wert für Eingänge (meistens am linken Rand der Node)
+                const inputPosX = labelInputPosX;
+
+                // Relativer y-Wert basierend auf Titelhöhe und Slot-Höhe
+                const inputPosY = (0) * NODE_SLOT_HEIGHT + 14;
+
+                  // Parameter für die Trichterform
+                const width = labelWidth; // Breite der Basis (linke Seite)
+                const height = labelHeight; // Höhe des Trichters (von Basis bis Spitze)
+
+                 // Beginne mit dem Zeichnen des Dreiecks
+            ctx.beginPath();
+            
+            // Input Trichter
+            ctx.moveTo(0, inputPosY - height / 2);
+            ctx.lineTo(inputPosX ,inputPosY - height / 2);
+            ctx.arc(inputPosX,inputPosY,height / 2 ,0, 2 * Math.PI)
+            ctx.lineTo(inputPosX ,inputPosY + height / 2);
+            ctx.lineTo(0 ,inputPosY + height / 2);
+            ctx.lineTo(0 ,inputPosY + height / 2);
+            ctx.closePath();
+
+            // Füllen des Trichters
+            ctx.fillStyle = srcNodesColor;
+            ctx.fill();
+            
         }
     };
 }

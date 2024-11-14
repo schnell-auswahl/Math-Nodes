@@ -45,12 +45,14 @@ export function _CustomGraphicsPlot() {
         this.widgets_start_y = 10; //Widgets sitzen neben ins
 
         // Node-Eigenschaften
-        this.title = "Multi-Function Plot with Grid";
+        this.title = "Graph";
         this.desc = "Plots up to 4 mathematical functions with different colors";
         this.colors = ["#FFA", "#F99", "#9F9", "#99F"];  // Vier Farben für vier Funktionen
         this.size = [350, 380];  // Vergrößertes Plot-Fenster
-        this.color = "#CE8A53";
-        this.bgcolor = "#FFFFFF";
+        //this.color = "#CE8A53";
+        this.color = fbNodesColor;
+        //this.bgcolor = "#FFFFFF";
+        this.bgcolor = bgColor1;
 
         this.equations = [];  // Array für die Gleichungen der vier Eingänge
         this.uvNames = [];    // Array für die UV-Namen der vier Eingänge
@@ -107,9 +109,46 @@ export function _CustomGraphicsPlot() {
         const offsetX = -xRange[0] * scaleX + margin;  // Verschiebung auf der X-Achse
         const offsetY = size[1] - (-yRange[0] * scaleY + margin);  // Verschiebung auf der Y-Achse
 
+
+        // Input Labels:
+
+                // Färbe den Eingang oder zeichne einen Kreis darum
+        const NODE_SLOT_HEIGHT = LiteGraph.NODE_SLOT_HEIGHT;
+        // Relativer x-Wert für Eingänge (meistens am linken Rand der Node)
+        const inputPosX = labelInputPosX;
+        const nodeWidth = this.size[0];      
+        const outputPosX = nodeWidth; // Rechter Rand der Node
+          // Parameter für die Trichterform
+        const width = labelWidth; // Breite der Basis (linke Seite)
+        const height = labelHeight; // Höhe des Trichters (von Basis bis Spitze)
+
+        const inputPosY = (0) * NODE_SLOT_HEIGHT + 14;
+
+       
+
+
         // Hintergrund zeichnen
         ctx.fillStyle = "#000";
         ctx.fillRect(0, 0, size[0], size[1]);
+
+        for(let i=0; i<4; i++){
+
+          const inputPosY = (i) * NODE_SLOT_HEIGHT + 14;
+         
+          ctx.beginPath();
+            // Input Trichter
+            ctx.moveTo(0, inputPosY - height / 2);
+            ctx.lineTo(inputPosX ,inputPosY - height / 2);
+            ctx.arc(inputPosX,inputPosY,height / 2 ,0, 2 * Math.PI)
+            ctx.lineTo(inputPosX ,inputPosY + height / 2);
+            ctx.lineTo(0 ,inputPosY + height / 2);
+            ctx.lineTo(0 ,inputPosY + height / 2);
+          ctx.closePath();
+          // Füllen des Trichters
+          ctx.fillStyle = inLabelsColor;
+          ctx.fill();
+      
+        }
 
         // Gitternetzlinien zeichnen
         this.drawGrid(ctx, size, scaleX, scaleY, offsetX, offsetY, marginTop);

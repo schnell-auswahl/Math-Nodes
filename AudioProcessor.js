@@ -6,7 +6,8 @@ class AudioProcessor extends AudioWorkletProcessor {
         this.sampleRate = sampleRate;
 
         // Standardfunktion: Sinuswelle mit 440 Hz
-        this.func = (t) => Math.sin(440 * 2 * Math.PI * t);
+        //this.func = (t) => Math.sin(440 * 2 * Math.PI * t);
+        this.func = 0;
 
         // Empfangene Funktion ändern
         this.port.onmessage = (event) => {

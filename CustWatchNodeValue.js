@@ -2,9 +2,10 @@ export function _CustWatchNodeValue() { return(
     class CustWatchNodeValue {
       constructor() {
         this.size = [100, 30];
-        this.color = "#CE8A53"; //Titelfarbe
-        this.bgcolor = "#FFFFFF"; //Hintergrundfarbe
-
+        //this.color = "#CE8A53"; //Titelfarbe
+        this.color = fbNodesColor;
+        //this.bgcolor = "#FFFFFF"; //Hintergrundfarbe
+        this.bgcolor = bgColor1;
 
         this.addInput("","object");
         //this.addInput("UV", "object");

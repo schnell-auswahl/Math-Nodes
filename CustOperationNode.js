@@ -4,6 +4,8 @@ export function _OperationNode(){
     return (
         class OperationNode {
             constructor() {
+                this.color = opNodesColor;
+                this.bgcolor = bgColor2;
                 
                 this.size = [160, 40];  
 
@@ -25,7 +27,7 @@ export function _OperationNode(){
                     In2_isNumberNode: ""
                   };
 
-                this.addWidget(
+                this.code_widget = this.addWidget(
                     "combo",             // Widgettyp: ComboBox (Dropdown-Menü)
                     "Operation",         // Beschreibung des Widgets
                     " ",                 // Standardwert
