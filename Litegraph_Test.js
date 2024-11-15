@@ -9,6 +9,7 @@ window.bgColor2 = "#959EAA"; //Grau
 window.outLabelsColor = "#A84008"; //Orange
 window.inLabelsColor = "#43715D"; //Grün
 window.paramLabelsColor = "#BFB700"; //Senfgelb
+window.textAnzeigeColor = "#FFAF2F" //Gelb
 
 //Parameter der In und Output Labels:
 window.labelInputPosX = 10;
@@ -54,23 +55,31 @@ md`## Controls
 
 // CustomNodes in separate Datei ausgelagert
 
+//Synth
 import { _FunctionNode } from './SynthNodes/CustomFunctionNode.js';
-
 import { _CustomTimeNode } from './SynthNodes/CustomTimeNode.js';
-
 import { _CustNumberNode } from './SynthNodes/CustomNumberNode.js';
-
 import { _uvNode } from './SynthNodes/Custom_UV_Node.js';
-
 import { _CustWatchNodeString } from './SynthNodes/CustWatchNodeString.js';
-
 import { _CustWatchNodeValue } from './SynthNodes/CustWatchNodeValue.js';
-
 import { _CustomGraphicsPlot } from './SynthNodes/CustomGraphicsPlotNode.js';
-
 import { _OperationNode } from './SynthNodes/CustOperationNode.js';
-
 import { _AudioNode } from './SynthNodes/AudioNode.js';
+
+//Wortmaschinen
+import { _TextInputNode } from './WordNodes/TextInputNode.js';
+import { _TextDisplayNode } from './WordNodes/TextDisplayNode.js';
+//import { _AlphabetCountdownNode } from './WordNodes/AlphabetCountdownNode.js';
+import { TextManipulationLogic } from './WordNodes/TextManipulationLogic.js';
+import { createTextManipulationNode } from './WordNodes/TextManipulationNode.js';
+
+
+
+
+//Testsetups
+import { nodeSetupSynth1 } from './TestSetups/nodeSetupSynth1.js';
+import { nodeSetupWords1 } from './TestSetups/nodeSetupWords1.js';
+import { nodeSetupWords2 } from './TestSetups/nodeSetupWords2.js';
 
 
 function renderEquationToSVG(equation, targetElementId) {
@@ -130,13 +139,14 @@ window.convertToLatex = convertToLatex;
 
 
 
-function _graph(graphCell,LiteGraph,FunctionNode,CustNumberNode,uvNode,CustWatchNodeString,CustWatchNodeValue,CustomGraphicsPlot,CustomTimeNode,OperationNode,AudioNode,$0)
+function _graph(graphCell,LiteGraph,FunctionNode,CustNumberNode,uvNode,CustWatchNodeString,CustWatchNodeValue,CustomGraphicsPlot,
+  CustomTimeNode,OperationNode,AudioNode,TextInputNode,TextDisplayNode,TextManipulationNodes,$0)
 {
   graphCell;
   
   // Register our new custom node
   
-
+// Synth
   LiteGraph.registerNodeType("custom/func", FunctionNode);
   LiteGraph.registerNodeType("custom/cconst", CustNumberNode);
   LiteGraph.registerNodeType("custom/uvNode", uvNode);
@@ -146,6 +156,30 @@ function _graph(graphCell,LiteGraph,FunctionNode,CustNumberNode,uvNode,CustWatch
   LiteGraph.registerNodeType("custom/time", CustomTimeNode);
   LiteGraph.registerNodeType("custom/Operation", OperationNode);
   LiteGraph.registerNodeType("custom/AudioNode", AudioNode);
+
+  //Wortmaschinen
+  LiteGraph.registerNodeType("Wortmaschinen/TextInputNode", TextInputNode);
+  LiteGraph.registerNodeType("Wortmaschinen/TextDisplayNode", TextDisplayNode);
+  //LiteGraph.registerNodeType("Wortmaschinen/AlphabetCountdownNode", AlphabetCountdownNode)
+
+// Hilfsfunktion zum Ersetzen von Umlauten in den Folgenden nodes
+function replaceUmlauts(string) {
+  return string
+      .replace(/Ä/g, "Ae")
+      .replace(/Ö/g, "Oe")
+      .replace(/Ü/g, "Ue")
+      .replace(/ä/g, "ae")
+      .replace(/ö/g, "oe")
+      .replace(/ü/g, "ue");
+}
+
+// Dynamische Registrierung der Textmanipulations-Nodes
+TextManipulationLogic.forEach((nodeDefinition) => {
+  const sanitizedTitle = replaceUmlauts(nodeDefinition.title.replace(/\s+/g, "").toLowerCase());
+  const NodeClass = createTextManipulationNode(nodeDefinition);
+  LiteGraph.registerNodeType(`Wortmaschinen/${sanitizedTitle}`, NodeClass);
+});
+
   
   var graph = new LiteGraph.LGraph();
   var canvas = new LiteGraph.LGraphCanvas("#graphDiv", graph);
@@ -155,159 +189,13 @@ function _graph(graphCell,LiteGraph,FunctionNode,CustNumberNode,uvNode,CustWatch
   canvas.allow_dragcanvas = false; // Prevent dragging the canvas
   canvas.allow_zoom = false; // Prevent zooming in/out
 
-  /** Disable LiteGraph Input prompts
-   *
-   * @note
-   * Some LiteGraph widgets support left-click Input pop-ups
-   * that also throw "Blocked autofocusing on a <input> element 
-   * in a cross-origin subframe"
-   * 
-   * There's no flag to disable so instead this snippet replaces
-   * the `prompt` function to keep LiteGraph spawning a pop-up.
-   */
-  //  canvas.prompt = (title,value,callback,event)=>{ return null; };
-
-//Beispiel:
-
-//Numbernodes
-
-  var nodeCustNum1 = LiteGraph.createNode("custom/uvNode");
-  nodeCustNum1.pos = [100,250];
-  nodeCustNum1.widgets[0].value = 42;  // Setze den Wert des ersten Widgets (Number Widget)
-  nodeCustNum1.properties.value = 42;  
-  nodeCustNum1.widgets[1].value = "x"; // Setze den Wert des zweiten Widgets (Text Widget)
-  nodeCustNum1.properties.rightSide = "x";
-  graph.add(nodeCustNum1);
-
-  var nodeCustNum2 = LiteGraph.createNode("custom/cconst");
-  nodeCustNum2.pos = [100,400];
-  nodeCustNum2.widgets[0].value = 0.2;  // Setze den Wert des ersten Widgets (Number Widget)
-  nodeCustNum2.properties.value = 0.2;  
-  nodeCustNum2.widgets[1].value = "b"; // Setze den Wert des zweiten Widgets (Text Widget)
-  nodeCustNum2.properties.rightSide = "b";
-  graph.add(nodeCustNum2);
-
-//Time
-
-var nodeAudio = LiteGraph.createNode("custom/AudioNode");
-nodeAudio.pos = [550,50];
-graph.add(nodeAudio);
-
-
-var nodeTime1 = LiteGraph.createNode("custom/time");
-nodeTime1.pos = [100,600];
-graph.add(nodeTime1);
-
-//Funcnodes
-
-  var nodeFunc1 = LiteGraph.createNode("custom/func");
-  nodeFunc1.pos = [400,200];
-  nodeFunc1.code_widget.value = "f(x) = x-2"; 
-  if (nodeFunc1.code_widget.callback) {
-    nodeFunc1.code_widget.callback(nodeFunc1.code_widget.value, null, nodeFunc1); // Manuelles Ausführen der Logik für das Widget, um die Berechnung zu starten
-  }
-  graph.add(nodeFunc1);
-
-  var nodeOper1 = LiteGraph.createNode("custom/Operation");
-  nodeOper1.pos = [600,500];
-  nodeOper1.code_widget.value = "+"; 
-  if (nodeOper1.code_widget.callback) {
-    nodeOper1.code_widget.callback(nodeOper1.code_widget.value, null, nodeOper1); // Manuelles Ausführen der Logik für das Widget, um die Berechnung zu starten
-  }
-  graph.add(nodeOper1);
-
-  var nodeFunc2 = LiteGraph.createNode("custom/func");
-  nodeFunc2.pos = [600,200];
-  nodeFunc2.code_widget.value = "g(x) = 1/x+h(x)"; 
-  if (nodeFunc2.code_widget.callback) {
-    nodeFunc2.code_widget.callback(nodeFunc2.code_widget.value, null, nodeFunc2); // Manuelles Ausführen der Logik für das Widget, um die Berechnung zu starten
-  }
-  graph.add(nodeFunc2);
-
-
-  var nodeFunc3 = LiteGraph.createNode("custom/func");
-  nodeFunc3.pos = [400,400];
-  nodeFunc3.code_widget.value = "h(x) = x^2+b"; 
-  if (nodeFunc3.code_widget.callback) {
-    nodeFunc3.code_widget.callback(nodeFunc3.code_widget.value, null, nodeFunc3); // Manuelles Ausführen der Logik für das Widget, um die Berechnung zu starten
-  }
-  graph.add(nodeFunc3);
-
-  var nodeFunc4 = LiteGraph.createNode("custom/func");
-  nodeFunc4.pos = [190,50];
-  nodeFunc4.code_widget.value = "f(x) = sin (1000 * x)"; 
-  if (nodeFunc4.code_widget.callback) {
-    nodeFunc4.code_widget.callback(nodeFunc4.code_widget.value, null, nodeFunc4); // Manuelles Ausführen der Logik für das Widget, um die Berechnung zu starten
-  }
-  graph.add(nodeFunc4);
-
-
-  var nodeCustWatchS = LiteGraph.createNode("custom/cwatchS");
-  nodeCustWatchS.pos = [900,200];
-  graph.add(nodeCustWatchS);
-
-  var nodeCustWatchV = LiteGraph.createNode("custom/cwatchV");
-  nodeCustWatchV.pos = [900,100];
-  graph.add(nodeCustWatchV);
-
-  var nodeCustWatchS2 = LiteGraph.createNode("custom/cwatchS");
-  nodeCustWatchS2.pos = [900,400];
-  graph.add(nodeCustWatchS2);
-
-  var nodeCustWatchV2 = LiteGraph.createNode("custom/cwatchV");
-  nodeCustWatchV2.pos = [800,600];
-  graph.add(nodeCustWatchV2);
-
-  var nodePlot1 = LiteGraph.createNode("custom/plot");
-  nodePlot1.pos = [1000,550];
-  graph.add(nodePlot1);
-
-
-  // All nodes must be in the graph before connections can be made.
-
-  //Verbindungen:
-  nodeCustNum1.connect(0,nodeFunc1,0);
-  nodeCustNum1.connect(0,nodeFunc3,0);
-  nodeCustNum2.connect(0,nodeFunc3,1);
-  nodeFunc1.connect(0,nodeFunc2,0);
-
-  nodeFunc3.connect(0,nodeFunc2,1);
-  nodeFunc3.connect(0,nodePlot1,2);
-  nodeFunc3.connect(0,nodeOper1,1);
-
-  nodeFunc2.connect(0,nodeCustWatchS,0);
-  nodeFunc2.connect(0,nodeCustWatchV,0);
-  nodeFunc2.connect(0,nodePlot1,0);
-  nodeFunc2.connect(0,nodeOper1,0);
-
-
-  nodeOper1.connect(0,nodeCustWatchS2,0);
-  nodeOper1.connect(0,nodeCustWatchV2,0);
-
-  nodeCustNum1.connect(0,nodeFunc4,0);
-  nodeFunc4.connect(0,nodeAudio,0);
-
-
-
-
-
-  // nodeConstB.connect(0,nodeMult,1);
   
-  // var nodeWatch = LiteGraph.createNode("basic/watch");
-  // nodeWatch.pos = [700,250];
-  // graph.add(nodeWatch);
+   // Beispielsetups laden
 
-  // Create an Observable mutate wrapper to copy the results of our multiplcation in to the `results` var
-  // var nodeObserve = LiteGraph.createNode("custom/observable");
-  // nodeObserve.setMutator((value)=>{
-  //   $0.value = value;
-  // });
-  // nodeObserve.pos = [700,350];
-  // graph.add(nodeObserve);
-  
-  // nodeMult.connect(0, nodeWatch, 0 );
-  // nodeMult.connect(0, nodeObserve, 0 );
-  
+   //mnodeSetupSynth1(graph, LiteGraph);
+   nodeSetupWords1(graph, LiteGraph);
+   //nodeSetupWords2(graph, LiteGraph);
+
   graph.start(30);
 
   function loop() {
@@ -345,8 +233,20 @@ export default function define(runtime, observer) {
   main.variable(observer("OperationNode")).define("OperationNode", _OperationNode);
   main.variable(observer("uvNode")).define("uvNode", _uvNode);
   main.variable(observer("AudioNode")).define("AudioNode", _AudioNode);
+  main.variable(observer("TextInputNode")).define("TextInputNode", _TextInputNode);
+  main.variable(observer("TextDisplayNode")).define("TextDisplayNode", _TextDisplayNode);
+  //main.variable(observer("AlphabetCountdownNode")).define("AlphabetCountdownNode", _AlphabetCountdownNode);
+  // Bereitstellen der Textmanipulations-Nodes
+  main.variable(observer("TextManipulationNodes")).define("TextManipulationNodes", () => {
+    return TextManipulationLogic.map(nodeDefinition => ({
+        name: `Wortmaschinen/${nodeDefinition.title.replace(/\s+/g, "").toLowerCase()}`,
+        nodeClass: createTextManipulationNode(nodeDefinition)
+    }));
+  });
+
+
   
-  main.variable(observer("graph")).define("graph", ["graphCell","LiteGraph","FunctionNode","CustNumberNode","uvNode","CustWatchNodeString","CustWatchNodeValue","CustomGraphicsPlot","CustomTimeNode","OperationNode","AudioNode","mutable results"], _graph);
+  main.variable(observer("graph")).define("graph", ["graphCell","LiteGraph","FunctionNode","CustNumberNode","uvNode","CustWatchNodeString","CustWatchNodeValue","CustomGraphicsPlot","CustomTimeNode","OperationNode","AudioNode","TextInputNode","TextDisplayNode","TextManipulationNodes","mutable results"], _graph);
   main.variable(observer("LiteGraph")).define("LiteGraph", ["require"], _LiteGraph);
   return main;
 }
