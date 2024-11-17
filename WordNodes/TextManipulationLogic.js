@@ -113,13 +113,14 @@ export const TextManipulationLogic = [
         description: "Tausche jeden Vokal im Wort\n" +
                      "mit dem folgenden Vokal im\n" +
                      "Alphabet aus. A wird zu E,\n" +
-                     "E zu I, I zu O, O zu U und\n" +
-                     "U zu A. Zum Beispiel wird\n" +
-                     "\"KATZE\" zu \"KETZI\".",
+                     "E zu I, I zu O, O zu U usw.",
         logic: (text) => text.replace(/[AEIOUaeiou]/g, (c) => {
-            const vowels = "AEIOUaeiou";
-            const index = vowels.indexOf(c);
-            return vowels[(index + 2) % 10];
+                        const vowelsUpper = "AEIOU"; // Zyklus für Großbuchstaben
+                        const vowelsLower = "aeiou"; // Zyklus für Kleinbuchstaben
+                        const isUpperCase = c === c.toUpperCase();
+                        const vowels = isUpperCase ? vowelsUpper : vowelsLower;
+                        const index = vowels.indexOf(c);
+                        return vowels[(index + 1 + vowels.length) % vowels.length];
         })
     },
 
@@ -128,12 +129,14 @@ export const TextManipulationLogic = [
         description: "Tausche jeden Vokal im Wort\n" +
                      "mit dem vorherigen Vokal im\n" +
                      "Alphabet aus. U wird zu O,\n" +
-                     "O zu I, I zu E, E zu A und\n" +
-                     "A zu U.",
+                     "O zu I, I zu E, E zu A usw.",
         logic: (text) => text.replace(/[AEIOUaeiou]/g, (c) => {
-            const vowels = "UOAIEuoaie";
-            const index = vowels.indexOf(c);
-            return vowels[(index + 10 - 2) % 10];
+                        const vowelsUpper = "AEIOU"; // Zyklus für Großbuchstaben
+                        const vowelsLower = "aeiou"; // Zyklus für Kleinbuchstaben
+                        const isUpperCase = c === c.toUpperCase();
+                        const vowels = isUpperCase ? vowelsUpper : vowelsLower;
+                        const index = vowels.indexOf(c);
+                        return vowels[(index - 1 + vowels.length) % vowels.length];
         })
     },
 

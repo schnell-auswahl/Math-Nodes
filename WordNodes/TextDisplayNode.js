@@ -22,8 +22,46 @@ export function _TextDisplayNode() {
             }
         }
 
+
+             //Minimale Größe Festlegen
+        onResize() {
+        
+            if (this.size[0] < 220) {
+            this.size[0] = 220
+            }
+            if (this.size[1] < 100) {
+            this.size[1] = 100
+            }
+        }
+
         onDrawForeground(ctx) {
             // Dynamische Größe der Textbox an die Größe der Node anpassen
+            // Zeichne die Input- und Output-Slots
+            const NODE_SLOT_HEIGHT = LiteGraph.NODE_SLOT_HEIGHT;
+            const inputPosX = labelInputPosX;
+            const nodeWidth = this.size[0];
+            const outputPosX = nodeWidth;
+            const width = labelWidth;
+            const height = labelHeight;
+            const inputPosY = 14;
+
+            ctx.beginPath();
+            ctx.moveTo(0, inputPosY - height / 2);
+            ctx.lineTo(inputPosX, inputPosY - height / 2);
+            ctx.arc(inputPosX, inputPosY, height / 2, 0, 2 * Math.PI);
+            ctx.lineTo(inputPosX, inputPosY + height / 2);
+            ctx.lineTo(0, inputPosY + height / 2);
+            ctx.closePath();
+            ctx.fillStyle = inLabelsColor;
+            ctx.fill();
+           
+           
+           
+           
+           
+           
+           
+           
             const boxWidth = this.size[0] - 2 * this.padding;
             const boxHeight = this.size[1] - 2 * this.padding;
         
@@ -58,7 +96,7 @@ export function _TextDisplayNode() {
         
                     // Wenn die maximale Höhe erreicht wird, Text abschneiden
                     if (y + lineHeight > this.size[1] - this.padding) {
-                        ctx.fillText("...", this.padding + 5, y);
+                        ctx.fillText("(...)", this.padding + 5, y);
                         return;
                     }
                 } else {
@@ -70,24 +108,7 @@ export function _TextDisplayNode() {
             if (line && y <= this.size[1] - this.padding) {
                 ctx.fillText(line, this.padding + 5, y);
             }
-        // Zeichne die Input- und Output-Slots
-        const NODE_SLOT_HEIGHT = LiteGraph.NODE_SLOT_HEIGHT;
-        const inputPosX = labelInputPosX;
-        const nodeWidth = this.size[0];
-        const outputPosX = nodeWidth;
-        const width = labelWidth;
-        const height = labelHeight;
-        const inputPosY = 14;
-
-        ctx.beginPath();
-        ctx.moveTo(0, inputPosY - height / 2);
-        ctx.lineTo(inputPosX, inputPosY - height / 2);
-        ctx.arc(inputPosX, inputPosY, height / 2, 0, 2 * Math.PI);
-        ctx.lineTo(inputPosX, inputPosY + height / 2);
-        ctx.lineTo(0, inputPosY + height / 2);
-        ctx.closePath();
-        ctx.fillStyle = inLabelsColor;
-        ctx.fill();
+       
         
         }
     };
