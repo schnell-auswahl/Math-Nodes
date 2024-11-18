@@ -191,63 +191,45 @@ TextManipulationLogic.forEach((nodeDefinition) => {
 
   // Touchinput 
 
-  let isInteractingWithNode = false; // Zustandsvariable
+  const canvasElement = document.getElementById("graphDiv");
 
-const canvasElement = document.getElementById("graphDiv");
-
-// Wenn eine Node angeklickt wird
-canvasElement.addEventListener("touchstart", (e) => {
+  canvasElement.addEventListener("touchstart", (e) => {
+    e.preventDefault(); // Verhindert das Scrollen 
     const touch = e.touches[0];
+      const simulatedEvent = new MouseEvent("mousedown", {
+          bubbles: true,
+          cancelable: true,
+          clientX: touch.clientX,
+          clientY: touch.clientY
+      });
+      canvasElement.dispatchEvent(simulatedEvent);
+  }, false);
 
-    // Prüfen, ob der Touch auf einer Node beginnt
-    const targetNode = canvas.getNodeOnPos(touch.clientX, touch.clientY);
-    isInteractingWithNode = !!targetNode; // True, wenn es eine Node ist
-
-    // Simuliere Mausereignis
-    const simulatedEvent = new MouseEvent("mousedown", {
-        bubbles: true,
-        cancelable: true,
-        clientX: touch.clientX,
-        clientY: touch.clientY
-    });
-    canvasElement.dispatchEvent(simulatedEvent);
-}, { passive: false });
-
-canvasElement.addEventListener("touchmove", (e) => {
-    if (isInteractingWithNode) {
-        e.preventDefault(); // Verhindert Scrollen und Zoomen
-    }
-
+  canvasElement.addEventListener("touchmove", (e) => {
+     
+    e.preventDefault(); // Verhindert das Scrollen
     const touch = e.touches[0];
-    const simulatedEvent = new MouseEvent("mousemove", {
-        bubbles: true,
-        cancelable: true,
-        clientX: touch.clientX,
-        clientY: touch.clientY
-    });
-    canvasElement.dispatchEvent(simulatedEvent);
-}, { passive: false });
+      const simulatedEvent = new MouseEvent("mousemove", {
+          bubbles: true,
+          cancelable: true,
+          clientX: touch.clientX,
+          clientY: touch.clientY
+      });
+      canvasElement.dispatchEvent(simulatedEvent);
+  }, false);
 
-canvasElement.addEventListener("touchend", (e) => {
-    isInteractingWithNode = false; // Interaktion mit Node beendet
-
+  canvasElement.addEventListener("touchend", (e) => {
+    e.preventDefault(); // Verhindert das Scrollen  
     const simulatedEvent = new MouseEvent("mouseup", {
-        bubbles: true,
-        cancelable: true,
-        clientX: e.changedTouches[0].clientX,
-        clientY: e.changedTouches[0].clientY
-    });
-    canvasElement.dispatchEvent(simulatedEvent);
-}, { passive: false });
+          bubbles: true,
+          cancelable: true,
+          clientX: e.changedTouches[0].clientX,
+          clientY: e.changedTouches[0].clientY
+      });
+      canvasElement.dispatchEvent(simulatedEvent);
+  }, false);
 
-// Standardverhalten bei Touch für Zoom und Scroll zulassen
-canvasElement.addEventListener("wheel", (e) => {
-    if (!isInteractingWithNode) {
-        // Nur scrollen/zoomen, wenn keine Node bewegt wird
-        return;
-    }
-    e.preventDefault();
-}, { passive: false });
+
 
    // Beispielsetups laden
 
