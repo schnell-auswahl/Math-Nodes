@@ -189,7 +189,44 @@ TextManipulationLogic.forEach((nodeDefinition) => {
   canvas.allow_dragcanvas = false; // Prevent dragging the canvas
   canvas.allow_zoom = false; // Prevent zooming in/out
 
-  
+  // Touchinput 
+
+  const canvasElement = document.getElementById("graphDiv");
+
+  canvasElement.addEventListener("touchstart", (e) => {
+      const touch = e.touches[0];
+      const simulatedEvent = new MouseEvent("mousedown", {
+          bubbles: true,
+          cancelable: true,
+          clientX: touch.clientX,
+          clientY: touch.clientY
+      });
+      canvasElement.dispatchEvent(simulatedEvent);
+  }, false);
+
+  canvasElement.addEventListener("touchmove", (e) => {
+      const touch = e.touches[0];
+      const simulatedEvent = new MouseEvent("mousemove", {
+          bubbles: true,
+          cancelable: true,
+          clientX: touch.clientX,
+          clientY: touch.clientY
+      });
+      canvasElement.dispatchEvent(simulatedEvent);
+  }, false);
+
+  canvasElement.addEventListener("touchend", (e) => {
+      const simulatedEvent = new MouseEvent("mouseup", {
+          bubbles: true,
+          cancelable: true,
+          clientX: e.changedTouches[0].clientX,
+          clientY: e.changedTouches[0].clientY
+      });
+      canvasElement.dispatchEvent(simulatedEvent);
+  }, false);
+
+
+
    // Beispielsetups laden
 
    //mnodeSetupSynth1(graph, LiteGraph);
