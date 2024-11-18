@@ -194,8 +194,9 @@ TextManipulationLogic.forEach((nodeDefinition) => {
   const canvasElement = document.getElementById("graphDiv");
 
   canvasElement.addEventListener("touchstart", (e) => {
-    e.preventDefault(); // Verhindert das Scrollen 
+     
     const touch = e.touches[0];
+    
       const simulatedEvent = new MouseEvent("mousedown", {
           bubbles: true,
           cancelable: true,
@@ -206,9 +207,7 @@ TextManipulationLogic.forEach((nodeDefinition) => {
   }, false);
 
   canvasElement.addEventListener("touchmove", (e) => {
-     
-    e.preventDefault(); // Verhindert das Scrollen
-    const touch = e.touches[0];
+      const touch = e.touches[0];
       const simulatedEvent = new MouseEvent("mousemove", {
           bubbles: true,
           cancelable: true,
@@ -219,8 +218,7 @@ TextManipulationLogic.forEach((nodeDefinition) => {
   }, false);
 
   canvasElement.addEventListener("touchend", (e) => {
-    e.preventDefault(); // Verhindert das Scrollen  
-    const simulatedEvent = new MouseEvent("mouseup", {
+      const simulatedEvent = new MouseEvent("mouseup", {
           bubbles: true,
           cancelable: true,
           clientX: e.changedTouches[0].clientX,
@@ -229,12 +227,30 @@ TextManipulationLogic.forEach((nodeDefinition) => {
       canvasElement.dispatchEvent(simulatedEvent);
   }, false);
 
+  // Testen von getNodeOnPos bei Klick auf das Canvas
+  document.getElementById("graphDiv").addEventListener("click", (e) => {
+  // Hole die Mausposition relativ zum Canvas
+  const rect = e.target.getBoundingClientRect();
+  const x = e.clientX - rect.left;
+  const y = e.clientY - rect.top;
 
+  // Prüfen, ob eine Node an dieser Position existiert
+  const clickedNode = graph.getNodeOnPos(x, y);
+
+  if (clickedNode) {
+      console.log("Node getroffen:", clickedNode.title);
+  } else {
+      console.log("Keine Node getroffen. Leere Stelle im Canvas.");
+  }
+});
+
+console.log(LiteGraph.VERSION); // Gibt die Version aus
+console.log(typeof graph.getNodeOnPos); // Sollte "function" ausgeben
 
    // Beispielsetups laden
 
-   //mnodeSetupSynth1(graph, LiteGraph);
-   nodeSetupWords1(graph, LiteGraph);
+   nodeSetupSynth1(graph, LiteGraph);
+   //nodeSetupWords1(graph, LiteGraph);
    //nodeSetupWords2(graph, LiteGraph);
 
   graph.start(30);
