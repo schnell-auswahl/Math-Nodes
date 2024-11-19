@@ -190,42 +190,107 @@ TextManipulationLogic.forEach((nodeDefinition) => {
   canvas.allow_zoom = false; // Prevent zooming in/out
 
   // Touchinput 
+// Touchinput 
 
-  const canvasElement = document.getElementById("graphDiv");
+  // const canvasElement = document.getElementById("graphDiv");
 
-  canvasElement.addEventListener("touchstart", (e) => {
+  // canvasElement.addEventListener("touchstart", (e) => {
      
-    const touch = e.touches[0];
+  //   const touch = e.touches[0];
     
-      const simulatedEvent = new MouseEvent("mousedown", {
-          bubbles: true,
-          cancelable: true,
-          clientX: touch.clientX,
-          clientY: touch.clientY
-      });
-      canvasElement.dispatchEvent(simulatedEvent);
-  }, false);
+  //     const simulatedEvent = new MouseEvent("mousedown", {
+  //         bubbles: true,
+  //         cancelable: true,
+  //         clientX: touch.clientX,
+  //         clientY: touch.clientY
+  //     });
+  //     canvasElement.dispatchEvent(simulatedEvent);
+  // }, false);
 
-  canvasElement.addEventListener("touchmove", (e) => {
-      const touch = e.touches[0];
-      const simulatedEvent = new MouseEvent("mousemove", {
-          bubbles: true,
-          cancelable: true,
-          clientX: touch.clientX,
-          clientY: touch.clientY
-      });
-      canvasElement.dispatchEvent(simulatedEvent);
-  }, false);
+  // canvasElement.addEventListener("touchmove", (e) => {
+  //     const touch = e.touches[0];
+  //     const simulatedEvent = new MouseEvent("mousemove", {
+  //         bubbles: true,
+  //         cancelable: true,
+  //         clientX: touch.clientX,
+  //         clientY: touch.clientY
+  //     });
+  //     canvasElement.dispatchEvent(simulatedEvent);
+  // }, false);
 
-  canvasElement.addEventListener("touchend", (e) => {
-      const simulatedEvent = new MouseEvent("mouseup", {
-          bubbles: true,
-          cancelable: true,
-          clientX: e.changedTouches[0].clientX,
-          clientY: e.changedTouches[0].clientY
-      });
-      canvasElement.dispatchEvent(simulatedEvent);
-  }, false);
+  // canvasElement.addEventListener("touchend", (e) => {
+  //     const simulatedEvent = new MouseEvent("mouseup", {
+  //         bubbles: true,
+  //         cancelable: true,
+  //         clientX: e.changedTouches[0].clientX,
+  //         clientY: e.changedTouches[0].clientY
+  //     });
+  //     canvasElement.dispatchEvent(simulatedEvent);
+  // }, false);
+
+// Touchinput mit Scroll-Unterdrückung
+const canvasElement = document.getElementById("graphDiv");
+
+canvasElement.addEventListener("touchstart", (e) => {
+    const touch = e.touches[0];
+    const rect = canvasElement.getBoundingClientRect();
+    const x = touch.clientX - rect.left;
+    const y = touch.clientY - rect.top;
+
+    // Prüfen, ob eine Node getroffen wurde
+    const touchedNode = graph.getNodeOnPos(x, y);
+
+    if (touchedNode) {
+        console.log("Node getroffen:", touchedNode.title);
+        e.preventDefault(); // Unterdrücke das Scrollen
+    }
+    
+    // Simuliere den mousedown-Event für LiteGraph
+    const simulatedEvent = new MouseEvent("mousedown", {
+        bubbles: true,
+        cancelable: true,
+        clientX: touch.clientX,
+        clientY: touch.clientY,
+    });
+    canvasElement.dispatchEvent(simulatedEvent);
+}, false);
+
+canvasElement.addEventListener("touchmove", (e) => {
+    const touch = e.touches[0];
+    const rect = canvasElement.getBoundingClientRect();
+    const x = touch.clientX - rect.left;
+    const y = touch.clientY - rect.top;
+
+    // Prüfen, ob eine Node getroffen wurde
+    const movedNode = graph.getNodeOnPos(x, y);
+
+    if (movedNode) {
+        console.log("Node wird bewegt:", movedNode.title);
+        e.preventDefault(); // Unterdrücke das Scrollen
+    }
+    
+    // Simuliere den mousemove-Event für LiteGraph
+    const simulatedEvent = new MouseEvent("mousemove", {
+        bubbles: true,
+        cancelable: true,
+        clientX: touch.clientX,
+        clientY: touch.clientY,
+    });
+    canvasElement.dispatchEvent(simulatedEvent);
+}, false);
+
+canvasElement.addEventListener("touchend", (e) => {
+    const simulatedEvent = new MouseEvent("mouseup", {
+        bubbles: true,
+        cancelable: true,
+        clientX: e.changedTouches[0].clientX,
+        clientY: e.changedTouches[0].clientY,
+    });
+    canvasElement.dispatchEvent(simulatedEvent);
+}, false);
+
+
+
 
   // Testen von getNodeOnPos bei Klick auf das Canvas
   document.getElementById("graphDiv").addEventListener("click", (e) => {
@@ -244,8 +309,8 @@ TextManipulationLogic.forEach((nodeDefinition) => {
   }
 });
 
-console.log(LiteGraph.VERSION); // Gibt die Version aus
-console.log(typeof graph.getNodeOnPos); // Sollte "function" ausgeben
+//console.log(LiteGraph.VERSION); // Gibt die Version aus
+//console.log(typeof graph.getNodeOnPos); // Sollte "function" ausgeben
 
    // Beispielsetups laden
 
@@ -307,3 +372,4 @@ export default function define(runtime, observer) {
   main.variable(observer("LiteGraph")).define("LiteGraph", ["require"], _LiteGraph);
   return main;
 }
+//Test
