@@ -189,43 +189,6 @@ TextManipulationLogic.forEach((nodeDefinition) => {
   canvas.allow_dragcanvas = false; // Prevent dragging the canvas
   canvas.allow_zoom = false; // Prevent zooming in/out
 
-  // Touchinput 
-
-  // const canvasElement = document.getElementById("graphDiv");
-
-  // canvasElement.addEventListener("touchstart", (e) => {
-     
-  //   const touch = e.touches[0];
-    
-  //     const simulatedEvent = new MouseEvent("mousedown", {
-  //         bubbles: true,
-  //         cancelable: true,
-  //         clientX: touch.clientX,
-  //         clientY: touch.clientY
-  //     });
-  //     canvasElement.dispatchEvent(simulatedEvent);
-  // }, false);
-
-  // canvasElement.addEventListener("touchmove", (e) => {
-  //     const touch = e.touches[0];
-  //     const simulatedEvent = new MouseEvent("mousemove", {
-  //         bubbles: true,
-  //         cancelable: true,
-  //         clientX: touch.clientX,
-  //         clientY: touch.clientY
-  //     });
-  //     canvasElement.dispatchEvent(simulatedEvent);
-  // }, false);
-
-  // canvasElement.addEventListener("touchend", (e) => {
-  //     const simulatedEvent = new MouseEvent("mouseup", {
-  //         bubbles: true,
-  //         cancelable: true,
-  //         clientX: e.changedTouches[0].clientX,
-  //         clientY: e.changedTouches[0].clientY
-  //     });
-  //     canvasElement.dispatchEvent(simulatedEvent);
-  // }, false);
 
 // Touchinput mit Scroll-Unterdrückung
 const canvasElement = document.getElementById("graphDiv");
@@ -292,20 +255,20 @@ canvasElement.addEventListener("touchend", (e) => {
 
 
   // Testen von getNodeOnPos bei Klick auf das Canvas
-  document.getElementById("graphDiv").addEventListener("click", (e) => {
-  // Hole die Mausposition relativ zum Canvas
-  const rect = e.target.getBoundingClientRect();
-  const x = e.clientX - rect.left;
-  const y = e.clientY - rect.top;
+  // document.getElementById("graphDiv").addEventListener("click", (e) => {
+  // // Hole die Mausposition relativ zum Canvas
+  // const rect = e.target.getBoundingClientRect();
+  // const x = e.clientX - rect.left;
+  // const y = e.clientY - rect.top;
 
-  // Prüfen, ob eine Node an dieser Position existiert
-  const clickedNode = graph.getNodeOnPos(x, y);
+  // // Prüfen, ob eine Node an dieser Position existiert
+  // const clickedNode = graph.getNodeOnPos(x, y);
 
-  if (clickedNode) {
-      console.log("Node getroffen:", clickedNode.title);
-  } else {
-      console.log("Keine Node getroffen. Leere Stelle im Canvas.");
-  }
+  // if (clickedNode) {
+  //     console.log("Node getroffen:", clickedNode.title);
+  // } else {
+  //     console.log("Keine Node getroffen. Leere Stelle im Canvas.");
+  // }
 });
 
 //console.log(LiteGraph.VERSION); // Gibt die Version aus
