@@ -99,6 +99,55 @@ function renderEquationToSVG(equation, targetElementId) {
 
 window.renderEquationToSVG = renderEquationToSVG;
 
+function renderWithMathJax(equation) {
+  try {
+      // Render die Gleichung in SVG
+      const svgNode = MathJax.tex2svg(equation);
+      const svg = svgNode.querySelector("svg");
+
+      // Konvertiere das SVG in eine Zeichenkette
+      const svgString = new XMLSerializer().serializeToString(svg);
+
+      // Erstelle ein neues Image-Objekt
+      const img = new Image();
+
+      // Setze die SVG-Daten als Quelle des Bildes
+      img.src = "data:image/svg+xml;base64," + btoa(svgString);
+
+      return img; // Gib das Image-Objekt zurück
+  } catch (err) {
+      console.error("Fehler beim Rendern der Gleichung mit MathJax:", err);
+      return null; // Gib null zurück, falls ein Fehler auftritt
+  }
+}
+
+// function renderWithMathJax(equation, ctx, x, y) {
+//   return new Promise((resolve, reject) => {
+//       MathJax.tex2svgPromise(equation).then((svgNode) => {
+//           // Extrahiere das SVG-Element
+//           const svg = svgNode.querySelector("svg");
+//           const svgString = new XMLSerializer().serializeToString(svg);
+
+//           // Erstelle ein Image-Objekt
+//           const img = new Image();
+
+//           img.onload = () => {
+//               resolve(img); // Gibt das Bild zurück, wenn es geladen ist
+//           };
+
+//           img.onerror = (err) => {
+//               reject(err); // Fehlerbehandlung
+//           };
+
+//           // Setze die Bildquelle
+//           img.src = "data:image/svg+xml;base64," + btoa(svgString);
+//       }).catch(reject);
+//   });
+// }
+
+window.renderWithMathJax = renderWithMathJax;
+
+
 // Beispiel mit MathJS
 function convertToLatex(expression) {
   try {
@@ -293,21 +342,21 @@ canvasElement.addEventListener("touchend", (e) => {
 
 
   // Testen von getNodeOnPos bei Klick auf das Canvas
-  document.getElementById("graphDiv").addEventListener("click", (e) => {
-  // Hole die Mausposition relativ zum Canvas
-  const rect = e.target.getBoundingClientRect();
-  const x = e.clientX - rect.left;
-  const y = e.clientY - rect.top;
+  // document.getElementById("graphDiv").addEventListener("click", (e) => {
+  // // Hole die Mausposition relativ zum Canvas
+  // const rect = e.target.getBoundingClientRect();
+  // const x = e.clientX - rect.left;
+  // const y = e.clientY - rect.top;
 
-  // Prüfen, ob eine Node an dieser Position existiert
-  const clickedNode = graph.getNodeOnPos(x, y);
+  // // Prüfen, ob eine Node an dieser Position existiert
+  // const clickedNode = graph.getNodeOnPos(x, y);
 
-  if (clickedNode) {
-      console.log("Node getroffen:", clickedNode.title);
-  } else {
-      console.log("Keine Node getroffen. Leere Stelle im Canvas.");
-  }
-});
+  // if (clickedNode) {
+  //     console.log("Node getroffen:", clickedNode.title);
+  // } else {
+  //     console.log("Keine Node getroffen. Leere Stelle im Canvas.");
+  // }
+//});
 
 //console.log(LiteGraph.VERSION); // Gibt die Version aus
 //console.log(typeof graph.getNodeOnPos); // Sollte "function" ausgeben
