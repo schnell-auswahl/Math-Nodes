@@ -2,7 +2,7 @@
 export function _CustomTimeNode() { return (
   class CustomTimeNode {
     constructor() {
-      this.color = "#0070AE";
+      this.color = srcNodesColor;
       this.bgcolor = bgColor2;
       this.addOutput("in ms", "object");
       this.addOutput("in sec", "object");

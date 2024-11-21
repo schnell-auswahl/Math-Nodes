@@ -1,53 +1,300 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LiteGraph Example with KaTeX</title>
-
-    <!-- Einbinden der KaTeX CSS-Datei, um mathematische Ausdrücke korrekt zu stylen -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.13.11/dist/katex.min.css">
+<!DOCTYPE HTML>
+<!--
+	Forty by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+	<head>
+		<title>Math Nodes</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="assets/css/main.css" />
+		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
+		  <!-- Einbinden der KaTeX CSS-Datei, um mathematische Ausdrücke korrekt zu stylen -->
+		  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.13.11/dist/katex.min.css">
     
-    <!-- Einbinden der KaTeX JavaScript-Datei, die für das Rendern von mathematischen Ausdrücken verantwortlich ist -->
-    <script src="https://cdn.jsdelivr.net/npm/katex@0.13.11/dist/katex.min.js"></script>
+		  <!-- Einbinden der KaTeX JavaScript-Datei, die für das Rendern von mathematischen Ausdrücken verantwortlich ist -->
+		  <script src="https://cdn.jsdelivr.net/npm/katex@0.13.11/dist/katex.min.js"></script>
+	  
+		  <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/10.2.0/math.min.js"></script>
+	  
+		  <!-- Mathjax als KAtex Alternative -->
+		  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
+	  
+		  <!-- Stile für den LiteGraph Inspector (kann angepasst werden) -->
+		  <link rel="stylesheet" type="text/css" href="./inspector.css">
+	</head>
+	<body class="is-preload">
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/10.2.0/math.min.js"></script>
+		<!-- Wrapper -->
+			<div id="wrapper">
 
-    <!-- Mathjax als KAtex Alternative -->
-    <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
+				<!-- Header -->
+					<header id="header" class="alt">
+						<a href="index.html" class="logo"><strong>Math-Nodes</strong> <span>Nicolas Regel</span></a>
+						<nav>
+							<a href="#menu">Menu</a>
+						</nav>
+					</header>
 
-    <!-- Stile für den LiteGraph Inspector (kann angepasst werden) -->
-    <link rel="stylesheet" type="text/css" href="./inspector.css">
-    <!-- <style>
-        #graphDiv {
-            touch-action: none; /* Verhindert Scrollen und Pinch-to-Zoom */
-        }
-    </style> -->
-</head>
+				<!-- Menu -->
+					<nav id="menu">
+						<ul class="links">
+							<li><a href="landing.html">Wortmaschinen</a></li>
+							<li><a href="generic.html">Funktionenmaschinen</a></li>
+                            <li><a href="generic.html">Workshop 1</a></li>
+                            <li><a href="generic.html">Workshop 2</a></li>
+                            <li><a href="generic.html">Workshop 3</a></li>
+                            <li><a href="generic.html">Material</a></li>
+							<li><a href="elements.html">Anleitung</a></li>
+						</ul>
+						<ul class="actions stacked">
+							<li><a href="index.html" class="button primary fit">Startseite</a></li>
+						</ul>
+					</nav>
 
-<body>
+				<!-- Banner -->
+					<section id="banner" class="major">
+						<div class="inner">
+							<header class="major">
+								<h1>Math-Nodes</h1>
+							</header>
+							<div class="content">
+								<p>Spielerisch Lernen mit Funktionenmaschinen<br />
+								ein Projekt von Nicolas Regel</p>
+								<ul class="actions">
+									<li><a href="#litegraph" class="button next scrolly">Freies Experimentieren</a></li>
+								</ul>
+                                <ul class="actions">
+									<li><a href="#one" class="button next scrolly">Zu den Aufgaben</a></li>
+								</ul>
+							</div>
+						</div>
+					</section>
+					<!-- LiteGraph Canvas -->
+					<section id="litegraph">
+                        <div>
+                            <canvas id="graphDiv" height="800" style="position: relative;"></canvas>
+                        </div>
+                        <div id="litegraph-buttons">
+                            <!-- Buttons für Save und Load -->
+                            <button id="saveGraphButton" onclick="saveGraphToFile()">Save Graph</button>
+                            <button id="loadGraphButton" onclick="loadGraphFromFile()">Load Graph</button>
+                        </div>
+                    </section>
 
-    <!-- Dies ist das HTML-Canvas, das für das Zeichnen des LiteGraph verwendet wird -->
-    <div>
-        <canvas id="graphDiv" width="1400" height="800" style="position: relative;"></canvas>
-    </div>
+					
 
-    <!-- Einbinden der lokal gespeicherten LiteGraph.js Datei -->
-    <script src="./litegraph.js"></script>
+				<!-- Main -->
+					<div id="main">
 
-    <!-- Hauptskript, das das Projekt startet und die KaTeX-Integration vorbereitet -->
-    <script type="module">
+						<!-- One -->
+							<section id="one" class="tiles">
+								<article>
+									<span class="image">
+										<img src="images/pic01.jpg" alt="" />
+									</span>
+									<header class="major">
+										<h3><a href="landing.html" class="link">Wortmaschinen</a></h3>
+										<p>Hier kannst du frei mit den Wortmaschinen experimentieren</p>
+									</header>
+								</article>
+								<article>
+									<span class="image">
+										<img src="images/pic02.jpg" alt="" />
+									</span>
+									<header class="major">
+										<h3><a href="landing.html" class="link">Funktionenmaschinen</a></h3>
+										<p>Hier kannst du frei mit den Funktionenmaschinen experimentieren</p>
+									</header>
+								</article>
+								<article>
+									<span class="image">
+										<img src="images/pic03.jpg" alt="" />
+									</span>
+									<header class="major">
+										<h3><a href="landing.html" class="link">Workshop 1</a></h3>
+										<p>Verschlüsseln lernen mit Wortmaschinen</p>
+									</header>
+								</article>
+								<article>
+									<span class="image">
+										<img src="images/pic04.jpg" alt="" />
+									</span>
+									<header class="major">
+										<h3><a href="landing.html" class="link">Workshop 2</a></h3>
+										<p>Verknüpfen und Verketten lernen mit den Funktionenmaschinen</p>
+									</header>
+								</article>
+								<article>
+									<span class="image">
+										<img src="images/pic05.jpg" alt="" />
+									</span>
+									<header class="major">
+										<h3><a href="landing.html" class="link">Workshop 3</a></h3>
+										<p>Mathematik hören: Funktionen hörbar machen mit den Funktionenmaschinen</p>
+									</header>
+								</article>
+								<article>
+									<span class="image">
+										<img src="images/pic06.jpg" alt="" />
+									</span>
+									<header class="major">
+										<h3><a href="landing.html" class="link">Funktionenmaschinen analog</a></h3>
+										<p>Unterrichtsmaterial zum Herunterladen</p>
+									</header>
+								</article>
+							</section>
 
-        // Importiere das Hauptmodul aus der Datei "index.js", das den LiteGraph aufbaut
-        import define from "./index.js";
+						<!-- Two -->
+							<section id="two">
+								<div class="inner">
+									<header class="major">
+										<h2>Anleitung</h2>
+									</header>
+									<p>Hier findest du eine detailierte Anleitung zu allen Funktionen von Math-Nodes. </p>
+									<ul class="actions">
+										<li><a href="landing.html" class="button next">Zur Anleitung</a></li>
+									</ul>
+								</div>
+							</section>
 
-        // Importiere den Runtime und Inspector, um die Module auszuführen und zu überwachen
-        import { Runtime, Library, Inspector } from "./runtime.js";
+					</div>
 
-        // Initialisiere den Runtime und weise den Graphen dem Inspector zu
-        const runtime = new Runtime();
-        const main = runtime.module(define, Inspector.into(document.body));
+				<!-- Contact -->
+					<section id="contact">
+						<div class="inner">
+							
+							<section>
+								<section>
+									<div class="contact-method">
+										<span class="icon solid alt fa-envelope"></span>
+										<h3>Email</h3>
+										<a href="mailto:mailadresse@asdasd.de">mailadresse@asdasd.de</a>
+									</div>
+								</section>
+								<section>
+									<div class="contact-method">
+										<span class="icon solid alt fa-phone"></span>
+										<h3>Phone</h3>
+										<span>823469 239786234</span>
+									</div>
+								</section>
 
-    </script>
-</body>
+							</section>
+						</div>
+					</section>
+
+                  
+
+				<!-- Footer -->
+					<footer id="footer">
+						<div class="inner">
+							<ul class="icons">
+								<li><a href="#" class="icon brands alt fa-twitter"><span class="label">Twitter</span></a></li>
+								<li><a href="#" class="icon brands alt fa-facebook-f"><span class="label">Facebook</span></a></li>
+								<li><a href="#" class="icon brands alt fa-instagram"><span class="label">Instagram</span></a></li>
+								<li><a href="#" class="icon brands alt fa-github"><span class="label">GitHub</span></a></li>
+								<li><a href="#" class="icon brands alt fa-linkedin-in"><span class="label">LinkedIn</span></a></li>
+							</ul>
+							<ul class="copyright">
+								<li>&copy; Nicolas Regel 2024</li><li>Designtemplate: <a href="https://html5up.net">HTML5 UP</a></li>
+							</ul>
+						</div>
+					</footer>
+
+			</div>
+
+		<!-- Scripts -->
+			<script src="assets/js/jquery.min.js"></script>
+			<script src="assets/js/jquery.scrolly.min.js"></script>
+			<script src="assets/js/jquery.scrollex.min.js"></script>
+			<script src="assets/js/browser.min.js"></script>
+			<script src="assets/js/breakpoints.min.js"></script>
+			<script src="assets/js/util.js"></script>
+			<script src="assets/js/main.js"></script>
+
+			<script src="./Litegraph/litegraph.js"></script>
+			<script type="module">
+   				 import define from "./Litegraph/index.js";
+   				 import { Runtime, Library, Inspector } from "./Litegraph/runtime.js";
+
+			// Initialisiere den LiteGraph Runtime
+			const runtime = new Runtime();
+			const main = runtime.module(define, Inspector.into(document.body));
+			</script>
+				<!-- Dynamisches Resizing des Canvas -->
+			<script>
+				function adjustCanvasSize() {
+					const canvas = document.getElementById("graphDiv");
+					const minWidth = 1000;
+					const browserWidth = window.innerWidth;
+					const canvasWidth = Math.max(browserWidth, minWidth);
+
+					canvas.width = canvasWidth;
+				}
+
+				// Initial aufrufen
+				adjustCanvasSize();
+
+				// Event Listener für Fensteränderungen
+				window.addEventListener("resize", adjustCanvasSize);
+			</script>
+            <script>
+                // Funktion zum Speichern des Graphen in eine Datei
+                function saveGraphToFile() {
+                    const graphData = graph.serialize(); // graph ist dein LGraph-Objekt
+                    const dataStr = JSON.stringify(graphData);
+                    const blob = new Blob([dataStr], { type: "application/json" });
+                    const url = URL.createObjectURL(blob);
+            
+                    const a = document.createElement("a");
+                    a.href = url;
+                    a.download = "graph_config.json"; // Name der Datei
+                    a.click();
+                    URL.revokeObjectURL(url);
+                }
+            
+                // Funktion zum Laden des Graphen aus einer Datei
+                // Funktion zum Laden des Graphen aus einer Datei
+                function loadGraphFromFile() {
+                    const input = document.createElement("input");
+                    input.type = "file";
+                    input.accept = "application/json";
+
+                    input.addEventListener("change", function (event) {
+                    const file = event.target.files[0];
+                    if (file) {
+                        const reader = new FileReader();
+                        reader.onload = function (e) {
+                            try {
+                                // Parse JSON aus der Datei
+                                const json = JSON.parse(e.target.result);
+
+                                // Graph leeren
+                                graph.clear();
+
+                                // Graph mit den neuen Daten konfigurieren
+                                graph.configure(json);
+
+                                // Das Canvas neu zeichnen
+                                graph.start();
+                                console.log("Graph erfolgreich geladen und aktualisiert!");
+                            } catch (error) {
+                                console.error("Fehler beim Laden des Graphen:", error);
+                                alert("Die Datei konnte nicht geladen werden. Bitte stelle sicher, dass es sich um eine gültige Graph-Konfigurationsdatei handelt.");
+                            }
+                        };
+                        reader.readAsText(file);
+                    }
+                    });
+
+                 input.click();
+                }
+            </script>
+
+
+
+	</body>
 </html>

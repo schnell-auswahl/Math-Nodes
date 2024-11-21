@@ -31,8 +31,8 @@ export function _FunctionNode() {
         // Widget für die Eingabe der Funktionsgleichung
         this.code_widget = this.addWidget(
           "text",               // Widgettyp (Textfeld)
-          "",                   // Keine Initialisierung für den Wert
-          "Funktionsgleichung",  // Beschreibung für das Widget
+          "Fkt:",                   // Keine Initialisierung für den Wert
+          "",  // Beschreibung für das Widget
           (v, canvas, node) => { // Callback-Funktion für Eingabeänderungen
             // Funktionsname und unabhängige Variable extrahieren
             var splitted = v.split("(");
