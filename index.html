@@ -96,7 +96,7 @@
 										<img src="images/pic01.jpg" alt="" />
 									</span>
 									<header class="major">
-										<h3><a href="landing.html" class="link">Wortmaschinen</a></h3>
+										<h3><a href="Wortmaschinen.html" class="link">Wortmaschinen</a></h3>
 										<p>Hier kannst du frei mit den Wortmaschinen experimentieren</p>
 									</header>
 								</article>
@@ -225,74 +225,7 @@
 			const main = runtime.module(define, Inspector.into(document.body));
 			</script>
 				<!-- Dynamisches Resizing des Canvas -->
-			<script>
-				function adjustCanvasSize() {
-					const canvas = document.getElementById("graphDiv");
-					const minWidth = 1000;
-					const browserWidth = window.innerWidth;
-					const canvasWidth = Math.max(browserWidth, minWidth);
-
-					canvas.width = canvasWidth;
-				}
-
-				// Initial aufrufen
-				adjustCanvasSize();
-
-				// Event Listener für Fensteränderungen
-				window.addEventListener("resize", adjustCanvasSize);
-			</script>
-            <script>
-                // Funktion zum Speichern des Graphen in eine Datei
-                function saveGraphToFile() {
-                    const graphData = graph.serialize(); // graph ist dein LGraph-Objekt
-                    const dataStr = JSON.stringify(graphData);
-                    const blob = new Blob([dataStr], { type: "application/json" });
-                    const url = URL.createObjectURL(blob);
-            
-                    const a = document.createElement("a");
-                    a.href = url;
-                    a.download = "graph_config.json"; // Name der Datei
-                    a.click();
-                    URL.revokeObjectURL(url);
-                }
-            
-                // Funktion zum Laden des Graphen aus einer Datei
-                // Funktion zum Laden des Graphen aus einer Datei
-                function loadGraphFromFile() {
-                    const input = document.createElement("input");
-                    input.type = "file";
-                    input.accept = "application/json";
-
-                    input.addEventListener("change", function (event) {
-                    const file = event.target.files[0];
-                    if (file) {
-                        const reader = new FileReader();
-                        reader.onload = function (e) {
-                            try {
-                                // Parse JSON aus der Datei
-                                const json = JSON.parse(e.target.result);
-
-                                // Graph leeren
-                                graph.clear();
-
-                                // Graph mit den neuen Daten konfigurieren
-                                graph.configure(json);
-
-                                // Das Canvas neu zeichnen
-                                graph.start();
-                                console.log("Graph erfolgreich geladen und aktualisiert!");
-                            } catch (error) {
-                                console.error("Fehler beim Laden des Graphen:", error);
-                                alert("Die Datei konnte nicht geladen werden. Bitte stelle sicher, dass es sich um eine gültige Graph-Konfigurationsdatei handelt.");
-                            }
-                        };
-                        reader.readAsText(file);
-                    }
-                    });
-
-                 input.click();
-                }
-            </script>
+			<script src="assets/js/scripts.js"></script>
 
 
 

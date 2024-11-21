@@ -10,17 +10,10 @@ export function _AudioNode() {
             this.color = fbNodesColor;
             this.bgcolor = bgColor1; // Hintergrundfarbe
             this.context = new (window.AudioContext || window.webkitAudioContext)();
+            this.context.suspend(); // Pausiere den AudioContext direkt nach der Erstellung
             this.isPlaying = false;
 
-            // Lade den AudioWorkletProcessor
-            this.context.audioWorklet.addModule('AudioProcessor.js').then(() => {
-                //console.log("AudioNode: AudioProcessor erfolgreich geladen");
-                this.workletNode = new AudioWorkletNode(this.context, 'audio-processor');
-                this.workletNode.connect(this.context.destination);
-                //console.log("AudioNode: WorkletNode mit Audioausgang verbunden");
-            }).catch((error) => {
-                //console.error("AudioNode: Fehler beim Laden des AudioWorklet", error);
-            });
+            
 
             // Füge den Eingabekanal für die Funktion hinzu
             this.addInput("function", "object");
@@ -35,6 +28,20 @@ export function _AudioNode() {
             });
 
             this.title = "Audio";
+
+           
+                // Lade den AudioWorkletProcessor
+              this.context.audioWorklet.addModule('AudioProcessor.js').then(() => {
+              //console.log("AudioNode: AudioProcessor erfolgreich geladen");
+              this.workletNode = new AudioWorkletNode(this.context, 'audio-processor');
+              this.workletNode.connect(this.context.destination);
+              this.context.suspend();
+              //console.log("AudioNode: WorkletNode mit Audioausgang verbunden");
+          }).catch((error) => {
+              //console.error("AudioNode: Fehler beim Laden des AudioWorklet", error);
+          });
+               
+          
         }
 
         // Funktion zum Verarbeiten der Eingabedaten
@@ -61,6 +68,8 @@ export function _AudioNode() {
                         //console.error("AudioNode: Fehler beim Erstellen der Funktion", error);
                     }
                 }
+            } else {
+                this.stop();
             }
         }
 
@@ -76,6 +85,8 @@ export function _AudioNode() {
 
         // Startet die Audiowiedergabe und ändert die Widget-Farbe zu Orange
         start() {
+           
+
             this.context.resume().then(() => {
                 this.isPlaying = true;
                 this.bgcolor = fbNodesColor; // Orange, wenn Wiedergabe aktiv
