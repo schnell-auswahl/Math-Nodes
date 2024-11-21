@@ -227,19 +227,8 @@ TextManipulationLogic.forEach((nodeDefinition) => {
   var graph = new LiteGraph.LGraph();
   var canvas = new LiteGraph.LGraphCanvas("#graphDiv", graph);
 
-    // Hier fügst du den Code ein
-    //const bgimg = new Image();
-    //bgimg.src = "../../images/banner.jpg"; // Pfad zum neuen Bild
-    //bgimg.onload = function () {
-      //console.log("Bild erfolgreich geladen:", bgimg.src);
         canvas.background_image = null; // Hintergrundbild setzen
         canvas.clear_background_color =canvasbgColor;
-        //canvas.draw(true, true);      // Neu zeichnen
-    //};
-  //   img.onerror = function () {
-  //     console.error("Fehler: Bild konnte nicht geladen werden. Überprüfe den Pfad:", img.src);
-  // };
-
 
 
   // Mach den Graph global verfügbar
@@ -371,5 +360,5 @@ export default function define(runtime, observer) {
   
   main.variable(observer("graph")).define("graph", ["graphCell","LiteGraph","FunctionNode","CustNumberNode","uvNode","CustWatchNodeString","CustWatchNodeValue","CustomGraphicsPlot","CustomTimeNode","OperationNode","AudioNode","TextInputNode","TextDisplayNode","TextManipulationNodes","mutable results"], _graph);
   main.variable(observer("LiteGraph")).define("LiteGraph", ["require"], _LiteGraph);
-  return main;
+ return main;
 }

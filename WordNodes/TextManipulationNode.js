@@ -7,6 +7,8 @@ export function createTextManipulationNode({ title, description, logic }) {
             this.size = [220, 100];
             this.resizable = false;
             this.description = description; // Beschreibung für die Node
+            this.color = opNodesColor;
+            this.bgcolor = bgColor2;
         }
 
         onExecute() {
