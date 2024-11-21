@@ -5,7 +5,7 @@ export function _uvNode() {
     class uvNode {
       constructor() {
 
-        this.color = "#0070AE";
+        this.color = srcNodesColor;
         this.bgcolor = bgColor2;
         this.addOutput("value", "object");
         this.properties = { value: 1.0, rightSide: "x"};

@@ -96,8 +96,8 @@ export function _CustWatchNodeString() {
 
       
         
-        console.log("this.renderedImage:", this.renderedImage);
-        console.log("Instance of Image:", this.renderedImage instanceof Image);
+        //console.log("this.renderedImage:", this.renderedImage);
+        //console.log("Instance of Image:", this.renderedImage instanceof Image);
         //ctx.fillStyle = "#000FF0";
         //ctx.fillRect(0, 0, this.size[0], this.size[1]);
         ctx.drawImage(this.renderedImage, this.offsetX, this.offsetY);

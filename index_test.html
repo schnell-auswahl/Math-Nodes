@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LiteGraph Example with KaTeX</title>
+
+    <!-- Einbinden der KaTeX CSS-Datei, um mathematische Ausdrücke korrekt zu stylen -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.13.11/dist/katex.min.css">
+    
+    <!-- Einbinden der KaTeX JavaScript-Datei, die für das Rendern von mathematischen Ausdrücken verantwortlich ist -->
+    <script src="https://cdn.jsdelivr.net/npm/katex@0.13.11/dist/katex.min.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/10.2.0/math.min.js"></script>
+
+    <!-- Mathjax als KAtex Alternative -->
+    <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
+
+    <!-- Stile für den LiteGraph Inspector (kann angepasst werden) -->
+    <link rel="stylesheet" type="text/css" href="./inspector.css">
+    <!-- <style>
+        #graphDiv {
+            touch-action: none; /* Verhindert Scrollen und Pinch-to-Zoom */
+        }
+    </style> -->
+</head>
+
+<body>
+
+    <!-- Dies ist das HTML-Canvas, das für das Zeichnen des LiteGraph verwendet wird -->
+    <div>
+        <canvas id="graphDiv" width="1400" height="800" style="position: relative;"></canvas>
+    </div>
+
+    <!-- Einbinden der lokal gespeicherten LiteGraph.js Datei -->
+    <script src="./Litegraph/litegraph.js"></script>
+
+    <!-- Hauptskript, das das Projekt startet und die KaTeX-Integration vorbereitet -->
+    <script type="module">
+
+        // Importiere das Hauptmodul aus der Datei "index.js", das den LiteGraph aufbaut
+        import define from "./Litegraph/index.js";
+
+        // Importiere den Runtime und Inspector, um die Module auszuführen und zu überwachen
+        import { Runtime, Library, Inspector } from "./Litegraph/runtime.js";
+
+        // Initialisiere den Runtime und weise den Graphen dem Inspector zu
+        const runtime = new Runtime();
+        const main = runtime.module(define, Inspector.into(document.body));
+
+    </script>
+</body>
+</html>

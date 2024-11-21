@@ -1,15 +1,29 @@
 // Farben
 
-window.fbNodesColor = "#A84008"; //Orange
-window.srcNodesColor = "#0079B5"; //Blau
-window.opNodesColor = "#43715D"; //Grün
-window.paramNodesColor = "#BFB700"; //Senfgelb
+// window.fbNodesColor = "#A84008"; //Orange
+// window.srcNodesColor = "#0079B5"; //Blau
+// window.opNodesColor = "#43715D"; //Grün
+// window.paramNodesColor = "#BFB700"; //Senfgelb
+// window.bgColor1 = "#FFFFFF"; //Weiß
+// window.bgColor2 = "#959EAA"; //Grau
+// window.outLabelsColor = "#A84008"; //Orange
+// window.inLabelsColor = "#43715D"; //Grün
+// window.paramLabelsColor = "#BFB700"; //Senfgelb
+// window.textAnzeigeColor = "#FFAF2F" //Gelb
+
+window.fbNodesColor = "#D0AF8B"; //Orange
+window.srcNodesColor = "#879BCE"; //Blau
+window.opNodesColor = "#88B19B"; //Grün
+window.paramNodesColor = "#D1AE8B"; //Senfgelb
 window.bgColor1 = "#FFFFFF"; //Weiß
 window.bgColor2 = "#959EAA"; //Grau
-window.outLabelsColor = "#A84008"; //Orange
-window.inLabelsColor = "#43715D"; //Grün
-window.paramLabelsColor = "#BFB700"; //Senfgelb
-window.textAnzeigeColor = "#FFAF2F" //Gelb
+window.outLabelsColor = fbNodesColor; //Orange
+window.inLabelsColor = opNodesColor; //Grün
+window.paramLabelsColor = paramNodesColor; //Senfgelb
+window.textAnzeigeColor = paramNodesColor; //Gelb
+window.canvasbgColor = "#232744"; //Dunkelblau 
+
+
 
 //Parameter der In und Output Labels:
 window.labelInputPosX = 10;
@@ -18,12 +32,14 @@ window.labelHeight = 14; // Höhe des Trichters (von Basis bis Spitze)
 
 
 
-function _1(md){return(
-md`# LiteGraph Example 1.1
-Here is a simple [Litegraph.js@0.7.8](https://github.com/jagenjo/litegraph.js) example demonstrating Observable integration and how to create a custom operation (multiplication).
+// function _1(md){return(
+// md`# LiteGraph Example 1.1
+// Here is a simple [Litegraph.js@0.7.8](https://github.com/jagenjo/litegraph.js) example demonstrating Observable integration and how to create a custom operation (multiplication).
 
-Graph values will update in real time.  Tweaking the numbers in either \`Const Number\` node will change results in \`Watch\`. You can also add/remove nodes using the right-click context menu to create more complex behaviours.`
-)}
+// Graph values will update in real time.  Tweaking the numbers in either \`Const Number\` node will change results in \`Watch\`. You can also add/remove nodes using the right-click context menu to create more complex behaviours.`
+// )}
+
+function _1(){return null;}
 
 function _2(html){return(
 html`<link href="https://unpkg.com/litegraph.js@0.7.8/css/litegraph.css" rel="stylesheet" />`
@@ -67,19 +83,19 @@ import { _OperationNode } from './SynthNodes/CustOperationNode.js';
 import { _AudioNode } from './SynthNodes/AudioNode.js';
 
 //Wortmaschinen
-import { _TextInputNode } from './WordNodes/TextInputNode.js';
-import { _TextDisplayNode } from './WordNodes/TextDisplayNode.js';
+import { _TextInputNode } from '../WordNodes/TextInputNode.js';
+import { _TextDisplayNode } from '../WordNodes/TextDisplayNode.js';
 //import { _AlphabetCountdownNode } from './WordNodes/AlphabetCountdownNode.js';
-import { TextManipulationLogic } from './WordNodes/TextManipulationLogic.js';
-import { createTextManipulationNode } from './WordNodes/TextManipulationNode.js';
+import { TextManipulationLogic } from '../WordNodes/TextManipulationLogic.js';
+import { createTextManipulationNode } from '../WordNodes/TextManipulationNode.js';
 
 
 
 
 //Testsetups
-import { nodeSetupSynth1 } from './TestSetups/nodeSetupSynth1.js';
-import { nodeSetupWords1 } from './TestSetups/nodeSetupWords1.js';
-import { nodeSetupWords2 } from './TestSetups/nodeSetupWords2.js';
+import { nodeSetupSynth1 } from '../TestSetups/nodeSetupSynth1.js';
+import { nodeSetupWords1 } from '../TestSetups/nodeSetupWords1.js';
+import { nodeSetupWords2 } from '../TestSetups/nodeSetupWords2.js';
 
 
 function renderEquationToSVG(equation, targetElementId) {
@@ -121,29 +137,7 @@ function renderWithMathJax(equation) {
   }
 }
 
-// function renderWithMathJax(equation, ctx, x, y) {
-//   return new Promise((resolve, reject) => {
-//       MathJax.tex2svgPromise(equation).then((svgNode) => {
-//           // Extrahiere das SVG-Element
-//           const svg = svgNode.querySelector("svg");
-//           const svgString = new XMLSerializer().serializeToString(svg);
 
-//           // Erstelle ein Image-Objekt
-//           const img = new Image();
-
-//           img.onload = () => {
-//               resolve(img); // Gibt das Bild zurück, wenn es geladen ist
-//           };
-
-//           img.onerror = (err) => {
-//               reject(err); // Fehlerbehandlung
-//           };
-
-//           // Setze die Bildquelle
-//           img.src = "data:image/svg+xml;base64," + btoa(svgString);
-//       }).catch(reject);
-//   });
-// }
 
 window.renderWithMathJax = renderWithMathJax;
 
@@ -232,6 +226,24 @@ TextManipulationLogic.forEach((nodeDefinition) => {
   
   var graph = new LiteGraph.LGraph();
   var canvas = new LiteGraph.LGraphCanvas("#graphDiv", graph);
+
+    // Hier fügst du den Code ein
+    //const bgimg = new Image();
+    //bgimg.src = "../../images/banner.jpg"; // Pfad zum neuen Bild
+    //bgimg.onload = function () {
+      //console.log("Bild erfolgreich geladen:", bgimg.src);
+        canvas.background_image = null; // Hintergrundbild setzen
+        canvas.clear_background_color =canvasbgColor;
+        //canvas.draw(true, true);      // Neu zeichnen
+    //};
+  //   img.onerror = function () {
+  //     console.error("Fehler: Bild konnte nicht geladen werden. Überprüfe den Pfad:", img.src);
+  // };
+
+
+
+  // Mach den Graph global verfügbar
+  window.graph = graph;
   
   // Search box triggers "Blocked autofocusing on a <input> element in a cross-origin subframe."
   canvas.allow_searchbox = false;   
@@ -339,28 +351,6 @@ canvasElement.addEventListener("touchend", (e) => {
 }, false);
 
 
-
-
-  // Testen von getNodeOnPos bei Klick auf das Canvas
-  // document.getElementById("graphDiv").addEventListener("click", (e) => {
-  // // Hole die Mausposition relativ zum Canvas
-  // const rect = e.target.getBoundingClientRect();
-  // const x = e.clientX - rect.left;
-  // const y = e.clientY - rect.top;
-
-  // // Prüfen, ob eine Node an dieser Position existiert
-  // const clickedNode = graph.getNodeOnPos(x, y);
-
-  // if (clickedNode) {
-  //     console.log("Node getroffen:", clickedNode.title);
-  // } else {
-  //     console.log("Keine Node getroffen. Leere Stelle im Canvas.");
-  // }
-//});
-
-//console.log(LiteGraph.VERSION); // Gibt die Version aus
-//console.log(typeof graph.getNodeOnPos); // Sollte "function" ausgeben
-
    // Beispielsetups laden
 
    nodeSetupSynth1(graph, LiteGraph);
@@ -387,13 +377,13 @@ function _LiteGraph(require){
 
 export default function define(runtime, observer) {
   const main = runtime.module();
-  main.variable(observer()).define(["md"], _1);
+  //main.variable(observer()).define(["md"], _1);
   main.variable(observer()).define(["html"], _2);
   main.variable(observer("graphCell")).define("graphCell", ["html"], _graphCell);
   main.define("initial results", _results);
   main.variable(observer("mutable results")).define("mutable results", ["Mutable", "initial results"], (M, _) => new M(_));
   main.variable(observer("results")).define("results", ["mutable results"], _ => _.generator);
-  main.variable(observer()).define(["md"], _5);
+  //main.variable(observer()).define(["md"], _5);
 
   main.variable(observer("FunctionNode")).define("FunctionNode", _FunctionNode);
   main.variable(observer("CustNumberNode")).define("CustNumberNode", _CustNumberNode);
@@ -421,4 +411,3 @@ export default function define(runtime, observer) {
   main.variable(observer("LiteGraph")).define("LiteGraph", ["require"], _LiteGraph);
   return main;
 }
-//Test
