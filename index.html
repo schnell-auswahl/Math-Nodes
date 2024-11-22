@@ -24,6 +24,10 @@
 	  
 		  <!-- Stile für den LiteGraph Inspector (kann angepasst werden) -->
 		  <link rel="stylesheet" type="text/css" href="./inspector.css">
+		  <link rel="stylesheet" type="text/css" href="./Litegraph/litegraph.css">
+		<script type="text/javascript" src="./Litegraph/litegraph.js"></script>
+		<script type="module" src="./Litegraph/createGraph.js"; ></script>
+
 	</head>
 	<body class="is-preload">
 
@@ -73,17 +77,18 @@
 						</div>
 					</section>
 					<!-- LiteGraph Canvas -->
-					<section id="litegraph">
-                        <div>
-                            <canvas id="graphDiv" height="800" style="position: relative;"></canvas>
-                        </div>
-                        <div id="litegraph-buttons">
-                            <!-- Buttons für Save und Load -->
-                            <button id="saveGraphButton" onclick="saveGraphToFile()">Save Graph</button>
-                            <button id="loadGraphButton" onclick="loadGraphFromFile()">Load Graph</button>
-                        </div>
-                    </section>
-
+					<section id="litegraph2">
+						<canvas id="graphCanvas1" width="1024" height="720" style="border: 1px solid;"></canvas>
+						<canvas id="graphCanvas2" width="1024" height="720" style="border: 1px solid;"></canvas>
+						<canvas id="graphCanvas3" width="1024" height="720" style="border: 1px solid;"></canvas>
+						<script type="module">
+							import { createGraphInstance } from './Litegraph/createGraph.js';
+							// Erstelle die Graphen für beide Canvas-Elemente
+							createGraphInstance("graphCanvas1");
+							createGraphInstance("graphCanvas2");
+							createGraphInstance("graphCanvas3");
+						</script>
+					</section>
 					
 
 				<!-- Main -->
@@ -215,17 +220,6 @@
 			<script src="assets/js/util.js"></script>
 			<script src="assets/js/main.js"></script>
 
-			<script src="./Litegraph/litegraph.js"></script>
-			<script type="module">
-   				 import define from "./Litegraph/index.js";
-   				 import { Runtime, Library, Inspector } from "./Litegraph/runtime.js";
-
-			// Initialisiere den LiteGraph Runtime
-			const runtime = new Runtime();
-			const main = runtime.module(define, Inspector.into(document.body));
-			</script>
-				<!-- Dynamisches Resizing des Canvas -->
-			<script src="assets/js/scripts.js"></script>
 
 
 
