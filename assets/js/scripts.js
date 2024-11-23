@@ -8,10 +8,20 @@ function adjustCanvasSize(canvasId) {
 
     const minWidth = 1000; // Mindestbreite des Canvas
     const browserWidth = window.innerWidth; // Breite des Browsers
+    const parent = canvas.parentElement;
+    const forceheight = parseFloat(canvas.getAttribute('forceheight')); 
+
+    canvas.width = parent.clientWidth;
+    if (forceheight) {
+        canvas.height = forceheight;
+    } else {
+    canvas.height = parent.clientHeight;
+    }
+
 
     // Berechne die neue Breite, mindestens jedoch die Mindestbreite
-    const canvasWidth = Math.max(browserWidth, minWidth); // 80% der Browserbreite oder mindestens 1000px
-    canvas.width = canvasWidth;
+    const canvasWidth = //Math.max(browserWidth, minWidth); // 80% der Browserbreite oder mindestens 1000px
+    //canvas.width = canvasWidth * widthPart;
 
     // Optional: Höhe setzen (z. B. 16:9-Seitenverhältnis)
     //const aspectRatio = 16 / 9;
@@ -38,12 +48,6 @@ document.addEventListener("DOMContentLoaded", () => {
     // Event Listener für Fensteränderungen hinzufügen
     window.addEventListener("resize", adjustAllCanvasSizes);
 });
-
-
-
-
-// Event Listener für Fensteränderungen
-window.addEventListener("resize", adjustCanvasSize);
 
 
 function saveGraphToFile(canvasId) {

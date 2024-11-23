@@ -11,7 +11,7 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 		<link rel="stylesheet" href="assets/css/main.css" />
 		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
-		  <!-- Einbinden der KaTeX CSS-Datei, um mathematische Ausdrücke korrekt zu stylen -->
+		  <!-- Ab hier brauchen wir alles für Litegraph -->
 		  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.13.11/dist/katex.min.css">
     
 		  <!-- Einbinden der KaTeX JavaScript-Datei, die für das Rendern von mathematischen Ausdrücken verantwortlich ist -->
@@ -77,10 +77,16 @@
 						</div>
 					</section>
 					<!-- LiteGraph Canvas -->
-					<section id="litegraph">
-						<canvas id="graphCanvas1" width="1024" height="720"  data-resize="true" data-config-path="Litegraph/configs/graphCanvas1.json"></canvas>
-						<canvas id="graphCanvas2" width="1024" height="720"  data-resize="true" data-config-path="Litegraph/configs/graphCanvas2.json"></canvas>
-						<canvas id="graphCanvas3" width="1024" height="720" ></canvas>
+					<section id="litegraph" >
+						<div id="graphstyle" style="height: 500px;">
+						<canvas id="graphCanvas1"  data-resize="true" data-config-path="Litegraph/configs/graphCanvas1.json"></canvas>
+						</div>
+						<div id="graphstyle" style="height: 500px;">
+						<canvas id="graphCanvas2" data-resize="true" data-config-path="Litegraph/configs/graphCanvas2.json"></canvas>
+						</div>
+						<div id="graphstyle" style="height: 500px;">
+						<canvas id="graphCanvas3" data-resize="true" ></canvas>
+						</div>
 						<script type="module">
 							import { createGraphInstance } from './Litegraph/createGraph.js';
 							// Erstelle die Graphen für beide Canvas-Elemente
@@ -107,7 +113,7 @@
 									</span>
 									<header class="major">
 										<h3><a href="Wortmaschinen.html" class="link">Wortmaschinen</a></h3>
-										<p>Hier kannst du frei mit den Wortmaschinen experimentieren</p>
+										<p>Hier lernst du wie die Wortmaschinen funktionieren und kannst dann du frei damit experimentieren</p>
 									</header>
 								</article>
 								<article>
@@ -116,7 +122,7 @@
 									</span>
 									<header class="major">
 										<h3><a href="landing.html" class="link">Funktionenmaschinen</a></h3>
-										<p>Hier kannst du frei mit den Funktionenmaschinen experimentieren</p>
+										<p>Hier lernst du wie die Funktionenmaschinen funktionieren und kannst dann du frei damit experimentieren</p>
 									</header>
 								</article>
 								<article>

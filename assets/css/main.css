@@ -2956,6 +2956,15 @@ input, select, textarea {
 					width: 100%;
 				}
 
+				.spotlights > section > .image canvas {
+					border-radius: 0;
+					display: block;
+					width: 100%;
+					height: 100%; /* Für Canvas-Inhalte wichtig */
+					aspect-ratio: 16 / 9; /* Beispiel: 16:9-Seitenverhältnis */
+					background-color: #333; /* Optional, falls kein Inhalt gezeichnet wird */
+				}
+
 				.spotlights > section > .image:before {
 					background: rgba(36, 41, 67, 0.9);
 					content: '';
@@ -3016,6 +3025,13 @@ input, select, textarea {
 				width: 40%;
 			}
 
+			
+			.spotlights > section > .image canvas {
+				width: 100%; /* Füllt den Bereich der Eltern-Div */
+				height: 100%;
+			}
+			
+
 			.spotlights > section > .content {
 				width: 60%;
 			}
@@ -3026,6 +3042,11 @@ input, select, textarea {
 
 			.spotlights > section > .image {
 				width: 45%;
+			}
+
+			.spotlights > section > .image canvas {
+				width: 100%; /* Füllt den Bereich der Eltern-Div */
+				height: 100%;
 			}
 
 			.spotlights > section > .content {
@@ -3044,6 +3065,11 @@ input, select, textarea {
 					width: 100%;
 				}
 
+				.spotlights > section > .image canvas {
+					width: 100%; /* Füllt den Bereich der Eltern-Div */
+					height: 100%;
+				}
+
 				.spotlights > section > .content {
 					padding: 4em 3em 2em 3em ;
 					width: 100%;
@@ -3058,6 +3084,109 @@ input, select, textarea {
 			}
 
 		}
+
+
+/* Spotlights-Canvas */
+
+	
+
+.spotlightscanv {
+    border-top: none;
+    background-color: #2e3450;
+}
+
+.spotlightscanv + * {
+    border-top: none;
+}
+
+.spotlightscanv > section {
+    display: flex;
+    flex-direction: row;
+    background-color: #2e3450;
+    padding: 2em 0;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.spotlightscanv > section > .canvas {
+    background-position: center center;
+    background-size: cover;
+    position: relative;
+    width: 30%; /* Standardbreite für Desktop */
+    min-width: 300px; /* Verhindert, dass die Canvas zu klein wird */
+    height: auto;
+}
+
+.spotlightscanv > section > .content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 70%;
+    padding: 1.5em 2em;
+    text-align: center;
+}
+
+.spotlightscanv > section > .content > .inner {
+    margin: 0 auto;
+    max-width: 100%;
+    width: 65em;
+}
+
+/* Abwechselndes Styling für jede zweite Sektion */
+.spotlightscanv > section:nth-child(2n) {
+    flex-direction: row-reverse;
+    background-color: #333856;
+}
+
+.spotlightscanv > section:nth-child(2n) > .content {
+    align-items: flex-end;
+}
+
+/* Responsive Anpassungen */
+@media screen and (max-width: 1680px) {
+    .spotlightscanv > section > .canvas {
+        width: 40%;
+    }
+
+    .spotlightscanv > section > .content {
+        width: 60%;
+    }
+}
+
+@media screen and (max-width: 1280px) {
+    .spotlightscanv > section > .canvas {
+        width: 45%;
+    }
+
+    .spotlightscanv > section > .content {
+        width: 55%;
+    }
+}
+
+@media screen and (max-width: 980px) {
+    .spotlightscanv > section {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .spotlightscanv > section > .canvas {
+        width: 100%;
+        margin-bottom: 2em; /* Abstand zwischen Canvas und Content */
+    }
+
+    .spotlightscanv > section > .content {
+        width: 100%;
+        padding: 3em 2em;
+    }
+}
+
+@media screen and (max-width: 736px) {
+    .spotlightscanv > section > .content {
+        padding: 2em 1em;
+    }
+}
+		
 
 /* Header */
 

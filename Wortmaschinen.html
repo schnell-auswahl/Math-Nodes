@@ -11,6 +11,25 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 		<link rel="stylesheet" href="assets/css/main.css" />
 		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
+
+		  <!-- Ab hier brauchen wir alles für Litegraph -->
+		  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.13.11/dist/katex.min.css">
+    
+		  <!-- Einbinden der KaTeX JavaScript-Datei, die für das Rendern von mathematischen Ausdrücken verantwortlich ist -->
+		  <script src="https://cdn.jsdelivr.net/npm/katex@0.13.11/dist/katex.min.js"></script>
+	  
+		  <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/10.2.0/math.min.js"></script>
+	  
+		  <!-- Mathjax als KAtex Alternative -->
+		  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
+	  
+		  <!-- Stile für den LiteGraph Inspector (kann angepasst werden) -->
+		  <link rel="stylesheet" type="text/css" href="./inspector.css">
+		  <link rel="stylesheet" type="text/css" href="./Litegraph/litegraph.css">
+		<script type="text/javascript" src="./Litegraph/litegraph.js"></script>
+		<script type="module" src="./Litegraph/createGraph.js"; ></script>
+
+
 	</head>
 	<body class="is-preload">
 
@@ -69,23 +88,21 @@
 									<p>Hier kannst du Nachrichten verschlüsseln und entschlüsseln und dabei spielerisch das Verketten von Funktionen verstehen.</p>
 								</div>
 							</section>
-						<!-- LiteGraph Canvas -->
-							<!-- <section id="litegraph">
-								<div>
-									<canvas id="graphDiv" height="800" style="position: relative;"></canvas>
-								</div>
-								<div id="litegraph-buttons">
-									
-									<button id="saveGraphButton" onclick="saveGraphToFile()">Save Graph</button>
-									<button id="loadGraphButton" onclick="loadGraphFromFile()">Load Graph</button>
-								</div>
-							</section> -->
+			
 						<!-- Two -->
 							<section id="two" class="spotlights">
 								<section>
-									<a href="generic.html" class="image">
-										<img src="images/pic08.jpg" alt="" data-position="center center" />
-									</a>
+									
+									<div class="image">
+										<canvas id="graphCanvas1" data-resize="true" data-config-path="Litegraph/configs/graphCanvas1.json"></canvas>
+										<script type="module">
+											import { createGraphInstance } from './Litegraph/createGraph.js';
+		
+										
+											
+											createGraphInstance("graphCanvas1");
+										</script>
+									</div>
 									<div class="content">
 										<div class="inner">
 											<header class="major">
@@ -226,6 +243,7 @@
 			<script src="assets/js/breakpoints.min.js"></script>
 			<script src="assets/js/util.js"></script>
 			<script src="assets/js/main.js"></script>
+			<script src="assets/js/scripts.js"></script>
 
 		
 
