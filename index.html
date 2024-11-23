@@ -77,10 +77,10 @@
 						</div>
 					</section>
 					<!-- LiteGraph Canvas -->
-					<section id="litegraph2">
-						<canvas id="graphCanvas1" width="1024" height="720" style="border: 1px solid;"></canvas>
-						<canvas id="graphCanvas2" width="1024" height="720" style="border: 1px solid;"></canvas>
-						<canvas id="graphCanvas3" width="1024" height="720" style="border: 1px solid;"></canvas>
+					<section id="litegraph">
+						<canvas id="graphCanvas1" width="1024" height="720"  data-resize="true" data-config-path="Litegraph/configs/graphCanvas1.json"></canvas>
+						<canvas id="graphCanvas2" width="1024" height="720"  data-resize="true" data-config-path="Litegraph/configs/graphCanvas2.json"></canvas>
+						<canvas id="graphCanvas3" width="1024" height="720" ></canvas>
 						<script type="module">
 							import { createGraphInstance } from './Litegraph/createGraph.js';
 							// Erstelle die Graphen für beide Canvas-Elemente
@@ -88,6 +88,11 @@
 							createGraphInstance("graphCanvas2");
 							createGraphInstance("graphCanvas3");
 						</script>
+						  <div id="litegraph-buttons">
+                            <!-- Buttons für Save und Load -->
+                            <button onclick="saveGraphToFile('graphCanvas1')">Save Graph 1</button>
+  							<button onclick="loadGraphFromFile('graphCanvas1')">Load Graph 1</button>
+                        </div>
 					</section>
 					
 
@@ -219,7 +224,7 @@
 			<script src="assets/js/breakpoints.min.js"></script>
 			<script src="assets/js/util.js"></script>
 			<script src="assets/js/main.js"></script>
-
+			<script src="assets/js/scripts.js"></script>
 
 
 

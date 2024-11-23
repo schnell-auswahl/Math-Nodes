@@ -119,6 +119,9 @@ export function createGraphInstance(canvasId) {
     // Erstelle eine neue Canvas-Instanz
     var canvas = new LGraphCanvas(`#${canvasId}`, graph);
 
+    // Speichere den Graph im Canvas-Element
+    canvasElement.graph = graph; 
+
     // Hintergrundbild setzen
     canvas.background_image = null; 
     canvas.clear_background_color =canvasbgColor;
