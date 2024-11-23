@@ -2965,17 +2965,7 @@ input, select, textarea {
 					background-color: #333; /* Optional, falls kein Inhalt gezeichnet wird */
 				}
 
-				.spotlights > section > .image:before {
-					background: rgba(36, 41, 67, 0.9);
-					content: '';
-					display: block;
-					height: 100%;
-					left: 0;
-					opacity: 0;
-					position: absolute;
-					top: 0;
-					width: 100%;
-				}
+		
 
 			.spotlights > section > .content {
 				display: -moz-flex;
