@@ -24,7 +24,7 @@ export function _CustomGraphicsPlot() {
         };
 
         // Widgets für xRange und yRange als Knobs
-        this.addWidget("slider", "xRange", this.properties.xRangeValue, (value) => {
+        this.addWidget("slider", "Zoom X-Richtung", this.properties.xRangeValue, (value) => {
           this.properties.xRangeValue = Math.round((value + Number.EPSILON) * 10) / 10;
           //const roundedValue = Math.round((parseFloat(this.properties["value"]) + Number.EPSILON) * 100) / 100;
 
@@ -34,7 +34,7 @@ export function _CustomGraphicsPlot() {
           }
         }, { min: 0.1, max: 100, step: 0.1, precision: 1 });
 
-        this.addWidget("slider", "yRange", this.properties.yRangeValue, (value) => {
+        this.addWidget("slider", "Zoom X-Richtung", this.properties.yRangeValue, (value) => {
           this.properties.yRangeValue = Math.round((value + Number.EPSILON) * 10) / 10;
           this.properties.yRange = [-this.properties.yRangeValue, this.properties.yRangeValue];  // Erstelle die symmetrische Range
           if (this.properties.yRangeValue >= this.properties.xRangeValue){
@@ -52,7 +52,7 @@ export function _CustomGraphicsPlot() {
         //this.color = "#CE8A53";
         this.color = fbNodesColor;
         //this.bgcolor = "#FFFFFF";
-        this.bgcolor = bgColor1;
+        this.bgcolor =  "#000000";
 
         this.equations = [];  // Array für die Gleichungen der vier Eingänge
         this.uvNames = [];    // Array für die UV-Namen der vier Eingänge

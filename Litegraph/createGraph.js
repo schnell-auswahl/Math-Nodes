@@ -78,15 +78,15 @@ export function createGraphInstance(canvasId) {
 
     //Nodes Registrieren
     // Synth
-    LiteGraph.registerNodeType("custom/func", FunctionNode);
-    LiteGraph.registerNodeType("custom/cconst", CustNumberNode);
-    LiteGraph.registerNodeType("custom/uvNode", uvNode);
-    LiteGraph.registerNodeType("custom/cwatchS", CustWatchNodeString);
-    LiteGraph.registerNodeType("custom/cwatchV", CustWatchNodeValue);
-    LiteGraph.registerNodeType("custom/plot", CustomGraphicsPlot);
-    LiteGraph.registerNodeType("custom/time", CustomTimeNode);
-    LiteGraph.registerNodeType("custom/Operation", OperationNode);
-    LiteGraph.registerNodeType("custom/AudioNode", AudioNode);
+    LiteGraph.registerNodeType("Funktionenmaschinen/func", FunctionNode);
+    LiteGraph.registerNodeType("Funktionenmaschinen/cconst", CustNumberNode);
+    LiteGraph.registerNodeType("Funktionenmaschinen/uvNode", uvNode);
+    LiteGraph.registerNodeType("Funktionenmaschinen/cwatchS", CustWatchNodeString);
+    LiteGraph.registerNodeType("Funktionenmaschinen/cwatchV", CustWatchNodeValue);
+    LiteGraph.registerNodeType("Funktionenmaschinen/plot", CustomGraphicsPlot);
+    LiteGraph.registerNodeType("Funktionenmaschinen/time", CustomTimeNode);
+    LiteGraph.registerNodeType("Funktionenmaschinen/Operation", OperationNode);
+    LiteGraph.registerNodeType("Funktionenmaschinen/AudioNode", AudioNode);
 
   //Wortmaschinen
     LiteGraph.registerNodeType("Wortmaschinen/TextInputNode", TextInputNode);
@@ -134,6 +134,29 @@ export function createGraphInstance(canvasId) {
 
     // Touchinput mit Scroll-Unterdrückung
 // const canvasElement = document.getElementById("graphDiv");
+// let touchTimeout;
+
+// canvasElement.addEventListener("touchstart", (e) => {
+//     touchTimeout = setTimeout(() => {
+//         console.log("Long touch erkannt! Simuliere Rechtsklick.");
+//         const touch = e.touches[0];
+
+//         // Simuliert ein contextmenu (Rechtsklick) Event
+//         const simulatedRightClick = new MouseEvent("contextmenu", {
+//             bubbles: true,
+//             cancelable: true,
+//             clientX: touch.clientX,
+//             clientY: touch.clientY,
+//         });
+
+//         canvasElement.dispatchEvent(simulatedRightClick);
+//     }, 500); // 500ms für langes Drücken
+// });
+
+// canvasElement.addEventListener("touchend", () => {
+//     clearTimeout(touchTimeout); // Timeout abbrechen, wenn der Finger losgelassen wird
+// });
+
 
 canvasElement.addEventListener("touchstart", (e) => {
     const touch = e.touches[0];
@@ -192,7 +215,6 @@ canvasElement.addEventListener("touchend", (e) => {
     });
     canvasElement.dispatchEvent(simulatedEvent);
 }, false);
-
 
 
 
