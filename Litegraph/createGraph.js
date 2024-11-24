@@ -157,6 +157,73 @@ export function createGraphInstance(canvasId) {
 //     clearTimeout(touchTimeout); // Timeout abbrechen, wenn der Finger losgelassen wird
 // });
 
+// canvasElement.addEventListener("mousedown", () => {
+//     if (document.activeElement !== canvasElement) {
+//         canvasElement.focus();
+//     }
+// });
+
+// canvasElement.addEventListener("touchstart", () => {
+//     if (document.activeElement !== canvasElement) {
+//         canvasElement.focus();
+//     }
+// });
+canvasElement.addEventListener("touchstart", (e) => {
+    // Prüfen, ob es genau zwei aktive Touchpunkte gibt
+    if (e.touches.length === 2) {
+        const touch1 = e.touches[0]; // Der erste Finger
+        const touch2 = e.touches[1]; // Der zweite Finger
+
+        // Simuliere ein contextmenu (Rechtsklick) Event basierend auf Finger 1
+        const simulatedRightClick = new MouseEvent("contextmenu", {
+            bubbles: true, // Event wird an übergeordnete Elemente weitergeleitet
+            cancelable: true, // Event kann gestoppt werden
+            view: window,
+            clientX: touch1.clientX, // X-Position von Finger 1
+            clientY: touch1.clientY, // Y-Position von Finger 1
+            button: 2, // Rechte Maustaste
+            buttons: 2 // Rechte Maustaste gedrückt
+        });
+
+        canvasElement.dispatchEvent(simulatedRightClick);
+
+        // Optional: Verhindere Standard-Scroll-/Zoom-Gesten
+        e.preventDefault();
+    }
+}, false);
+
+canvasElement.addEventListener("touchend", (e) => {
+    if (e.touches.length < 2) {
+        console.log("Zwei-Finger-Touch beendet.");
+    }
+});
+
+
+canvasElement.addEventListener("touchstart", (e) => {
+    //canvasElement.focus(); 
+    touchTimeout = setTimeout(() => {
+        //e.preventDefault(); // Unterdrücke das Scrollen
+        //console.log("Long touch erkannt! Simuliere Rechtsklick.");
+        const touch = e.touches[0];
+
+        // Simuliert ein contextmenu (Rechtsklick) Event
+        const simulatedRightClick = new MouseEvent("contextmenu", {
+            bubbles: true, // Event wird an übergeordnete Elemente weitergeleitet
+            cancelable: false, // Event kann gestoppt werden
+            view: window,
+            clientX: touch.clientX,
+            clientY: touch.clientY,
+            button: 2, // Rechte Maustaste
+            buttons: 2 // Rechte Maustaste gedrückt
+        });
+
+        canvasElement.dispatchEvent(simulatedRightClick);
+    }, 500); // 500ms für langes Drücken
+}, );
+
+canvasElement.addEventListener("touchend", () => {
+    clearTimeout(touchTimeout); // Timeout abbrechen, wenn der Finger losgelassen wird
+});
 
 canvasElement.addEventListener("touchstart", (e) => {
     const touch = e.touches[0];
