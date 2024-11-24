@@ -171,5 +171,11 @@ export const TextManipulationLogic = [
             }
             return result.join(" ");
         }
-    }
+    },
+
+    {
+        title: "Platzhalter",
+        description:"",
+        logic: undefined
+    },
 ];

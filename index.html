@@ -11,7 +11,7 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 		<link rel="stylesheet" href="assets/css/main.css" />
 		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
-		  <!-- Einbinden der KaTeX CSS-Datei, um mathematische Ausdrücke korrekt zu stylen -->
+		  <!-- Ab hier brauchen wir alles für Litegraph -->
 		  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.13.11/dist/katex.min.css">
     
 		  <!-- Einbinden der KaTeX JavaScript-Datei, die für das Rendern von mathematischen Ausdrücken verantwortlich ist -->
@@ -24,6 +24,10 @@
 	  
 		  <!-- Stile für den LiteGraph Inspector (kann angepasst werden) -->
 		  <link rel="stylesheet" type="text/css" href="./inspector.css">
+		  <link rel="stylesheet" type="text/css" href="./Litegraph/litegraph.css">
+		<script type="text/javascript" src="./Litegraph/litegraph.js"></script>
+		<script type="module" src="./Litegraph/createGraph.js"; ></script>
+
 	</head>
 	<body class="is-preload">
 
@@ -73,17 +77,24 @@
 						</div>
 					</section>
 					<!-- LiteGraph Canvas -->
-					<section id="litegraph">
-                        <div>
-                            <canvas id="graphDiv" height="800" style="position: relative;"></canvas>
-                        </div>
-                        <div id="litegraph-buttons">
+					<section id="litegraph" >
+						<div id="graphstylefull">
+						<canvas id="graphCanvas1"  data-resize="true" data-config-path="Litegraph/configs/Test_config1.json"></canvas>
+						</div>
+						<script type="module">
+							import { createGraphInstance } from './Litegraph/createGraph.js';
+							// Erstelle die Graphen für beide Canvas-Elemente
+							createGraphInstance("graphCanvas1");
+							//createGraphInstance("graphCanvas2");
+							//createGraphInstance("graphCanvas3");
+						</script>
+						  <div id="litegraph-buttons">
                             <!-- Buttons für Save und Load -->
-                            <button id="saveGraphButton" onclick="saveGraphToFile()">Save Graph</button>
-                            <button id="loadGraphButton" onclick="loadGraphFromFile()">Load Graph</button>
+                            <button onclick="saveGraphToFile('graphCanvas1')">Save Graph 1</button>
+  							<button onclick="loadGraphFromFile('graphCanvas1')">Load Graph 1</button>
+							<button id="adjustNodesButton" class="button">Adjust Node Positions</button>
                         </div>
-                    </section>
-
+					</section>
 					
 
 				<!-- Main -->
@@ -97,7 +108,7 @@
 									</span>
 									<header class="major">
 										<h3><a href="Wortmaschinen.html" class="link">Wortmaschinen</a></h3>
-										<p>Hier kannst du frei mit den Wortmaschinen experimentieren</p>
+										<p>Hier lernst du wie die Wortmaschinen funktionieren und kannst dann du frei damit experimentieren</p>
 									</header>
 								</article>
 								<article>
@@ -106,7 +117,7 @@
 									</span>
 									<header class="major">
 										<h3><a href="landing.html" class="link">Funktionenmaschinen</a></h3>
-										<p>Hier kannst du frei mit den Funktionenmaschinen experimentieren</p>
+										<p>Hier lernst du wie die Funktionenmaschinen funktionieren und kannst dann du frei damit experimentieren</p>
 									</header>
 								</article>
 								<article>
@@ -214,17 +225,6 @@
 			<script src="assets/js/breakpoints.min.js"></script>
 			<script src="assets/js/util.js"></script>
 			<script src="assets/js/main.js"></script>
-
-			<script src="./Litegraph/litegraph.js"></script>
-			<script type="module">
-   				 import define from "./Litegraph/index.js";
-   				 import { Runtime, Library, Inspector } from "./Litegraph/runtime.js";
-
-			// Initialisiere den LiteGraph Runtime
-			const runtime = new Runtime();
-			const main = runtime.module(define, Inspector.into(document.body));
-			</script>
-				<!-- Dynamisches Resizing des Canvas -->
 			<script src="assets/js/scripts.js"></script>
 
 

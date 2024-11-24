@@ -11,6 +11,25 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 		<link rel="stylesheet" href="assets/css/main.css" />
 		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
+
+		  <!-- Ab hier brauchen wir alles für Litegraph -->
+		  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.13.11/dist/katex.min.css">
+    
+		  <!-- Einbinden der KaTeX JavaScript-Datei, die für das Rendern von mathematischen Ausdrücken verantwortlich ist -->
+		  <script src="https://cdn.jsdelivr.net/npm/katex@0.13.11/dist/katex.min.js"></script>
+	  
+		  <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/10.2.0/math.min.js"></script>
+	  
+		  <!-- Mathjax als KAtex Alternative -->
+		  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
+	  
+		  <!-- Stile für den LiteGraph Inspector (kann angepasst werden) -->
+		  <link rel="stylesheet" type="text/css" href="./inspector.css">
+		  <link rel="stylesheet" type="text/css" href="./Litegraph/litegraph.css">
+		<script type="text/javascript" src="./Litegraph/litegraph.js"></script>
+		<script type="module" src="./Litegraph/createGraph.js"; ></script>
+
+
 	</head>
 	<body class="is-preload">
 
@@ -69,61 +88,67 @@
 									<p>Hier kannst du Nachrichten verschlüsseln und entschlüsseln und dabei spielerisch das Verketten von Funktionen verstehen.</p>
 								</div>
 							</section>
-						<!-- LiteGraph Canvas -->
-							<!-- <section id="litegraph">
-								<div>
-									<canvas id="graphDiv" height="800" style="position: relative;"></canvas>
-								</div>
-								<div id="litegraph-buttons">
-									
-									<button id="saveGraphButton" onclick="saveGraphToFile()">Save Graph</button>
-									<button id="loadGraphButton" onclick="loadGraphFromFile()">Load Graph</button>
-								</div>
-							</section> -->
+			
 						<!-- Two -->
 							<section id="two" class="spotlights">
 								<section>
-									<a href="generic.html" class="image">
-										<img src="images/pic08.jpg" alt="" data-position="center center" />
-									</a>
+									
+									<div class="image">
+										<canvas id="graphCanvas1" data-resize="true" data-config-path="Litegraph/configs/Wortmaschinen1_config.json"></canvas>
+										<script type="module">
+											import { createGraphInstance } from './Litegraph/createGraph.js';
+											createGraphInstance("graphCanvas1");
+										</script>
+									</div>
 									<div class="content">
 										<div class="inner">
 											<header class="major">
 												<h3>Deine erste Verbindung</h3>
 											</header>
-											<p>Verbinde die Maschinen indem du ein Kabel von Ausgabe der Texteingabe zum Eingang des Textdisplays ziehst. Wenn du das geschafft hast, klicke auf das Texteingabefeld auf der Texteingabe-Maschine und gib etwas ein. Siehst du es auf dem Display? Du kannst Verbidnungen auch wieder lösen indem du am Ausgang anfasst und die Verbindung von da wieder löst. Verbinde zum Schluss die Texteingabe-Maschine mit der Alphabet-Countdown-Maschine und diese dann mit der Textdisplay-Maschine. Was passiert mit deinem Text? </p>
+											<p>Verbinde die unteren Maschinen wie im Beispiel oben, indem du ein Kabel vom Ausgang der Texteingabe zum Eingang des Textdisplays ziehst. Wenn du das geschafft hast, klicke auf das Texteingabefeld auf der Texteingabe-Maschine und gib etwas ein. Siehst du es auf dem Display? Du kannst Verbidnungen auch wieder lösen indem du am Ausgang anfasst und die Verbindung von da wieder löst. Versuche es!</p>
 											<ul class="actions">
-												<li><a href="generic.html" class="button">Learn more</a></li>
+												
+												 <!-- Buttons für Save und Load -->
+												 <button onclick="saveGraphToFile('graphCanvas1')">Save Graph 1</button>
+												 <button onclick="loadGraphFromFile('graphCanvas1')">Load Graph 1</button>
 											</ul>
 										</div>
 									</div>
 								</section>
 								<section>
-									<a href="generic.html" class="image">
-										<img src="images/pic09.jpg" alt="" data-position="top center" />
-									</a>
+									<div class="image">
+										<canvas id="graphCanvas2" data-resize="true" data-config-path="Litegraph/configs/Wortmaschinen2_config.json"></canvas>
+										<script type="module">
+											import { createGraphInstance } from './Litegraph/createGraph.js';
+											createGraphInstance("graphCanvas2");
+										</script>
+									</div>
 									<div class="content">
 										<div class="inner">
 											<header class="major">
-												<h3>Rhoncus magna</h3>
+												<h3>Deinen ersten Text verschlüsseln</h3>
 											</header>
-											<p>Nullam et orci eu lorem consequat tincidunt vivamus et sagittis magna sed nunc rhoncus condimentum sem. In efficitur ligula tate urna. Maecenas massa sed magna lacinia magna pellentesque lorem ipsum dolor. Nullam et orci eu lorem consequat tincidunt. Vivamus et sagittis tempus.</p>
+											<p>Du kannst deinen Text mit verschiedenen Maschinen manipulieren. Verbinde dazu die Texteingabe-Maschine mit der Alphabet-Countdown-Maschine und diese dann mit der Textdisplay-Maschine. Gib jetzt etwas in die Texteingabe-Maschine ein. Was passiert mit deinem Text? </p>
 											<ul class="actions">
-												<li><a href="generic.html" class="button">Learn more</a></li>
+												<button onclick="loadGraphFromServerAsync('graphCanvas2', 'Litegraph/configs/Wortmaschinen2_config.json')">Neustart</button>
 											</ul>
 										</div>
 									</div>
 								</section>
 								<section>
-									<a href="generic.html" class="image">
-										<img src="images/pic10.jpg" alt="" data-position="25% 25%" />
-									</a>
+									<div class="image">
+										<canvas id="graphCanvas3" data-resize="true" data-config-path="Litegraph/configs/Wortmaschinen3_config.json"></canvas>
+										<script type="module">
+											import { createGraphInstance } from './Litegraph/createGraph.js';
+											createGraphInstance("graphCanvas3");
+										</script>
+									</div>
 									<div class="content">
 										<div class="inner">
 											<header class="major">
-												<h3>Sed nunc ligula</h3>
+												<h3>Mehrere Maschinen verketten</h3>
 											</header>
-											<p>Nullam et orci eu lorem consequat tincidunt vivamus et sagittis magna sed nunc rhoncus condimentum sem. In efficitur ligula tate urna. Maecenas massa sed magna lacinia magna pellentesque lorem ipsum dolor. Nullam et orci eu lorem consequat tincidunt. Vivamus et sagittis tempus.</p>
+											<p>Du kannst natürlich auch mehrere Maschinen zum Text manipulieren hintereinander verwenden. Das nennt man in der Mathematik verketten. Verbinde die Maschinen im Beispiel und verschlüssel deine Botschaft. Spielt die Reihenfolge dabei eine Rolle? Du kannst das zweite Textdisplay zusätzlich an die erste Maschine zum Textmanipulieren anschließen, um das Zwischenergebnis zu überprüfen. </p>
 											<ul class="actions">
 												<li><a href="generic.html" class="button">Learn more</a></li>
 											</ul>
@@ -226,6 +251,7 @@
 			<script src="assets/js/breakpoints.min.js"></script>
 			<script src="assets/js/util.js"></script>
 			<script src="assets/js/main.js"></script>
+			<script src="assets/js/scripts.js"></script>
 
 		
 

@@ -2,11 +2,20 @@ export function _TextInputNode() {
     return class TextInputNode {
       constructor() {
         this.addOutput("", "string");
+        this.properties = { text: ""};
         this.textInput_widget = this.addWidget("text", "", "", (v) => {
-          this.text = v;
+          // Ersetze die speziellen Zeichen
+          this.properties.text = v
+              .replace(/ä/g, "ae")
+              .replace(/ö/g, "oe")
+              .replace(/ü/g, "ue")
+              .replace(/Ä/g, "Ae")
+              .replace(/Ö/g, "Oe")
+              .replace(/Ü/g, "Ue")
+              .replace(/ß/g, "ss");
         });
         this.title = "Text Eingabe";
-        this.text = "";
+        //this.text = "";
 
         this.displayedText = "";
         this.size = [220, 150];
@@ -29,9 +38,11 @@ export function _TextInputNode() {
      }
 
       onExecute() {
-        this.setOutputData(0, this.text);
+   
 
-        const inputText = this.text;
+        const inputText = this.properties.text;
+
+        this.setOutputData(0, this.properties.text);
         
             
         // Wenn Text vorhanden ist, anzeigen; andernfalls Text löschen
