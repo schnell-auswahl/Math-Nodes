@@ -3,7 +3,8 @@ export function _TextDisplayNode() {
         constructor() {
             this.addInput("", "string");
             this.title = "Text Anzeige";
-            this.displayedText = "";
+            this.properties = { displayedText: ""};
+            //this.displayedText = "";
             this.size = [220, 100];
             this.padding = 15; // Abstand vom Rand der Box
             this.color = opNodesColor;
@@ -16,12 +17,14 @@ export function _TextDisplayNode() {
             
             // Wenn Text vorhanden ist, anzeigen; andernfalls Text löschen
             if (inputText !== undefined) {
-                this.displayedText = inputText;
-            } else {
-                this.displayedText = ""; // Text zurücksetzen, wenn keine Eingabe vorhanden
-            }
+                this.properties.displayedText = inputText;
+            } 
         }
 
+        onConnectionsChange() {
+            this.properties.displayedText = ""; // Text zurücksetzen, wenn keine Eingabe vorhanden
+
+        }
 
              //Minimale Größe Festlegen
         onResize() {
@@ -78,7 +81,7 @@ export function _TextDisplayNode() {
             ctx.font = "12px Arial";
             ctx.fillStyle = "#000000";
         
-            const words = this.displayedText.split(" "); // Zerlege den Text in Wörter
+            const words = this.properties.displayedText.split(" "); // Zerlege den Text in Wörter
             const lineHeight = 14; // Höhe für jede Textzeile
             let y = this.padding + lineHeight; // Anfangsposition für die erste Zeile
             let line = ""; // Aktuelle Zeile, die aufgebaut wird

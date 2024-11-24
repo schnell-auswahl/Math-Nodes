@@ -78,26 +78,21 @@
 					</section>
 					<!-- LiteGraph Canvas -->
 					<section id="litegraph" >
-						<div id="graphstyle" style="height: 500px;">
-						<canvas id="graphCanvas1"  data-resize="true" data-config-path="Litegraph/configs/graphCanvas1.json"></canvas>
-						</div>
-						<div id="graphstyle" style="height: 500px;">
-						<canvas id="graphCanvas2" data-resize="true" data-config-path="Litegraph/configs/graphCanvas2.json"></canvas>
-						</div>
-						<div id="graphstyle" style="height: 500px;">
-						<canvas id="graphCanvas3" data-resize="true" ></canvas>
+						<div id="graphstylefull">
+						<canvas id="graphCanvas1"  data-resize="true" data-config-path="Litegraph/configs/Test_config1.json"></canvas>
 						</div>
 						<script type="module">
 							import { createGraphInstance } from './Litegraph/createGraph.js';
 							// Erstelle die Graphen für beide Canvas-Elemente
 							createGraphInstance("graphCanvas1");
-							createGraphInstance("graphCanvas2");
-							createGraphInstance("graphCanvas3");
+							//createGraphInstance("graphCanvas2");
+							//createGraphInstance("graphCanvas3");
 						</script>
 						  <div id="litegraph-buttons">
                             <!-- Buttons für Save und Load -->
                             <button onclick="saveGraphToFile('graphCanvas1')">Save Graph 1</button>
   							<button onclick="loadGraphFromFile('graphCanvas1')">Load Graph 1</button>
+							<button id="adjustNodesButton" class="button">Adjust Node Positions</button>
                         </div>
 					</section>
 					

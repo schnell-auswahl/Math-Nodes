@@ -201,17 +201,17 @@ canvasElement.addEventListener("touchend", (e) => {
 
 
     // Beispielknoten hinzufügen
-    var node_const = LiteGraph.createNode("basic/const");
-    node_const.pos = [200, 200];
-    graph.add(node_const);
-    node_const.setValue(Math.random() * 10); // Zufälliger Wert für Variation
+    // var node_const = LiteGraph.createNode("basic/const");
+    // node_const.pos = [200, 200];
+    // graph.add(node_const);
+    // node_const.setValue(Math.random() * 10); // Zufälliger Wert für Variation
 
-    var node_watch = LiteGraph.createNode("basic/watch");
-    node_watch.pos = [700, 200];
-    graph.add(node_watch);
+    // var node_watch = LiteGraph.createNode("basic/watch");
+    // node_watch.pos = [700, 200];
+    // graph.add(node_watch);
 
-    // Verbinde die Knoten
-    node_const.connect(0, node_watch, 0);
+    // // Verbinde die Knoten
+    // node_const.connect(0, node_watch, 0);
 
     // Graph starten
     graph.start(30);
