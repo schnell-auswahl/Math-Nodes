@@ -13181,11 +13181,11 @@ LGraphNode.prototype.executeAction = function(action)
         } else {
             options = [
                 {
-                    content: "Add Node",
+                    content: "Maschine hinzufügen",
                     has_submenu: true,
                     callback: LGraphCanvas.onMenuAdd
                 },
-                { content: "Add Group", callback: LGraphCanvas.onGroupAdd },
+                //{ content: "Add Group", callback: LGraphCanvas.onGroupAdd },
 				//{ content: "Arrange", callback: that.graph.arrange },
                 //{content:"Collapse All", callback: LGraphCanvas.onMenuCollapseAll }
             ];
