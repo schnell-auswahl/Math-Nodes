@@ -14443,7 +14443,7 @@ if (typeof exports != "undefined") {
         this.setOutputData(1, this.graph.globaltime);
     };
 
-    LiteGraph.registerNodeType("basic/time", Time);
+    //LiteGraph.registerNodeType("basic/time", Time);
 
     //Subgraph: a node that contains a graph
     function Subgraph() {
@@ -14905,7 +14905,7 @@ if (typeof exports != "undefined") {
 	}
 
     LiteGraph.Subgraph = Subgraph;
-    LiteGraph.registerNodeType("graph/subgraph", Subgraph);
+    //LiteGraph.registerNodeType("graph/subgraph", Subgraph);
 
     //Input for a subgraph
     function GraphInput() {
@@ -15066,7 +15066,7 @@ if (typeof exports != "undefined") {
     };
 
     LiteGraph.GraphInput = GraphInput;
-    LiteGraph.registerNodeType("graph/input", GraphInput);
+    //LiteGraph.registerNodeType("graph/input", GraphInput);
 
     //Output for a subgraph
     function GraphOutput() {
@@ -15199,7 +15199,7 @@ if (typeof exports != "undefined") {
     };
 
     LiteGraph.GraphOutput = GraphOutput;
-    LiteGraph.registerNodeType("graph/output", GraphOutput);
+    //LiteGraph.registerNodeType("graph/output", GraphOutput);
 
     //Constant
     function ConstantNumber() {
@@ -15234,7 +15234,7 @@ if (typeof exports != "undefined") {
         this.outputs[0].label = this.properties["value"].toFixed(3);
     };
 
-    LiteGraph.registerNodeType("basic/const", ConstantNumber);
+    //LiteGraph.registerNodeType("basic/const", ConstantNumber);
 
     function ConstantBoolean() {
         this.addOutput("bool", "boolean");
@@ -15264,7 +15264,7 @@ if (typeof exports != "undefined") {
 		this.setValue( !this.properties.value );
 	}
 
-    LiteGraph.registerNodeType("basic/boolean", ConstantBoolean);
+    //LiteGraph.registerNodeType("basic/boolean", ConstantBoolean);
 
     function ConstantString() {
         this.addOutput("string", "string");
@@ -15296,7 +15296,7 @@ if (typeof exports != "undefined") {
 		reader.readAsText(file);
 	}
 
-    LiteGraph.registerNodeType("basic/string", ConstantString);
+    //LiteGraph.registerNodeType("basic/string", ConstantString);
 
     function ConstantObject() {
         this.addOutput("obj", "object");
@@ -15311,7 +15311,7 @@ if (typeof exports != "undefined") {
         this.setOutputData(0, this._object);
     };
 
-    LiteGraph.registerNodeType( "basic/object", ConstantObject );
+    //LiteGraph.registerNodeType( "basic/object", ConstantObject );
 
     function ConstantFile() {
         this.addInput("url", "string");
@@ -15409,7 +15409,7 @@ if (typeof exports != "undefined") {
 			return reader.readAsBinaryString(file);
 	}
 
-    LiteGraph.registerNodeType("basic/file", ConstantFile);
+    //LiteGraph.registerNodeType("basic/file", ConstantFile);
 
 
 //to store json objects
@@ -15451,7 +15451,7 @@ JSONParse.prototype.onAction = function(name) {
 		this.parse();
 }
 
-LiteGraph.registerNodeType("basic/jsonparse", JSONParse);	
+//LiteGraph.registerNodeType("basic/jsonparse", JSONParse);	
 
 	//to store json objects
     function ConstantData() {
@@ -15486,7 +15486,7 @@ LiteGraph.registerNodeType("basic/jsonparse", JSONParse);
 
 	ConstantData.prototype.setValue = ConstantNumber.prototype.setValue;
 
-    LiteGraph.registerNodeType("basic/data", ConstantData);
+    //LiteGraph.registerNodeType("basic/data", ConstantData);
 
 	//to store json objects
     function ConstantArray() {
@@ -15536,7 +15536,7 @@ LiteGraph.registerNodeType("basic/jsonparse", JSONParse);
 
 	ConstantArray.prototype.setValue = ConstantNumber.prototype.setValue;
 
-    LiteGraph.registerNodeType("basic/array", ConstantArray);
+    //LiteGraph.registerNodeType("basic/array", ConstantArray);
 
 	function SetArray()
 	{
@@ -15562,7 +15562,7 @@ LiteGraph.registerNodeType("basic/jsonparse", JSONParse);
 		this.setOutputData(0,arr);
     };
 
-    LiteGraph.registerNodeType("basic/set_array", SetArray );
+    //LiteGraph.registerNodeType("basic/set_array", SetArray );
 
     function ArrayElement() {
         this.addInput("array", "array,table,string");
@@ -15584,7 +15584,7 @@ LiteGraph.registerNodeType("basic/jsonparse", JSONParse);
         this.setOutputData(0, array[Math.floor(Number(index))] );
     };
 
-    LiteGraph.registerNodeType("basic/array[]", ArrayElement);
+    //LiteGraph.registerNodeType("basic/array[]", ArrayElement);
 
     function TableElement() {
         this.addInput("table", "table");
@@ -15615,7 +15615,7 @@ LiteGraph.registerNodeType("basic/jsonparse", JSONParse);
 	        this.setOutputData(0, null );
     };
 
-    LiteGraph.registerNodeType("basic/table[][]", TableElement);
+    //LiteGraph.registerNodeType("basic/table[][]", TableElement);
 
     function ObjectProperty() {
         this.addInput("obj", "object");
@@ -15653,7 +15653,7 @@ LiteGraph.registerNodeType("basic/jsonparse", JSONParse);
         }
     };
 
-    LiteGraph.registerNodeType("basic/object_property", ObjectProperty);
+    //LiteGraph.registerNodeType("basic/object_property", ObjectProperty);
 
     function ObjectKeys() {
         this.addInput("obj", "");
@@ -15671,7 +15671,7 @@ LiteGraph.registerNodeType("basic/jsonparse", JSONParse);
         }
     };
 
-    LiteGraph.registerNodeType("basic/object_keys", ObjectKeys);
+    //LiteGraph.registerNodeType("basic/object_keys", ObjectKeys);
 
 
 	function SetObject()
@@ -15698,7 +15698,7 @@ LiteGraph.registerNodeType("basic/jsonparse", JSONParse);
 		this.setOutputData(0,obj);
     };
 
-    LiteGraph.registerNodeType("basic/set_object", SetObject );
+    //LiteGraph.registerNodeType("basic/set_object", SetObject );
 
 
     function MergeObjects() {
@@ -15729,7 +15729,7 @@ LiteGraph.registerNodeType("basic/jsonparse", JSONParse);
 		this.setOutputData(0,C);
     };
 
-    LiteGraph.registerNodeType("basic/merge_objects", MergeObjects );
+    //LiteGraph.registerNodeType("basic/merge_objects", MergeObjects );
 
     //Store as variable
     function Variable() {
@@ -15786,7 +15786,7 @@ LiteGraph.registerNodeType("basic/jsonparse", JSONParse);
         return this.properties.varname;
     };
 
-    LiteGraph.registerNodeType("basic/variable", Variable);
+    //LiteGraph.registerNodeType("basic/variable", Variable);
 
     function length(v) {
         if(v && v.length != null)
@@ -15794,12 +15794,12 @@ LiteGraph.registerNodeType("basic/jsonparse", JSONParse);
 		return 0;
     }
 
-    LiteGraph.wrapFunctionAsNode(
-        "basic/length",
-        length,
-        [""],
-        "number"
-    );
+    // LiteGraph.wrapFunctionAsNode(
+    //     "basic/length",
+    //     length,
+    //     [""],
+    //     "number"
+    // );
 
     function length(v) {
         if(v && v.length != null)
@@ -15807,12 +15807,12 @@ LiteGraph.registerNodeType("basic/jsonparse", JSONParse);
 		return 0;
     }
 
-    LiteGraph.wrapFunctionAsNode(
-        "basic/not",
-        function(a){ return !a; },
-        [""],
-        "boolean"
-    );
+    // LiteGraph.wrapFunctionAsNode(
+    //     "basic/not",
+    //     function(a){ return !a; },
+    //     [""],
+    //     "boolean"
+    // );
 
 	function DownloadData() {
         this.size = [60, 30];
@@ -15872,7 +15872,7 @@ LiteGraph.registerNodeType("basic/jsonparse", JSONParse);
         return this.title;
     };
 
-    LiteGraph.registerNodeType("basic/download", DownloadData);
+    //LiteGraph.registerNodeType("basic/download", DownloadData);
 
 
 
@@ -15921,7 +15921,7 @@ LiteGraph.registerNodeType("basic/jsonparse", JSONParse);
         this.inputs[0].label = Watch.toString(this.value);
     };
 
-    LiteGraph.registerNodeType("basic/watch", Watch);
+    //LiteGraph.registerNodeType("basic/watch", Watch);
 
     //in case one type doesnt match other type but you want to connect them anyway
     function Cast() {
@@ -15937,7 +15937,7 @@ LiteGraph.registerNodeType("basic/jsonparse", JSONParse);
         this.setOutputData(0, this.getInputData(0));
     };
 
-    LiteGraph.registerNodeType("basic/cast", Cast);
+    //LiteGraph.registerNodeType("basic/cast", Cast);
 
     //Show value inside the debug console
     function Console() {
@@ -15983,7 +15983,7 @@ LiteGraph.registerNodeType("basic/jsonparse", JSONParse);
         ];
     };
 
-    LiteGraph.registerNodeType("basic/console", Console);
+    //LiteGraph.registerNodeType("basic/console", Console);
 
     //Show value inside the debug console
     function Alert() {
@@ -16011,7 +16011,7 @@ LiteGraph.registerNodeType("basic/jsonparse", JSONParse);
         }, 10);
     };
 
-    LiteGraph.registerNodeType("basic/alert", Alert);
+    //LiteGraph.registerNodeType("basic/alert", Alert);
 
     //Execites simple code
     function NodeScript() {
@@ -16095,7 +16095,7 @@ LiteGraph.registerNodeType("basic/jsonparse", JSONParse);
         return [["C", ""]];
     };
 
-    LiteGraph.registerNodeType("basic/script", NodeScript);
+    //LiteGraph.registerNodeType("basic/script", NodeScript);
     
     
     function GenericCompare() {
@@ -16192,7 +16192,7 @@ LiteGraph.registerNodeType("basic/jsonparse", JSONParse);
         this.setOutputData(1, !result);
     };
 
-    LiteGraph.registerNodeType("basic/CompareValues", GenericCompare);
+    //LiteGraph.registerNodeType("basic/CompareValues", GenericCompare);
     
 })(this);
 
@@ -16213,7 +16213,7 @@ LiteGraph.registerNodeType("basic/jsonparse", JSONParse);
         console.log(action, param);
     };
 
-    LiteGraph.registerNodeType("events/log", LogEvent);
+    //LiteGraph.registerNodeType("events/log", LogEvent);
 
     //convert to Event if the value is true
     function TriggerEvent() {
@@ -16244,7 +16244,7 @@ LiteGraph.registerNodeType("basic/jsonparse", JSONParse);
 		this.prev = v;
     };
 
-    LiteGraph.registerNodeType("events/trigger", TriggerEvent);
+    //LiteGraph.registerNodeType("events/trigger", TriggerEvent);
 
     //Sequence of events
     function Sequence() {
@@ -16285,7 +16285,7 @@ LiteGraph.registerNodeType("basic/jsonparse", JSONParse);
         }
     };
 
-    LiteGraph.registerNodeType("events/sequence", Sequence);
+    //LiteGraph.registerNodeType("events/sequence", Sequence);
 
 
    //Sequence of events
@@ -16342,7 +16342,7 @@ WaitAll.prototype.reset = function()
     this.ready.length = 0;
 }
 
-LiteGraph.registerNodeType("events/waitAll", WaitAll);    
+//LiteGraph.registerNodeType("events/waitAll", WaitAll);    
 
 
     //Sequencer for events
@@ -16410,7 +16410,7 @@ LiteGraph.registerNodeType("events/waitAll", WaitAll);
         }
     };
 
-    LiteGraph.registerNodeType("events/stepper", Stepper);
+    //LiteGraph.registerNodeType("events/stepper", Stepper);
 
     //Filter events
     function FilterEvent() {
@@ -16453,7 +16453,7 @@ LiteGraph.registerNodeType("events/waitAll", WaitAll);
         this.triggerSlot(0, param, null, options);
     };
 
-    LiteGraph.registerNodeType("events/filter", FilterEvent);
+    //LiteGraph.registerNodeType("events/filter", FilterEvent);
 
 
     function EventBranch() {
@@ -16477,7 +16477,7 @@ LiteGraph.registerNodeType("events/waitAll", WaitAll);
 		this.triggerSlot(this._value ? 0 : 1, param, null, options);
 	}
 
-    LiteGraph.registerNodeType("events/branch", EventBranch);
+    //LiteGraph.registerNodeType("events/branch", EventBranch);
 
     //Show value inside the debug console
     function EventCounter() {
@@ -16532,7 +16532,7 @@ LiteGraph.registerNodeType("events/waitAll", WaitAll);
         this.setOutputData(1, this.num);
     };
 
-    LiteGraph.registerNodeType("events/counter", EventCounter);
+    //LiteGraph.registerNodeType("events/counter", EventCounter);
 
     //Show value inside the debug console
     function DelayEvent() {
@@ -16583,7 +16583,7 @@ LiteGraph.registerNodeType("events/waitAll", WaitAll);
         return [["event", LiteGraph.ACTION], ["time_in_ms", "number"]];
     };
 
-    LiteGraph.registerNodeType("events/delay", DelayEvent);
+    //LiteGraph.registerNodeType("events/delay", DelayEvent);
 
     //Show value inside the debug console
     function TimerEvent() {
@@ -16653,7 +16653,7 @@ LiteGraph.registerNodeType("events/waitAll", WaitAll);
         return [["tick", "boolean"]];
     };
 
-    LiteGraph.registerNodeType("events/timer", TimerEvent);
+    //LiteGraph.registerNodeType("events/timer", TimerEvent);
 
 
 
@@ -16690,7 +16690,7 @@ LiteGraph.registerNodeType("events/waitAll", WaitAll);
 			this._ready = false;
     };
 
-    LiteGraph.registerNodeType("events/semaphore", SemaphoreEvent);
+    //LiteGraph.registerNodeType("events/semaphore", SemaphoreEvent);
 
     function OnceEvent() {
         this.addInput("in", LiteGraph.ACTION );
@@ -16717,7 +16717,7 @@ LiteGraph.registerNodeType("events/waitAll", WaitAll);
 			this._once = false;
     };
 
-    LiteGraph.registerNodeType("events/once", OnceEvent);
+    //LiteGraph.registerNodeType("events/once", OnceEvent);
 
     function DataStore() {
         this.addInput("data", 0);
@@ -16752,7 +16752,7 @@ LiteGraph.registerNodeType("events/waitAll", WaitAll);
 			o.data = null;
 	}
 
-    LiteGraph.registerNodeType("basic/data_store", DataStore);
+    //LiteGraph.registerNodeType("basic/data_store", DataStore);
 
 
 
@@ -16845,7 +16845,7 @@ LiteGraph.registerNodeType("events/waitAll", WaitAll);
         this.clicked = false;
     };
 
-    LiteGraph.registerNodeType("widget/button", WidgetButton);
+    //LiteGraph.registerNodeType("widget/button", WidgetButton);
 
     function WidgetToggle() {
         this.addInput("", "boolean");
@@ -16915,7 +16915,7 @@ LiteGraph.registerNodeType("events/waitAll", WaitAll);
         }
     };
 
-    LiteGraph.registerNodeType("widget/toggle", WidgetToggle);
+    //LiteGraph.registerNodeType("widget/toggle", WidgetToggle);
 
     /* Number ****************/
 
@@ -17032,7 +17032,7 @@ LiteGraph.registerNodeType("events/waitAll", WaitAll);
         }
     };
 
-    LiteGraph.registerNodeType("widget/number", WidgetNumber);
+    //LiteGraph.registerNodeType("widget/number", WidgetNumber);
 
 
     /* Combo ****************/
@@ -17072,7 +17072,7 @@ LiteGraph.registerNodeType("events/waitAll", WaitAll);
 		}
 	};
 
-    LiteGraph.registerNodeType("widget/combo", WidgetCombo);
+    //LiteGraph.registerNodeType("widget/combo", WidgetCombo);
 
 
     /* Knob ****************/
@@ -17235,7 +17235,7 @@ LiteGraph.registerNodeType("events/waitAll", WaitAll);
         }
     };
 
-    LiteGraph.registerNodeType("widget/knob", WidgetKnob);
+    //LiteGraph.registerNodeType("widget/knob", WidgetKnob);
 
     //Show value inside the debug console
     function WidgetSliderGUI() {
@@ -17272,7 +17272,7 @@ LiteGraph.registerNodeType("events/waitAll", WaitAll);
         this.setOutputData(0, this.properties.value);
     };
 
-    LiteGraph.registerNodeType("widget/internal_slider", WidgetSliderGUI);
+    //LiteGraph.registerNodeType("widget/internal_slider", WidgetSliderGUI);
 
     //Widget H SLIDER
     function WidgetHSlider() {
@@ -17357,7 +17357,7 @@ LiteGraph.registerNodeType("events/waitAll", WaitAll);
         //this.oldmouse = null;
     };
 
-    LiteGraph.registerNodeType("widget/hslider", WidgetHSlider);
+    //LiteGraph.registerNodeType("widget/hslider", WidgetHSlider);
 
     function WidgetProgress() {
         this.size = [160, 26];
@@ -17387,7 +17387,7 @@ LiteGraph.registerNodeType("events/waitAll", WaitAll);
         ctx.fillRect(2, 2, (this.size[0] - 4) * v, this.size[1] - 4);
     };
 
-    LiteGraph.registerNodeType("widget/progress", WidgetProgress);
+    //LiteGraph.registerNodeType("widget/progress", WidgetProgress);
 
     function WidgetText() {
         this.addInputs("", 0);
@@ -17484,7 +17484,7 @@ LiteGraph.registerNodeType("events/waitAll", WaitAll);
         return true;
     };
 
-    LiteGraph.registerNodeType("widget/text", WidgetText);
+    //LiteGraph.registerNodeType("widget/text", WidgetText);
 
     function WidgetPanel() {
         this.size = [200, 100];
@@ -17554,7 +17554,7 @@ LiteGraph.registerNodeType("events/waitAll", WaitAll);
         ctx.stroke();
     };
 
-    LiteGraph.registerNodeType("widget/panel", WidgetPanel);
+    //LiteGraph.registerNodeType("widget/panel", WidgetPanel);
 })(this);
 
 (function(global) {
@@ -17908,7 +17908,7 @@ LiteGraph.registerNodeType("events/waitAll", WaitAll);
         ];
     };
 
-    LiteGraph.registerNodeType("input/gamepad", GamepadInput);
+    //LiteGraph.registerNodeType("input/gamepad", GamepadInput);
 
 })(this);
 
@@ -17988,7 +17988,7 @@ LiteGraph.registerNodeType("events/waitAll", WaitAll);
         ];
     };
 
-    LiteGraph.registerNodeType("math/converter", Converter);
+    //LiteGraph.registerNodeType("math/converter", Converter);
 
     //Bypass
     function Bypass() {
@@ -18005,7 +18005,7 @@ LiteGraph.registerNodeType("events/waitAll", WaitAll);
         this.setOutputData(0, v);
     };
 
-    LiteGraph.registerNodeType("math/bypass", Bypass);
+    //LiteGraph.registerNodeType("math/bypass", Bypass);
 
     function ToNumber() {
         this.addInput("in");
@@ -18020,7 +18020,7 @@ LiteGraph.registerNodeType("events/waitAll", WaitAll);
         this.setOutputData(0, Number(v));
     };
 
-    LiteGraph.registerNodeType("math/to_number", ToNumber);
+    ////LiteGraph.registerNodeType("math/to_number", ToNumber);
 
     function MathRange() {
         this.addInput("in", "number", { locked: true });
@@ -18103,7 +18103,7 @@ LiteGraph.registerNodeType("events/waitAll", WaitAll);
         ];
     };
 
-    LiteGraph.registerNodeType("math/range", MathRange);
+    //LiteGraph.registerNodeType("math/range", MathRange);
 
     function MathRand() {
         this.addOutput("value", "number");
@@ -18142,7 +18142,7 @@ LiteGraph.registerNodeType("events/waitAll", WaitAll);
         return [["min", "number"], ["max", "number"]];
     };
 
-    LiteGraph.registerNodeType("math/rand", MathRand);
+    //LiteGraph.registerNodeType("math/rand", MathRand);
 
     //basic continuous noise
     function MathNoise() {
@@ -18212,7 +18212,7 @@ LiteGraph.registerNodeType("events/waitAll", WaitAll);
         this.outputs[0].label = (this._last_v || 0).toFixed(3);
     };
 
-    LiteGraph.registerNodeType("math/noise", MathNoise);
+    //LiteGraph.registerNodeType("math/noise", MathNoise);
 
     //generates spikes every random time
     function MathSpikes() {
@@ -18253,7 +18253,7 @@ LiteGraph.registerNodeType("events/waitAll", WaitAll);
         this.setOutputData(0, v);
     };
 
-    LiteGraph.registerNodeType("math/spikes", MathSpikes);
+    //LiteGraph.registerNodeType("math/spikes", MathSpikes);
 
     //Math clamp
     function MathClamp() {
@@ -18291,7 +18291,7 @@ LiteGraph.registerNodeType("events/waitAll", WaitAll);
         return code;
     };
 
-    LiteGraph.registerNodeType("math/clamp", MathClamp);
+    //LiteGraph.registerNodeType("math/clamp", MathClamp);
 
     //Math ABS
     function MathLerp() {
@@ -18329,7 +18329,7 @@ LiteGraph.registerNodeType("events/waitAll", WaitAll);
         return [["f", "number"]];
     };
 
-    LiteGraph.registerNodeType("math/lerp", MathLerp);
+    //LiteGraph.registerNodeType("math/lerp", MathLerp);
 
     //Math ABS
     function MathAbs() {
@@ -18349,7 +18349,7 @@ LiteGraph.registerNodeType("events/waitAll", WaitAll);
         this.setOutputData(0, Math.abs(v));
     };
 
-    LiteGraph.registerNodeType("math/abs", MathAbs);
+    //LiteGraph.registerNodeType("math/abs", MathAbs);
 
     //Math Floor
     function MathFloor() {
@@ -18369,7 +18369,7 @@ LiteGraph.registerNodeType("events/waitAll", WaitAll);
         this.setOutputData(0, Math.floor(v));
     };
 
-    LiteGraph.registerNodeType("math/floor", MathFloor);
+    //LiteGraph.registerNodeType("math/floor", MathFloor);
 
     //Math frac
     function MathFrac() {
@@ -18389,7 +18389,7 @@ LiteGraph.registerNodeType("events/waitAll", WaitAll);
         this.setOutputData(0, v % 1);
     };
 
-    LiteGraph.registerNodeType("math/frac", MathFrac);
+    //LiteGraph.registerNodeType("math/frac", MathFrac);
 
     //Math Floor
     function MathSmoothStep() {
@@ -18419,7 +18419,7 @@ LiteGraph.registerNodeType("events/waitAll", WaitAll);
         this.setOutputData(0, v);
     };
 
-    LiteGraph.registerNodeType("math/smoothstep", MathSmoothStep);
+    //LiteGraph.registerNodeType("math/smoothstep", MathSmoothStep);
 
     //Math scale
     function MathScale() {
@@ -18439,7 +18439,7 @@ LiteGraph.registerNodeType("events/waitAll", WaitAll);
         }
     };
 
-    LiteGraph.registerNodeType("math/scale", MathScale);
+    //LiteGraph.registerNodeType("math/scale", MathScale);
 
 	//Gate
 	function Gate() {
@@ -18457,7 +18457,7 @@ LiteGraph.registerNodeType("events/waitAll", WaitAll);
 		this.setOutputData(0, this.getInputData( v ? 1 : 2 ));
 	};
 
-	LiteGraph.registerNodeType("math/gate", Gate);
+	//LiteGraph.registerNodeType("math/gate", Gate);
 
 
     //Math Average
@@ -18510,7 +18510,7 @@ LiteGraph.registerNodeType("events/waitAll", WaitAll);
         }
     };
 
-    LiteGraph.registerNodeType("math/average", MathAverageFilter);
+    //LiteGraph.registerNodeType("math/average", MathAverageFilter);
 
     //Math
     function MathTendTo() {
@@ -18538,7 +18538,7 @@ LiteGraph.registerNodeType("events/waitAll", WaitAll);
         this.setOutputData(0, this._value);
     };
 
-    LiteGraph.registerNodeType("math/tendTo", MathTendTo);
+    //LiteGraph.registerNodeType("math/tendTo", MathTendTo);
 
     //Math operation
     function MathOperation() {
@@ -18656,7 +18656,7 @@ LiteGraph.registerNodeType("events/waitAll", WaitAll);
         ctx.textAlign = "left";
     };
 
-    LiteGraph.registerNodeType("math/operation", MathOperation);
+    //LiteGraph.registerNodeType("math/operation", MathOperation);
 
     LiteGraph.registerSearchboxExtra("math/operation", "MAX", {
         properties: {OP:"max"},
@@ -18738,7 +18738,7 @@ LiteGraph.registerNodeType("events/waitAll", WaitAll);
         ];
     };
 
-    LiteGraph.registerNodeType("math/compare", MathCompare);
+    //LiteGraph.registerNodeType("math/compare", MathCompare);
 
     LiteGraph.registerSearchboxExtra("math/compare", "==", {
         outputs: [["A==B", "boolean"]],
@@ -18839,7 +18839,7 @@ LiteGraph.registerNodeType("events/waitAll", WaitAll);
         this.setOutputData(1, !result);
     };
 
-    LiteGraph.registerNodeType("math/condition", MathCondition);
+    //LiteGraph.registerNodeType("math/condition", MathCondition);
 
 
     function MathBranch() {
@@ -18869,7 +18869,7 @@ LiteGraph.registerNodeType("events/waitAll", WaitAll);
 		}
 	}
 
-    LiteGraph.registerNodeType("math/branch", MathBranch);
+    //LiteGraph.registerNodeType("math/branch", MathBranch);
 
 
     function MathAccumulate() {
@@ -18896,7 +18896,7 @@ LiteGraph.registerNodeType("events/waitAll", WaitAll);
         this.setOutputData(0, this.properties.value);
     };
 
-    LiteGraph.registerNodeType("math/accumulate", MathAccumulate);
+    //LiteGraph.registerNodeType("math/accumulate", MathAccumulate);
 
     //Math Trigonometry
     function MathTrigonometry() {
@@ -18970,7 +18970,7 @@ LiteGraph.registerNodeType("events/waitAll", WaitAll);
         ];
     };
 
-    LiteGraph.registerNodeType("math/trigonometry", MathTrigonometry);
+    //LiteGraph.registerNodeType("math/trigonometry", MathTrigonometry);
 
     LiteGraph.registerSearchboxExtra("math/trigonometry", "SIN()", {
         outputs: [["sin", "number"]],
@@ -19066,7 +19066,7 @@ LiteGraph.registerNodeType("events/waitAll", WaitAll);
         }
     };
 
-    LiteGraph.registerNodeType("math/formula", MathFormula);
+    //LiteGraph.registerNodeType("math/formula", MathFormula);
 
     function Math3DVec2ToXY() {
         this.addInput("vec2", "vec2");
@@ -19087,7 +19087,7 @@ LiteGraph.registerNodeType("events/waitAll", WaitAll);
         this.setOutputData(1, v[1]);
     };
 
-    LiteGraph.registerNodeType("math3d/vec2-to-xy", Math3DVec2ToXY);
+    //LiteGraph.registerNodeType("math3d/vec2-to-xy", Math3DVec2ToXY);
 
     function Math3DXYToVec2() {
         this.addInputs([["x", "number"], ["y", "number"]]);
@@ -19116,7 +19116,7 @@ LiteGraph.registerNodeType("events/waitAll", WaitAll);
         this.setOutputData(0, data);
     };
 
-    LiteGraph.registerNodeType("math3d/xy-to-vec2", Math3DXYToVec2);
+    //LiteGraph.registerNodeType("math3d/xy-to-vec2", Math3DXYToVec2);
 
     function Math3DVec3ToXYZ() {
         this.addInput("vec3", "vec3");
@@ -19139,7 +19139,7 @@ LiteGraph.registerNodeType("events/waitAll", WaitAll);
         this.setOutputData(2, v[2]);
     };
 
-    LiteGraph.registerNodeType("math3d/vec3-to-xyz", Math3DVec3ToXYZ);
+    //LiteGraph.registerNodeType("math3d/vec3-to-xyz", Math3DVec3ToXYZ);
 
     function Math3DXYZToVec3() {
         this.addInputs([["x", "number"], ["y", "number"], ["z", "number"]]);
@@ -19173,7 +19173,7 @@ LiteGraph.registerNodeType("events/waitAll", WaitAll);
         this.setOutputData(0, data);
     };
 
-    LiteGraph.registerNodeType("math3d/xyz-to-vec3", Math3DXYZToVec3);
+    //LiteGraph.registerNodeType("math3d/xyz-to-vec3", Math3DXYZToVec3);
 
     function Math3DVec4ToXYZW() {
         this.addInput("vec4", "vec4");
@@ -19198,7 +19198,7 @@ LiteGraph.registerNodeType("events/waitAll", WaitAll);
         this.setOutputData(3, v[3]);
     };
 
-    LiteGraph.registerNodeType("math3d/vec4-to-xyzw", Math3DVec4ToXYZW);
+    //LiteGraph.registerNodeType("math3d/vec4-to-xyzw", Math3DVec4ToXYZW);
 
     function Math3DXYZWToVec4() {
         this.addInputs([
@@ -19242,7 +19242,7 @@ LiteGraph.registerNodeType("events/waitAll", WaitAll);
         this.setOutputData(0, data);
     };
 
-    LiteGraph.registerNodeType("math3d/xyzw-to-vec4", Math3DXYZWToVec4);
+    //LiteGraph.registerNodeType("math3d/xyzw-to-vec4", Math3DXYZWToVec4);
 
 })(this);
 
@@ -19310,7 +19310,7 @@ LiteGraph.registerNodeType("events/waitAll", WaitAll);
 		this.setOutputData(0, M);		
 	}
 
-    LiteGraph.registerNodeType("math3d/mat4", Math3DMat4);
+    //LiteGraph.registerNodeType("math3d/mat4", Math3DMat4);
 
     //Math 3D operation
     function Math3DOperation() {
@@ -19421,7 +19421,7 @@ LiteGraph.registerNodeType("events/waitAll", WaitAll);
         ctx.textAlign = "left";
     };
 
-    LiteGraph.registerNodeType("math3d/operation", Math3DOperation);
+    //LiteGraph.registerNodeType("math3d/operation", Math3DOperation);
 
     function Math3DVec3Scale() {
         this.addInput("in", "vec3");
@@ -19451,7 +19451,7 @@ LiteGraph.registerNodeType("events/waitAll", WaitAll);
         this.setOutputData(0, data);
     };
 
-    LiteGraph.registerNodeType("math3d/vec3-scale", Math3DVec3Scale);
+    //LiteGraph.registerNodeType("math3d/vec3-scale", Math3DVec3Scale);
 
     function Math3DVec3Length() {
         this.addInput("in", "vec3");
@@ -19470,7 +19470,7 @@ LiteGraph.registerNodeType("events/waitAll", WaitAll);
         this.setOutputData(0, dist);
     };
 
-    LiteGraph.registerNodeType("math3d/vec3-length", Math3DVec3Length);
+    //LiteGraph.registerNodeType("math3d/vec3-length", Math3DVec3Length);
 
     function Math3DVec3Normalize() {
         this.addInput("in", "vec3");
@@ -19495,7 +19495,7 @@ LiteGraph.registerNodeType("events/waitAll", WaitAll);
         this.setOutputData(0, data);
     };
 
-    LiteGraph.registerNodeType("math3d/vec3-normalize", Math3DVec3Normalize);
+    //LiteGraph.registerNodeType("math3d/vec3-normalize", Math3DVec3Normalize);
 
     function Math3DVec3Lerp() {
         this.addInput("A", "vec3");
@@ -19528,7 +19528,7 @@ LiteGraph.registerNodeType("events/waitAll", WaitAll);
         this.setOutputData(0, data);
     };
 
-    LiteGraph.registerNodeType("math3d/vec3-lerp", Math3DVec3Lerp);
+    //LiteGraph.registerNodeType("math3d/vec3-lerp", Math3DVec3Lerp);
 
     function Math3DVec3Dot() {
         this.addInput("A", "vec3");
@@ -19553,7 +19553,7 @@ LiteGraph.registerNodeType("events/waitAll", WaitAll);
         this.setOutputData(0, dot);
     };
 
-    LiteGraph.registerNodeType("math3d/vec3-dot", Math3DVec3Dot);
+    //LiteGraph.registerNodeType("math3d/vec3-dot", Math3DVec3Dot);
 
     //if glMatrix is installed...
     if (global.glMatrix) {
@@ -19586,7 +19586,7 @@ LiteGraph.registerNodeType("events/waitAll", WaitAll);
             ];
         };
 
-        LiteGraph.registerNodeType("math3d/quaternion", Math3DQuaternion);
+        //LiteGraph.registerNodeType("math3d/quaternion", Math3DQuaternion);
 
         function Math3DRotation() {
             this.addInputs([["degrees", "number"], ["axis", "vec3"]]);
@@ -19613,7 +19613,7 @@ LiteGraph.registerNodeType("events/waitAll", WaitAll);
             this.setOutputData(0, R);
         };
 
-        LiteGraph.registerNodeType("math3d/rotation", Math3DRotation);
+        //LiteGraph.registerNodeType("math3d/rotation", Math3DRotation);
 
 
         function MathEulerToQuat() {
@@ -19639,7 +19639,7 @@ LiteGraph.registerNodeType("events/waitAll", WaitAll);
             this.setOutputData(0, R);
         };
 
-        LiteGraph.registerNodeType("math3d/euler_to_quat", MathEulerToQuat);
+        //LiteGraph.registerNodeType("math3d/euler_to_quat", MathEulerToQuat);
 
         function MathQuatToEuler() {
             this.addInput(["quat", "quat"]);
@@ -19659,7 +19659,7 @@ LiteGraph.registerNodeType("events/waitAll", WaitAll);
             this.setOutputData(0, this._value);
         };
 
-        LiteGraph.registerNodeType("math3d/quat_to_euler", MathQuatToEuler);
+        //LiteGraph.registerNodeType("math3d/quat_to_euler", MathQuatToEuler);
 
 
         //Math3D rotate vec3
@@ -19688,7 +19688,7 @@ LiteGraph.registerNodeType("events/waitAll", WaitAll);
             }
         };
 
-        LiteGraph.registerNodeType("math3d/rotate_vec3", Math3DRotateVec3);
+        //LiteGraph.registerNodeType("math3d/rotate_vec3", Math3DRotateVec3);
 
         function Math3DMultQuat() {
             this.addInputs([["A", "quat"], ["B", "quat"]]);
@@ -19714,7 +19714,7 @@ LiteGraph.registerNodeType("events/waitAll", WaitAll);
             this.setOutputData(0, R);
         };
 
-        LiteGraph.registerNodeType("math3d/mult-quat", Math3DMultQuat);
+        //LiteGraph.registerNodeType("math3d/mult-quat", Math3DMultQuat);
 
         function Math3DQuatSlerp() {
             this.addInputs([
@@ -19749,7 +19749,7 @@ LiteGraph.registerNodeType("events/waitAll", WaitAll);
             this.setOutputData(0, R);
         };
 
-        LiteGraph.registerNodeType("math3d/quat-slerp", Math3DQuatSlerp);
+        //LiteGraph.registerNodeType("math3d/quat-slerp", Math3DQuatSlerp);
 
 
         //Math3D rotate vec3
@@ -19810,7 +19810,7 @@ LiteGraph.registerNodeType("events/waitAll", WaitAll);
 			this.setOutputData(1,this._clamped);
         };
 
-        LiteGraph.registerNodeType("math3d/remap_range", Math3DRemapRange);
+        //LiteGraph.registerNodeType("math3d/remap_range", Math3DRemapRange);
 
 
 
@@ -19839,18 +19839,18 @@ LiteGraph.registerNodeType("events/waitAll", WaitAll);
         return String(a);
     }
 
-    LiteGraph.wrapFunctionAsNode("string/toString", toString, [""], "string");
+    //LiteGraph.wrapFunctionAsNode("string/toString", toString, [""], "string");
 
     function compare(a, b) {
         return a == b;
     }
 
-    LiteGraph.wrapFunctionAsNode(
-        "string/compare",
-        compare,
-        ["string", "string"],
-        "boolean"
-    );
+    // LiteGraph.wrapFunctionAsNode(
+    //     "string/compare",
+    //     compare,
+    //     ["string", "string"],
+    //     "boolean"
+    // );
 
     function concatenate(a, b) {
         if (a === undefined) {
@@ -19862,12 +19862,12 @@ LiteGraph.registerNodeType("events/waitAll", WaitAll);
         return a + b;
     }
 
-    LiteGraph.wrapFunctionAsNode(
-        "string/concatenate",
-        concatenate,
-        ["string", "string"],
-        "string"
-    );
+    // LiteGraph.wrapFunctionAsNode(
+    //     "string/concatenate",
+    //     concatenate,
+    //     ["string", "string"],
+    //     "string"
+    // );
 
     function contains(a, b) {
         if (a === undefined || b === undefined) {
@@ -19876,12 +19876,12 @@ LiteGraph.registerNodeType("events/waitAll", WaitAll);
         return a.indexOf(b) != -1;
     }
 
-    LiteGraph.wrapFunctionAsNode(
-        "string/contains",
-        contains,
-        ["string", "string"],
-        "boolean"
-    );
+    // LiteGraph.wrapFunctionAsNode(
+    //     "string/contains",
+    //     contains,
+    //     ["string", "string"],
+    //     "boolean"
+    // );
 
     function toUpperCase(a) {
         if (a != null && a.constructor === String) {
@@ -19890,12 +19890,12 @@ LiteGraph.registerNodeType("events/waitAll", WaitAll);
         return a;
     }
 
-    LiteGraph.wrapFunctionAsNode(
-        "string/toUpperCase",
-        toUpperCase,
-        ["string"],
-        "string"
-    );
+    // LiteGraph.wrapFunctionAsNode(
+    //     "string/toUpperCase",
+    //     toUpperCase,
+    //     ["string"],
+    //     "string"
+    // );
 
     function split(str, separator) {
 		if(separator == null)
@@ -19916,13 +19916,13 @@ LiteGraph.registerNodeType("events/waitAll", WaitAll);
         return null;
     }
 
-    LiteGraph.wrapFunctionAsNode(
-        "string/split",
-        split,
-        ["string,array", "string"],
-        "array",
-		{ separator: "," }
-    );
+    // LiteGraph.wrapFunctionAsNode(
+    //     "string/split",
+    //     split,
+    //     ["string,array", "string"],
+    //     "array",
+	// 	{ separator: "," }
+    // );
 
     function toFixed(a) {
         if (a != null && a.constructor === Number) {
@@ -19931,13 +19931,13 @@ LiteGraph.registerNodeType("events/waitAll", WaitAll);
         return a;
     }
 
-    LiteGraph.wrapFunctionAsNode(
-        "string/toFixed",
-        toFixed,
-        ["number"],
-        "string",
-        { precision: 0 }
-    );
+    // LiteGraph.wrapFunctionAsNode(
+    //     "string/toFixed",
+    //     toFixed,
+    //     ["number"],
+    //     "string",
+    //     { precision: 0 }
+    // );
 
 
     function StringToTable() {
@@ -19967,7 +19967,7 @@ LiteGraph.registerNodeType("events/waitAll", WaitAll);
         this.setOutputData(1, this._table ? this._table.length : 0 );
     };
 
-    LiteGraph.registerNodeType("string/toTable", StringToTable);
+    //LiteGraph.registerNodeType("string/toTable", StringToTable);
 
 })(this);
 
@@ -20016,7 +20016,7 @@ LiteGraph.registerNodeType("events/waitAll", WaitAll);
         return [["E", 0], ["F", 0], ["G", 0], ["H", 0]];
     };
 
-    LiteGraph.registerNodeType("logic/selector", Selector);
+    //LiteGraph.registerNodeType("logic/selector", Selector);
 
     function Sequence() {
         this.properties = {
@@ -20054,7 +20054,7 @@ LiteGraph.registerNodeType("events/waitAll", WaitAll);
         this.setOutputData(0, this.values[index]);
     };
 
-    LiteGraph.registerNodeType("logic/sequence", Sequence);
+    //LiteGraph.registerNodeType("logic/sequence", Sequence);
 	
     
     function logicAnd(){
@@ -20080,7 +20080,7 @@ LiteGraph.registerNodeType("events/waitAll", WaitAll);
             ["and", "boolean"]
         ];
     };
-    LiteGraph.registerNodeType("logic/AND", logicAnd);
+    //LiteGraph.registerNodeType("logic/AND", logicAnd);
     
     
     function logicOr(){
@@ -20106,7 +20106,7 @@ LiteGraph.registerNodeType("events/waitAll", WaitAll);
             ["or", "boolean"]
         ];
     };
-    LiteGraph.registerNodeType("logic/OR", logicOr);
+    //LiteGraph.registerNodeType("logic/OR", logicOr);
     
     
     function logicNot(){
@@ -20120,7 +20120,7 @@ LiteGraph.registerNodeType("events/waitAll", WaitAll);
         var ret = !this.getInputData(0);
         this.setOutputData(0, ret);
     };
-    LiteGraph.registerNodeType("logic/NOT", logicNot);
+    //LiteGraph.registerNodeType("logic/NOT", logicNot);
     
     
     function logicCompare(){
@@ -20149,7 +20149,7 @@ LiteGraph.registerNodeType("events/waitAll", WaitAll);
             ["bool", "boolean"]
         ];
     };
-    LiteGraph.registerNodeType("logic/CompareBool", logicCompare);
+    //LiteGraph.registerNodeType("logic/CompareBool", logicCompare);
     
     
     function logicBranch(){
@@ -20170,7 +20170,7 @@ LiteGraph.registerNodeType("events/waitAll", WaitAll);
             this.triggerSlot(1);
         }
     };
-    LiteGraph.registerNodeType("logic/IF", logicBranch);
+    //LiteGraph.registerNodeType("logic/IF", logicBranch);
 })(this);
 
 (function(global) {
@@ -20248,7 +20248,7 @@ LiteGraph.registerNodeType("events/waitAll", WaitAll);
         }
     };
 
-    LiteGraph.registerNodeType("graphics/plot", GraphicsPlot);
+    //LiteGraph.registerNodeType("graphics/plot", GraphicsPlot);
 
     function GraphicsImage() {
         this.addOutput("frame", "image");
@@ -20346,7 +20346,7 @@ LiteGraph.registerNodeType("events/waitAll", WaitAll);
         });
     };
 
-    LiteGraph.registerNodeType("graphics/image", GraphicsImage);
+    //LiteGraph.registerNodeType("graphics/image", GraphicsImage);
 
     function ColorPalette() {
         this.addInput("f", "number");
@@ -20421,7 +20421,7 @@ LiteGraph.registerNodeType("events/waitAll", WaitAll);
         this.setOutputData(0, result);
     };
 
-    LiteGraph.registerNodeType("color/palette", ColorPalette);
+    //LiteGraph.registerNodeType("color/palette", ColorPalette);
 
     function ImageFrame() {
         this.addInput("", "image,canvas");
@@ -20472,7 +20472,7 @@ LiteGraph.registerNodeType("events/waitAll", WaitAll);
         }
     };
 
-    LiteGraph.registerNodeType("graphics/frame", ImageFrame);
+    //LiteGraph.registerNodeType("graphics/frame", ImageFrame);
 
     function ImageFade() {
         this.addInputs([
@@ -20531,7 +20531,7 @@ LiteGraph.registerNodeType("events/waitAll", WaitAll);
         this.setDirtyCanvas(true);
     };
 
-    LiteGraph.registerNodeType("graphics/imagefade", ImageFade);
+    //LiteGraph.registerNodeType("graphics/imagefade", ImageFade);
 
     function ImageCrop() {
         this.addInput("", "image");
@@ -20612,7 +20612,7 @@ LiteGraph.registerNodeType("events/waitAll", WaitAll);
         return true;
     };
 
-    LiteGraph.registerNodeType("graphics/cropImage", ImageCrop);
+    //LiteGraph.registerNodeType("graphics/cropImage", ImageCrop);
 
     //CANVAS stuff
 
@@ -20651,7 +20651,7 @@ LiteGraph.registerNodeType("events/waitAll", WaitAll);
         }
     };
 
-    LiteGraph.registerNodeType("graphics/canvas", CanvasNode);
+    //LiteGraph.registerNodeType("graphics/canvas", CanvasNode);
 
     function DrawImageNode() {
         this.addInput("canvas", "canvas");
@@ -20681,7 +20681,7 @@ LiteGraph.registerNodeType("events/waitAll", WaitAll);
         ctx.drawImage(img, x, y);
     };
 
-    LiteGraph.registerNodeType("graphics/drawImage", DrawImageNode);
+    //LiteGraph.registerNodeType("graphics/drawImage", DrawImageNode);
 
     function DrawRectangleNode() {
         this.addInput("canvas", "canvas");
@@ -20716,7 +20716,7 @@ LiteGraph.registerNodeType("events/waitAll", WaitAll);
         ctx.fillRect(x, y, w, h);
     };
 
-    LiteGraph.registerNodeType("graphics/drawRectangle", DrawRectangleNode);
+    //LiteGraph.registerNodeType("graphics/drawRectangle", DrawRectangleNode);
 
     function ImageVideo() {
         this.addInput("t", "number");
@@ -20904,7 +20904,7 @@ LiteGraph.registerNodeType("events/waitAll", WaitAll);
 	*/
     };
 
-    LiteGraph.registerNodeType("graphics/video", ImageVideo);
+    //LiteGraph.registerNodeType("graphics/video", ImageVideo);
 
     // Texture Webcam *****************************************
     function ImageWebcam() {
@@ -21067,7 +21067,7 @@ LiteGraph.registerNodeType("events/waitAll", WaitAll);
         ];
     };
 
-    LiteGraph.registerNodeType("graphics/webcam", ImageWebcam);
+    //LiteGraph.registerNodeType("graphics/webcam", ImageWebcam);
 })(this);
 
 (function(global) {
@@ -21458,7 +21458,7 @@ LiteGraph.registerNodeType("events/waitAll", WaitAll);
 		});
 	}
 
-	LiteGraph.registerNodeType("texture/texture", LGraphTexture);
+	//LiteGraph.registerNodeType("texture/texture", LGraphTexture);
 
 	//**************************
 	function LGraphTexturePreview() {
@@ -21506,7 +21506,7 @@ LiteGraph.registerNodeType("events/waitAll", WaitAll);
 		ctx.restore();
 	};
 
-	LiteGraph.registerNodeType("texture/preview", LGraphTexturePreview);
+	//LiteGraph.registerNodeType("texture/preview", LGraphTexturePreview);
 
 	//**************************************
 
@@ -21553,7 +21553,7 @@ LiteGraph.registerNodeType("events/waitAll", WaitAll);
 		this.setOutputData(1, this.properties.name);
 	};
 
-	LiteGraph.registerNodeType("texture/save", LGraphTextureSave);
+	//LiteGraph.registerNodeType("texture/save", LGraphTextureSave);
 
 	//****************************************************
 
@@ -21817,7 +21817,7 @@ LiteGraph.registerNodeType("events/waitAll", WaitAll);
 		}});
 	}
 
-	LiteGraph.registerNodeType("texture/operation", LGraphTextureOperation);
+	//LiteGraph.registerNodeType("texture/operation", LGraphTextureOperation);
 
 	//****************************************************
 
@@ -22033,7 +22033,7 @@ void main() {\n\
 }\n\
 ";
 
-	LiteGraph.registerNodeType("texture/shader", LGraphTextureShader);
+	//LiteGraph.registerNodeType("texture/shader", LGraphTextureShader);
 
 	// Texture Scale Offset
 
@@ -22147,10 +22147,10 @@ void main() {\n\
 		}\n\
 		";
 
-	LiteGraph.registerNodeType(
-		"texture/scaleOffset",
-		LGraphTextureScaleOffset
-	);
+	//LiteGraph.registerNodeType(
+	// 	"texture/scaleOffset",
+	// 	LGraphTextureScaleOffset
+	// );
 
 	// Warp (distort a texture) *************************
 
@@ -22282,7 +22282,7 @@ void main() {\n\
 		}\n\
 		";
 
-	LiteGraph.registerNodeType("texture/warp", LGraphTextureWarp);
+	//LiteGraph.registerNodeType("texture/warp", LGraphTextureWarp);
 
 	//****************************************************
 
@@ -22468,10 +22468,10 @@ void main() {\n\
 		}\n\
 		";
 
-	LiteGraph.registerNodeType(
-		"texture/toviewport",
-		LGraphTextureToViewport
-	);
+	//LiteGraph.registerNodeType(
+	// 	"texture/toviewport",
+	// 	LGraphTextureToViewport
+	// );
 
 	// Texture Copy *****************************************
 	function LGraphTextureCopy() {
@@ -22556,7 +22556,7 @@ void main() {\n\
 		this.setOutputData(0, this._temp_texture);
 	};
 
-	LiteGraph.registerNodeType("texture/copy", LGraphTextureCopy);
+	//LiteGraph.registerNodeType("texture/copy", LGraphTextureCopy);
 
 	// Texture Downsample *****************************************
 	function LGraphTextureDownsample() {
@@ -22680,10 +22680,10 @@ void main() {\n\
 		}\n\
 		";
 
-	LiteGraph.registerNodeType(
-		"texture/downsample",
-		LGraphTextureDownsample
-	);
+	//LiteGraph.registerNodeType(
+	// 	"texture/downsample",
+	// 	LGraphTextureDownsample
+	// );
 
 
 
@@ -22746,7 +22746,7 @@ void main() {\n\
 		this.setOutputData(0, this._texture);
 	};
 
-	LiteGraph.registerNodeType( "texture/resize", LGraphTextureResize );
+	//LiteGraph.registerNodeType( "texture/resize", LGraphTextureResize );
 
 	// Texture Average  *****************************************
 	function LGraphTextureAverage() {
@@ -22900,7 +22900,7 @@ void main() {\n\
 		}\n\
 		";
 
-	LiteGraph.registerNodeType("texture/average", LGraphTextureAverage);
+	//LiteGraph.registerNodeType("texture/average", LGraphTextureAverage);
 
 
 
@@ -23110,7 +23110,7 @@ void main() {\n\
 		}\n\
 		";
 
-	LiteGraph.registerNodeType( "texture/temporal_smooth", LGraphTextureTemporalSmooth );
+	//LiteGraph.registerNodeType( "texture/temporal_smooth", LGraphTextureTemporalSmooth );
 
 
 	function LGraphTextureLinearAvgSmooth() {
@@ -23236,7 +23236,7 @@ void main() {\n\
 		";
 
 
-	LiteGraph.registerNodeType( "texture/linear_avg_smooth", LGraphTextureLinearAvgSmooth );
+	//LiteGraph.registerNodeType( "texture/linear_avg_smooth", LGraphTextureLinearAvgSmooth );
 
 	// Image To Texture *****************************************
 	function LGraphImageToTexture() {
@@ -23285,10 +23285,10 @@ void main() {\n\
 		this.setOutputData(0, this._temp_texture);
 	};
 
-	LiteGraph.registerNodeType(
-		"texture/imageToTexture",
-		LGraphImageToTexture
-	);
+	//LiteGraph.registerNodeType(
+	// 	"texture/imageToTexture",
+	// 	LGraphImageToTexture
+	// );
 
 	// Texture LUT *****************************************
 	function LGraphTextureLUT() {
@@ -23407,7 +23407,7 @@ void main() {\n\
 		}\n\
 		";
 
-	LiteGraph.registerNodeType("texture/LUT", LGraphTextureLUT);
+	//LiteGraph.registerNodeType("texture/LUT", LGraphTextureLUT);
 
 
 	// Texture LUT *****************************************
@@ -23531,7 +23531,7 @@ void main() {\n\
 		}\n\
 		";
 
-	LiteGraph.registerNodeType("texture/encode", LGraphTextureEncode);
+	//LiteGraph.registerNodeType("texture/encode", LGraphTextureEncode);
 
 	// Texture Channels *****************************************
 	function LGraphTextureChannels() {
@@ -23635,10 +23635,10 @@ void main() {\n\
 		}\n\
 		";
 
-	LiteGraph.registerNodeType(
-		"texture/textureChannels",
-		LGraphTextureChannels
-	);
+	//LiteGraph.registerNodeType(
+	// 	"texture/textureChannels",
+	// 	LGraphTextureChannels
+	// );
 
 	// Texture Channels to Texture *****************************************
 	function LGraphChannelsTexture() {
@@ -23752,10 +23752,10 @@ void main() {\n\
 		}\n\
 		";
 
-	LiteGraph.registerNodeType(
-		"texture/channelsTexture",
-		LGraphChannelsTexture
-	);
+	//LiteGraph.registerNodeType(
+	// 	"texture/channelsTexture",
+	// 	LGraphChannelsTexture
+	// );
 
 	// Texture Color *****************************************
 	function LGraphTextureColor() {
@@ -23854,7 +23854,7 @@ void main() {\n\
 		];
 	};
 
-	LiteGraph.registerNodeType("texture/color", LGraphTextureColor);
+	//LiteGraph.registerNodeType("texture/color", LGraphTextureColor);
 
 	// Texture Channels to Texture *****************************************
 	function LGraphTextureGradient() {
@@ -23967,7 +23967,7 @@ void main() {\n\
 		}\n\
 		";
 
-	LiteGraph.registerNodeType("texture/gradient", LGraphTextureGradient);
+	//LiteGraph.registerNodeType("texture/gradient", LGraphTextureGradient);
 
 	// Texture Mix *****************************************
 	function LGraphTextureMix() {
@@ -24086,7 +24086,7 @@ void main() {\n\
 		}\n\
 		";
 
-	LiteGraph.registerNodeType("texture/mix", LGraphTextureMix);
+	//LiteGraph.registerNodeType("texture/mix", LGraphTextureMix);
 
 	// Texture Edges detection *****************************************
 	function LGraphTextureEdges() {
@@ -24189,7 +24189,7 @@ void main() {\n\
 		}\n\
 		";
 
-	LiteGraph.registerNodeType("texture/edges", LGraphTextureEdges);
+	//LiteGraph.registerNodeType("texture/edges", LGraphTextureEdges);
 
 	// Texture Depth *****************************************
 	function LGraphTextureDepthRange() {
@@ -24330,7 +24330,7 @@ void main() {\n\
 		}\n\
 		";
 
-	LiteGraph.registerNodeType( "texture/depth_range", LGraphTextureDepthRange );
+	//LiteGraph.registerNodeType( "texture/depth_range", LGraphTextureDepthRange );
 
 
 	// Texture Depth *****************************************
@@ -24427,7 +24427,7 @@ void main() {\n\
 		}\n\
 		";
 
-	LiteGraph.registerNodeType( "texture/linear_depth", LGraphTextureLinearDepth );
+	//LiteGraph.registerNodeType( "texture/linear_depth", LGraphTextureLinearDepth );
 
 	// Texture Blur *****************************************
 	function LGraphTextureBlur() {
@@ -24549,7 +24549,7 @@ LGraphTextureBlur.pixel_shader = "precision highp float;\n\
 		";
 */
 
-	LiteGraph.registerNodeType("texture/blur", LGraphTextureBlur);
+	//LiteGraph.registerNodeType("texture/blur", LGraphTextureBlur);
 
 	//Independent glow FX
 	//based on https://catlikecoding.com/unity/tutorials/advanced-rendering/bloom/
@@ -24941,7 +24941,7 @@ LGraphTextureBlur.pixel_shader = "precision highp float;\n\
 			this.setOutputData(2, glow_texture);
 	};
 
-	LiteGraph.registerNodeType("texture/glow", LGraphTextureGlow);
+	//LiteGraph.registerNodeType("texture/glow", LGraphTextureGlow);
 
 	// Texture Filter *****************************************
 	function LGraphTextureKuwaharaFilter() {
@@ -25128,10 +25128,10 @@ void main() {\n\
 }\n\
 ";
 
-	LiteGraph.registerNodeType(
-		"texture/kuwahara",
-		LGraphTextureKuwaharaFilter
-	);
+	//LiteGraph.registerNodeType(
+	// 	"texture/kuwahara",
+	// 	LGraphTextureKuwaharaFilter
+	// );
 
 	// Texture  *****************************************
 	function LGraphTextureXDoGFilter() {
@@ -25271,7 +25271,7 @@ void main(void){\n\
 	gl_FragColor = vec4(destColor, 1.0);\n\
 }";
 
-	LiteGraph.registerNodeType("texture/xDoG", LGraphTextureXDoGFilter);
+	//LiteGraph.registerNodeType("texture/xDoG", LGraphTextureXDoGFilter);
 
 	// Texture Webcam *****************************************
 	function LGraphTextureWebcam() {
@@ -25460,7 +25460,7 @@ void main(void){\n\
 		];
 	};
 
-	LiteGraph.registerNodeType("texture/webcam", LGraphTextureWebcam);
+	//LiteGraph.registerNodeType("texture/webcam", LGraphTextureWebcam);
 
 	//from https://github.com/spite/Wagner
 	function LGraphLensFX() {
@@ -25598,7 +25598,7 @@ void main(void){\n\
 			gl_FragColor = sumcol / sumw;\n\
 		}";
 
-	LiteGraph.registerNodeType("texture/lensfx", LGraphLensFX);
+	//LiteGraph.registerNodeType("texture/lensfx", LGraphLensFX);
 
 
 	function LGraphTextureFromData() {
@@ -25646,7 +25646,7 @@ void main(void){\n\
 		this.setOutputData(0, temp);
 	}
 
-	LiteGraph.registerNodeType("texture/fromdata", LGraphTextureFromData);
+	//LiteGraph.registerNodeType("texture/fromdata", LGraphTextureFromData);
 
 	//applies a curve (or generates one)
 	function LGraphTextureCurve() {
@@ -25862,7 +25862,7 @@ void main(void){\n\
 			gl_FragColor = color;\n\
 		}";
 
-	LiteGraph.registerNodeType("texture/curve", LGraphTextureCurve);
+	//LiteGraph.registerNodeType("texture/curve", LGraphTextureCurve);
 
 	//simple exposition, but plan to expand it to support different gamma curves
 	function LGraphExposition() {
@@ -25941,7 +25941,7 @@ void main(void){\n\
 			gl_FragColor = vec4( color.xyz * u_exposition, color.a );\n\
 		}";
 
-	LiteGraph.registerNodeType("texture/exposition", LGraphExposition);
+	//LiteGraph.registerNodeType("texture/exposition", LGraphExposition);
 
 	function LGraphToneMapping() {
 		this.addInput("in", "Texture");
@@ -26105,7 +26105,7 @@ void main(void){\n\
 			gl_FragColor = vec4( rgb, color.a );\n\
 		}";
 
-	LiteGraph.registerNodeType("texture/tonemapping", LGraphToneMapping);
+	//LiteGraph.registerNodeType("texture/tonemapping", LGraphToneMapping);
 
 	function LGraphTexturePerlin() {
 		this.addOutput("out", "Texture");
@@ -26291,7 +26291,7 @@ void main(void){\n\
 			gl_FragColor = color;\n\
 		}";
 
-	LiteGraph.registerNodeType("texture/perlin", LGraphTexturePerlin);
+	//LiteGraph.registerNodeType("texture/perlin", LGraphTexturePerlin);
 
 	function LGraphTextureCanvas2D() {
 		this.addInput("v");
@@ -26433,7 +26433,7 @@ void main(void){\n\
 		this.setOutputData(0, temp);
 	};
 
-	LiteGraph.registerNodeType("texture/canvas2D", LGraphTextureCanvas2D);
+	//LiteGraph.registerNodeType("texture/canvas2D", LGraphTextureCanvas2D);
 
 	// To do chroma keying *****************
 
@@ -26529,7 +26529,7 @@ void main(void){\n\
 			gl_FragColor = vec4( color, alpha );\n\
 		}";
 
-	LiteGraph.registerNodeType("texture/matte", LGraphTextureMatte);
+	//LiteGraph.registerNodeType("texture/matte", LGraphTextureMatte);
 
 	//***********************************
 	function LGraphCubemapToTexture2D() {
@@ -26556,7 +26556,7 @@ void main(void){\n\
 		this.setOutputData( 0, this._last_tex );
 	};
 
-	LiteGraph.registerNodeType( "texture/cubemapToTexture2D", LGraphCubemapToTexture2D );
+	//LiteGraph.registerNodeType( "texture/cubemapToTexture2D", LGraphCubemapToTexture2D );
 })(this);
 
 (function(global) {
@@ -26702,7 +26702,7 @@ void main(void){\n\
 			}
 		*/
 
-		LiteGraph.registerNodeType( "shader::" + type, node_ctor );
+		//LiteGraph.registerNodeType( "shader::" + type, node_ctor );
 	}
 
 	function getShaderNodeVarName( node, name )
@@ -27320,7 +27320,7 @@ gl_FragColor = fragcolor;\n\
 		return options;
 	}
 
-	LiteGraph.registerNodeType( "texture/shaderGraph", LGraphShaderGraph );
+	//LiteGraph.registerNodeType( "texture/shaderGraph", LGraphShaderGraph );
 
 	function shaderNodeFromFunction( classname, params, return_type, code )
 	{
@@ -28904,7 +28904,7 @@ float iqnoise( in vec2 x, float u, float v ){\n\
 		}
 	}
 
-	LiteGraph.registerNodeType( "geometry/points3D", LGraphPoints3D );
+	//LiteGraph.registerNodeType( "geometry/points3D", LGraphPoints3D );
 
 
 
@@ -29044,7 +29044,7 @@ float iqnoise( in vec2 x, float u, float v ){\n\
 		this._geometry_id = geometry._id;
 	}
 
-	LiteGraph.registerNodeType( "geometry/points_to_instances", LGraphPointsToInstances );
+	//LiteGraph.registerNodeType( "geometry/points_to_instances", LGraphPointsToInstances );
 
 
 	function LGraphGeometryTransform() {
@@ -29169,7 +29169,7 @@ float iqnoise( in vec2 x, float u, float v ){\n\
 		this.geometry._version++;
 	}
 
-	LiteGraph.registerNodeType( "geometry/transform", LGraphGeometryTransform );
+	//LiteGraph.registerNodeType( "geometry/transform", LGraphGeometryTransform );
 
 
 	function LGraphGeometryPolygon() {
@@ -29243,7 +29243,7 @@ float iqnoise( in vec2 x, float u, float v ){\n\
 		this.last_info.radius = radius;
 	}
 
-	LiteGraph.registerNodeType( "geometry/polygon", LGraphGeometryPolygon );
+	//LiteGraph.registerNodeType( "geometry/polygon", LGraphGeometryPolygon );
 
 
 	function LGraphGeometryExtrude() {
@@ -29332,7 +29332,7 @@ float iqnoise( in vec2 x, float u, float v ){\n\
 		return out_geo;
 	}
 
-	LiteGraph.registerNodeType( "geometry/extrude", LGraphGeometryExtrude );
+	//LiteGraph.registerNodeType( "geometry/extrude", LGraphGeometryExtrude );
 
 
 	function LGraphGeometryEval() {
@@ -29453,7 +29453,7 @@ float iqnoise( in vec2 x, float u, float v ){\n\
 		this.setOutputData(0,this.geometry);
 	}
 
-	LiteGraph.registerNodeType( "geometry/eval", LGraphGeometryEval );
+	//LiteGraph.registerNodeType( "geometry/eval", LGraphGeometryEval );
 
 /*
 function LGraphGeometryDisplace() {
@@ -29520,7 +29520,7 @@ function LGraphGeometryDisplace() {
 		this.setOutputData(0,this.geometry);
 	}
 
-	LiteGraph.registerNodeType( "geometry/displace", LGraphGeometryDisplace );
+	//LiteGraph.registerNodeType( "geometry/displace", LGraphGeometryDisplace );
 */
 
 	function LGraphConnectPoints() {
@@ -29606,7 +29606,7 @@ function LGraphGeometryDisplace() {
 			this.setOutputData( 0, null );
 	}
 
-	LiteGraph.registerNodeType( "geometry/connectPoints", LGraphConnectPoints );
+	//LiteGraph.registerNodeType( "geometry/connectPoints", LGraphConnectPoints );
 
     //Works with Litegl.js to create WebGL nodes
     if (typeof GL == "undefined") //LiteGL RELATED **********************************************
@@ -29648,7 +29648,7 @@ function LGraphGeometryDisplace() {
 			this.setOutputData(1,this.geometry.vertices);
 	}
 
-	LiteGraph.registerNodeType( "geometry/toGeometry", LGraphToGeometry );
+	//LiteGraph.registerNodeType( "geometry/toGeometry", LGraphToGeometry );
 
 	function LGraphGeometryToMesh() {
 		this.addInput("in", "geometry");
@@ -29717,7 +29717,7 @@ function LGraphGeometryDisplace() {
 		this.setOutputData(0, this.mesh);
 	}
 
-	LiteGraph.registerNodeType( "geometry/toMesh", LGraphGeometryToMesh );
+	//LiteGraph.registerNodeType( "geometry/toMesh", LGraphGeometryToMesh );
 
 	function LGraphRenderMesh() {
 		this.addInput("mesh", "mesh");
@@ -29818,7 +29818,7 @@ function LGraphGeometryDisplace() {
 		gl.depthMask( true );
 	}
 
-	LiteGraph.registerNodeType( "geometry/render_mesh", LGraphRenderMesh );
+	//LiteGraph.registerNodeType( "geometry/render_mesh", LGraphRenderMesh );
 
 	//**************************
 
@@ -29894,7 +29894,7 @@ function LGraphGeometryDisplace() {
 		this._mesh.version = this.version++;
 	}
 
-	LiteGraph.registerNodeType( "geometry/mesh_primitive", LGraphGeometryPrimitive );
+	//LiteGraph.registerNodeType( "geometry/mesh_primitive", LGraphGeometryPrimitive );
 
 
 	function LGraphRenderPoints() {
@@ -30021,7 +30021,7 @@ function LGraphGeometryDisplace() {
 		gl.depthMask( true );
 	}
 
-	LiteGraph.registerNodeType( "geometry/render_points", LGraphRenderPoints );
+	//LiteGraph.registerNodeType( "geometry/render_points", LGraphRenderPoints );
 
 	LGraphRenderPoints.vertex_shader_code = '\
 		precision mediump float;\n\
@@ -30439,8 +30439,8 @@ function LGraphGeometryDisplace() {
 			}\n\
 		*/
 
-        LiteGraph.registerNodeType("fx/lens", LGraphFXLens);
-        global.LGraphFXLens = LGraphFXLens;
+        //LiteGraph.registerNodeType("fx/lens", LGraphFXLens);
+        //global.LGraphFXLens = LGraphFXLens;
 
         /* not working yet
 	function LGraphDepthOfField()
@@ -30551,7 +30551,7 @@ function LGraphGeometryDisplace() {
 		}\n\
 		";
 
-	LiteGraph.registerNodeType("fx/DOF", LGraphDepthOfField );
+	//LiteGraph.registerNodeType("fx/DOF", LGraphDepthOfField );
 	global.LGraphDepthOfField = LGraphDepthOfField;
 	*/
 
@@ -30798,8 +30798,8 @@ function LGraphGeometryDisplace() {
 				gl_FragColor = color;\n\
 			}\n";
 
-        LiteGraph.registerNodeType("fx/bokeh", LGraphFXBokeh);
-        global.LGraphFXBokeh = LGraphFXBokeh;
+        //LiteGraph.registerNodeType("fx/bokeh", LGraphFXBokeh);
+        //global.LGraphFXBokeh = LGraphFXBokeh;
 
         //************************************************
 
@@ -30998,8 +30998,8 @@ function LGraphGeometryDisplace() {
 				gl_FragColor = vec4( pow( color.xyz, vec3(gamma) ), color.a );\n\
 			}\n";
 
-        LiteGraph.registerNodeType("fx/generic", LGraphFXGeneric);
-        global.LGraphFXGeneric = LGraphFXGeneric;
+        //LiteGraph.registerNodeType("fx/generic", LGraphFXGeneric);
+        //global.LGraphFXGeneric = LGraphFXGeneric;
 
         // Vigneting ************************************
 
@@ -31093,7 +31093,7 @@ function LGraphGeometryDisplace() {
 			}\n\
 			";
 
-        LiteGraph.registerNodeType("fx/vigneting", LGraphFXVigneting);
+        //LiteGraph.registerNodeType("fx/vigneting", LGraphFXVigneting);
         global.LGraphFXVigneting = LGraphFXVigneting;
     }
 })(this);
@@ -31688,7 +31688,7 @@ function LGraphGeometryDisplace() {
         ];
     };
 
-    LiteGraph.registerNodeType("midi/input", LGMIDIIn);
+    //LiteGraph.registerNodeType("midi/input", LGMIDIIn);
 
     function LGMIDIOut() {
         this.addInput("send", LiteGraph.EVENT);
@@ -31756,7 +31756,7 @@ function LGraphGeometryDisplace() {
         return [["on_midi", LiteGraph.EVENT]];
     };
 
-    LiteGraph.registerNodeType("midi/output", LGMIDIOut);
+    //LiteGraph.registerNodeType("midi/output", LGMIDIOut);
 
 
     function LGMIDIShow() {
@@ -31804,7 +31804,7 @@ function LGraphGeometryDisplace() {
         return [["on_midi", LiteGraph.EVENT]];
     };
 
-    LiteGraph.registerNodeType("midi/show", LGMIDIShow);
+    //LiteGraph.registerNodeType("midi/show", LGMIDIShow);
 
     function LGMIDIFilter() {
         this.properties = {
@@ -31912,7 +31912,7 @@ function LGraphGeometryDisplace() {
         this.trigger("on_midi", midi_event);
     };
 
-    LiteGraph.registerNodeType("midi/filter", LGMIDIFilter);
+    //LiteGraph.registerNodeType("midi/filter", LGMIDIFilter);
 
     function LGMIDIEvent() {
         this.properties = {
@@ -32086,7 +32086,7 @@ function LGraphGeometryDisplace() {
         ];
     };
 
-    LiteGraph.registerNodeType("midi/event", LGMIDIEvent);
+    //LiteGraph.registerNodeType("midi/event", LGMIDIEvent);
 
     function LGMIDICC() {
         this.properties = {
@@ -32111,7 +32111,7 @@ function LGraphGeometryDisplace() {
         this.setOutputData(0, this.properties.value);
     };
 
-    LiteGraph.registerNodeType("midi/cc", LGMIDICC);
+    //LiteGraph.registerNodeType("midi/cc", LGMIDICC);
 
     function LGMIDIGenerator() {
         this.addInput("generate", LiteGraph.ACTION);
@@ -32202,7 +32202,7 @@ function LGraphGeometryDisplace() {
         );
     };
 
-    LiteGraph.registerNodeType("midi/generator", LGMIDIGenerator);
+    //LiteGraph.registerNodeType("midi/generator", LGMIDIGenerator);
 
     function LGMIDITranspose() {
         this.properties = {
@@ -32246,7 +32246,7 @@ function LGraphGeometryDisplace() {
         }
     };
 
-    LiteGraph.registerNodeType("midi/transpose", LGMIDITranspose);
+    //LiteGraph.registerNodeType("midi/transpose", LGMIDITranspose);
 
     function LGMIDIQuantize() {
         this.properties = {
@@ -32323,7 +32323,7 @@ function LGraphGeometryDisplace() {
         }
     };
 
-    LiteGraph.registerNodeType("midi/quantize", LGMIDIQuantize);
+    //LiteGraph.registerNodeType("midi/quantize", LGMIDIQuantize);
 
 	function LGMIDIFromFile() {
         this.properties = {
@@ -32438,7 +32438,7 @@ function LGraphGeometryDisplace() {
 		this.loadMIDIFile( file );
 	}
 
-    LiteGraph.registerNodeType("midi/fromFile", LGMIDIFromFile);
+    //LiteGraph.registerNodeType("midi/fromFile", LGMIDIFromFile);
 
 
     function LGMIDIPlay() {
@@ -32498,7 +32498,7 @@ function LGraphGeometryDisplace() {
         }
     };
 
-    LiteGraph.registerNodeType("midi/play", LGMIDIPlay);
+    //LiteGraph.registerNodeType("midi/play", LGMIDIPlay);
 
     function LGMIDIKeys() {
         this.properties = {
@@ -32678,7 +32678,7 @@ function LGraphGeometryDisplace() {
         return true;
     };
 
-    LiteGraph.registerNodeType("midi/keys", LGMIDIKeys);
+    //LiteGraph.registerNodeType("midi/keys", LGMIDIKeys);
 
     function now() {
         return window.performance.now();
@@ -33173,7 +33173,7 @@ function LGraphGeometryDisplace() {
 
     LGAudioSource.title = "Source";
     LGAudioSource.desc = "Plays audio";
-    LiteGraph.registerNodeType("audio/source", LGAudioSource);
+    //LiteGraph.registerNodeType("audio/source", LGAudioSource);
 
     //****************************************************
 
@@ -33324,7 +33324,7 @@ function LGraphGeometryDisplace() {
 
     LGAudioMediaSource.title = "MediaSource";
     LGAudioMediaSource.desc = "Plays microphone";
-    LiteGraph.registerNodeType("audio/media_source", LGAudioMediaSource);
+    //LiteGraph.registerNodeType("audio/media_source", LGAudioMediaSource);
 
     //*****************************************************
 
@@ -33409,7 +33409,7 @@ function LGraphGeometryDisplace() {
 
     LGAudioAnalyser.title = "Analyser";
     LGAudioAnalyser.desc = "Audio Analyser";
-    LiteGraph.registerNodeType("audio/analyser", LGAudioAnalyser);
+    //LiteGraph.registerNodeType("audio/analyser", LGAudioAnalyser);
 
     //*****************************************************
 
@@ -33443,7 +33443,7 @@ function LGraphGeometryDisplace() {
 
     LGAudioGain.title = "Gain";
     LGAudioGain.desc = "Audio gain";
-    LiteGraph.registerNodeType("audio/gain", LGAudioGain);
+    //LiteGraph.registerNodeType("audio/gain", LGAudioGain);
 
     function LGAudioConvolver() {
         //default
@@ -33513,7 +33513,7 @@ function LGraphGeometryDisplace() {
 
     LGAudioConvolver.title = "Convolver";
     LGAudioConvolver.desc = "Convolves the signal (used for reverb)";
-    LiteGraph.registerNodeType("audio/convolver", LGAudioConvolver);
+    //LiteGraph.registerNodeType("audio/convolver", LGAudioConvolver);
 
     function LGAudioDynamicsCompressor() {
         //default
@@ -33562,10 +33562,10 @@ function LGraphGeometryDisplace() {
 
     LGAudioDynamicsCompressor.title = "DynamicsCompressor";
     LGAudioDynamicsCompressor.desc = "Dynamics Compressor";
-    LiteGraph.registerNodeType(
-        "audio/dynamicsCompressor",
-        LGAudioDynamicsCompressor
-    );
+    //LiteGraph.registerNodeType(
+    //     "audio/dynamicsCompressor",
+    //     LGAudioDynamicsCompressor
+    // );
 
     function LGAudioWaveShaper() {
         //default
@@ -33597,7 +33597,7 @@ function LGraphGeometryDisplace() {
     /* disabled till I dont find a way to do a wave shape
 LGAudioWaveShaper.title = "WaveShaper";
 LGAudioWaveShaper.desc = "Distortion using wave shape";
-LiteGraph.registerNodeType("audio/waveShaper", LGAudioWaveShaper);
+//LiteGraph.registerNodeType("audio/waveShaper", LGAudioWaveShaper);
 */
 
     function LGAudioMixer() {
@@ -33670,7 +33670,7 @@ LiteGraph.registerNodeType("audio/waveShaper", LGAudioWaveShaper);
 
     LGAudioMixer.title = "Mixer";
     LGAudioMixer.desc = "Audio mixer";
-    LiteGraph.registerNodeType("audio/mixer", LGAudioMixer);
+    //LiteGraph.registerNodeType("audio/mixer", LGAudioMixer);
 
     function LGAudioADSR() {
         //default
@@ -33728,7 +33728,7 @@ LiteGraph.registerNodeType("audio/waveShaper", LGAudioWaveShaper);
 
     LGAudioADSR.title = "ADSR";
     LGAudioADSR.desc = "Audio envelope";
-    LiteGraph.registerNodeType("audio/adsr", LGAudioADSR);
+    //LiteGraph.registerNodeType("audio/adsr", LGAudioADSR);
 
     function LGAudioDelay() {
         //default
@@ -33754,7 +33754,7 @@ LiteGraph.registerNodeType("audio/waveShaper", LGAudioWaveShaper);
 
     LGAudioDelay.title = "Delay";
     LGAudioDelay.desc = "Audio delay";
-    LiteGraph.registerNodeType("audio/delay", LGAudioDelay);
+    //LiteGraph.registerNodeType("audio/delay", LGAudioDelay);
 
     function LGAudioBiquadFilter() {
         //default
@@ -33809,7 +33809,7 @@ LiteGraph.registerNodeType("audio/waveShaper", LGAudioWaveShaper);
 
     LGAudioBiquadFilter.title = "BiquadFilter";
     LGAudioBiquadFilter.desc = "Audio filter";
-    LiteGraph.registerNodeType("audio/biquadfilter", LGAudioBiquadFilter);
+    //LiteGraph.registerNodeType("audio/biquadfilter", LGAudioBiquadFilter);
 
     function LGAudioOscillatorNode() {
         //default
@@ -33882,7 +33882,7 @@ LiteGraph.registerNodeType("audio/waveShaper", LGAudioWaveShaper);
 
     LGAudioOscillatorNode.title = "Oscillator";
     LGAudioOscillatorNode.desc = "Oscillator";
-    LiteGraph.registerNodeType("audio/oscillator", LGAudioOscillatorNode);
+    //LiteGraph.registerNodeType("audio/oscillator", LGAudioOscillatorNode);
 
     //*****************************************************
 
@@ -33958,7 +33958,7 @@ LiteGraph.registerNodeType("audio/waveShaper", LGAudioWaveShaper);
 
     LGAudioVisualization.title = "Visualization";
     LGAudioVisualization.desc = "Audio Visualization";
-    LiteGraph.registerNodeType("audio/visualization", LGAudioVisualization);
+    //LiteGraph.registerNodeType("audio/visualization", LGAudioVisualization);
 
     function LGAudioBandSignal() {
         //default
@@ -34009,7 +34009,7 @@ LiteGraph.registerNodeType("audio/waveShaper", LGAudioWaveShaper);
 
     LGAudioBandSignal.title = "Signal";
     LGAudioBandSignal.desc = "extract the signal of some frequency";
-    LiteGraph.registerNodeType("audio/signal", LGAudioBandSignal);
+    //LiteGraph.registerNodeType("audio/signal", LGAudioBandSignal);
 
     function LGAudioScript() {
         if (!LGAudioScript.default_code) {
@@ -34130,7 +34130,7 @@ LiteGraph.registerNodeType("audio/waveShaper", LGAudioWaveShaper);
 
     LGAudioScript.title = "Script";
     LGAudioScript.desc = "apply script to signal";
-    LiteGraph.registerNodeType("audio/script", LGAudioScript);
+    //LiteGraph.registerNodeType("audio/script", LGAudioScript);
 
     function LGAudioDestination() {
         this.audionode = LGAudio.getAudioContext().destination;
@@ -34139,7 +34139,7 @@ LiteGraph.registerNodeType("audio/waveShaper", LGAudioWaveShaper);
 
     LGAudioDestination.title = "Destination";
     LGAudioDestination.desc = "Audio output";
-    LiteGraph.registerNodeType("audio/destination", LGAudioDestination);
+    //LiteGraph.registerNodeType("audio/destination", LGAudioDestination);
 })(this);
 
 //event related nodes
@@ -34289,7 +34289,7 @@ LiteGraph.registerNodeType("audio/waveShaper", LGAudioWaveShaper);
         return [["out", 0]];
     };
 
-    LiteGraph.registerNodeType("network/websocket", LGWebSocket);
+    //LiteGraph.registerNodeType("network/websocket", LGWebSocket);
 
     //It is like a websocket but using the SillyServer.js server that bounces packets back to all clients connected:
     //For more information: https://github.com/jagenjo/SillyServer.js
@@ -34505,7 +34505,7 @@ LiteGraph.registerNodeType("audio/waveShaper", LGAudioWaveShaper);
         return [["out", 0]];
     };
 
-    LiteGraph.registerNodeType("network/sillyclient", LGSillyClient);
+    //LiteGraph.registerNodeType("network/sillyclient", LGSillyClient);
 
 //HTTP Request
 function HTTPRequestNode() {
@@ -34565,7 +34565,7 @@ HTTPRequestNode.prototype.onGetOutputs = function() {
 	return [["error",LiteGraph.EVENT]];
 }
 
-LiteGraph.registerNodeType("network/httprequest", HTTPRequestNode);
+//LiteGraph.registerNodeType("network/httprequest", HTTPRequestNode);
 
 
 	
