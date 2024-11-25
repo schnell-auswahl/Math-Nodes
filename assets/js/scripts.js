@@ -187,8 +187,8 @@ function adjustAllCanvasSizes() {
         adjustCanvasSize(canvas.id);
     });
 }
+//Node positions
 
-// Node Positions
 function adjustNodePositions(canvasId) {
     const canvas = document.getElementById(canvasId);
     if (!canvas) {
@@ -212,65 +212,44 @@ function adjustNodePositions(canvasId) {
         node: node,
         x: node.pos[0],
         y: node.pos[1],
+        width: node.size ? node.size[0] : 150, // Standardbreite eines Nodes
+        height: node.size ? node.size[1] : 100 // Standardhöhe eines Nodes
     }));
 
-    // Überprüfen, ob alle Nodes innerhalb der Grenzen des Canvas sind
-    const allNodesWithinCanvas = nodePositions.every(({ node, x, y }) => {
-        const nodeWidth = node.size ? node.size[0] : 150; // Default-Breite des Nodes
-        const nodeHeight = node.size ? node.size[1] : 100; // Default-Höhe des Nodes
-
-        return (
-            x >= margin &&
-            x + nodeWidth <= canvasWidth - margin &&
-            y >= margin + titleHeight &&
-            y + nodeHeight <= canvasHeight - margin
-        );
-    });
-
-    if (allNodesWithinCanvas) {
-        console.log(`Alle Nodes befinden sich innerhalb des Canvas "${canvasId}". Keine Neupositionierung erforderlich.`);
-        return; // Beende die Funktion, wenn alle Nodes innerhalb des Canvas sind
-    }
-
-    // Extremwerte finden
+    // Extremwerte finden, wobei wir die rechte Seite der Nodes berücksichtigen
     const minX = Math.min(...nodePositions.map((pos) => pos.x));
-    const maxX = Math.max(...nodePositions.map((pos) => pos.x));
+    const maxX = Math.max(...nodePositions.map((pos) => pos.x + pos.width)); // Rechte Seite des Nodes
     const minY = Math.min(...nodePositions.map((pos) => pos.y));
-    const maxY = Math.max(...nodePositions.map((pos) => pos.y));
+    const maxY = Math.max(...nodePositions.map((pos) => pos.y + pos.height)); // Untere Seite des Nodes
 
-    // Debugging: Extremwerte anzeigen
-    console.log(`Extremwerte: minX=${minX}, maxX=${maxX}, minY=${minY}, maxY=${maxY}`);
+    // Skalenfaktoren für X und Y berechnen
+    const scaleX =
+        maxX === minX
+            ? 1 // Wenn alle X-Werte gleich sind, keine Skalierung erforderlich
+            : (canvasWidth - 2 * margin) / (maxX - minX);
 
-    // Falls alle Nodes denselben Wert haben, Warnung ausgeben
-    if (minX === maxX) {
-        console.warn("Alle Nodes haben denselben x-Wert. Keine Skalierung entlang der X-Achse möglich.");
-    }
-    if (minY === maxY) {
-        console.warn("Alle Nodes haben denselben y-Wert. Keine Skalierung entlang der Y-Achse möglich.");
-    }
+    const scaleY =
+        maxY === minY
+            ? 1 // Wenn alle Y-Werte gleich sind, keine Skalierung erforderlich
+            : (canvasHeight - 2 * margin - titleHeight) / (maxY - minY);
 
-    // Nodes skalieren und verschieben
+    // Kleineren Skalierungsfaktor verwenden, um das Verhältnis zu erhalten
+    const scale = Math.min(scaleX, scaleY);
+
+    // Offset berechnen, um die Nodes innerhalb des Canvas zu verschieben
+    const offsetX = margin - minX * scale;
+    const offsetY = margin + titleHeight - minY * scale;
+
+    // Nodes neu positionieren
     nodePositions.forEach(({ node, x, y }) => {
-        // Skaliere X-Wert auf den Canvas mit Berücksichtigung des Rands
-        const newX =
-            minX === maxX
-                ? margin // Falls kein Abstand, setze alles auf den Rand
-                : margin + ((x - minX) / (maxX - minX)) * (canvasWidth - 2 * margin - node.size[0]);
+        // Neue Position basierend auf Skalierung und Offset berechnen
+        node.pos[0] = x * scale + offsetX;
+        node.pos[1] = y * scale + offsetY;
 
-        // Skaliere Y-Wert auf den Canvas mit Berücksichtigung von Rand und Titelhöhe
-        const newY =
-            minY === maxY
-                ? margin + titleHeight // Falls kein Abstand, setze alles auf den Rand unterhalb des Titels
-                : margin + titleHeight + ((y - minY) / (maxY - minY)) * (canvasHeight - 2 * margin - titleHeight - node.size[1]);
-
-        // Neue Position setzen
-        node.pos[0] = newX;
-        node.pos[1] = newY;
-
-        console.log(`Node "${node.title}" verschoben: Neue Position (${newX}, ${newY})`);
+        console.log(`Node "${node.title}" verschoben: Neue Position (${node.pos[0]}, ${node.pos[1]})`);
     });
 
-    console.log("Alle Nodes skaliert und verschoben.");
+    console.log("Alle Nodes skaliert und relativ verschoben.");
 }
 
 // Dynamisches Resizing für alle Canvas mit data-resize="true"
