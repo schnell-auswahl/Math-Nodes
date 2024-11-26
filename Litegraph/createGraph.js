@@ -355,11 +355,15 @@ function renderEquationToSVG(equation, targetElementId) {
   
   window.renderEquationToSVG = renderEquationToSVG;
   
-  function renderWithMathJax(equation) {
+  function renderWithMathJax(equation, color = "black") {
     try {
+        //const styledEquation = `{\\color{red}${equation}}`;
+        
         // Render die Gleichung in SVG
         const svgNode = MathJax.tex2svg(equation);
         const svg = svgNode.querySelector("svg");
+
+        svg.style.color = color; // Setzt die Farbe global
   
         // Konvertiere das SVG in eine Zeichenkette
         const svgString = new XMLSerializer().serializeToString(svg);

@@ -18,7 +18,7 @@
 
         CANVAS_GRID_SIZE: 10,
 
-        NODE_TITLE_HEIGHT: 30,
+        NODE_TITLE_HEIGHT: 35,
         NODE_TITLE_TEXT_Y: 20,
         NODE_SLOT_HEIGHT: 20,
         NODE_WIDGET_HEIGHT: 20,

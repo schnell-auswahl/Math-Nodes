@@ -27,7 +27,7 @@ function saveGraphToFile(canvasId) {
     a.click();
     URL.revokeObjectURL(url);
 
-    console.log(`Graph von Canvas "${canvasId}" wurde gespeichert.`);
+    //console.log(`Graph von Canvas "${canvasId}" wurde gespeichert.`);
 }
 
 
@@ -62,7 +62,7 @@ function loadGraphFromFile(canvasId) {
                     graph.configure(json);
                     graph.start();
 
-                    console.log(`Graph von Canvas "${canvasId}" wurde erfolgreich geladen.`);
+                    //console.log(`Graph von Canvas "${canvasId}" wurde erfolgreich geladen.`);
                 } catch (error) {
                     console.error("Fehler beim Laden des Graphen:", error);
                     alert("Ungültige Datei. Bitte überprüfe das JSON-Format.");
@@ -105,7 +105,7 @@ function loadGraphFromServerAsync(canvasId, jsonFilePath) {
                     graph.configure(json);
                     graph.start();
 
-                    console.log(`Graph von Canvas "${canvasId}" erfolgreich aus ${jsonFilePath} geladen.`);
+                    //console.log(`Graph von Canvas "${canvasId}" erfolgreich aus ${jsonFilePath} geladen.`);
                     resolve(); // Ladevorgang erfolgreich abgeschlossen
                 } catch (error) {
                     reject(`Fehler beim Konfigurieren des Graphen: ${error.message}`);
@@ -128,12 +128,12 @@ async function loadAllGraphs() {
 
     try {
         await Promise.all(loadPromises); // Warten, bis alle Graphen geladen sind
-        console.log("Alle Graphen wurden erfolgreich geladen.");
+        //console.log("Alle Graphen wurden erfolgreich geladen.");
 
         // Nodes anpassen, nachdem alle Graphen geladen sind
         canvases.forEach((canvas) => adjustNodePositions(canvas.id));
     } catch (error) {
-        console.error("Fehler beim Laden eines oder mehrerer Graphen:", error);
+        //console.error("Fehler beim Laden eines oder mehrerer Graphen:", error);
     }
 }
 
@@ -167,14 +167,13 @@ function adjustCanvasSize(canvasId) {
 
 
     // Berechne die neue Breite, mindestens jedoch die Mindestbreite
-    const canvasWidth = //Math.max(browserWidth, minWidth); // 80% der Browserbreite oder mindestens 1000px
+    // const canvasWidth = //Math.max(browserWidth, minWidth); // 80% der Browserbreite oder mindestens 1000px
     //canvas.width = canvasWidth * widthPart;
 
     // Optional: Höhe setzen (z. B. 16:9-Seitenverhältnis)
     //const aspectRatio = 16 / 9;
     //canvas.height = canvasWidth / aspectRatio;
-
-    console.log(`Canvas "${canvasId}" angepasst: Breite ${canvas.width}px, Höhe ${canvas.height}px`);
+    // console.log(`Canvas "${canvasId}" angepasst: Breite ${canvas.width}px, Höhe ${canvas.height}px`);
 }
 
 // Dynamisches Resizing für alle Canvas mit data-resize="true"
@@ -246,10 +245,10 @@ function adjustNodePositions(canvasId) {
         node.pos[0] = x * scale + offsetX;
         node.pos[1] = y * scale + offsetY;
 
-        console.log(`Node "${node.title}" verschoben: Neue Position (${node.pos[0]}, ${node.pos[1]})`);
+        //console.log(`Node "${node.title}" verschoben: Neue Position (${node.pos[0]}, ${node.pos[1]})`);
     });
 
-    console.log("Alle Nodes skaliert und relativ verschoben.");
+    //console.log("Alle Nodes skaliert und relativ verschoben.");
 }
 
 // Dynamisches Resizing für alle Canvas mit data-resize="true"
@@ -298,9 +297,9 @@ document.addEventListener("DOMContentLoaded", () => {
         canvases.forEach((canvas) => {
             const canvasId = canvas.id; // ID des Canvas
             adjustNodePositions(canvasId); // Funktion ausführen
-            console.log(`adjustNodePositions für Canvas "${canvasId}" ausgeführt.`);
+            //console.log(`adjustNodePositions für Canvas "${canvasId}" ausgeführt.`);
         });
 
-        console.log("Alle Graphen auf der Seite wurden bearbeitet.");
+        //console.log("Alle Graphen auf der Seite wurden bearbeitet.");
     });
 });

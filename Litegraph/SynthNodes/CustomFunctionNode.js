@@ -25,7 +25,8 @@ export function _FunctionNode() {
           paramNames: ["", "", "", ""],  // Namen der Parameter (Platzhalter für bis zu 4 Parameter)
           paramValues: {},  // Objekt, das die Werte der Parameter speichert
           evaluatedFormula: "",   // Neu: Hinzufügen der Property für die ausgewertete Formel
-          uvError: false // Status für UV-Fehler
+          uvError: false, // Status für UV-Fehler
+          completeEquationfromWidget: ""
         };
 
         // Widget für die Eingabe der Funktionsgleichung
@@ -35,6 +36,7 @@ export function _FunctionNode() {
           "",  // Beschreibung für das Widget
           (v, canvas, node) => { // Callback-Funktion für Eingabeänderungen
             // Funktionsname und unabhängige Variable extrahieren
+            this.properties.completeEquationfromWidget = v;
             var splitted = v.split("(");
             node.properties["funcName"] = splitted[0]; // Funktionsname
             node.properties["uvName"] = splitted[1][0]; // Unabhängige Variable
@@ -59,50 +61,56 @@ export function _FunctionNode() {
         this._func = null;
         this.oldParamNames = [];
 
+        this.lastRenderedEquation = null; // Speichert die zuletzt gerenderte Gleichung
+        this.renderedImage = null; // Speichert das gerenderte Bild
+        this.offsetX = 30; // Verschiebung des Equation renderings
+        this.offsetY = 3* LiteGraph.NODE_SLOT_HEIGHT;
+
         // Titel und Beschreibung für den Knoten
         this.title = "Funktion";
         this.desc = "Compute formula"; // Beschreibung des Knotens
-        this.size = [160, 150]; // Größe des Knotens in Pixeln
+        this.minwidth = 160;
+        this.size = [this.minwidth, 150]; // Größe des Knotens in Pixeln
         //this.color = "#4C7468"; //Titelfarbe
         //this.bgcolor = "#9FA8B4"; //Hintergrundfarbe
       }
 
       // Hilfsfunktionen für Superscript und Subscript
-      toSuperscript(text) {
-        const superscriptMap = {
-          '0': '⁰', '1': '¹', '2': '²', '3': '³', '4': '⁴', '5': '⁵', '6': '⁶', '7': '⁷', '8': '⁸', '9': '⁹',
-          '-': '⁻', '+': '⁺', '=': '⁼', '(': '⁽', ')': '⁾',
-          'a': 'ᵃ', 'b': 'ᵇ', 'c': 'ᶜ', 'd': 'ᵈ', 'e': 'ᵉ', 'f': 'ᶠ', 'g': 'ᵍ', 'h': 'ʰ', 'i': 'ⁱ', 'j': 'ʲ', 
-          'k': 'ᵏ', 'l': 'ˡ', 'm': 'ᵐ', 'n': 'ⁿ', 'o': 'ᵒ', 'p': 'ᵖ', 'r': 'ʳ', 's': 'ˢ', 't': 'ᵗ', 'u': 'ᵘ',
-          'v': 'ᵛ', 'w': 'ʷ', 'x': 'ˣ', 'y': 'ʸ', 'z': 'ᶻ'
-        };
+      // toSuperscript(text) {
+      //   const superscriptMap = {
+      //     '0': '⁰', '1': '¹', '2': '²', '3': '³', '4': '⁴', '5': '⁵', '6': '⁶', '7': '⁷', '8': '⁸', '9': '⁹',
+      //     '-': '⁻', '+': '⁺', '=': '⁼', '(': '⁽', ')': '⁾',
+      //     'a': 'ᵃ', 'b': 'ᵇ', 'c': 'ᶜ', 'd': 'ᵈ', 'e': 'ᵉ', 'f': 'ᶠ', 'g': 'ᵍ', 'h': 'ʰ', 'i': 'ⁱ', 'j': 'ʲ', 
+      //     'k': 'ᵏ', 'l': 'ˡ', 'm': 'ᵐ', 'n': 'ⁿ', 'o': 'ᵒ', 'p': 'ᵖ', 'r': 'ʳ', 's': 'ˢ', 't': 'ᵗ', 'u': 'ᵘ',
+      //     'v': 'ᵛ', 'w': 'ʷ', 'x': 'ˣ', 'y': 'ʸ', 'z': 'ᶻ'
+      //   };
         
-        return text.toString().split('').map(char => superscriptMap[char] || char).join('');
-      }
+      //   return text.toString().split('').map(char => superscriptMap[char] || char).join('');
+      // }
       
-      toSubscript(text) {
-        const subscriptMap = {
-          '0': '₀', '1': '₁', '2': '₂', '3': '₃', '4': '₄', '5': '₅', '6': '₆', '7': '₇', '8': '₈', '9': '₉',
-          '-': '₋', '+': '₊', '=': '₌', '(': '₍', ')': '₎',
-          'a': 'ₐ', 'e': 'ₑ', 'h': 'ₕ', 'i': 'ᵢ', 'j': 'ⱼ', 'k': 'ₖ', 'l': 'ₗ', 'm': 'ₘ', 'n': 'ₙ', 'o': 'ₒ',
-          'p': 'ₚ', 'r': 'ᵣ', 's': 'ₛ', 't': 'ₜ', 'u': 'ᵤ', 'v': 'ᵥ', 'x': 'ₓ'
-        };
+      // toSubscript(text) {
+      //   const subscriptMap = {
+      //     '0': '₀', '1': '₁', '2': '₂', '3': '₃', '4': '₄', '5': '₅', '6': '₆', '7': '₇', '8': '₈', '9': '₉',
+      //     '-': '₋', '+': '₊', '=': '₌', '(': '₍', ')': '₎',
+      //     'a': 'ₐ', 'e': 'ₑ', 'h': 'ₕ', 'i': 'ᵢ', 'j': 'ⱼ', 'k': 'ₖ', 'l': 'ₗ', 'm': 'ₘ', 'n': 'ₙ', 'o': 'ₒ',
+      //     'p': 'ₚ', 'r': 'ᵣ', 's': 'ₛ', 't': 'ₜ', 'u': 'ᵤ', 'v': 'ᵥ', 'x': 'ₓ'
+      //   };
         
-        return text.toString().split('').map(char => subscriptMap[char] || char).join('');
-      }
+      //   return text.toString().split('').map(char => subscriptMap[char] || char).join('');
+      // }
 
-      toItalic(text) {
-        const italicMap = {
-          'A': '𝐴', 'B': '𝐵', 'C': '𝐶', 'D': '𝐷', 'E': '𝐸', 'F': '𝐹', 'G': '𝐺', 'H': '𝐻', 'I': '𝐼', 'J': '𝐽', 
-          'K': '𝐾', 'L': '𝐿', 'M': '𝑀', 'N': '𝑁', 'O': '𝑂', 'P': '𝑃', 'Q': '𝑄', 'R': '𝑅', 'S': '𝑆', 'T': '𝑇', 
-          'U': '𝑈', 'V': '𝑉', 'W': '𝑊', 'X': '𝑋', 'Y': '𝑌', 'Z': '𝑍',
-          'a': '𝑎', 'b': '𝑏', 'c': '𝑐', 'd': '𝑑', 'e': '𝑒', 'f': '𝑓', 'g': '𝑔', 'h': 'ℎ', 'i': '𝑖', 'j': '𝑗',
-          'k': '𝑘', 'l': '𝑙', 'm': '𝑚', 'n': '𝑛', 'o': '𝑜', 'p': '𝑝', 'q': '𝑞', 'r': '𝑟', 's': '𝑠', 't': '𝑡',
-          'u': '𝑢', 'v': '𝑣', 'w': '𝑤', 'x': '𝑥', 'y': '𝑦', 'z': '𝑧'
-        };
+      // toItalic(text) {
+      //   const italicMap = {
+      //     'A': '𝐴', 'B': '𝐵', 'C': '𝐶', 'D': '𝐷', 'E': '𝐸', 'F': '𝐹', 'G': '𝐺', 'H': '𝐻', 'I': '𝐼', 'J': '𝐽', 
+      //     'K': '𝐾', 'L': '𝐿', 'M': '𝑀', 'N': '𝑁', 'O': '𝑂', 'P': '𝑃', 'Q': '𝑄', 'R': '𝑅', 'S': '𝑆', 'T': '𝑇', 
+      //     'U': '𝑈', 'V': '𝑉', 'W': '𝑊', 'X': '𝑋', 'Y': '𝑌', 'Z': '𝑍',
+      //     'a': '𝑎', 'b': '𝑏', 'c': '𝑐', 'd': '𝑑', 'e': '𝑒', 'f': '𝑓', 'g': '𝑔', 'h': 'ℎ', 'i': '𝑖', 'j': '𝑗',
+      //     'k': '𝑘', 'l': '𝑙', 'm': '𝑚', 'n': '𝑛', 'o': '𝑜', 'p': '𝑝', 'q': '𝑞', 'r': '𝑟', 's': '𝑠', 't': '𝑡',
+      //     'u': '𝑢', 'v': '𝑣', 'w': '𝑤', 'x': '𝑥', 'y': '𝑦', 'z': '𝑧'
+      //   };
         
-        return text.split('').map(char => italicMap[char] || char).join('');
-      }
+      //   return text.split('').map(char => italicMap[char] || char).join('');
+      // }
 
 
       // Diese Methode fügt eine alte Gleichung an die neue Gleichung an, basierend auf der unabhängigen Variablen
@@ -136,65 +144,9 @@ export function _FunctionNode() {
         }
         
         // Wenn die Funktionsgleichung, UV und Funktionsname vorhanden sind
-        if (this.properties["evaluatedFormula"] && this.properties["uvName"] && this.properties["funcName"]) { // Setze den Titel entsprechend der vollständigen Funktionsbeschreibung
-          
-          let formulaForTitle = this.properties["evaluatedFormula"]
-          .replace(/\s+/g, "")            // Entfernt alle Leerzeichen
-          .replace(/\+/g, " + ")          // Fügt Leerzeichen um Pluszeichen ein
-          .replace(/-/g, " - ")           // Fügt Leerzeichen um Minuszeichen ein
-          .replace(/\*\*/g, "^")          // Ersetzt Potenzierung zurück
-          .replace(/\*/g, " · ")              // setzt schönen Malpunkt mit Leerzeichen<- Wichtig: Muss nach Potenzersetzung kommen
-          //.replace(/\//g," / ")         // Fügt Leerzeichen um / ein
-          .replace(/Math\.sin/g, "sin") // Ersetzt Sinus zurück
-          .replace(/Math\.cos/g, "cos") // Ersetzt Kosinus zurück
-          .replace(/Math\.tan/g, "tan") // Ersetzt Tangens zurück
-          .replace(/Math\.sqrt/g, "sqrt") // Ersetzt Quadratwurzel zurück
-          .replace(/Math\.log10/g, "log") // Ersetzt Logarithmus zur Basis 10 zurück
-          .replace(/Math\.log\b/g, "ln")  // Ersetzt natürlicher Logarithmus zurück
-          .replace(/Math\.exp/g, "exp")   // Ersetzt Exponentialfunktion zurück
-          .replace(/Math\.abs\(([^()]*|\((?:[^()]*|\([^()]*\))*\))\)/g, "|$1|") // Ersetzt Absolutbetrag und umschließt Inhalt mit |...| 
-          .replace(/Math\.PI/g, "π")      // Ersetzt Math.PI durch das Symbol π
-          .replace(/Math\.E/g, "e");      // Ersetzt Math.E durch das Symbol e
-      
-          // Erkennung und Umwandlung von Potenzierungen (x^(...)) und (x^2)
-                
-        // Erster Fall: Potenzierungen mit Klammern um den Exponenten
-        formulaForTitle = formulaForTitle.replace(/(\(.+?\)|\w+)\^\(([^()]*|\((?:[^()]*|\([^()]*\))*\))\)/g, (match, base, exponent) => {
-          return base + this.toSuperscript(exponent); // Verwende 'this.toSuperscript'
-        });
+        if (this.properties["formula"] && this.properties["uvName"] && this.properties["funcName"]) { // Setze den Titel entsprechend der vollständigen Funktionsbeschreibung
 
-        // Zweiter Fall: Potenzierungen ohne Klammern um den Exponenten
-        formulaForTitle = formulaForTitle.replace(/(\(.+?\)|\w+)\^(\w+)/g, (match, base, exponent) => {
-          return base + this.toSuperscript(exponent); // Verwende 'this.toSuperscript'
-        });
-
-        let titleForTitle = `${this.properties["funcName"]}(${this.properties["uvName"]}) = ${formulaForTitle}`;
-
-        // Setze alle Buchstaben kursiv
-        titleForTitle = this.toItalic(titleForTitle);
-        titleForTitle = titleForTitle
-        .replace(/𝑠𝑖𝑛/g,"sin")
-        .replace(/𝑐𝑜𝑠/g,"cos")
-        .replace(/𝑡𝑎𝑛/g,"tan")
-        .replace(/𝑠𝑞𝑟𝑡/g,"sqrt")
-        .replace(/𝑙𝑛/g,"ln")
-        .replace(/𝑙𝑜𝑔/g,"log")
-        .replace(/𝑒𝑥𝑝/g,"exp");    
-
-                // Berechne die erforderliche Breite basierend auf der Titellänge
-          const titleLength = titleForTitle.length;
-          const minWidth = 160; // Standardbreite des Knotens
-          const extraWidthPerChar = 8; // Zusätzliche Breite pro Zeichen über der Standardlänge
-
-          // Berechne die neue Breite, wenn der Titel länger ist als 20 Zeichen
-          const newWidth = titleLength > 20 ? minWidth + (titleLength - 20) * extraWidthPerChar : minWidth;
-      
-          // Setze die Knotengröße neu
-          if (this.size[0] < newWidth){
-            this.size = [newWidth, this.size[1]];
-          }
-
-          return titleForTitle;
+          return "Funktion " + this.properties.funcName;
           //return `${this.properties["funcName"]}(${this.properties["uvName"]}) = ${formulaForTitle}`;
           //return `${this.properties["leftSide"]} = ${this.properties["evaluatedFormula"]}`;
         } else {
@@ -204,7 +156,7 @@ export function _FunctionNode() {
       }
 
       // Zeichnet den Hintergrund und passt die Labels der Eingänge/Ausgänge dynamisch an
-      onDrawBackground(ctx) {
+      onDrawForeground(ctx) {
         var inputData = this.getInputData(0);
         //console.log(inputData)
         // Setze das Label des ersten Eingangs basierend auf der unabhängigen Variablen (UV)
@@ -243,7 +195,7 @@ export function _FunctionNode() {
 
          //Output:
           // Berechnung der x-Position auf der rechten Seite der Node
-                   ctx.beginPath();
+          ctx.beginPath();
 
           // Ausgangstrichter spiegeln
           ctx.moveTo(outputPosX, inputPosY - height / 2);              // Obere rechte Ecke
@@ -278,13 +230,88 @@ export function _FunctionNode() {
           ctx.fill();
 
         }
+
+        let inputLabelmaxLength = 0;
+        let currentInputLabelLength = 0;
+        let outputLabelmaxLength = 0;
+        let currentOutputLabelLength = 0;
+
+        for(let i=0; i<5; i++){
+           // Berechne die Länge des aktuellen Labels
+          if (!this.inputs[i].label){
+            currentInputLabelLength = 0
+          } else {
+            currentInputLabelLength = this.inputs[i].label.length;
+          }
+    
+          // Aktualisiere maxLength, falls das aktuelle Label länger ist
+          if (currentInputLabelLength > inputLabelmaxLength) {
+            inputLabelmaxLength = currentInputLabelLength;
+          }
+        }
+
+        //console.log("Maximale Länge der Labels:", inputLabelmaxLength);
+
         // Setze das Label des Ausgangs basierend auf der Funktionsgleichung
         if(this.properties["uvName"] && this.properties["funcName"]){
           this.outputs[0].label = this.properties["leftSide"];
         }
 
-       
-        
+        if (!this.outputs[0].label){
+          currentOutputLabelLength = 0
+        } else {
+          currentOutputLabelLength = this.outputs[0].label.length;
+        }
+
+
+        if (this.properties["formula"] && this.properties["uvName"] && this.properties["funcName"]) { // Wenn alles ordentlich definiert ist: 
+          
+          //latex render versuch
+            let equation = this.properties.completeEquationfromWidget;
+  
+            //console.log(equation);
+           
+            //console.log(latexEquation);
+              // Prüfen, ob die Gleichung sich geändert hat
+            if (this.lastRenderedEquation !== equation) {
+              this.lastRenderedEquation = equation;
+
+              let latexEquation = convertToLatex(equation);
+  
+              // Gleichung rendern und Bild speichern
+              this.renderedImage = renderWithMathJax(latexEquation, "black"); // Kein Canvas hier notwendig
+  
+              setTimeout(() => {
+                this.Pause = true;
+                
+              }, 100);
+              
+             
+              if (this.size[0] < this.renderedImage.width + 2 * this.offsetX + inputLabelmaxLength * 8 + currentOutputLabelLength * 8){
+                this.size[0] = this.renderedImage.width + 2 * this.offsetX + inputLabelmaxLength * 8 + currentOutputLabelLength * 8;
+              }
+              if (this.size[1] < this.renderedImage.height + 2 * this.offsetY){
+                this.size[1] = this.renderedImage.height + 2 * this.offsetY;
+              }
+              
+  
+            }
+        }
+
+         if (this.Pause == false) {
+         return;
+         }
+         
+      
+
+         // Zeichne das Bild mit skalierter Größe
+        ctx.drawImage(
+          this.renderedImage, 
+          this.offsetX + inputLabelmaxLength * 8, 
+          this.offsetY - (1/2) * this.renderedImage.height, //zentrierung im titel
+        );
+
+        this.Pause == false        
             
       }
 
@@ -386,6 +413,7 @@ export function _FunctionNode() {
           }
         }
       }
+      
     }
   );
 }
