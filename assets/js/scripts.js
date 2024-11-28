@@ -76,6 +76,7 @@ function loadGraphFromFile(canvasId) {
 }
 
 
+
 // Funktion zum Laden des Graphen aus einer Datei über einen Pfad
 
 
@@ -117,6 +118,23 @@ function loadGraphFromServerAsync(canvasId, jsonFilePath) {
     });
 }
 
+function clearGraph(canvasId) {
+    const canvas = document.getElementById(canvasId);
+    if (!canvas) {
+        //alert(`Canvas mit ID "${canvasId}" nicht gefunden.`);
+        return;
+    }
+
+    const graph = canvas.graph;
+    if (!graph) {
+        //alert(`Kein Graph mit Canvas-ID "${canvasId}" gefunden.`);
+        return;
+    }
+
+    graph.clear(); // Graph löschen
+    //alert(`Graph von Canvas "${canvasId}" wurde geleert.`);
+}
+
 
 async function loadAllGraphs() {
     const canvases = document.querySelectorAll('canvas[data-config-path]');
@@ -141,6 +159,36 @@ async function loadAllGraphs() {
 document.addEventListener("DOMContentLoaded", () => {
     loadAllGraphs();
 });
+
+// function rightclicksim(canvasId) {
+
+//     const canvas = document.getElementById(canvasId); // Passe die ID deines Canvas an
+//     if (!canvas) {
+//         console.error("Canvas nicht gefunden.");
+//         return;
+//     }
+
+//     // Rechtsklick-Ereignis erstellen
+//     const simulatedRightClick = new MouseEvent("contextmenu", {
+//         bubbles: true, // Event wird an übergeordnete Elemente weitergeleitet
+//         cancelable: false, // Event kann gestoppt werden
+//         //view: window,
+//         clientX: canvas.getBoundingClientRect().left + 10, // X-Koordinate relativ zum Viewport
+//         clientY: canvas.getBoundingClientRect().top + 300, // Y-Koordinate relativ zum Viewport
+//         button: 2, // Rechte Maustaste
+//         button: 3, // Rechte Maustaste
+//         buttons: 2, // Rechte Maustaste gedrückt
+//         preventDefault: () => {},
+//         stopPropagation: () => {}
+//     });
+
+//     //canvasElement.dispatchEvent(simulatedRightClick);
+
+//     // Ereignis auf dem Canvas dispatchen
+//     canvas.dispatchEvent(simulatedRightClick);
+
+//     console.log("Rechtsklick bei (10, 100) simuliert.");
+// }
 
 
 //REsizinbg und positioning der Nodes und des canvas
@@ -284,22 +332,49 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 
-document.addEventListener("DOMContentLoaded", () => {
-    // Button auswählen
-    const button = document.getElementById("adjustNodesButton");
 
-    // Event-Listener hinzufügen
-    button.addEventListener("click", () => {
-        // Alle Canvas-Elemente mit Graphen auswählen
-        const canvases = document.querySelectorAll('canvas[data-resize="true"]');
+// // button zu,m nodes ausrichten
+// document.addEventListener("DOMContentLoaded", () => {
+//     // Button auswählen
+//     const button = document.getElementById("adjustNodesButton");
 
-        // Für jeden Canvas adjustNodePositions aufrufen
-        canvases.forEach((canvas) => {
-            const canvasId = canvas.id; // ID des Canvas
-            adjustNodePositions(canvasId); // Funktion ausführen
-            //console.log(`adjustNodePositions für Canvas "${canvasId}" ausgeführt.`);
-        });
+//     // Event-Listener hinzufügen
+//     button.addEventListener("click", () => {
+//         // Alle Canvas-Elemente mit Graphen auswählen
+//         const canvases = document.querySelectorAll('canvas[data-resize="true"]');
 
-        //console.log("Alle Graphen auf der Seite wurden bearbeitet.");
-    });
-});
+//         // Für jeden Canvas adjustNodePositions aufrufen
+//         canvases.forEach((canvas) => {
+//             const canvasId = canvas.id; // ID des Canvas
+//             adjustNodePositions(canvasId); // Funktion ausführen
+//             //console.log(`adjustNodePositions für Canvas "${canvasId}" ausgeführt.`);
+//         });
+
+//         //console.log("Alle Graphen auf der Seite wurden bearbeitet.");
+//     });
+// });
+
+
+// document.addEventListener("DOMContentLoaded", () => {
+//     const button = document.getElementById("simulateContextMenu");
+//     if (button) {
+//         button.addEventListener("click", () => {
+//             console.log("Button geklickt!");
+
+//             // Simuliert ein contextmenu (Rechtsklick) Event
+//         const simulatedRightClick = new MouseEvent("mousedown", {
+//             bubbles: true, // Event wird an übergeordnete Elemente weitergeleitet
+//             cancelable: false, // Event kann gestoppt werden
+//             view: window,
+//             clientX: 100,
+//             clientY: 500,
+//             button: 2, // Rechte Maustaste
+//             buttons: 2 // Rechte Maustaste gedrückt
+//         });
+
+//         graphCanvas.dispatchEvent(simulatedRightClick);
+//         });
+//     } else {
+//         console.error("Button mit ID 'simulateContextMenu' wurde nicht gefunden.");
+//     }
+// });

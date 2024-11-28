@@ -233,8 +233,8 @@ export function _FunctionNode() {
 
         let inputLabelmaxLength = 0;
         let currentInputLabelLength = 0;
-        let outputLabelmaxLength = 0;
-        let currentOutputLabelLength = 0;
+        //let outputLabelmaxLength = 0;
+        //let currentOutputLabelLength = 0;
 
         for(let i=0; i<5; i++){
            // Berechne die Länge des aktuellen Labels
@@ -257,14 +257,14 @@ export function _FunctionNode() {
           this.outputs[0].label = this.properties["leftSide"];
         }
 
-        if (!this.outputs[0].label){
-          currentOutputLabelLength = 0
-        } else {
-          currentOutputLabelLength = this.outputs[0].label.length;
-        }
+        // if (!this.outputs[0].label){
+        //   currentOutputLabelLength = 0
+        // } else {
+        //   currentOutputLabelLength = this.outputs[0].label.length;
+        // }
 
 
-        if (this.properties["formula"] && this.properties["uvName"] && this.properties["funcName"]) { // Wenn alles ordentlich definiert ist: 
+        //if (this.properties["formula"] && this.properties["uvName"] && this.properties["funcName"]) { // Wenn alles ordentlich definiert ist: 
           
           //latex render versuch
             let equation = this.properties.completeEquationfromWidget;
@@ -276,42 +276,47 @@ export function _FunctionNode() {
             if (this.lastRenderedEquation !== equation) {
               this.lastRenderedEquation = equation;
 
-              let latexEquation = convertToLatex(equation);
+              let latexEquation = "";
+              if (equation){
+                latexEquation = convertToLatex(equation);
+               
+
   
               // Gleichung rendern und Bild speichern
-              this.renderedImage = renderWithMathJax(latexEquation, "black"); // Kein Canvas hier notwendig
+              
+               this.renderedImage = renderWithMathJax(latexEquation, "white"); // Kein Canvas hier notwendig
   
-              setTimeout(() => {
-                this.Pause = true;
-                
-              }, 100);
-              
-             
-              if (this.size[0] < this.renderedImage.width + 2 * this.offsetX + inputLabelmaxLength * 8 + currentOutputLabelLength * 8){
-                this.size[0] = this.renderedImage.width + 2 * this.offsetX + inputLabelmaxLength * 8 + currentOutputLabelLength * 8;
+           
+
+                setTimeout(() => {
+                  this.Pause = true;
+                  
+                }, 100);       
               }
-              if (this.size[1] < this.renderedImage.height + 2 * this.offsetY){
-                this.size[1] = this.renderedImage.height + 2 * this.offsetY;
-              }
-              
   
             }
-        }
 
          if (this.Pause == false) {
          return;
          }
-         
-      
+         if (this.renderedImage){
+          if (this.renderedImage.width + 2 * this.offsetX + 2 * inputLabelmaxLength * 8 > this.minwidth){
+            this.size[0] = this.renderedImage.width + 2 * this.offsetX + 2 * inputLabelmaxLength * 8;
+            }
+            if (this.size[1] < this.renderedImage.height + 2 * this.offsetY){
+            this.size[1] = this.renderedImage.height + 2 * this.offsetY;
+          }
+          
 
-         // Zeichne das Bild mit skalierter Größe
-        ctx.drawImage(
-          this.renderedImage, 
-          this.offsetX + inputLabelmaxLength * 8, 
-          this.offsetY - (1/2) * this.renderedImage.height, //zentrierung im titel
-        );
+          // Zeichne das Bild mit skalierter Größe
+          ctx.drawImage(
+            this.renderedImage, 
+            this.offsetX + inputLabelmaxLength * 8, 
+            this.offsetY - (1/2) * this.renderedImage.height, //zentrierung im titel
+          );
 
-        this.Pause == false        
+          this.Pause == false       
+        } 
             
       }
 
