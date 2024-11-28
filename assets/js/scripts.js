@@ -27,7 +27,7 @@ function saveGraphToFile(canvasId) {
     a.click();
     URL.revokeObjectURL(url);
 
-    console.log(`Graph von Canvas "${canvasId}" wurde gespeichert.`);
+    //console.log(`Graph von Canvas "${canvasId}" wurde gespeichert.`);
 }
 
 
@@ -62,7 +62,7 @@ function loadGraphFromFile(canvasId) {
                     graph.configure(json);
                     graph.start();
 
-                    console.log(`Graph von Canvas "${canvasId}" wurde erfolgreich geladen.`);
+                    //console.log(`Graph von Canvas "${canvasId}" wurde erfolgreich geladen.`);
                 } catch (error) {
                     console.error("Fehler beim Laden des Graphen:", error);
                     alert("Ungültige Datei. Bitte überprüfe das JSON-Format.");
@@ -74,6 +74,7 @@ function loadGraphFromFile(canvasId) {
 
     input.click();
 }
+
 
 
 // Funktion zum Laden des Graphen aus einer Datei über einen Pfad
@@ -105,7 +106,7 @@ function loadGraphFromServerAsync(canvasId, jsonFilePath) {
                     graph.configure(json);
                     graph.start();
 
-                    console.log(`Graph von Canvas "${canvasId}" erfolgreich aus ${jsonFilePath} geladen.`);
+                    //console.log(`Graph von Canvas "${canvasId}" erfolgreich aus ${jsonFilePath} geladen.`);
                     resolve(); // Ladevorgang erfolgreich abgeschlossen
                 } catch (error) {
                     reject(`Fehler beim Konfigurieren des Graphen: ${error.message}`);
@@ -115,6 +116,23 @@ function loadGraphFromServerAsync(canvasId, jsonFilePath) {
                 reject(`Fehler beim Laden der Datei "${jsonFilePath}": ${error.message}`);
             });
     });
+}
+
+function clearGraph(canvasId) {
+    const canvas = document.getElementById(canvasId);
+    if (!canvas) {
+        //alert(`Canvas mit ID "${canvasId}" nicht gefunden.`);
+        return;
+    }
+
+    const graph = canvas.graph;
+    if (!graph) {
+        //alert(`Kein Graph mit Canvas-ID "${canvasId}" gefunden.`);
+        return;
+    }
+
+    graph.clear(); // Graph löschen
+    //alert(`Graph von Canvas "${canvasId}" wurde geleert.`);
 }
 
 
@@ -128,12 +146,12 @@ async function loadAllGraphs() {
 
     try {
         await Promise.all(loadPromises); // Warten, bis alle Graphen geladen sind
-        console.log("Alle Graphen wurden erfolgreich geladen.");
+        //console.log("Alle Graphen wurden erfolgreich geladen.");
 
         // Nodes anpassen, nachdem alle Graphen geladen sind
         canvases.forEach((canvas) => adjustNodePositions(canvas.id));
     } catch (error) {
-        console.error("Fehler beim Laden eines oder mehrerer Graphen:", error);
+        //console.error("Fehler beim Laden eines oder mehrerer Graphen:", error);
     }
 }
 
@@ -141,6 +159,36 @@ async function loadAllGraphs() {
 document.addEventListener("DOMContentLoaded", () => {
     loadAllGraphs();
 });
+
+// function rightclicksim(canvasId) {
+
+//     const canvas = document.getElementById(canvasId); // Passe die ID deines Canvas an
+//     if (!canvas) {
+//         console.error("Canvas nicht gefunden.");
+//         return;
+//     }
+
+//     // Rechtsklick-Ereignis erstellen
+//     const simulatedRightClick = new MouseEvent("contextmenu", {
+//         bubbles: true, // Event wird an übergeordnete Elemente weitergeleitet
+//         cancelable: false, // Event kann gestoppt werden
+//         //view: window,
+//         clientX: canvas.getBoundingClientRect().left + 10, // X-Koordinate relativ zum Viewport
+//         clientY: canvas.getBoundingClientRect().top + 300, // Y-Koordinate relativ zum Viewport
+//         button: 2, // Rechte Maustaste
+//         button: 3, // Rechte Maustaste
+//         buttons: 2, // Rechte Maustaste gedrückt
+//         preventDefault: () => {},
+//         stopPropagation: () => {}
+//     });
+
+//     //canvasElement.dispatchEvent(simulatedRightClick);
+
+//     // Ereignis auf dem Canvas dispatchen
+//     canvas.dispatchEvent(simulatedRightClick);
+
+//     console.log("Rechtsklick bei (10, 100) simuliert.");
+// }
 
 
 //REsizinbg und positioning der Nodes und des canvas
@@ -167,14 +215,13 @@ function adjustCanvasSize(canvasId) {
 
 
     // Berechne die neue Breite, mindestens jedoch die Mindestbreite
-    const canvasWidth = //Math.max(browserWidth, minWidth); // 80% der Browserbreite oder mindestens 1000px
+    // const canvasWidth = //Math.max(browserWidth, minWidth); // 80% der Browserbreite oder mindestens 1000px
     //canvas.width = canvasWidth * widthPart;
 
     // Optional: Höhe setzen (z. B. 16:9-Seitenverhältnis)
     //const aspectRatio = 16 / 9;
     //canvas.height = canvasWidth / aspectRatio;
-
-    console.log(`Canvas "${canvasId}" angepasst: Breite ${canvas.width}px, Höhe ${canvas.height}px`);
+    // console.log(`Canvas "${canvasId}" angepasst: Breite ${canvas.width}px, Höhe ${canvas.height}px`);
 }
 
 // Dynamisches Resizing für alle Canvas mit data-resize="true"
@@ -246,10 +293,10 @@ function adjustNodePositions(canvasId) {
         node.pos[0] = x * scale + offsetX;
         node.pos[1] = y * scale + offsetY;
 
-        console.log(`Node "${node.title}" verschoben: Neue Position (${node.pos[0]}, ${node.pos[1]})`);
+        //console.log(`Node "${node.title}" verschoben: Neue Position (${node.pos[0]}, ${node.pos[1]})`);
     });
 
-    console.log("Alle Nodes skaliert und relativ verschoben.");
+    //console.log("Alle Nodes skaliert und relativ verschoben.");
 }
 
 // Dynamisches Resizing für alle Canvas mit data-resize="true"
@@ -285,22 +332,49 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 
-document.addEventListener("DOMContentLoaded", () => {
-    // Button auswählen
-    const button = document.getElementById("adjustNodesButton");
 
-    // Event-Listener hinzufügen
-    button.addEventListener("click", () => {
-        // Alle Canvas-Elemente mit Graphen auswählen
-        const canvases = document.querySelectorAll('canvas[data-resize="true"]');
+// // button zu,m nodes ausrichten
+// document.addEventListener("DOMContentLoaded", () => {
+//     // Button auswählen
+//     const button = document.getElementById("adjustNodesButton");
 
-        // Für jeden Canvas adjustNodePositions aufrufen
-        canvases.forEach((canvas) => {
-            const canvasId = canvas.id; // ID des Canvas
-            adjustNodePositions(canvasId); // Funktion ausführen
-            console.log(`adjustNodePositions für Canvas "${canvasId}" ausgeführt.`);
-        });
+//     // Event-Listener hinzufügen
+//     button.addEventListener("click", () => {
+//         // Alle Canvas-Elemente mit Graphen auswählen
+//         const canvases = document.querySelectorAll('canvas[data-resize="true"]');
 
-        console.log("Alle Graphen auf der Seite wurden bearbeitet.");
-    });
-});
+//         // Für jeden Canvas adjustNodePositions aufrufen
+//         canvases.forEach((canvas) => {
+//             const canvasId = canvas.id; // ID des Canvas
+//             adjustNodePositions(canvasId); // Funktion ausführen
+//             //console.log(`adjustNodePositions für Canvas "${canvasId}" ausgeführt.`);
+//         });
+
+//         //console.log("Alle Graphen auf der Seite wurden bearbeitet.");
+//     });
+// });
+
+
+// document.addEventListener("DOMContentLoaded", () => {
+//     const button = document.getElementById("simulateContextMenu");
+//     if (button) {
+//         button.addEventListener("click", () => {
+//             console.log("Button geklickt!");
+
+//             // Simuliert ein contextmenu (Rechtsklick) Event
+//         const simulatedRightClick = new MouseEvent("mousedown", {
+//             bubbles: true, // Event wird an übergeordnete Elemente weitergeleitet
+//             cancelable: false, // Event kann gestoppt werden
+//             view: window,
+//             clientX: 100,
+//             clientY: 500,
+//             button: 2, // Rechte Maustaste
+//             buttons: 2 // Rechte Maustaste gedrückt
+//         });
+
+//         graphCanvas.dispatchEvent(simulatedRightClick);
+//         });
+//     } else {
+//         console.error("Button mit ID 'simulateContextMenu' wurde nicht gefunden.");
+//     }
+// });

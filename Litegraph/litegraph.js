@@ -18,7 +18,7 @@
 
         CANVAS_GRID_SIZE: 10,
 
-        NODE_TITLE_HEIGHT: 30,
+        NODE_TITLE_HEIGHT: 35,
         NODE_TITLE_TEXT_Y: 20,
         NODE_SLOT_HEIGHT: 20,
         NODE_WIDGET_HEIGHT: 20,
@@ -29,22 +29,22 @@
         NODE_TITLE_COLOR: "#FFFFFF",
         NODE_SELECTED_TITLE_COLOR: "#FFFFFF",
         NODE_TEXT_SIZE: 14,
-        NODE_TEXT_COLOR: "#000000",
+        NODE_TEXT_COLOR: "#555555",
         NODE_SUBTEXT_SIZE: 13,
         NODE_DEFAULT_COLOR: "#4C7468",
-        NODE_DEFAULT_BGCOLOR: "#9FA8B4",
+        NODE_DEFAULT_BGCOLOR: "#7C8693",
         NODE_DEFAULT_BOXCOLOR: "#666",
         NODE_DEFAULT_SHAPE: "box",
         NODE_BOX_OUTLINE_COLOR: "#FFF",
         DEFAULT_SHADOW_COLOR: "rgba(0,0,0,0.5)",
         DEFAULT_GROUP_FONT: 24,
 
-        WIDGET_BGCOLOR: "#222",
+        WIDGET_BGCOLOR: "#555555",
         WIDGET_OUTLINE_COLOR: "#666",
         WIDGET_TEXT_COLOR: "#DDD",
         WIDGET_SECONDARY_TEXT_COLOR: "#999",
 
-        LINK_COLOR: "#9A9",
+        LINK_COLOR: "#D0AF8B",
         EVENT_LINK_COLOR: "#A86",
         CONNECTING_LINK_COLOR: "#AFA",
 
@@ -13225,59 +13225,61 @@ LGraphNode.prototype.executeAction = function(action)
 
         if (node.getMenuOptions) {
             options = node.getMenuOptions(this);
-        } else {
+        } 
+        else {
             options = [
-                {
-                    content: "Inputs",
-                    has_submenu: true,
-                    disabled: true,
-                    callback: LGraphCanvas.showMenuNodeOptionalInputs
-                },
-                {
-                    content: "Outputs",
-                    has_submenu: true,
-                    disabled: true,
-                    callback: LGraphCanvas.showMenuNodeOptionalOutputs
-                },
-                null,
-                {
-                    content: "Properties",
-                    has_submenu: true,
-                    callback: LGraphCanvas.onShowMenuNodeProperties
-                },
-                null,
-                {
-                    content: "Title",
-                    callback: LGraphCanvas.onShowPropertyEditor
-                },
-                {
-                    content: "Mode",
-                    has_submenu: true,
-                    callback: LGraphCanvas.onMenuNodeMode
-                }];
-            if(node.resizable !== false){
-                options.push({
-                    content: "Resize", callback: LGraphCanvas.onMenuResizeNode
-                });
-            }
-            options.push(
-                {
-                    content: "Collapse",
-                    callback: LGraphCanvas.onMenuNodeCollapse
-                },
-                { content: "Pin", callback: LGraphCanvas.onMenuNodePin },
-                {
-                    content: "Colors",
-                    has_submenu: true,
-                    callback: LGraphCanvas.onMenuNodeColors
-                },
-                {
-                    content: "Shapes",
-                    has_submenu: true,
-                    callback: LGraphCanvas.onMenuNodeShapes
-                },
-                null
-            );
+            //     {
+            //         content: "Inputs",
+            //         has_submenu: true,
+            //         disabled: true,
+            //         callback: LGraphCanvas.showMenuNodeOptionalInputs
+            //     },
+            //     {
+            //         content: "Outputs",
+            //         has_submenu: true,
+            //         disabled: true,
+            //         callback: LGraphCanvas.showMenuNodeOptionalOutputs
+            //     },
+            //     null,
+            //     {
+            //         content: "Properties",
+            //         has_submenu: true,
+            //         callback: LGraphCanvas.onShowMenuNodeProperties
+            //     },
+            //     null,
+            //     {
+            //         content: "Title",
+            //         callback: LGraphCanvas.onShowPropertyEditor
+            //     },
+            //     {
+            //         content: "Mode",
+            //         has_submenu: true,
+            //         callback: LGraphCanvas.onMenuNodeMode
+            //     }
+            ];
+            // if(node.resizable !== false){
+            //     options.push({
+            //         content: "Resize", callback: LGraphCanvas.onMenuResizeNode
+            //     });
+            // }
+            // options.push(
+            //     {
+            //         content: "Collapse",
+            //         callback: LGraphCanvas.onMenuNodeCollapse
+            //     },
+            //     { content: "Pin", callback: LGraphCanvas.onMenuNodePin },
+            //     {
+            //         content: "Colors",
+            //         has_submenu: true,
+            //         callback: LGraphCanvas.onMenuNodeColors
+            //     },
+            //     {
+            //         content: "Shapes",
+            //         has_submenu: true,
+            //         callback: LGraphCanvas.onMenuNodeShapes
+            //     },
+            //     null
+            // );
         }
 
         if (node.onGetInputs) {

@@ -34,7 +34,7 @@ export function _CustomGraphicsPlot() {
           }
         }, { min: 0.1, max: 100, step: 0.1, precision: 1 });
 
-        this.addWidget("slider", "Zoom X-Richtung", this.properties.yRangeValue, (value) => {
+        this.addWidget("slider", "Zoom Y-Richtung", this.properties.yRangeValue, (value) => {
           this.properties.yRangeValue = Math.round((value + Number.EPSILON) * 10) / 10;
           this.properties.yRange = [-this.properties.yRangeValue, this.properties.yRangeValue];  // Erstelle die symmetrische Range
           if (this.properties.yRangeValue >= this.properties.xRangeValue){

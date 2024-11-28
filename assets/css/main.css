@@ -4074,7 +4074,7 @@ input, select, textarea {
 #litegraph {
     border-top: 2px solid white; /* Weiße Linie oben */
     border-bottom: 2px solid white; /* Weiße Linie unten */
-    padding: 20px 0; /* Optional: Abstand zwischen Inhalt und Linie */
+ 
 }
 
 
@@ -4086,9 +4086,29 @@ input, select, textarea {
 
 #graphstylefull {
     height: 715px;
+	position: relative; /* Setzt den Canvas-Bereich als Referenzpunkt */
+    width: 100%;
+    display: block; /* Sicherstellen, dass der Canvas-Bereich blockweise dargestellt wird */
 }
 
 #graphstylehalf {
     height: 500px;
 	width: 50%;
+}
+
+#canvas-menu ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+#canvas-menu ul li {
+    margin: 5px 0;
+}
+
+#canvas-menu ul li a {
+    text-decoration: none;
+    color: #ffffff;
+    font-weight: bold;
+    cursor: pointer;
 }
