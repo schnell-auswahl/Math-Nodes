@@ -80,15 +80,15 @@ export function createGraphInstance(canvasId) {
 
     //Nodes Registrieren
     // Funktionenmaschinen
-    LiteGraph.registerNodeType("Funktionenmaschinen/func", FunctionNode);
-    LiteGraph.registerNodeType("Funktionenmaschinen/cconst", CustNumberNode);
-    LiteGraph.registerNodeType("Funktionenmaschinen/uvNode", uvNode);
-    LiteGraph.registerNodeType("Funktionenmaschinen/cwatchS", CustWatchNodeString);
-    LiteGraph.registerNodeType("Funktionenmaschinen/cwatchV", CustWatchNodeValue);
-    LiteGraph.registerNodeType("Funktionenmaschinen/plot", CustomGraphicsPlot);
-    LiteGraph.registerNodeType("Funktionenmaschinen/time", CustomTimeNode);
+    LiteGraph.registerNodeType("Funktionenmaschinen/Unabhängige_Variable", uvNode);
+    LiteGraph.registerNodeType("Funktionenmaschinen/Unabhängige_Variable_Zeit ", CustomTimeNode);
+    LiteGraph.registerNodeType("Funktionenmaschinen/Parameter", CustNumberNode);
+    LiteGraph.registerNodeType("Funktionenmaschinen/Funktion", FunctionNode);
     LiteGraph.registerNodeType("Funktionenmaschinen/Operation", OperationNode);
-    LiteGraph.registerNodeType("Funktionenmaschinen/AudioNode", AudioNode);
+    LiteGraph.registerNodeType("Funktionenmaschinen/Feedback_Gleichung", CustWatchNodeString);
+    LiteGraph.registerNodeType("Funktionenmaschinen/Feedback_Wert", CustWatchNodeValue);
+    LiteGraph.registerNodeType("Funktionenmaschinen/Feedback_Graph", CustomGraphicsPlot);
+    LiteGraph.registerNodeType("Funktionenmaschinen/Feedback_Audio", AudioNode);
 
   //Wortmaschinen
     LiteGraph.registerNodeType("Wortmaschinen/TextInputNode", TextInputNode);
@@ -135,8 +135,8 @@ Object.keys(LiteGraph.registered_node_types).forEach((nodeType) => {
 
 
 // Debug-Ausgabe
-console.log("Funktionenmaschinen Nodes:", funcNodeTypes);
-console.log("Wortmaschinen Nodes:", wordNodeTypes);
+// console.log("Funktionenmaschinen Nodes:", funcNodeTypes);
+// console.log("Wortmaschinen Nodes:", wordNodeTypes);
 
 
 // Erstelle eine neue Graph-Instanz
@@ -382,30 +382,13 @@ menuToggle.addEventListener("click", () => {
     //wordColumn.class="col-6 col-12-small";;
     //wordColumn.style.margin = "10px";
     wordColumn.innerHTML = '<header class="major"> <h3>Wortmaschinen</h3></header>';
-    // Node-Typen für Funktionenmaschinen
-    // const funcNodeTypes = [
-    //     { name: "func", type: "Funktionenmaschinen/func" },
-    //     { name: "cconst", type: "Funktionenmaschinen/cconst" },
-    //     { name: "uvNode", type: "Funktionenmaschinen/uvNode" },
-    //     { name: "cwatchS", type: "Funktionenmaschinen/cwatchS" },
-    //     { name: "cwatchV", type: "Funktionenmaschinen/cwatchV" },
-    //     { name: "plot", type: "Funktionenmaschinen/plot" },
-    //     { name: "time", type: "Funktionenmaschinen/time" },
-    //     { name: "Operation", type: "Funktionenmaschinen/Operation" },
-    //     { name: "AudioNode", type: "Funktionenmaschinen/AudioNode" },
-    // ];
-
-    // Node-Typen für Wortmaschinen
-    // const wordNodeTypes = [
-    //     { name: "TextInputNode", type: "Wortmaschinen/TextInputNode" },
-    //     { name: "TextDisplayNode", type: "Wortmaschinen/TextDisplayNode" },
-    // ];
+   
 
     // Funktion, um Buttons für Nodes zu erstellen
     const createNodeButtons = (parent, nodeTypes) => {
         nodeTypes.forEach((node) => {
             const button = document.createElement("li");
-            button.textContent = node.name;
+            button.textContent = node.name.replace(/_/g, " ");
             button.class="links"
             button.style.margin = "5px";
             button.style.listStyle = "none"; 
@@ -425,7 +408,7 @@ menuToggle.addEventListener("click", () => {
                     (canvasElement.height - 200),
                 ];
                 graph.add(newNode);
-                console.log(`Node hinzugefügt: ${uniqueName}`);
+                //console.log(`Node hinzugefügt: ${uniqueName}`); // Aber bestätigung einbauen
                 document.body.removeChild(overlay); // Menü schließen
             });
 

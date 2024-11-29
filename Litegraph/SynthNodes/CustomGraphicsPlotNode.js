@@ -20,7 +20,11 @@ export function _CustomGraphicsPlot() {
           marginTop: 80,       // Spezielle Randgröße für den oberen Rand
           xRange: [-10, 10],   // Standardwert für xRange
           yRange: [-10, 10],    // Standardwert für yRange
-          equations: []
+          equations: [],
+          uvNames: [],
+          savedEquation: "",
+          savedUV: ""
+          
         };
 
         // Widgets für xRange und yRange als Knobs
@@ -49,6 +53,7 @@ export function _CustomGraphicsPlot() {
         this.desc = "Plots up to 4 mathematical functions with different colors";
         this.colors = ["#FFA", "#F99", "#9F9", "#99F"];  // Vier Farben für vier Funktionen
         this.size = [350, 380];  // Vergrößertes Plot-Fenster
+        //this.collapsed = false;
         //this.color = "#CE8A53";
         this.color = fbNodesColor;
         //this.bgcolor = "#FFFFFF";
@@ -75,6 +80,7 @@ export function _CustomGraphicsPlot() {
       }
 
       onExecute() {
+        
         this.equations = [];
         this.uvNames = [];
 
@@ -85,17 +91,23 @@ export function _CustomGraphicsPlot() {
             const equation = inputData["rightSide"];
             const uvName = inputData["uvName"] || "x";
 
+
             if (equation) {
-              this.equations.push(equation);
-              this.uvNames.push(uvName);
-              this.properties.equations = this.equations;
-            }
+              this.equations[i] = equation;
+              this.uvNames[i] =uvName;
+              //if (this.equations[i]) { //Möglichkeit gespeicherte mit nicht neuen zu
+                this.properties.uvNames[i] =  this.uvNames[i];
+                this.properties.equations[i] = this.equations[i];
+            //}
           }
         }
       }
+     }
 
       onDrawForeground(ctx) {
-        if (this.flags.collapsed || this.equations.length === 0) {
+        this.properties.equations[4] = this.properties.savedEquation;
+        this.properties.uvNames[4] = this.properties.savedUV;
+        if (this.flags.collapsed || this.properties.equations.length === 0) {
           return;
         }
 
@@ -154,9 +166,9 @@ export function _CustomGraphicsPlot() {
         this.drawGrid(ctx, size, scaleX, scaleY, offsetX, offsetY, marginTop);
 
         // Plotte jede Funktion in einer anderen Farbe
-        for (let i = 0; i < this.equations.length; i++) {
-          const equation = this.equations[i];
-          const uvName = this.uvNames[i];
+        for (let i = 0; i < this.properties.equations.length; i++) {
+          const equation = this.properties.equations[i];
+          const uvName =  this.properties.uvNames[i];
           const color = this.colors[i];
 
           ctx.strokeStyle = color;

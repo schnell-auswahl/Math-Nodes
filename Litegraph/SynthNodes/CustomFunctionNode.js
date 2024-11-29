@@ -253,8 +253,10 @@ export function _FunctionNode() {
         //console.log("Maximale Länge der Labels:", inputLabelmaxLength);
 
         // Setze das Label des Ausgangs basierend auf der Funktionsgleichung
-        if(this.properties["uvName"] && this.properties["funcName"]){
+        if(this.properties["uvName"] && this.properties["funcName"] && this.getInputData(0)){
           this.outputs[0].label = this.properties["leftSide"];
+        } else if (this.properties["uvName"] && this.properties["funcName"]) {
+          this.outputs[0].label = `${this.properties["funcName"]}(${this.properties.uvName})`;
         }
 
         // if (!this.outputs[0].label){
