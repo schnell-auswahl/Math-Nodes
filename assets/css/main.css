@@ -4091,6 +4091,13 @@ input, select, textarea {
     display: block; /* Sicherstellen, dass der Canvas-Bereich blockweise dargestellt wird */
 }
 
+#graphstylefulldouble {
+    height: 1430px;
+	position: relative; /* Setzt den Canvas-Bereich als Referenzpunkt */
+    width: 100%;
+    display: block; /* Sicherstellen, dass der Canvas-Bereich blockweise dargestellt wird */
+}
+
 #graphstylehalf {
     height: 500px;
 	width: 50%;

@@ -3,7 +3,7 @@ export function _CustWatchNodeString() {
     constructor() {
       this.size = [160, 80]; // Etwas größere Größe, damit genug Platz für die Gleichung ist
       this.color = fbNodesColor;
-      this.bgcolor = bgColor1;
+      this.bgcolor = bgColor2;
 
       this.addInput("value", 0, { label: "" });
       this.value = null;
@@ -40,7 +40,7 @@ export function _CustWatchNodeString() {
         this.lastRenderedEquation = equation;
 
         // Gleichung rendern und Bild speichern
-        this.renderedImage = renderWithMathJax(latexEquation, null, 0, 0); // Kein Canvas hier notwendig
+        this.renderedImage = renderWithMathJax(latexEquation, "white"); // Kein Canvas hier notwendig
 
         setTimeout(() => {
           this.Pause = true;

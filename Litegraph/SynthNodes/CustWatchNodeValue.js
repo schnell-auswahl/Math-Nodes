@@ -5,7 +5,7 @@ export function _CustWatchNodeValue() { return(
         //this.color = "#CE8A53"; //Titelfarbe
         this.color = fbNodesColor;
         //this.bgcolor = "#FFFFFF"; //Hintergrundfarbe
-        this.bgcolor = bgColor1;
+        this.bgcolor = bgColor2;
 
         this.addInput("","object");
         //this.addInput("UV", "object");

@@ -8,7 +8,7 @@ export function _AudioNode() {
 
             //this.color = "#CE8A53"; // Titelfarbe
             this.color = fbNodesColor;
-            this.bgcolor = bgColor1; // Hintergrundfarbe
+            this.bgcolor = bgColor2; // Hintergrundfarbe
             this.context = new (window.AudioContext || window.webkitAudioContext)();
             this.context.suspend(); // Pausiere den AudioContext direkt nach der Erstellung
             this.isPlaying = false;
@@ -101,7 +101,7 @@ export function _AudioNode() {
         stop() {
             this.context.suspend().then(() => {
                 this.isPlaying = false;
-                this.bgcolor = "#FFFFFF"; // Schwarz, wenn Wiedergabe gestoppt
+                this.bgcolor = bgColor2 // grau, wenn Wiedergabe gestoppt
                 //console.log("AudioNode: Audiowiedergabe gestoppt");
                 this.setDirtyCanvas(true); // Aktualisiere das Widget
             }).catch((error) => {
@@ -111,7 +111,7 @@ export function _AudioNode() {
 
         // Aktualisiert die Hintergrundfarbe des Widgets, je nach Wiedergabestatus
         onDrawBackground(ctx) {
-            this.bgcolor = this.isPlaying ? fbNodesColor : "#FFFFFF"; // Hintergrundfarbe des Widgets
+            this.bgcolor = this.isPlaying ? fbNodesColor : bgColor2; // Hintergrundfarbe des Widgets
 
              // Färbe den Eingang oder zeichne einen Kreis darum
                 const NODE_SLOT_HEIGHT = LiteGraph.NODE_SLOT_HEIGHT;
