@@ -13220,42 +13220,42 @@ LGraphNode.prototype.executeAction = function(action)
     };
 
     //called by processContextMenu to extract the menu list
-    LGraphCanvas.prototype.getNodeMenuOptions = function(node) {
+    LGraphCanvas.prototype.getNodeMenuOptions = function(node) { 
         var options = null;
 
         if (node.getMenuOptions) {
             options = node.getMenuOptions(this);
         } 
         else {
-            options = [
-            //     {
-            //         content: "Inputs",
-            //         has_submenu: true,
-            //         disabled: true,
-            //         callback: LGraphCanvas.showMenuNodeOptionalInputs
-            //     },
-            //     {
-            //         content: "Outputs",
-            //         has_submenu: true,
-            //         disabled: true,
-            //         callback: LGraphCanvas.showMenuNodeOptionalOutputs
-            //     },
-            //     null,
-            //     {
-            //         content: "Properties",
-            //         has_submenu: true,
-            //         callback: LGraphCanvas.onShowMenuNodeProperties
-            //     },
-            //     null,
-            //     {
-            //         content: "Title",
-            //         callback: LGraphCanvas.onShowPropertyEditor
-            //     },
-            //     {
-            //         content: "Mode",
-            //         has_submenu: true,
-            //         callback: LGraphCanvas.onMenuNodeMode
-            //     }
+            options = [//Zum debuggen ein uns auskommentieren
+                // {
+                //     content: "Inputs",
+                //     has_submenu: true,
+                //     disabled: true,
+                //     callback: LGraphCanvas.showMenuNodeOptionalInputs
+                // },
+                // {
+                //     content: "Outputs",
+                //     has_submenu: true,
+                //     disabled: true,
+                //     callback: LGraphCanvas.showMenuNodeOptionalOutputs
+                // },
+                // null,
+                // {
+                //     content: "Properties",
+                //     has_submenu: true,
+                //     callback: LGraphCanvas.onShowMenuNodeProperties
+                // },
+                // null,
+                // {
+                //     content: "Title",
+                //     callback: LGraphCanvas.onShowPropertyEditor
+                // },
+                // {
+                //     content: "Mode",
+                //     has_submenu: true,
+                //     callback: LGraphCanvas.onMenuNodeMode
+                // }
             ];
             // if(node.resizable !== false){
             //     options.push({
