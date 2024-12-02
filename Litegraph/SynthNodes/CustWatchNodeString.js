@@ -114,15 +114,15 @@ export function _CustWatchNodeString() {
       } else {
         let formulaForDisplay = o["rightSide"]
           .replace(/\*\*/g, "^") // Ersetzt Potenzierung zurück
-          .replace(/Math\.sin/g, "\\sin ") // Ersetzt Sinus zurück
-          .replace(/Math\.cos/g, "\\cos ") // Ersetzt Kosinus zurück
-          .replace(/Math\.tan/g, "\\tan ") // Ersetzt Tangens zurück
-          .replace(/Math\.sqrt/g, "\\sqrt ") // Ersetzt Quadratwurzel zurück
-          .replace(/Math\.log10/g, "\\log ") // Ersetzt Logarithmus zur Basis 10 zurück
-          .replace(/Math\.log\b/g, "\\ln ") // Ersetzt natürlicher Logarithmus zurück
-          .replace(/Math\.exp/g, "\\exp ") // Ersetzt Exponentialfunktion zurück
+          .replace(/Math\.sin/g, "sin ") // Ersetzt Sinus zurück
+          .replace(/Math\.cos/g, "cos ") // Ersetzt Kosinus zurück
+          .replace(/Math\.tan/g, "tan ") // Ersetzt Tangens zurück
+          .replace(/Math\.sqrt/g, "sqrt ") // Ersetzt Quadratwurzel zurück
+          .replace(/Math\.log10/g, "log ") // Ersetzt Logarithmus zur Basis 10 zurück
+          .replace(/Math\.log\b/g, "ln ") // Ersetzt natürlicher Logarithmus zurück
+          .replace(/Math\.exp/g, "exp ") // Ersetzt Exponentialfunktion zurück
           .replace(/Math\.abs\(([^()]*|\((?:[^()]*|\([^()]*\))*\))\)/g, "|$1|") // Absolutbetrag
-          .replace(/Math\.PI/g, "\\pi ") // Math.PI durch π
+          .replace(/Math\.PI/g, "pi ") // Math.PI durch π
           .replace(/Math\.E/g, "e"); // Math.E durch e
 
         return o["leftSide"] + " = " + formulaForDisplay; // Gib die Gleichung zurück
