@@ -1,7 +1,7 @@
 export function _CustWatchNodeString() {
   return class CustWatchNodeString {
     constructor() {
-      this.size = [160, 80]; // Etwas größere Größe, damit genug Platz für die Gleichung ist
+      this.size = [160, 160]; // Etwas größere Größe, damit genug Platz für die Gleichung ist
       this.color = fbNodesColor;
       this.bgcolor = bgColor2;
 
@@ -26,11 +26,15 @@ export function _CustWatchNodeString() {
         this.value = this.getInputData(0); // Holt den Wert der Gleichung
       }
 
-      if (!this.value) return;
+      console.log(this.properties.GleichungvorMathJax);
+      if (!this.value && !this.properties.GleichungvorMathJax) return;
 
-      let equation = this.toString(this.value);
-      this.properties.GleichungvorMathJax = equation;
-  
+      if (this.value) {
+        this.properties.GleichungvorMathJax= this.toString(this.value);
+      }
+        let equation =  this.properties.GleichungvorMathJax;
+      
+
       // Konvertiere den mathematischen Ausdruck in LaTeX mit MathJS
       let latexEquation = convertToLatex(equation);
       this.properties.GleichungvorKaTex = latexEquation;
@@ -44,67 +48,56 @@ export function _CustWatchNodeString() {
 
         setTimeout(() => {
           this.Pause = true;
-          
         }, 100);
-
       }
-      if (this.size[0] < this.renderedImage.width + 2 * this.offsetX){
+      if (this.size[0] < this.renderedImage.width + 2 * this.offsetX) {
         this.size[0] = this.renderedImage.width + 2 * this.offsetX;
       }
-      if (this.size[1] < this.renderedImage.height + 2 * this.offsetY){
-        this.size[1] = this.renderedImage.height +  2 * this.offsetY;
+      if (this.size[1] < this.renderedImage.height + 2 * this.offsetY) {
+        this.size[1] = this.renderedImage.height + 2 * this.offsetY;
       }
-
     }
 
     onDrawForeground(ctx) {
-        // Färbe den Eingang oder zeichne einen Kreis darum
-        const NODE_SLOT_HEIGHT = LiteGraph.NODE_SLOT_HEIGHT;
+      // Färbe den Eingang oder zeichne einen Kreis darum
+      const NODE_SLOT_HEIGHT = LiteGraph.NODE_SLOT_HEIGHT;
 
-        // Relativer x-Wert für Eingänge (meistens am linken Rand der Node)
-        const inputPosX = labelInputPosX;
+      // Relativer x-Wert für Eingänge (meistens am linken Rand der Node)
+      const inputPosX = labelInputPosX;
 
-        // Relativer y-Wert basierend auf Titelhöhe und Slot-Höhe
-        const inputPosY = (0) * NODE_SLOT_HEIGHT + 14;
+      // Relativer y-Wert basierend auf Titelhöhe und Slot-Höhe
+      const inputPosY = 0 * NODE_SLOT_HEIGHT + 14;
 
-          // Parameter für die Trichterform
-        const width = labelWidth; // Breite der Basis (linke Seite)
-        const height = labelHeight; // Höhe des Trichters (von Basis bis Spitze)
+      // Parameter für die Trichterform
+      const width = labelWidth; // Breite der Basis (linke Seite)
+      const height = labelHeight; // Höhe des Trichters (von Basis bis Spitze)
 
-        // Beginne mit dem Zeichnen des Dreiecks
+      // Beginne mit dem Zeichnen des Dreiecks
       ctx.beginPath();
 
       // Input Trichter
       ctx.moveTo(0, inputPosY - height / 2);
-      ctx.lineTo(inputPosX ,inputPosY - height / 2);
-      ctx.arc(inputPosX,inputPosY,height / 2 ,0, 2 * Math.PI)
-      ctx.lineTo(inputPosX ,inputPosY + height / 2);
-      ctx.lineTo(0 ,inputPosY + height / 2);
-      ctx.lineTo(0 ,inputPosY + height / 2);
+      ctx.lineTo(inputPosX, inputPosY - height / 2);
+      ctx.arc(inputPosX, inputPosY, height / 2, 0, 2 * Math.PI);
+      ctx.lineTo(inputPosX, inputPosY + height / 2);
+      ctx.lineTo(0, inputPosY + height / 2);
+      ctx.lineTo(0, inputPosY + height / 2);
       ctx.closePath();
 
       // Füllen des Trichters
       ctx.fillStyle = inLabelsColor;
       ctx.fill();
 
-
-
-    
       if (this.Pause == false) {
         return;
       }
 
-      
-        
-        //console.log("this.renderedImage:", this.renderedImage);
-        //console.log("Instance of Image:", this.renderedImage instanceof Image);
-        //ctx.fillStyle = "#000FF0";
-        //ctx.fillRect(0, 0, this.size[0], this.size[1]);
-        ctx.drawImage(this.renderedImage, this.offsetX, this.offsetY);
-        
-    
+      //console.log("this.renderedImage:", this.renderedImage);
+      //console.log("Instance of Image:", this.renderedImage instanceof Image);
+      //ctx.fillStyle = "#000FF0";
+      //ctx.fillRect(0, 0, this.size[0], this.size[1]);
+      ctx.drawImage(this.renderedImage, this.offsetX, this.offsetY);
     }
-
 
     toString(o) {
       if (o == null) {

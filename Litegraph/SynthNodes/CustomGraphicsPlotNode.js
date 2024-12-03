@@ -20,8 +20,8 @@ export function _CustomGraphicsPlot() {
           marginTop: 80,       // Spezielle Randgröße für den oberen Rand
           xRange: [-10, 10],   // Standardwert für xRange
           yRange: [-10, 10],    // Standardwert für yRange
-          equations: [],
-          uvNames: [],
+          equations: ["","","","",""],
+          uvNames: ["","","","",""],
           savedEquation: "",
           savedUV: ""
           
@@ -70,7 +70,7 @@ export function _CustomGraphicsPlot() {
           const func = new Function(uvName, `return ${safeEquation};`);
           return func(uvValue);
         } catch (error) {
-          console.error("Fehler bei der Auswertung der Funktion:", error);
+          //console.error("Fehler bei der Auswertung der Funktion:", error);
           return null;
         }
       }
@@ -107,7 +107,7 @@ export function _CustomGraphicsPlot() {
       onDrawForeground(ctx) {
         this.properties.equations[4] = this.properties.savedEquation;
         this.properties.uvNames[4] = this.properties.savedUV;
-        if (this.flags.collapsed || this.properties.equations.length === 0) {
+        if (!this.inputs[0]) {
           return;
         }
 

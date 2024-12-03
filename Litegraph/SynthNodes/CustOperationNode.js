@@ -7,7 +7,7 @@ export function _OperationNode(){
                 this.color = opNodesColor;
                 this.bgcolor = bgColor2;
                 
-                this.size = [80, 90];  
+                this.size = [120, 90];  
 
                 this.addInput("", "object");
                 this.addInput("", "object");
@@ -77,7 +77,7 @@ export function _OperationNode(){
             }
 
             onDrawBackground(ctx) {
-                this.outputs[0].label = this.properties["Result_Value"].toFixed(2);
+                //this.outputs[0].label = this.properties["Result_Value"].toFixed(2);
 
 
                 // Färbe den Eingang oder zeichne einen Kreis darum

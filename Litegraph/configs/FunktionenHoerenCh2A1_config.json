@@ -1,0 +1,234 @@
+{
+  "last_node_id": 15,
+  "last_link_id": 23,
+  "nodes": [
+    {
+      "id": 14,
+      "type": "Funktionenmaschinen/Feedback_Graph",
+      "pos": [550.1417322834645, 312.00787401574803],
+      
+      "flags": {},
+      "order": 0,
+      "mode": 0,
+      "inputs": [
+        { "name": "", "type": "object", "link": null },
+        { "name": "", "type": "object", "link": null },
+        { "name": "", "type": "object", "link": null },
+        { "name": "", "type": "object", "link": null }
+      ],
+      "title": "Graph",
+      "properties": {
+        "xRangeValue": 10,
+        "yRangeValue": 10,
+        "scaleX": 1,
+        "scaleY": 1,
+        "gridSize": 2,
+        "discontinuityThreshold": 100,
+        "margin": 30,
+        "marginTop": 80,
+        "xRange": [-10, 10],
+        "yRange": [-10, 10],
+        "equations": [null, null, null, null, ""],
+        "uvNames": [null, null, null, null, ""],
+        "savedEquation": "",
+        "savedUV": ""
+      },
+      "color": "#D0AF8B",
+      "bgcolor": "#000000"
+    },
+    {
+      "id": 3,
+      "type": "Funktionenmaschinen/Feedback_Audio",
+      "pos": [991.5905511811023, 558.9370078740158],
+      
+      "flags": {},
+      "order": 1,
+      "mode": 0,
+      "inputs": [{ "name": "function", "type": "object", "link": null }],
+      "title": "Audio",
+      "properties": {
+        "FormulafromInput": "(Math.sin(1000*(Math.sin(0.2*t))*t))**2"
+      },
+      "color": "#D0AF8B",
+      "bgcolor": "#7C8693"
+    },
+    {
+      "id": 12,
+      "type": "Funktionenmaschinen/Feedback_Gleichung",
+      "pos": [1340.3149606299212, 555.9133858267717],
+      
+      "flags": {},
+      "order": 2,
+      "mode": 0,
+      "inputs": [{ "name": "value", "type": 0, "link": null, "label": "" }],
+      "title": "Gleichung",
+      "properties": {
+        "GleichungvorMathJax": "h(g(t)) = (sin (1000*(sin (0.2*t))*t))^2",
+        "GleichungvorKaTex": "\\mathrm{h}\\left(\\mathrm{g}\\left(\\mathrm{t}\\right)\\right) = {\\left(\\sin\\left(1000\\cdot\\left(\\sin\\left(0.2\\cdot\\mathrm{t}\\right)\\right)\\cdot\\mathrm{t}\\right)\\right)}^{2}"
+      },
+      "color": "#D0AF8B",
+      "bgcolor": "#7C8693"
+    },
+    {
+      "id": 6,
+      "type": "Funktionenmaschinen/Funktion",
+      "pos": [516.8818897637796, 56.007874015748044],
+      
+      "flags": {},
+      "order": 5,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "UV",
+          "type": "object",
+          "link": 16,
+          "label": "t",
+          "slot_index": 0
+        },
+        { "name": "", "type": "object", "link": 17, "label": "f(t)" },
+        { "name": "", "type": "object", "link": null, "label": "" },
+        { "name": "", "type": "object", "link": null, "label": "" },
+        { "name": "", "type": "object", "link": null }
+      ],
+      "outputs": [
+        {
+          "name": "",
+          "type": "object",
+          "links": [18],
+          "label": "g(t)",
+          "slot_index": 0
+        }
+      ],
+      "title": "Funktion",
+      "properties": {
+        "funcName": "g",
+        "formula": "Math.sin(1000*f(t)*t)",
+        "leftSide": "g(t)",
+        "rightSide": "t",
+        "uvName": "t",
+        "paramNames": ["", "f(t)", "", ""],
+        "paramValues": { "f(t)": -0.7231881240865121 },
+        "evaluatedFormula": "Math.sin(1000*(Math.sin(0.2*t))*t)",
+        "uvError": false,
+        "completeEquationfromWidget": "g(t)=sin(1000*f(t)*t)",
+        "finalEquation": "Math.sin(1000*(Math.sin(0.2*t))*t)"
+      },
+      "color": "#88B19B",
+      "bgcolor": "#7C8693"
+    },
+    {
+      "id": 8,
+      "type": "Funktionenmaschinen/Funktion",
+      "pos": [857.5433070866142, 56.007874015748044],
+      
+      "flags": {},
+      "order": 6,
+      "mode": 0,
+      "inputs": [
+        { "name": "UV", "type": "object", "link": 18, "label": "g(t)" },
+        { "name": "", "type": "object", "link": null, "label": "" },
+        { "name": "", "type": "object", "link": null, "label": "" },
+        { "name": "", "type": "object", "link": null, "label": "" },
+        { "name": "", "type": "object", "link": null }
+      ],
+      "outputs": [
+        {
+          "name": "",
+          "type": "object",
+          "links": [],
+          "label": "h(g(t))",
+          "slot_index": 0
+        }
+      ],
+      "title": "Funktion",
+      "properties": {
+        "funcName": "h",
+        "formula": "t**2",
+        "leftSide": "h(g(t))",
+        "rightSide": "Math.sin(1000*(Math.sin(0.2*t))*t)",
+        "uvName": "t",
+        "paramNames": ["", "", "", ""],
+        "paramValues": {},
+        "evaluatedFormula": "t**2",
+        "uvError": false,
+        "completeEquationfromWidget": "h(t)=t^2",
+        "finalEquation": "(Math.sin(1000*(Math.sin(0.2*t))*t))**2"
+      },
+      "color": "#88B19B",
+      "bgcolor": "#7C8693"
+    },
+    {
+      "id": 2,
+      "type": "Funktionenmaschinen/Unabhängige_Variable_Zeit ",
+      "pos": [20, 142.68503937007875],
+      
+      "flags": {},
+      "order": 3,
+      "mode": 0,
+      "outputs": [
+        { "name": "in ms", "type": "object", "links": null },
+        {
+          "name": "in sec",
+          "type": "object",
+          "links": [15, 16],
+          "slot_index": 1
+        }
+      ],
+      "title": "Time",
+      "properties": { "rightSide": "t", "leftSide": "t", "uvName": "t" },
+      "color": "#879BCE",
+      "bgcolor": "#7C8693"
+    },
+    {
+      "id": 7,
+      "type": "Funktionenmaschinen/Funktion",
+      "pos": [281.03937007874015, 239.44094488188978],
+      
+      "flags": {},
+      "order": 4,
+      "mode": 0,
+      "inputs": [
+        { "name": "UV", "type": "object", "link": 15, "label": "t" },
+        { "name": "", "type": "object", "link": null, "label": "" },
+        { "name": "", "type": "object", "link": null, "label": "" },
+        { "name": "", "type": "object", "link": null, "label": "" },
+        { "name": "", "type": "object", "link": null }
+      ],
+      "outputs": [
+        {
+          "name": "",
+          "type": "object",
+          "links": [17],
+          "label": "f(t)",
+          "slot_index": 0
+        }
+      ],
+      "title": "Funktion",
+      "properties": {
+        "funcName": "f",
+        "formula": "Math.sin(0.2*t)",
+        "leftSide": "f(t)",
+        "rightSide": "t",
+        "uvName": "t",
+        "paramNames": ["", "", "", ""],
+        "paramValues": {},
+        "evaluatedFormula": "Math.sin(0.2*t)",
+        "uvError": false,
+        "completeEquationfromWidget": "f(t)=sin(0.2*t)",
+        "finalEquation": "Math.sin(0.2*t)"
+      },
+      "color": "#88B19B",
+      "bgcolor": "#7C8693"
+    }
+  ],
+  "links": [
+    [15, 2, 1, 7, 0, "object"],
+    [16, 2, 1, 6, 0, "object"],
+    [17, 7, 0, 6, 1, "object"],
+    [18, 6, 0, 8, 0, "object"]
+  ],
+  "groups": [],
+  "config": {},
+  "extra": {},
+  "version": 0.4
+}

@@ -1,0 +1,92 @@
+{
+  "last_node_id": 16,
+  "last_link_id": 7,
+  "nodes": [
+    {
+      "id": 16,
+      "type": "Funktionenmaschinen/Unabhängige_Variable_Zeit ",
+      "pos": [27, 254],
+      
+      "flags": {},
+      "order": 0,
+      "mode": 0,
+      "outputs": [
+        { "name": "in ms", "type": "object", "links": null },
+        { "name": "in sec", "type": "object", "links": [7] }
+      ],
+      "title": "Time",
+      "properties": { "rightSide": "t", "leftSide": "t", "uvName": "t" },
+      "color": "#879BCE",
+      "bgcolor": "#7C8693"
+    },
+    {
+      "id": 11,
+      "type": "Funktionenmaschinen/Feedback_Audio",
+      "pos": [731, 260],
+      
+      "flags": {},
+      "order": 2,
+      "mode": 0,
+      "inputs": [{ "name": "function", "type": "object", "link": 6 }],
+      "title": "Audio",
+      "properties": { "FormulafromInput": "Math.sin(2*Math.PI*440*t)" },
+      "color": "#D0AF8B",
+      "bgcolor": "#7C8693"
+    },
+    {
+      "id": 14,
+      "type": "Funktionenmaschinen/Funktion",
+      "pos": [351, 235],
+      
+      "flags": {},
+      "order": 1,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "UV",
+          "type": "object",
+          "link": 7,
+          "label": "t",
+          "slot_index": 0
+        },
+        { "name": "", "type": "object", "link": null, "label": "" },
+        { "name": "", "type": "object", "link": null, "label": "" },
+        { "name": "", "type": "object", "link": null, "label": "" },
+        { "name": "", "type": "object", "link": null }
+      ],
+      "outputs": [
+        {
+          "name": "",
+          "type": "object",
+          "links": [6],
+          "label": "f(t)",
+          "slot_index": 0
+        }
+      ],
+      "title": "Funktion",
+      "properties": {
+        "funcName": "f",
+        "formula": "Math.sin(2*Math.PI*440*t)",
+        "leftSide": "f(t)",
+        "rightSide": "t",
+        "uvName": "t",
+        "paramNames": ["", "", "", ""],
+        "paramValues": {},
+        "evaluatedFormula": "Math.sin(2*Math.PI*440*t)",
+        "uvError": false,
+        "completeEquationfromWidget": "f(t)=sin(2*pi*440*t)",
+        "finalEquation": "Math.sin(2*Math.PI*440*t)"
+      },
+      "color": "#88B19B",
+      "bgcolor": "#7C8693"
+    }
+  ],
+  "links": [
+    [6, 14, 0, 11, 0, "object"],
+    [7, 16, 1, 14, 0, "object"]
+  ],
+  "groups": [],
+  "config": {},
+  "extra": {},
+  "version": 0.4
+}
