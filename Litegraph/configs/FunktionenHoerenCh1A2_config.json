@@ -1,0 +1,263 @@
+{
+  "last_node_id": 21,
+  "last_link_id": 37,
+  "nodes": [
+    {
+      "id": 2,
+      "type": "Funktionenmaschinen/Unabhängige_Variable_Zeit ",
+      "pos": [20, 120.48058011570231],
+      "size": [100, 80],
+      "flags": {},
+      "order": 0,
+      "mode": 0,
+      "outputs": [
+        { "name": "in ms", "type": "object", "links": null },
+        { "name": "in sec", "type": "object", "links": [], "slot_index": 1 }
+      ],
+      "title": "Time",
+      "properties": { "rightSide": "t", "leftSide": "t", "uvName": "t" },
+      "color": "#879BCE",
+      "bgcolor": "#7C8693"
+    },
+    {
+      "id": 18,
+      "type": "Funktionenmaschinen/Operation",
+      "pos": [550.8790927499415, 55],
+      "size": { "0": 150, "1": 78 },
+      "flags": {},
+      "order": 1,
+      "mode": 0,
+      "inputs": [
+        { "name": "", "type": "object", "link": null },
+        { "name": "", "type": "object", "link": null }
+      ],
+      "outputs": [
+        { "name": "", "type": "object", "links": [], "slot_index": 0 }
+      ],
+      "title": "Operation",
+      "properties": {
+        "Out_leftSideOfEquation": "h(g(t)) * f(t)",
+        "Out_rightSideOfEquation": "(Math.E**(Math.sin(440 * 2*Math.PI*t))) * (Math.log(t))",
+        "Result_Value": 9.979151828404381,
+        "Operation": "*",
+        "Fehlermeldung": "",
+        "In1_isNumberNode": "",
+        "In2_isNumberNode": ""
+      },
+      "color": "#88B19B",
+      "bgcolor": "#7C8693"
+    },
+    {
+      "id": 17,
+      "type": "Funktionenmaschinen/Feedback_Gleichung",
+      "pos": [663.8735418490115, 290.7297989825428],
+      "size": { "0": 318, "1": 69 },
+      "flags": {},
+      "order": 2,
+      "mode": 0,
+      "inputs": [{ "name": "value", "type": 0, "link": null, "label": "" }],
+      "title": "Gleichung",
+      "properties": {
+        "GleichungvorMathJax": "",
+        "GleichungvorKaTex": "\\mathrm{h}\\left(\\mathrm{g}\\left(\\mathrm{t}\\right)\\right)\\cdot\\mathrm{f}\\left(\\mathrm{t}\\right) = \\left({ e}^{\\left(\\sin\\left(440\\cdot2\\cdot\\pi\\cdot\\mathrm{t}\\right)\\right)}\\right)\\cdot\\left(\\mathrm{ln}\\left(\\mathrm{t}\\right)\\right)"
+      },
+      "color": "#D0AF8B",
+      "bgcolor": "#7C8693"
+    },
+    {
+      "id": 20,
+      "type": "Funktionenmaschinen/Feedback_Graph",
+      "pos": [1040.8464022053915, 159.22763839310772],
+      "size": [350, 380],
+      "flags": {},
+      "order": 3,
+      "mode": 0,
+      "inputs": [
+        { "name": "", "type": "object", "link": null },
+        { "name": "", "type": "object", "link": null },
+        { "name": "", "type": "object", "link": null },
+        { "name": "", "type": "object", "link": null }
+      ],
+      "title": "Graph",
+      "properties": {
+        "xRangeValue": 10,
+        "yRangeValue": 10,
+        "scaleX": 1,
+        "scaleY": 1,
+        "gridSize": 2,
+        "discontinuityThreshold": 100,
+        "margin": 30,
+        "marginTop": 80,
+        "xRange": [-10, 10],
+        "yRange": [-10, 10],
+        "equations": [null, null, null, null, ""],
+        "uvNames": [null, null, null, null, ""],
+        "savedEquation": "",
+        "savedUV": ""
+      },
+      "color": "#D0AF8B",
+      "bgcolor": "#000000"
+    },
+    {
+      "id": 3,
+      "type": "Funktionenmaschinen/Feedback_Audio",
+      "pos": [807.0647833797296, 100.7822336866922],
+      "size": { "0": 150, "1": 58 },
+      "flags": {},
+      "order": 4,
+      "mode": 0,
+      "inputs": [{ "name": "function", "type": "object", "link": null }],
+      "title": "Audio",
+      "properties": {
+        "FormulafromInput": "(Math.E**(Math.sin(440 * 2*Math.PI*t))) * (Math.log(t))"
+      },
+      "color": "#D0AF8B",
+      "bgcolor": "#7C8693"
+    },
+    {
+      "id": 12,
+      "type": "Funktionenmaschinen/Feedback_Gleichung",
+      "pos": [661.5973445072069, 430.23814040660875],
+      "size": { "0": 212, "1": 56 },
+      "flags": {},
+      "order": 5,
+      "mode": 0,
+      "inputs": [{ "name": "value", "type": 0, "link": null, "label": "" }],
+      "title": "Gleichung",
+      "properties": {
+        "GleichungvorMathJax": "k(t) = ln(t) * sin (0.2*t)",
+        "GleichungvorKaTex": "\\mathrm{k}\\left(\\mathrm{t}\\right) = \\mathrm{ln}\\left(\\mathrm{t}\\right)\\cdot\\sin\\left(0.2\\cdot\\mathrm{t}\\right)"
+      },
+      "color": "#D0AF8B",
+      "bgcolor": "#7C8693"
+    },
+    {
+      "id": 16,
+      "type": "Funktionenmaschinen/Funktion",
+      "pos": [197, 54],
+      "size": [285, 150],
+      "flags": {},
+      "order": 7,
+      "mode": 0,
+      "inputs": [
+        { "name": "UV", "type": "object", "link": null, "label": "t" },
+        { "name": "", "type": "object", "link": null, "label": "" },
+        { "name": "", "type": "object", "link": null, "label": "" },
+        { "name": "", "type": "object", "link": null, "label": "" },
+        { "name": "", "type": "object", "link": null }
+      ],
+      "outputs": [
+        {
+          "name": "",
+          "type": "object",
+          "links": [],
+          "label": "g(t)",
+          "slot_index": 0
+        }
+      ],
+      "title": "Funktion",
+      "properties": {
+        "funcName": "g",
+        "formula": "Math.sin(f(t)*440*2*Math.PI*t)",
+        "leftSide": "g(t)",
+        "rightSide": "t",
+        "uvName": "t",
+        "paramNames": ["", "", "", ""],
+        "paramValues": {},
+        "evaluatedFormula": "Math.sin(440 * 2*Math.PI*t)",
+        "uvError": false,
+        "completeEquationfromWidget": "g(t)=sin(f(t)*440*2*pi*t)",
+        "finalEquation": "Math.sin(440 * 2*Math.PI*t)"
+      },
+      "color": "#88B19B",
+      "bgcolor": "#7C8693"
+    },
+    {
+      "id": 7,
+      "type": "Funktionenmaschinen/Funktion",
+      "pos": [218, 542],
+      "size": [163, 150],
+      "flags": {},
+      "order": 6,
+      "mode": 0,
+      "inputs": [
+        { "name": "UV", "type": "object", "link": null, "label": "t" },
+        { "name": "", "type": "object", "link": null, "label": "" },
+        { "name": "", "type": "object", "link": null, "label": "" },
+        { "name": "", "type": "object", "link": null, "label": "" },
+        { "name": "", "type": "object", "link": null }
+      ],
+      "outputs": [
+        {
+          "name": "",
+          "type": "object",
+          "links": [],
+          "label": "f(t)",
+          "slot_index": 0
+        }
+      ],
+      "title": "Funktion",
+      "properties": {
+        "funcName": "f",
+        "formula": "Math.log(t)",
+        "leftSide": "f(t)",
+        "rightSide": "t",
+        "uvName": "t",
+        "paramNames": ["", "", "", ""],
+        "paramValues": {},
+        "evaluatedFormula": "Math.log(t)",
+        "uvError": false,
+        "completeEquationfromWidget": "f(t)=ln(t)",
+        "finalEquation": "Math.log(t)"
+      },
+      "color": "#88B19B",
+      "bgcolor": "#7C8693"
+    },
+    {
+      "id": 21,
+      "type": "Funktionenmaschinen/Funktion",
+      "pos": [206, 273],
+      "size": [246, 150],
+      "flags": {},
+      "order": 7,
+      "mode": 0,
+      "inputs": [
+        { "name": "UV", "type": "object", "link": null, "label": "t" },
+        { "name": "", "type": "object", "link": null, "label": "" },
+        { "name": "", "type": "object", "link": null, "label": "" },
+        { "name": "", "type": "object", "link": null, "label": "" },
+        { "name": "", "type": "object", "link": null }
+      ],
+      "outputs": [
+        {
+          "name": "",
+          "type": "object",
+          "links": [],
+          "label": "g(t)",
+          "slot_index": 0
+        }
+      ],
+      "title": "Funktion",
+      "properties": {
+        "funcName": "g",
+        "formula": "Math.sin(440*2*Math.PI*t)",
+        "leftSide": "g(t)",
+        "rightSide": "t",
+        "uvName": "t",
+        "paramNames": ["", "", "", ""],
+        "paramValues": {},
+        "evaluatedFormula": "Math.sin(440 * 2*Math.PI*t)",
+        "uvError": false,
+        "completeEquationfromWidget": "g(t)=sin(440*2*pi*t)",
+        "finalEquation": "Math.sin(440 * 2*Math.PI*t)"
+      },
+      "color": "#88B19B",
+      "bgcolor": "#7C8693"
+    }
+  ],
+  "links": [],
+  "groups": [],
+  "config": {},
+  "extra": {},
+  "version": 0.4
+}

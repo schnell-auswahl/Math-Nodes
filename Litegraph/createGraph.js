@@ -470,16 +470,41 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 
-
+    // Initialisiere Loop-Variablen
+    let isVisible = false;
+    let isLooping = false;
 
 
     graph.start(30);
 
+    // Loop-Funktion
     function loop() {
+        if (!isVisible) {
+            isLooping = false;
+            return; // Stoppe den Loop, wenn Canvas nicht sichtbar
+        }
+
         graph.runStep();
-        canvas.draw(true, true);  // Redraw every frame
-        requestAnimationFrame(loop);
-      }
+        canvas.draw(true, true); // Redraw every frame
+        requestAnimationFrame(loop); // Loop erneut aufrufen
+    }
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+            isVisible = entry.isIntersecting; // Prüft, ob das Canvas sichtbar ist
+            if (isVisible && !isLooping) {
+                // Starte den Loop, wenn sichtbar und nicht bereits laufend
+                isLooping = true;
+                loop();
+            }
+        });
+    });
+
+
+    // Beobachte den Canvas
+    observer.observe(canvasElement);
+
+
       loop();  // Start the loop
 
     //console.log(`Graph für Canvas "${canvasId}" erstellt.`);

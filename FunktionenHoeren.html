@@ -1,0 +1,275 @@
+<!DOCTYPE HTML>
+<!--
+	Forty by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+
+<head>
+	<title>Wortmaschinen</title>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+	<link rel="stylesheet" href="assets/css/main.css" />
+	<noscript>
+		<link rel="stylesheet" href="assets/css/noscript.css" />
+	</noscript>
+
+	<!-- Ab hier brauchen wir alles für Litegraph -->
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.13.11/dist/katex.min.css">
+
+	<!-- Einbinden der KaTeX JavaScript-Datei, die für das Rendern von mathematischen Ausdrücken verantwortlich ist -->
+	<script src="https://cdn.jsdelivr.net/npm/katex@0.13.11/dist/katex.min.js"></script>
+
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/10.2.0/math.min.js"></script>
+
+	<!-- Mathjax als KAtex Alternative -->
+	<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
+
+	<!-- Stile für den LiteGraph Inspector (kann angepasst werden) -->
+	<link rel="stylesheet" type="text/css" href="./inspector.css">
+	<link rel="stylesheet" type="text/css" href="./Litegraph/litegraph.css">
+	<script type="text/javascript" src="./Litegraph/litegraph.js"></script>
+	<script type="module" src="./Litegraph/createGraph.js" ;></script>
+
+
+</head>
+
+<body class="is-preload">
+
+	<!-- Wrapper -->
+	<div id="wrapper">
+
+		<!-- Header -->
+		<!-- Header -->
+		<header id="header" class="alt">
+			<a href="index.html" class="logo"><strong>Math-Nodes</strong> <span>Nicolas Regel</span></a>
+			<nav>
+				<a href="#menu">Menu</a>
+			</nav>
+		</header>
+		<!-- Menu -->
+		<nav id="menu">
+			<ul class="links">
+				<li><a href="landing.html">Wortmaschinen</a></li>
+				<li><a href="generic.html">Funktionenmaschinen</a></li>
+				<li><a href="generic.html">Workshop 1</a></li>
+				<li><a href="generic.html">Workshop 2</a></li>
+				<li><a href="generic.html">Workshop 3</a></li>
+				<li><a href="generic.html">Material</a></li>
+				<li><a href="elements.html">Anleitung</a></li>
+			</ul>
+			<ul class="actions stacked">
+				<li><a href="index.html" class="button primary fit">Startseite</a></li>
+			</ul>
+		</nav>
+
+		<!-- Banner -->
+		<!-- Note: The "styleN" class below should match that of the header element. -->
+		<section id="banner" class="style2">
+			<div class="inner">
+				<span class="image">
+					<img src="images/pic07.jpg" alt="" />
+				</span>
+				<header class="major">
+					<h1>Funktionen hören</h1>
+				</header>
+				<div class="content">
+					<p>Mit den Funktionenmaschinen kannst du Funktionen hörbar machen. Hier lernst du wie!</p>
+				</div>
+			</div>
+		</section>
+
+		<!-- Main -->
+		<div id="main">
+
+			<!-- One -->
+			<section id="one">
+				<div class="inner">
+					<header class="major">
+						<h2>Wie funktioniert es?</h2>
+					</header>
+					<p>Periodische Funktionen sind ein tolles Modell für Töne. Töne sind nämlich physikalisch
+						Schwingungen in der Luft, die sich mit den richtigen Funktionen sehr gut beschreiben lassen.
+						Physikalisch ist die Unabhängige dabei immer die Zeit t. Math-Nodes kann dir aber auch Töne
+						ausgeben, wenn du z.B. x als Unabhängige gewählt hast. In den folgenden Beispielen schauen
+						wir uns Stück für Stück an, wie du mit Funktionen Töne erzeugen und in Tonhöhe und Klang
+						verändern kannst.</p>
+				</div>
+			</section>
+
+			<!-- Two -->
+			<section id="two" class="spotlights">
+				<section>
+
+					<div class="image">
+						<canvas id="graphCanvas1" data-resize="true"
+							data-config-path="Litegraph/configs/FunktionenHoeren1_config.json"></canvas>
+						<script type="module">
+							import { createGraphInstance } from './Litegraph/createGraph.js';
+							createGraphInstance("graphCanvas1");
+						</script>
+					</div>
+					<div class="content">
+						<div class="inner">
+							<header class="major">
+								<h3>Der erste Ton</h3>
+							</header>
+							<p>Um in Math-Nodes einen Ton zu erzeugen, brauchst du mindestens 3 Maschinen: Eine
+								Unabhängige-Variable-Maschine, eine Funktion-Maschine und eine Audio-Maschine.
+								Die Sinusfunktion in diesem Beispiel schwingt 440 mal in der Sekunde hin und her, hat
+								also eine Frequenz von 440 Hz. Klicke in der Audio-Maschine auf Start und schaue, ob du
+								etwas hörst. </p>
+						</div>
+					</div>
+				</section>
+				<section>
+					<div class="image">
+						<canvas id="graphCanvas2" data-resize="true"
+							data-config-path="Litegraph/configs/FunktionenHoeren2_config.json"></canvas>
+						<script type="module">
+							import { createGraphInstance } from './Litegraph/createGraph.js';
+							createGraphInstance("graphCanvas2");
+						</script>
+					</div>
+					<div class="content">
+						<div class="inner">
+							<header class="major">
+								<h3>Den Einfluss von Parametern</h3>
+							</header>
+							<p>Wenn du bis hier gekommen bist, hast du deinen ersten Ton erzeugt. Klasse!
+								Hier dein erster Forschungsauftrag:
+								Untersuche den Einfluss der Parameter \(a, b, c, d\) auf das, was du hörst, also deinen
+								Höreindruck. Verändere dazu die Werte der Parameter an den entsprechenden Maschinen.
+
+							</p>
+							<!-- <ul class="actions">
+								<button
+									onclick="loadGraphFromServerAsync('graphCanvas2', 'Litegraph/configs/FunktionenHoeren3_config.json')">Neustart</button>
+							</ul> -->
+						</div>
+					</div>
+				</section>
+			</section>
+			<section id="three">
+				<div class="inner">
+					<header class="major">
+						<h2>Maschinen verknüpfen und mit dem Graph-Modul analysieren</h2>
+					</header>
+					<p>In dieser Aufgabe sollst du die Funktion \(f(t) = a \cdot \sin(b \cdot 2 \pi \cdot t)\) mit der
+						Funktion \(g(f(t)) = (a \cdot \sin(b \cdot 2 \pi \cdot t))^2\) zunächst grafisch und
+						dann auditiv vergleichen. Kannst du vermuten, welchen Einfluss auf den Klang die Funktion \(g\)
+						hat? Bevor du dir die Funktionen anhören willst, musst du die Frequenz (Parameter \(b\))
+						erhöhen. Menschen können Töne erst ab ca \(50\) Hz überhaupt als Ton wahrnehmen. Wähle am besten
+						eine Frequenz ab ca. \(250\) Hz. </p>
+				</div>
+			</section>
+			<!-- Three -->
+			<!-- LiteGraph Canvas -->
+			<section id="litegraph">
+				<div id="graphstylefull">
+					<canvas id="graphCanvas3" data-resize="true"
+						data-config-path="Litegraph/configs/FunktionenHoeren3_config.json"></canvas>
+				</div>
+				<script type="module">
+					import { createGraphInstance } from './Litegraph/createGraph.js';
+					// Erstelle die Graphen für beide Canvas-Elemente
+					createGraphInstance("graphCanvas3");
+					//createGraphInstance("graphCanvas2");
+					//createGraphInstance("graphCanvas3");
+				</script>
+			</section>
+			<!-- Four -->
+			<section id="one" class="tiles">
+				<article>
+					<span class="image">
+						<img src="images/pic01.jpg" alt="" />
+					</span>
+					<header class="major">
+						<h3><a href="FunktionenHoerenC1.html" class="link">Kapitel 1</a></h3>
+						<p>Hier startest du mit einer Funktionsgleichung, setzt diese in Math-Nodes mit Maschinen um und forschst wie diese Funktion klingt.</p>
+					</header>
+				</article>
+				<article>
+					<span class="image">
+						<img src="images/pic02.jpg" alt="" />
+					</span>
+					<header class="major">
+						<h3><a href="FunktionenHoerenC2.html" class="link">Kapitel 2</a></h3>
+						<p>Hier startest du mit der Funktionenmaschinen-Darstellung in Math-Nodes, untersuchst wie die Funktionsgleichung dazu lauten würde und forschst wie diese Funktion klingt.</p>
+					</header>
+				</article>
+				<article>
+					<span class="image">
+						<img src="images/pic06.jpg" alt="" />
+					</span>
+					<header class="major">
+						<h3><a href="FunktionenHoeren.html" class="link">Kapitel 3</a></h3>
+						<p>In Kapitel drei startest du mit einem Klang, den du mit Math-Nodes modellieren sollst. Welche Funktionsgleichung beschreibt den gehörten Ton?</p>
+					</header>
+				</article>
+			</section>
+
+
+		</div>
+
+		<!-- Contact -->
+		<section id="contact">
+			<div class="inner">
+
+				<section>
+					<section>
+						<div class="contact-method">
+							<span class="icon solid alt fa-envelope"></span>
+							<h3>Mail</h3>
+							<a href="mailto:Nicolas.Regel@TU-Dresden.de">Nicolas.Regel@TU-Dresden.de</a>
+						</div>
+					</section>
+					<section>
+						<div class="contact-method">
+							<span class="icon solid alt fa-phone"></span>
+							<h3>Telefon</h3>
+							<span>0351 46332074</span>
+						</div>
+					</section>
+
+				</section>
+			</div>
+		</section>
+
+
+
+		<!-- Footer -->
+		<footer id="footer">
+			<div class="inner">
+				<ul class="icons">
+					<li><a href="#" class="icon brands alt fa-twitter"><span class="label">Twitter</span></a></li>
+					<li><a href="#" class="icon brands alt fa-facebook-f"><span class="label">Facebook</span></a></li>
+					<li><a href="#" class="icon brands alt fa-instagram"><span class="label">Instagram</span></a></li>
+					<li><a href="#" class="icon brands alt fa-github"><span class="label">GitHub</span></a></li>
+					<li><a href="#" class="icon brands alt fa-linkedin-in"><span class="label">LinkedIn</span></a></li>
+				</ul>
+				<ul class="copyright">
+					<li>&copy; Nicolas Regel 2024</li>
+					<li>Designtemplate: <a href="https://html5up.net">HTML5 UP</a></li>
+				</ul>
+			</div>
+		</footer>
+
+	</div>
+
+	<!-- Scripts -->
+	<script src="assets/js/jquery.min.js"></script>
+	<script src="assets/js/jquery.scrolly.min.js"></script>
+	<script src="assets/js/jquery.scrollex.min.js"></script>
+	<script src="assets/js/browser.min.js"></script>
+	<script src="assets/js/breakpoints.min.js"></script>
+	<script src="assets/js/util.js"></script>
+	<script src="assets/js/main.js"></script>
+	<script src="assets/js/scripts.js"></script>
+
+
+
+</body>
+
+</html>

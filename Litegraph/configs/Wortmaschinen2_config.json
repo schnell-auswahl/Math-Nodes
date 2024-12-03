@@ -6,7 +6,7 @@
         "id": 9,
         "type": "Wortmaschinen/TextInputNode",
         "pos": [14, 300],
-        "size": [220, 150],
+        
         "flags": {},
         "order": 0,
         "mode": 0,
@@ -20,7 +20,7 @@
         "id": 10,
         "type": "Wortmaschinen/TextDisplayNode",
         "pos": [547, 43],
-        "size": [220, 100],
+        
         "flags": {},
         "order": 1,
         "mode": 0,
@@ -34,7 +34,7 @@
         "id": 11,
         "type": "Wortmaschinen/alphabet-countdown",
         "pos": [283, 191],
-        "size": [220, 100],
+        
         "flags": {},
         "order": 2,
         "mode": 0,

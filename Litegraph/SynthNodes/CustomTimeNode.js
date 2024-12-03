@@ -4,7 +4,7 @@ export function _CustomTimeNode() { return (
     constructor() {
       this.color = srcNodesColor;
       this.bgcolor = bgColor2;
-      this.size = [100, 80]; // Etwas größere Größe, damit genug Platz für die Gleichung ist
+      
       this.addOutput("in ms", "object");
       this.addOutput("in sec", "object");
       this.properties = { rightSide: "t", leftSide: "t", uvName: "t"};
@@ -25,6 +25,8 @@ export function _CustomTimeNode() { return (
           this.lastbtpress = this.graph.globaltime            // Ruft eine Methode auf, die die Funktion ausführt
         }
       );
+
+      this.size = [100, 80]; // Etwas größere Größe, damit genug Platz für die Gleichung ist
 
     }
 

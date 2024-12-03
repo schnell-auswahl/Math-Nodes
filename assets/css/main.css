@@ -2947,7 +2947,7 @@ input, select, textarea {
 				border-radius: 0;
 				display: block;
 				position: relative;
-				width: 60%;
+				width: 67%;
 			}
 
 				.spotlights > section > .image img {
@@ -2970,6 +2970,8 @@ input, select, textarea {
 			.spotlights > section > .content {
 				display: -moz-flex;
 				display: -webkit-flex;
+				word-wrap: break-word;
+   				overflow-wrap: break-word;
 				display: -ms-flex;
 				display: flex;
 				-moz-flex-direction: column;
@@ -2985,7 +2987,7 @@ input, select, textarea {
 				-ms-align-items: center;
 				align-items: center;
 				padding: 2em 3em 0.1em 3em ;
-				width: 40%;
+				width: 33%;
 			}
 
 				.spotlights > section > .content > .inner {
@@ -3012,7 +3014,7 @@ input, select, textarea {
 		@media screen and (max-width: 1680px) {
 
 			.spotlights > section > .image {
-				width: 60%;
+				width: 67%;
 			}
 
 			
@@ -3023,15 +3025,18 @@ input, select, textarea {
 			
 
 			.spotlights > section > .content {
-				width: 40%;
+				width: 33%;
+				word-wrap: break-word;
+    			overflow-wrap: break-word;
 			}
 
 		}
 
-		@media screen and (max-width: 1280px) {
+		@media screen and (max-width: 1500px) {
 
 			.spotlights > section > .image {
-				width: 60%;
+				width: 67%;
+				
 			}
 
 			.spotlights > section > .image canvas {
@@ -3040,16 +3045,24 @@ input, select, textarea {
 			}
 
 			.spotlights > section > .content {
-				width: 40%;
+				width: 33%;
+				word-wrap: break-word;
+ 				overflow-wrap: break-word;
 			}
 
 		}
 
-		@media screen and (max-width: 980px) {
+		@media screen and (max-width: 1400px) {
 
 			.spotlights > section {
 				display: block;
 			}
+				.spotlights > section > .content {
+					padding: 4em 3em 2em 3em ;
+					width: 100%;
+					word-wrap: break-word;
+    				overflow-wrap: break-word;
+				}
 
 				.spotlights > section > .image {
 					width: 100%;
@@ -3060,10 +3073,7 @@ input, select, textarea {
 					height: 100%;
 				}
 
-				.spotlights > section > .content {
-					padding: 4em 3em 2em 3em ;
-					width: 100%;
-				}
+				
 
 		}
 

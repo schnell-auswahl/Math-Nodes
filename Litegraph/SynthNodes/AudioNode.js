@@ -7,6 +7,7 @@ export function _AudioNode() {
               };
 
             //this.color = "#CE8A53"; // Titelfarbe
+            this.size = [107,200];
             this.color = fbNodesColor;
             this.bgcolor = bgColor2; // Hintergrundfarbe
             this.context = new (window.AudioContext || window.webkitAudioContext)();
@@ -85,15 +86,17 @@ export function _AudioNode() {
 
         // Startet die Audiowiedergabe und ändert die Widget-Farbe zu Orange
         start() {
-           
-
             this.context.resume().then(() => {
                 this.isPlaying = true;
                 this.bgcolor = fbNodesColor; // Orange, wenn Wiedergabe aktiv
-                //console.log("AudioNode: Audiowiedergabe gestartet");
+        
+                if (this.workletNode) {
+                    this.workletNode.port.postMessage({ type: 'start' });
+                }
+        
                 this.setDirtyCanvas(true); // Aktualisiere das Widget
             }).catch((error) => {
-                //console.error("AudioNode: Fehler beim Starten des AudioContext", error);
+                console.error("AudioNode: Fehler beim Starten des AudioContext", error);
             });
         }
 

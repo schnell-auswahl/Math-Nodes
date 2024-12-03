@@ -7,9 +7,9 @@ export function _CustNumberNode() {
         this.color = paramNodesColor;
         this.bgcolor = bgColor2;
         this.addOutput("value", "object");
-        this.properties = { value: 1.0, rightSide: "x"};
+        this.properties = { value: 1.0, rightSide: "a"};
         this.numberWidget = this.addWidget("number", "Wert", 1, "value", { precision: 2 });
-        this.nameWidget = this.addWidget("text", "Parametername", "x", "rightSide");
+        this.nameWidget = this.addWidget("text", "Parametername", "a", "rightSide");
         this.widgets_up = true;
         //this.color = "#4C7468"; //Titelfarbe
         //this.bgcolor = "#9FA8B4"; //Hintergrundfarbe

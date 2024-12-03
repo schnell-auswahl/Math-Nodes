@@ -1,0 +1,184 @@
+{
+  "last_node_id": 20,
+  "last_link_id": 11,
+  "nodes": [
+    {
+      "id": 16,
+      "type": "Funktionenmaschinen/Unabhängige_Variable_Zeit ",
+      "pos": [20, 74.40904198062432],
+      
+      "flags": {},
+      "order": 0,
+      "mode": 0,
+      "outputs": [
+        { "name": "in ms", "type": "object", "links": null },
+        { "name": "in sec", "type": "object", "links": [7] }
+      ],
+      "title": "Time",
+      "properties": { "rightSide": "t", "leftSide": "t", "uvName": "t" },
+      "color": "#879BCE",
+      "bgcolor": "#7C8693"
+    },
+    {
+      "id": 19,
+      "type": "Funktionenmaschinen/Parameter",
+      "pos": [43, 399],
+      
+      "flags": {},
+      "order": 3,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "value",
+          "type": "object",
+          "links": [10],
+          "label": "1.000",
+          "slot_index": 0
+        }
+      ],
+      "properties": { "value": 1, "rightSide": "c" },
+      "color": "#D1AE8B",
+      "bgcolor": "#7C8693",
+      "shape": 2
+    },
+    {
+      "id": 20,
+      "type": "Funktionenmaschinen/Parameter",
+      "pos": [45, 493],
+      
+      "flags": {},
+      "order": 4,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "value",
+          "type": "object",
+          "links": [11],
+          "label": "1.000",
+          "slot_index": 0
+        }
+      ],
+      "properties": { "value": 1, "rightSide": "d" },
+      "color": "#D1AE8B",
+      "bgcolor": "#7C8693",
+      "shape": 2
+    },
+    {
+      "id": 17,
+      "type": "Funktionenmaschinen/Parameter",
+      "pos": [46, 196],
+      
+      "flags": {},
+      "order": 1,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "value",
+          "type": "object",
+          "links": [8],
+          "label": "1.300",
+          "slot_index": 0
+        }
+      ],
+      "properties": { "value": 1.3000000000000003, "rightSide": "a" },
+      "color": "#D1AE8B",
+      "bgcolor": "#7C8693",
+      "shape": 2
+    },
+    {
+      "id": 14,
+      "type": "Funktionenmaschinen/Funktion",
+      "pos": [427, 206],
+      
+      "flags": {},
+      "order": 5,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "UV",
+          "type": "object",
+          "link": 7,
+          "label": "t",
+          "slot_index": 0
+        },
+        { "name": "", "type": "object", "link": 8, "label": "a" },
+        { "name": "", "type": "object", "link": 9, "label": "b" },
+        { "name": "", "type": "object", "link": 10, "label": "c" },
+        { "name": "", "type": "object", "link": 11, "label": "d" }
+      ],
+      "outputs": [
+        {
+          "name": "",
+          "type": "object",
+          "links": [6],
+          "label": "f(t)",
+          "slot_index": 0
+        }
+      ],
+      "title": "Funktion",
+      "properties": {
+        "funcName": "f",
+        "formula": "a*Math.sin(b*2*Math.PI*t+c)+d",
+        "leftSide": "f(t)",
+        "rightSide": "t",
+        "uvName": "t",
+        "paramNames": ["", "a", "b", "c", "d"],
+        "paramValues": { "a": 1.3, "b": 440, "c": 1, "d": 1 },
+        "evaluatedFormula": "1.3*Math.sin(440*2*Math.PI*t+1)+1",
+        "uvError": false,
+        "completeEquationfromWidget": "f(t)=a*sin(b*2*pi*t+c)+d",
+        "finalEquation": "1.3*Math.sin(440*2*Math.PI*t+1)+1"
+      },
+      "color": "#88B19B",
+      "bgcolor": "#7C8693"
+    },
+    {
+      "id": 11,
+      "type": "Funktionenmaschinen/Feedback_Audio",
+      "pos": [765, 80],
+      
+      "flags": {},
+      "order": 6,
+      "mode": 0,
+      "inputs": [{ "name": "function", "type": "object", "link": 6 }],
+      "title": "Audio",
+      "properties": { "FormulafromInput": "1.3*Math.sin(440*2*Math.PI*t+1)+1" },
+      "color": "#D0AF8B",
+      "bgcolor": "#D0AF8B"
+    },
+    {
+      "id": 18,
+      "type": "Funktionenmaschinen/Parameter",
+      "pos": [45, 295],
+      
+      "flags": {},
+      "order": 2,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "value",
+          "type": "object",
+          "links": [9],
+          "label": "440.000",
+          "slot_index": 0
+        }
+      ],
+      "properties": { "value": 440, "rightSide": "b" },
+      "color": "#D1AE8B",
+      "bgcolor": "#7C8693",
+      "shape": 2
+    }
+  ],
+  "links": [
+    [6, 14, 0, 11, 0, "object"],
+    [7, 16, 1, 14, 0, "object"],
+    [8, 17, 0, 14, 1, "object"],
+    [9, 18, 0, 14, 2, "object"],
+    [10, 19, 0, 14, 3, "object"],
+    [11, 20, 0, 14, 4, "object"]
+  ],
+  "groups": [],
+  "config": {},
+  "extra": {},
+  "version": 0.4
+}
