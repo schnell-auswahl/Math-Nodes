@@ -63,7 +63,7 @@
       "inputs": [{ "name": "value", "type": 0, "link": null, "label": "" }],
       "title": "Gleichung",
       "properties": {
-        "GleichungvorMathJax": "h(g(t)) = (sin (1000*(sin (0.2*t))*t))^2",
+        "GleichungvorMathJax": "",
         "GleichungvorKaTex": "\\mathrm{h}\\left(\\mathrm{g}\\left(\\mathrm{t}\\right)\\right) = {\\left(\\sin\\left(1000\\cdot\\left(\\sin\\left(0.2\\cdot\\mathrm{t}\\right)\\right)\\cdot\\mathrm{t}\\right)\\right)}^{2}"
       },
       "color": "#D0AF8B",
