@@ -160,35 +160,7 @@ document.addEventListener("DOMContentLoaded", () => {
     loadAllGraphs();
 });
 
-// function rightclicksim(canvasId) {
 
-//     const canvas = document.getElementById(canvasId); // Passe die ID deines Canvas an
-//     if (!canvas) {
-//         console.error("Canvas nicht gefunden.");
-//         return;
-//     }
-
-//     // Rechtsklick-Ereignis erstellen
-//     const simulatedRightClick = new MouseEvent("contextmenu", {
-//         bubbles: true, // Event wird an übergeordnete Elemente weitergeleitet
-//         cancelable: false, // Event kann gestoppt werden
-//         //view: window,
-//         clientX: canvas.getBoundingClientRect().left + 10, // X-Koordinate relativ zum Viewport
-//         clientY: canvas.getBoundingClientRect().top + 300, // Y-Koordinate relativ zum Viewport
-//         button: 2, // Rechte Maustaste
-//         button: 3, // Rechte Maustaste
-//         buttons: 2, // Rechte Maustaste gedrückt
-//         preventDefault: () => {},
-//         stopPropagation: () => {}
-//     });
-
-//     //canvasElement.dispatchEvent(simulatedRightClick);
-
-//     // Ereignis auf dem Canvas dispatchen
-//     canvas.dispatchEvent(simulatedRightClick);
-
-//     console.log("Rechtsklick bei (10, 100) simuliert.");
-// }
 
 
 //REsizinbg und positioning der Nodes und des canvas
@@ -212,16 +184,6 @@ function adjustCanvasSize(canvasId) {
     } else {
     canvas.height = parent.clientHeight;
     }
-
-
-    // Berechne die neue Breite, mindestens jedoch die Mindestbreite
-    // const canvasWidth = //Math.max(browserWidth, minWidth); // 80% der Browserbreite oder mindestens 1000px
-    //canvas.width = canvasWidth * widthPart;
-
-    // Optional: Höhe setzen (z. B. 16:9-Seitenverhältnis)
-    //const aspectRatio = 16 / 9;
-    //canvas.height = canvasWidth / aspectRatio;
-    // console.log(`Canvas "${canvasId}" angepasst: Breite ${canvas.width}px, Höhe ${canvas.height}px`);
 }
 
 // Dynamisches Resizing für alle Canvas mit data-resize="true"
@@ -333,48 +295,75 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
 
-// // button zu,m nodes ausrichten
+// Platz optimieren
+function autoPositionNodes(canvasId) {
+        const canvas = document.getElementById(canvasId);
+        if (!canvas) {
+            console.error(`Canvas mit ID "${canvasId}" nicht gefunden.`);
+            return;
+        }
+    
+        const graph = canvas.graph;
+        if (!graph) {
+            console.error(`Kein Graph mit Canvas-ID "${canvasId}" gefunden.`);
+            return;
+        }
+    
+        const canvasWidth = canvas.width;
+        const canvasHeight = canvas.height;
+        const margin = 20; // Randgröße
+        const titleHeight = LiteGraph.NODE_TITLE_HEIGHT || 30; // Höhe des Titels
+    
+        // Ursprüngliche Positionen sammeln
+        const nodePositions = graph._nodes.map((node) => ({
+            node: node,
+            x: node.pos[0],
+            y: node.pos[1],
+            width: node.size ? node.size[0] : 150, // Standardbreite eines Nodes
+            height: node.size ? node.size[1] : 100 // Standardhöhe eines Nodes
+        }));
+    
+        if (nodePositions.length === 0) {
+            console.error("Keine Nodes im Graph gefunden.");
+            return;
+        }
+    
+        // Extremwerte finden
+        const minX = Math.min(...nodePositions.map((pos) => pos.x));
+        const maxX = Math.max(...nodePositions.map((pos) => pos.x + pos.width)); // Rechte Seite des Nodes
+        const minY = Math.min(...nodePositions.map((pos) => pos.y));
+        const maxY = Math.max(...nodePositions.map((pos) => pos.y + pos.height)); // Untere Seite des Nodes
+    
+        // Schritt 1: Maximierung in X-Richtung
+        const scaleX = (canvasWidth - 2 * margin) / (maxX - minX);
+        const offsetX = margin - minX * scaleX;
+    
+        nodePositions.forEach(({ node, x }) => {
+            node.pos[0] = x * scaleX + offsetX;
+        });
+    
+        // Extremwerte nach X-Skalierung erneut berechnen
+        const updatedMinY = Math.min(...nodePositions.map(({ node }) => node.pos[1]));
+        const updatedMaxY = Math.max(...nodePositions.map(({ node }) => node.pos[1] + node.size[1]));
+    
+        // Schritt 2: Maximierung in Y-Richtung
+        const scaleY = (canvasHeight - 2 * margin - titleHeight) / (updatedMaxY - updatedMinY);
+        const offsetY = margin + titleHeight - updatedMinY * scaleY;
+    
+        nodePositions.forEach(({ node, y }) => {
+            node.pos[1] = y * scaleY + offsetY;
+        });
+    
+        console.log("Nodes in X- und Y-Richtung unabhängig maximiert und positioniert.");
+    }
+
 // document.addEventListener("DOMContentLoaded", () => {
-//     // Button auswählen
-//     const button = document.getElementById("adjustNodesButton");
-
-//     // Event-Listener hinzufügen
-//     button.addEventListener("click", () => {
-//         // Alle Canvas-Elemente mit Graphen auswählen
-//         const canvases = document.querySelectorAll('canvas[data-resize="true"]');
-
-//         // Für jeden Canvas adjustNodePositions aufrufen
-//         canvases.forEach((canvas) => {
-//             const canvasId = canvas.id; // ID des Canvas
-//             adjustNodePositions(canvasId); // Funktion ausführen
-//             //console.log(`adjustNodePositions für Canvas "${canvasId}" ausgeführt.`);
-//         });
-
-//         //console.log("Alle Graphen auf der Seite wurden bearbeitet.");
-//     });
-// });
-
-
-// document.addEventListener("DOMContentLoaded", () => {
-//     const button = document.getElementById("simulateContextMenu");
+//     const buttonId = `AutoPosition${canvasId}`;
+//     const button = document.getElementById(buttonId);
+  
 //     if (button) {
-//         button.addEventListener("click", () => {
-//             console.log("Button geklickt!");
-
-//             // Simuliert ein contextmenu (Rechtsklick) Event
-//         const simulatedRightClick = new MouseEvent("mousedown", {
-//             bubbles: true, // Event wird an übergeordnete Elemente weitergeleitet
-//             cancelable: false, // Event kann gestoppt werden
-//             view: window,
-//             clientX: 100,
-//             clientY: 500,
-//             button: 2, // Rechte Maustaste
-//             buttons: 2 // Rechte Maustaste gedrückt
-//         });
-
-//         graphCanvas.dispatchEvent(simulatedRightClick);
-//         });
+//       button.addEventListener("click", () => autoPositionNodes(canvasId));
 //     } else {
-//         console.error("Button mit ID 'simulateContextMenu' wurde nicht gefunden.");
+//       console.error(`Button mit ID "${buttonId}" nicht gefunden.`);
 //     }
-// });
+//   });

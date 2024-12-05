@@ -26,7 +26,7 @@ export function _CustWatchNodeString() {
         this.value = this.getInputData(0); // Holt den Wert der Gleichung
       }
 
-      console.log(this.properties.GleichungvorMathJax);
+      //console.log(this.properties.GleichungvorMathJax);
       if (!this.value && !this.properties.GleichungvorMathJax) return;
 
       if (this.value) {
