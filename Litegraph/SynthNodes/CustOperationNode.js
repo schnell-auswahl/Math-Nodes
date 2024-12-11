@@ -79,10 +79,33 @@ export function _OperationNode(){
 
             onDrawForeground(ctx) {
 
-                if (this.flags && this.flags.collapsed) {
+                if (this.flags.collapsed) {
                     return; // Zeichne nichts, wenn die Node collapsed ist
                    }
                 //this.outputs[0].label = this.properties["Result_Value"].toFixed(2);
+                
+                
+                let opDisplay = "";
+
+                if (this.properties["Operation"] == "*"){
+                    opDisplay = "·";
+                } else {
+                    opDisplay = this.properties.Operation;
+                }
+                   
+
+                    ctx.font = "40px Arial";
+                    ctx.fillStyle = "#FFFFFF";
+                    ctx.textAlign = "center";
+                    ctx.fillText(
+                        opDisplay,
+                        this.size[0] * 0.5,
+                        2 * LiteGraph.NODE_SLOT_HEIGHT
+                        //(this.size[1] + LiteGraph.NODE_TITLE_HEIGHT) * 0.5
+                    );
+                    ctx.textAlign = "left";
+                
+
 
 
                 // Färbe den Eingang oder zeichne einen Kreis darum
@@ -134,7 +157,11 @@ export function _OperationNode(){
             onExecute() {
                 if (this.properties.widgetVisible == false) {
                     this.widgets = []; // Alle Widgets entfernen
+                    this.size = [100, 80];  
+                    } else {
+                        //this.size = [120, 90];   
                     }
+
                 if (this.getInputData(0) && this.getInputData(1)){
                     var In1_inputData = this.getInputData(0);
                     var In2_inputData = this.getInputData(1);
