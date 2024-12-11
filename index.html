@@ -82,8 +82,13 @@
 					<!-- LiteGraph Canvas -->
 					<section id="litegraph" >
 						<div id="graphstylefull">
-						<canvas id="graphCanvas1"  data-resize="true" data-config-path="Litegraph/configs/Test_config1.json"></canvas>
-						</div>
+							<canvas 
+							id="graphCanvas1" 
+							Interaction="true" 
+							data-config-path="Litegraph/configs/Test_config1.json" 
+							data-zoom="1">
+						</canvas>
+					</div>
 						<script type="module">
 							import { createGraphInstance } from './Litegraph/createGraph.js';
 							// Erstelle die Graphen für beide Canvas-Elemente

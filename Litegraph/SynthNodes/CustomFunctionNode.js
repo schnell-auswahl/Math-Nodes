@@ -27,7 +27,10 @@ export function _FunctionNode() {
         uvError: false, // Status für UV-Fehler
         completeEquationfromWidget: "",
         finalEquation: "",
+        widgetVisible: true
       };
+
+
 
       // Widget für die Eingabe der Funktionsgleichung
       this.code_widget = this.addWidget(
@@ -55,8 +58,12 @@ export function _FunctionNode() {
             .replace(/exp/g, "Math.exp") // Ersetzt Exponentialfunktion
             .replace(/\bpi\b/gi, "Math.PI") // Ersetzt pi durch Math.PI (unabhängig von Groß-/Kleinschreibung)
             .replace(/\be\b/g, "Math.E"); // Ersetzt e durch Math.E (unabhängig von Groß-/Kleinschreibung)
-        }
+        },
+    
       );
+    
+
+      
 
       // Funktionsobjekt und alte Parameternamen zur Überprüfung
       this._func = null;
@@ -72,6 +79,8 @@ export function _FunctionNode() {
       this.desc = "Compute formula"; // Beschreibung des Knotens
       this.minwidth = 160;
       this.size = [this.minwidth, 150]; // Größe des Knotens in Pixeln
+      this.resizable = false;
+
       //this.color = "#4C7468"; //Titelfarbe
       //this.bgcolor = "#9FA8B4"; //Hintergrundfarbe
     }
@@ -124,6 +133,9 @@ export function _FunctionNode() {
 
     // Zeichnet den Hintergrund und passt die Labels der Eingänge/Ausgänge dynamisch an
     onDrawForeground(ctx) {
+      if (this.flags && this.flags.collapsed) {
+        return; // Zeichne nichts, wenn die Node collapsed ist
+       }
       var inputData = this.getInputData(0);
       //console.log(inputData)
       // Setze das Label des ersten Eingangs basierend auf der unabhängigen Variablen (UV)
@@ -276,15 +288,19 @@ export function _FunctionNode() {
             2 * this.offsetX +
             2 * inputLabelmaxLength * 8;
         }
-        if (this.size[1] < this.renderedImage.height + 2 * this.offsetY) {
-          this.size[1] = this.renderedImage.height + 2 * this.offsetY;
+        if (this.renderedImage.height < 2 * this.offsetY && this.properties.widgetVisible==false)  {
+          this.size[1] = 2 * this.offsetY;
+        } else if (this.renderedImage.height < 2 * this.offsetY) {
+          this.size[1] = 2* this.offsetY + NODE_SLOT_HEIGHT;
+        } else {
+          this.size[1] = this.renderedImage.height + this.offsetY;
         }
 
         // Zeichne das Bild mit skalierter Größe
         ctx.drawImage(
           this.renderedImage,
           this.offsetX + inputLabelmaxLength * 8,
-          this.offsetY - (1 / 2) * this.renderedImage.height //zentrierung im titel
+          this.offsetY - (1 / 2) * this.renderedImage.height //zentrierung i der node
         );
 
         this.Pause == false;
@@ -293,7 +309,9 @@ export function _FunctionNode() {
 
     // Führt die Berechnung durch, wenn die Eingabedaten vorliegen
     onExecute() {
-      // Überprüfe, ob Daten im ersten Eingang vorhanden sind (für UV)
+      if (this.properties.widgetVisible == false) {
+      this.widgets = []; // Alle Widgets entfernen
+      }
       if (this.getInputData(0)) {
         var inputData = this.getInputData(0);
         var uvValue = inputData["value"]; // Wert der unabhängigen Variablen (x)

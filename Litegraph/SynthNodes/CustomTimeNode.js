@@ -54,7 +54,11 @@ export function _CustomTimeNode() { return (
       this.setOutputData(1, outputSec);
     };
 
-    onDrawBackground(ctx) {
+    onDrawForeground(ctx) {
+
+      if (this.flags && this.flags.collapsed) {
+        return; // Zeichne nichts, wenn die Node collapsed ist
+       }
      
               // Färbe den Eingang oder zeichne einen Kreis darum
       const NODE_SLOT_HEIGHT = LiteGraph.NODE_SLOT_HEIGHT;

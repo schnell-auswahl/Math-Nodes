@@ -26,7 +26,7 @@ export function _CustWatchNodeString() {
         this.value = this.getInputData(0); // Holt den Wert der Gleichung
       }
 
-      console.log(this.properties.GleichungvorMathJax);
+      //console.log(this.properties.GleichungvorMathJax);
       if (!this.value && !this.properties.GleichungvorMathJax) return;
 
       if (this.value) {
@@ -59,6 +59,11 @@ export function _CustWatchNodeString() {
     }
 
     onDrawForeground(ctx) {
+         // Überprüfen, ob die Node "collapsed" ist
+       if (this.flags && this.flags.collapsed) {
+      return; // Zeichne nichts, wenn die Node collapsed ist
+  }
+
       // Färbe den Eingang oder zeichne einen Kreis darum
       const NODE_SLOT_HEIGHT = LiteGraph.NODE_SLOT_HEIGHT;
 

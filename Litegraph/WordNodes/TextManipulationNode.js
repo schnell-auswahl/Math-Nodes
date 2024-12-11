@@ -19,6 +19,9 @@ export function createTextManipulationNode({ title, description, logic }) {
         }
 
         onDrawForeground(ctx) {
+            if (this.flags && this.flags.collapsed) {
+                return; // Zeichne nichts, wenn die Node collapsed ist
+               }
             // Textformat für die Beschreibung
             ctx.font = "12px Arial";
             ctx.fillStyle = "#FFFFFF";

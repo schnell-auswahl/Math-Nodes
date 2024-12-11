@@ -3814,6 +3814,9 @@
      */
     LGraphNode.prototype.addWidget = function( type, name, value, callback, options )
 	{
+        // if (hidden == true) {
+        //     return;
+        // }
         if (!this.widgets) {
             this.widgets = [];
         }

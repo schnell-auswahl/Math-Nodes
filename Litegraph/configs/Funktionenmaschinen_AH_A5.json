@@ -105,6 +105,7 @@
         "paramValues": {},
         "evaluatedFormula": "Math.sqrt(x)",
         "uvError": false,
+        "widgetVisible": false,
         "completeEquationfromWidget": "m(x)=sqrt(x)"
       },
       "color": "#88B19B",
@@ -145,6 +146,7 @@
         "paramValues": {},
         "evaluatedFormula": "1/x",
         "uvError": false,
+        "widgetVisible": false,
         "completeEquationfromWidget": "q(x)=1/x"
       },
       "color": "#88B19B",
@@ -185,6 +187,7 @@
         "paramValues": {},
         "evaluatedFormula": "1/x",
         "uvError": false,
+        "widgetVisible": false,
         "completeEquationfromWidget": "q(x)=1/x"
       },
       "color": "#88B19B",
@@ -225,6 +228,7 @@
         "paramValues": {},
         "evaluatedFormula": "Math.sin(x)",
         "uvError": false,
+        "widgetVisible": false,
         "completeEquationfromWidget": "n(x)=sin(x)"
       },
       "color": "#88B19B",
@@ -259,6 +263,7 @@
         "paramValues": {},
         "evaluatedFormula": "",
         "uvError": false,
+        "widgetVisible": false,
         "completeEquationfromWidget": "f(x)=x"
       },
       "color": "#88B19B",
@@ -298,6 +303,7 @@
         "paramNames": ["", "", "", ""],
         "paramValues": {},
         "evaluatedFormula": "-0.3 * x",
+        "widgetVisible": false,
         "uvError": false,
         "completeEquationfromWidget": "t(x)=-0.3 * x"
       },
@@ -338,6 +344,7 @@
         "paramNames": ["", "", "", ""],
         "paramValues": {},
         "evaluatedFormula": "3*x+1",
+        "widgetVisible": false,
         "uvError": false,
         "completeEquationfromWidget": "g(x)=3*x+1"
       },
@@ -378,6 +385,7 @@
         "paramNames": ["", "", "", ""],
         "paramValues": {},
         "evaluatedFormula": "Math.E**x",
+        "widgetVisible": false,
         "uvError": false,
         "completeEquationfromWidget": "r(x)=e^x"
       },
@@ -424,6 +432,7 @@
         "paramNames": ["", "", "", ""],
         "paramValues": {},
         "evaluatedFormula": "Math.sin(10*x)",
+        "widgetVisible": false,
         "uvError": false,
         "completeEquationfromWidget": "s(x)=sin(10*x)"
       },
@@ -447,7 +456,6 @@
           "name": "",
           "type": "object",
           "links": [6],
-          "label": "-0.60",
           "slot_index": 0
         }
       ],
@@ -458,6 +466,7 @@
         "Result_Value": -0.595253909327889,
         "Operation": "*",
         "Fehlermeldung": "",
+        "widgetVisible": false,
         "In1_isNumberNode": "",
         "In2_isNumberNode": ""
       },
@@ -477,7 +486,7 @@
         { "name": "", "type": "object", "link": null }
       ],
       "outputs": [
-        { "name": "", "type": "object", "links": null, "label": "0.00" }
+        { "name": "", "type": "object", "links": null }
       ],
       "title": "Operation",
       "properties": {
@@ -485,6 +494,7 @@
         "Out_rightSideOfEquation": "",
         "Result_Value": 0,
         "Operation": "/",
+        "widgetVisible": false,
         "Fehlermeldung": "",
         "In1_isNumberNode": "",
         "In2_isNumberNode": ""
@@ -505,7 +515,7 @@
         { "name": "", "type": "object", "link": null }
       ],
       "outputs": [
-        { "name": "", "type": "object", "links": null, "label": "0.00" }
+        { "name": "", "type": "object", "links": null }
       ],
       "title": "Operation",
       "properties": {
@@ -513,6 +523,7 @@
         "Out_rightSideOfEquation": "",
         "Result_Value": 0,
         "Operation": "+",
+        "widgetVisible": false,
         "Fehlermeldung": "",
         "In1_isNumberNode": "",
         "In2_isNumberNode": ""
@@ -533,7 +544,7 @@
         { "name": "", "type": "object", "link": null }
       ],
       "outputs": [
-        { "name": "", "type": "object", "links": null, "label": "0.00" }
+        { "name": "", "type": "object", "links": null }
       ],
       "title": "Operation",
       "properties": {
@@ -541,6 +552,7 @@
         "Out_rightSideOfEquation": "",
         "Result_Value": 0,
         "Operation": "-",
+        "widgetVisible": false,
         "Fehlermeldung": "",
         "In1_isNumberNode": "",
         "In2_isNumberNode": ""
@@ -561,11 +573,10 @@
           "name": "value",
           "type": "object",
           "links": [1, 5, 10, 12],
-          "label": "1.000",
           "slot_index": 0
         }
       ],
-      "properties": { "value": 1, "rightSide": "x" },
+      "properties": { "value": 1, "rightSide": "x", "widgetVisible": false},
       "color": "#879BCE",
       "bgcolor": "#7C8693",
       "shape": 2

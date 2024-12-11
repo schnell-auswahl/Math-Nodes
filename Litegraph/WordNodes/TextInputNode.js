@@ -55,6 +55,9 @@ export function _TextInputNode() {
       }
       
       onDrawForeground(ctx) {
+        if (this.flags && this.flags.collapsed) {
+            return; // Zeichne nichts, wenn die Node collapsed ist
+           }
          // Zeichne die Input- und Output-Slots
          const NODE_SLOT_HEIGHT = LiteGraph.NODE_SLOT_HEIGHT;
          const inputPosX = labelInputPosX;
