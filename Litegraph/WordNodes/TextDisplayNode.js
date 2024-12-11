@@ -38,6 +38,9 @@ export function _TextDisplayNode() {
         }
 
         onDrawForeground(ctx) {
+            if (this.flags && this.flags.collapsed) {
+                return; // Zeichne nichts, wenn die Node collapsed ist
+               }
             // Dynamische Größe der Textbox an die Größe der Node anpassen
             // Zeichne die Input- und Output-Slots
             const NODE_SLOT_HEIGHT = LiteGraph.NODE_SLOT_HEIGHT;

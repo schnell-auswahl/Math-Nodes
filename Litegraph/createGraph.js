@@ -271,7 +271,11 @@ export function createGraphInstance(canvasId) {
                         <span id="zoomValue${canvasId}" style="font-size: 0.9em; font-weight: bold; ">1.0</span>
                         <button id="zoomIn${canvasId}" class="button small" >Zoom +</button>
                     </div>
-                <button	onclick="autoPositionNodes('${canvasId}')"class="button fit small" style="margin-bottom: 10px;">Maschinen sortieren</button>
+                <button	onclick="
+                for (let i=0; i<2;i++){
+                autoPositionNodes('${canvasId}');
+                }
+                "class="button fit small" style="margin-bottom: 10px;">Maschinen sortieren</button>
                 <button id="copyNode" class="button fit small" style="margin-bottom: 10px;">Maschine kopieren</button>
                 <button id="delNode" class="button fit small">Maschine löschen</button>
             </ul>
@@ -303,9 +307,11 @@ export function createGraphInstance(canvasId) {
 
   // Zoom from canvas loading
   const zoomLevel = parseFloat(canvasElement.getAttribute("data-zoom")) || 1.0; // Default zoom is 1.0
+  canvasElement.zoom = zoomLevel;
+  //console.log(canvas.zoom);
 
   // Apply the zoom level
-  const centerPoint = [canvasElement.width / 2, canvasElement.height / 2];
+  const centerPoint = [0, 0]; //[canvasElement.width / 2, canvasElement.height / 2];
   canvas.setZoom(zoomLevel, centerPoint);
 
   // Event-Handling für die Zoom-Buttons
@@ -317,10 +323,8 @@ export function createGraphInstance(canvasId) {
 
   function applyZoom(newZoom) {
     currentZoom = Math.min(Math.max(newZoom, 0.5), 2); // Begrenzung des Zoomwerts auf [0.5, 2]
-    canvas.setZoom(currentZoom, [
-      canvasElement.width / 2,
-      canvasElement.height / 2,
-    ]);
+    canvas.setZoom(currentZoom, [0, 0]);
+    canvasElement.zoom = currentZoom; // Zoom-Wert im Canvas speichern
     zoomValueLabel.textContent = currentZoom.toFixed(1); // Aktualisiere die Anzeige
   }
 

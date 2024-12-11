@@ -24,7 +24,8 @@ export function _OperationNode(){
                     Operation: "", 
                     Fehlermeldung: "",
                     In1_isNumberNode: "",
-                    In2_isNumberNode: ""
+                    In2_isNumberNode: "",
+                    widgetVisible: true
                   };
 
                 this.code_widget = this.addWidget(
@@ -76,7 +77,11 @@ export function _OperationNode(){
 
             }
 
-            onDrawBackground(ctx) {
+            onDrawForeground(ctx) {
+
+                if (this.flags && this.flags.collapsed) {
+                    return; // Zeichne nichts, wenn die Node collapsed ist
+                   }
                 //this.outputs[0].label = this.properties["Result_Value"].toFixed(2);
 
 
@@ -127,6 +132,9 @@ export function _OperationNode(){
             }
             
             onExecute() {
+                if (this.properties.widgetVisible == false) {
+                    this.widgets = []; // Alle Widgets entfernen
+                    }
                 if (this.getInputData(0) && this.getInputData(1)){
                     var In1_inputData = this.getInputData(0);
                     var In2_inputData = this.getInputData(1);

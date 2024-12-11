@@ -47,7 +47,11 @@ export function _CustNumberNode() {
       }
 
      
-      onDrawBackground(ctx) {
+      onDrawForeground(ctx) {
+
+        if (this.flags && this.flags.collapsed) {
+          return; // Zeichne nichts, wenn die Node collapsed ist
+         }
         // Rundung auf 3 Dezimalstellen für die Anzeige, unabhängig von der Berechnung
         this.outputs[0].label = this.properties["value"].toFixed(3);
 

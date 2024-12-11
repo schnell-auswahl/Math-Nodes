@@ -62,6 +62,8 @@ function loadGraphFromFile(canvasId) {
                     graph.configure(json);
                     graph.start();
 
+                    autoPositionNodes(canvas.id);
+
                     //console.log(`Graph von Canvas "${canvasId}" wurde erfolgreich geladen.`);
                 } catch (error) {
                     console.error("Fehler beim Laden des Graphen:", error);
@@ -106,6 +108,7 @@ function loadGraphFromServerAsync(canvasId, jsonFilePath) {
                     graph.configure(json);
                     graph.start();
 
+
                     //console.log(`Graph von Canvas "${canvasId}" erfolgreich aus ${jsonFilePath} geladen.`);
                     resolve(); // Ladevorgang erfolgreich abgeschlossen
                 } catch (error) {
@@ -149,7 +152,7 @@ async function loadAllGraphs() {
         //console.log("Alle Graphen wurden erfolgreich geladen.");
 
         // Nodes anpassen, nachdem alle Graphen geladen sind
-        canvases.forEach((canvas) => adjustNodePositions(canvas.id));
+        canvases.forEach((canvas) =>   autoPositionNodes(canvas.id));
     } catch (error) {
         //console.error("Fehler beim Laden eines oder mehrerer Graphen:", error);
     }
@@ -210,9 +213,10 @@ function adjustNodePositions(canvasId) {
         console.error(`Kein Graph mit Canvas-ID "${canvasId}" gefunden.`);
         return;
     }
-
-    const canvasWidth = canvas.width;
-    const canvasHeight = canvas.height;
+    const zoomFactor = canvas.zoom|| 1;
+    console.log(zoomFactor);
+    const canvasWidth = canvas.width / zoomFactor;  
+    const canvasHeight = canvas.height / zoomFactor;
     const margin = 20; // Randgröße
     const titleHeight = LiteGraph.NODE_TITLE_HEIGHT || 30; // Höhe des Titels
 
@@ -264,23 +268,25 @@ function adjustNodePositions(canvasId) {
 // Dynamisches Resizing für alle Canvas mit data-resize="true"
 function adjustAllNodePositions() {
     // Alle Canvas-Elemente mit dem Attribut data-resize="true" auswählen
-    const resizableCanvases = document.querySelectorAll('canvas[data-resize="true"]');
+    const resizableCanvases = document.querySelectorAll('canvas');
 
     // Resize-Funktion für jedes Canvas aufrufen
     resizableCanvases.forEach((canvas) => {
-        adjustNodePositions(canvas.id);
+        //adjustNodePositions(canvas.id);
+        autoPositionNodes(canvas.id);
     });
 }
 
 // Dynamisches Resizing für alle Canvas und Neupositionierung der Nodes
 function adjustAllCanvasAndNodePositions() {
     // Alle Canvas-Elemente mit dem Attribut data-resize="true" auswählen
-    const canvases = document.querySelectorAll('canvas[data-resize="true"]');
+    const canvases = document.querySelectorAll('canvas');
 
     // Für jedes Canvas die Größe und Node-Positionen anpassen
     canvases.forEach((canvas) => {
         adjustCanvasSize(canvas.id);
-        adjustNodePositions(canvas.id);
+        autoPositionNodes(canvas.id);
+        //adjustNodePositions(canvas.id);
     });
 }
 
@@ -309,8 +315,11 @@ function autoPositionNodes(canvasId) {
             return;
         }
     
-        const canvasWidth = canvas.width;
-        const canvasHeight = canvas.height;
+        const zoomFactor = canvas.zoom|| 1;
+        //console.log(zoomFactor);
+
+        const canvasWidth = canvas.width/zoomFactor;
+        const canvasHeight = canvas.height/zoomFactor;
         const margin = 20; // Randgröße
         const titleHeight = LiteGraph.NODE_TITLE_HEIGHT || 30; // Höhe des Titels
     
@@ -354,16 +363,16 @@ function autoPositionNodes(canvasId) {
             node.pos[1] = y * scaleY + offsetY;
         });
     
-        console.log("Nodes in X- und Y-Richtung unabhängig maximiert und positioniert.");
+        //console.log("Nodes in X- und Y-Richtung unabhängig maximiert und positioniert.");
     }
 
-// document.addEventListener("DOMContentLoaded", () => {
-//     const buttonId = `AutoPosition${canvasId}`;
-//     const button = document.getElementById(buttonId);
-  
-//     if (button) {
-//       button.addEventListener("click", () => autoPositionNodes(canvasId));
-//     } else {
-//       console.error(`Button mit ID "${buttonId}" nicht gefunden.`);
-//     }
-//   });
+    // document.addEventListener("DOMContentLoaded", () => {
+    //     const sortButton = document.getElementById(`sortNodes${canvasId}`);
+    //     if (sortButton) {
+    //         sortButton.addEventListener("click", () => {
+    //             for (let i = 0; i < 2; i++) {
+    //                 autoPositionNodes(canvasId);
+    //             }
+    //         });
+    //     }
+    // });

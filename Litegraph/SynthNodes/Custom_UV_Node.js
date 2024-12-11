@@ -8,11 +8,11 @@ export function _uvNode() {
         this.color = srcNodesColor;
         this.bgcolor = bgColor2;
         this.addOutput("value", "object");
-        this.properties = { value: 1.0, rightSide: "x"};
+        this.properties = { value: 1.0, rightSide: "x", widgetVisible: true};
         this.numberWidget = this.addWidget("number", "Wert", 1, "value", { precision: 2 });
         this.nameWidget = this.addWidget("text", "Unabhängige", "x", "rightSide");
         this.widgets_up = true;
-        //this.color = "#4C7468"; //Titelfarbe
+        //this.color = "#4C7468"; //Titelfarbe 
         //this.bgcolor = "#9FA8B4"; //Hintergrundfarbe
          this.shape = LiteGraph.ROUND_SHAPE; // Runde Ecken
          this.size = [180, 60];
@@ -20,6 +20,9 @@ export function _uvNode() {
       }
 
       onExecute() {
+        if (this.properties.widgetVisible == false) {
+          this.widgets = []; // Alle Widgets entfernen
+          }
         // Hier wird die Rundung wie gewünscht angewendet
         const roundedValue = Math.round((parseFloat(this.properties["value"]) + Number.EPSILON) * 100) / 100;
 
@@ -48,9 +51,12 @@ export function _uvNode() {
         console.log("in setValue");
       }
 
-      onDrawBackground(ctx) {
+      onDrawForeground(ctx) {
+        if (this.flags && this.flags.collapsed) {
+          return; // Zeichne nichts, wenn die Node collapsed ist
+         }
         // Rundung auf 3 Dezimalstellen für die Anzeige, unabhängig von der Berechnung
-        this.outputs[0].label = this.properties["value"].toFixed(3);
+        this.outputs[0].label = "";
 
                 // Färbe den Eingang oder zeichne einen Kreis darum
         const NODE_SLOT_HEIGHT = LiteGraph.NODE_SLOT_HEIGHT;

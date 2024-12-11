@@ -90,7 +90,10 @@ export function _CustWatchNodeValue() { return(
         }
       };
   
-      onDrawBackground = function(ctx) {
+      onDrawForeground = function(ctx) {
+        if (this.flags && this.flags.collapsed) {
+          return; // Zeichne nichts, wenn die Node collapsed ist
+         }
         //show the current value
         // Färbe den Eingang oder zeichne einen Kreis darum
         const NODE_SLOT_HEIGHT = LiteGraph.NODE_SLOT_HEIGHT;
