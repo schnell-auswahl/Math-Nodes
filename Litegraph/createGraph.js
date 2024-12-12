@@ -175,25 +175,25 @@ export function createGraphInstance(canvasId) {
     (e) => {
       const touch = e.touches[0];
       const rect = canvasElement.getBoundingClientRect();
-      const x = touch.clientX - rect.left;
-      const y = touch.clientY - rect.top;
-
+      
+      // Berechne die unskalierten Koordinaten
+      const x = (touch.clientX - rect.left) / canvasElement.zoom;
+      const y = (touch.clientY - rect.top) / canvasElement.zoom;
+  
       // Prüfen, ob eine Node getroffen wurde
       const touchedNode = graph.getNodeOnPos(x, y);
-
+  
       if (touchedNode) {
         console.log("Node getroffen:", touchedNode.title);
         e.preventDefault(); // Unterdrücke das Scrollen
       }
-
+  
       // Simuliere den mousedown-Event für LiteGraph
       const simulatedEvent = new MouseEvent("mousedown", {
         bubbles: true,
         cancelable: true,
         clientX: touch.clientX,
         clientY: touch.clientY,
-        //button: 1, // Rechte Maustaste
-        //buttons: 1 // Rechte Maustaste gedrückt
       });
       canvasElement.dispatchEvent(simulatedEvent);
     },
@@ -308,7 +308,7 @@ export function createGraphInstance(canvasId) {
   // Zoom from canvas loading
   const zoomLevel = parseFloat(canvasElement.getAttribute("data-zoom")) || 1.0; // Default zoom is 1.0
   canvasElement.zoom = zoomLevel;
-  //console.log(canvas.zoom);
+  
 
   // Apply the zoom level
   const centerPoint = [0, 0]; //[canvasElement.width / 2, canvasElement.height / 2];
@@ -326,6 +326,7 @@ export function createGraphInstance(canvasId) {
     canvas.setZoom(currentZoom, [0, 0]);
     canvasElement.zoom = currentZoom; // Zoom-Wert im Canvas speichern
     zoomValueLabel.textContent = currentZoom.toFixed(1); // Aktualisiere die Anzeige
+    console.log(canvasElement.zoom);
   }
 
   // Event-Listener für die Buttons
