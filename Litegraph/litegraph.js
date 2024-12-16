@@ -5348,7 +5348,7 @@ LGraphNode.prototype.executeAction = function(action)
         this.default_link_color = LiteGraph.LINK_COLOR;
         this.default_connection_color = {
             input_off: "#778",
-            input_on: "#7F7", //"#BBD"
+            input_on: "#FFFFFF", //"#BBD"
             output_off: "#778",
             output_on: "#7F7" //"#BBD"
 		};
@@ -6084,9 +6084,9 @@ LGraphNode.prototype.executeAction = function(action)
                                     }
 
                                     if (is_double_click) {
-                                        if (node.onOutputDblClick) {
-                                            node.onOutputDblClick(i, e);
-                                        }
+                                        // if (node.onOutputDblClick) {
+                                        //     node.onOutputDblClick(i, e);
+                                        // }
                                     } else {
                                         if (node.onOutputClick) {
                                             node.onOutputClick(i, e);
@@ -6115,9 +6115,9 @@ LGraphNode.prototype.executeAction = function(action)
                                     )
                                 ) {
                                     if (is_double_click) {
-                                        if (node.onInputDblClick) {
-                                            node.onInputDblClick(i, e);
-                                        }
+                                        // if (node.onInputDblClick) {
+                                        //     node.onInputDblClick(i, e);
+                                        // }
                                     } else {
                                         if (node.onInputClick) {
                                             node.onInputClick(i, e);
@@ -6195,11 +6195,11 @@ LGraphNode.prototype.executeAction = function(action)
                     //double clicking
                     if (this.allow_interaction && is_double_click && this.selected_nodes[node.id]) {
                         //double click node
-                        if (node.onDblClick) {
-                            node.onDblClick( e, pos, this );
-                        }
-                        this.processNodeDblClicked(node);
-                        block_drag_node = true;
+                        // if (node.onDblClick) {
+                        //     node.onDblClick( e, pos, this );
+                        // }
+                        // this.processNodeDblClicked(node);
+                        // block_drag_node = true;
                     }
 
                     //if do not capture mouse
@@ -6279,9 +6279,9 @@ LGraphNode.prototype.executeAction = function(action)
 					}
 
 					if (is_double_click && !this.read_only && this.allow_searchbox) {
-						this.showSearchBox(e);
-						e.preventDefault();
-						e.stopPropagation();
+						// this.showSearchBox(e);
+						// e.preventDefault();
+						// e.stopPropagation();
 					}
 
 					clicking_canvas_bg = true;
@@ -13231,34 +13231,34 @@ LGraphNode.prototype.executeAction = function(action)
         } 
         else {
             options = [//Zum debuggen ein uns auskommentieren
-                // {
-                //     content: "Inputs",
-                //     has_submenu: true,
-                //     disabled: true,
-                //     callback: LGraphCanvas.showMenuNodeOptionalInputs
-                // },
-                // {
-                //     content: "Outputs",
-                //     has_submenu: true,
-                //     disabled: true,
-                //     callback: LGraphCanvas.showMenuNodeOptionalOutputs
-                // },
-                // null,
-                // {
-                //     content: "Properties",
-                //     has_submenu: true,
-                //     callback: LGraphCanvas.onShowMenuNodeProperties
-                // },
-                // null,
-                // {
-                //     content: "Title",
-                //     callback: LGraphCanvas.onShowPropertyEditor
-                // },
-                // {
-                //     content: "Mode",
-                //     has_submenu: true,
-                //     callback: LGraphCanvas.onMenuNodeMode
-                // }
+                {
+                    content: "Inputs",
+                    has_submenu: true,
+                    disabled: true,
+                    callback: LGraphCanvas.showMenuNodeOptionalInputs
+                },
+                {
+                    content: "Outputs",
+                    has_submenu: true,
+                    disabled: true,
+                    callback: LGraphCanvas.showMenuNodeOptionalOutputs
+                },
+                null,
+                {
+                    content: "Properties",
+                    has_submenu: true,
+                    callback: LGraphCanvas.onShowMenuNodeProperties
+                },
+                null,
+                {
+                    content: "Title",
+                    callback: LGraphCanvas.onShowPropertyEditor
+                },
+                {
+                    content: "Mode",
+                    has_submenu: true,
+                    callback: LGraphCanvas.onMenuNodeMode
+                }
             ];
             // if(node.resizable !== false){
             //     options.push({

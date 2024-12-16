@@ -20,6 +20,7 @@ export function _uvNode() {
       }
 
       onExecute() {
+        this.outputs[0].color_off = "#000000";
         if (this.properties.widgetVisible == false) {
           this.widgets = []; // Alle Widgets entfernen
           }
@@ -36,6 +37,8 @@ export function _uvNode() {
           // funcList: ""
         }
         this.setOutputData(0, output);
+        this.outputs[0].color_off = "#000000";
+        this.outputs[0].color_on = adjustColor("#00FF00","#FF0000",roundedValue);
       }
 
       getTitle() {

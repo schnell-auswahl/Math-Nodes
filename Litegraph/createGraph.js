@@ -21,7 +21,6 @@ window.labelHeight = 14; // Höhe des Trichters (von Basis bis Spitze)
 
 // CustomNodes in separate Datei ausgelagert
 
-// //Synth
 // Synth
 import { _FunctionNode } from "./SynthNodes/CustomFunctionNode.js";
 const FunctionNode = _FunctionNode();
@@ -72,7 +71,7 @@ export function createGraphInstance(canvasId) {
     return;
   }
 
-  //Nodes Registrieren
+  // Nodes Registrieren
   // Funktionenmaschinen
   LiteGraph.registerNodeType(
     "Funktionenmaschinen/Unabhängige_Variable",
@@ -175,25 +174,25 @@ export function createGraphInstance(canvasId) {
     (e) => {
       const touch = e.touches[0];
       const rect = canvasElement.getBoundingClientRect();
-      const x = touch.clientX - rect.left;
-      const y = touch.clientY - rect.top;
-
+      
+      // Berechne die unskalierten Koordinaten
+      const x = (touch.clientX - rect.left) / canvasElement.zoom;
+      const y = (touch.clientY - rect.top) / canvasElement.zoom;
+  
       // Prüfen, ob eine Node getroffen wurde
       const touchedNode = graph.getNodeOnPos(x, y);
-
+  
       if (touchedNode) {
         console.log("Node getroffen:", touchedNode.title);
         e.preventDefault(); // Unterdrücke das Scrollen
       }
-
+  
       // Simuliere den mousedown-Event für LiteGraph
       const simulatedEvent = new MouseEvent("mousedown", {
         bubbles: true,
         cancelable: true,
         clientX: touch.clientX,
         clientY: touch.clientY,
-        //button: 1, // Rechte Maustaste
-        //buttons: 1 // Rechte Maustaste gedrückt
       });
       canvasElement.dispatchEvent(simulatedEvent);
     },
@@ -272,16 +271,17 @@ export function createGraphInstance(canvasId) {
                         <button id="zoomIn${canvasId}" class="button small" >Zoom +</button>
                     </div>
                 <button	onclick="
-                for (let i=0; i<2;i++){
+                for (let i=0; i<5;i++){
                 autoPositionNodes('${canvasId}');
                 }
                 "class="button fit small" style="margin-bottom: 10px;">Maschinen sortieren</button>
-                <button id="copyNode" class="button fit small" style="margin-bottom: 10px;">Maschine kopieren</button>
-                <button id="delNode" class="button fit small">Maschine löschen</button>
+                <button onclick="delNode('${canvasId}')"  class="button fit small">Maschine löschen</button>
+                
             </ul>
         </nav>       
     `;
 
+    //  <button onclick="copyNode('${canvasId}')"  class="button fit small" style="margin-bottom: 10px;">Maschine kopieren</button>
   // Füge das Menü in den Canvas-Container ein
   canvasElement.parentElement.appendChild(menu);
 
@@ -296,6 +296,7 @@ export function createGraphInstance(canvasId) {
   // Setze die initiale Breite
   menu.style.width = collapsedWidth;
 
+
   // Füge Event Listener hinzu
   menuToggle.addEventListener("click", () => {
     const isExpanded = menuContent.style.display === "block";
@@ -308,7 +309,7 @@ export function createGraphInstance(canvasId) {
   // Zoom from canvas loading
   const zoomLevel = parseFloat(canvasElement.getAttribute("data-zoom")) || 1.0; // Default zoom is 1.0
   canvasElement.zoom = zoomLevel;
-  //console.log(canvas.zoom);
+  
 
   // Apply the zoom level
   const centerPoint = [0, 0]; //[canvasElement.width / 2, canvasElement.height / 2];
@@ -326,6 +327,7 @@ export function createGraphInstance(canvasId) {
     canvas.setZoom(currentZoom, [0, 0]);
     canvasElement.zoom = currentZoom; // Zoom-Wert im Canvas speichern
     zoomValueLabel.textContent = currentZoom.toFixed(1); // Aktualisiere die Anzeige
+    console.log(canvasElement.zoom);
   }
 
   // Event-Listener für die Buttons
@@ -413,7 +415,7 @@ export function createGraphInstance(canvasId) {
           newNode.pos = [50, canvasElement.height - 200];
           graph.add(newNode);
           //console.log(`Node hinzugefügt: ${uniqueName}`); // Aber bestätigung einbauen
-          document.body.removeChild(overlay); // Menü schließen
+          document.body.removeChild(overlay); // Menü schließen <-Das funktioniert noch nicht
         });
 
         parent.appendChild(button);
@@ -471,6 +473,8 @@ export function createGraphInstance(canvasId) {
       });
     }
   });
+
+ 
 
   // Initialisiere Loop-Variablen
   let isVisible = false;
@@ -595,3 +599,62 @@ function convertToLatex(expression) {
 
 // Macht die Funktion global verfügbar
 window.convertToLatex = convertToLatex;
+
+
+
+function adjustColor(positiveColor, negativeColor, value) {
+  // Hilfsfunktion: Hex-Farbe zu RGB konvertieren
+  function hexToRgb(hex) {
+    const r = parseInt(hex.slice(1, 3), 16);
+    const g = parseInt(hex.slice(3, 5), 16);
+    const b = parseInt(hex.slice(5, 7), 16);
+    return { r, g, b };
+  }
+
+  // Hilfsfunktion: RGB zu Hex konvertieren
+  function rgbToHex({ r, g, b }) {
+    return `#${((1 << 24) + (r << 16) + (g << 8) + b).toString(16).slice(1).toUpperCase()}`;
+  }
+
+// Hilfsfunktion: Helligkeit anpassen mit logarithmischer Skala
+// Hilfsfunktion: Helligkeit anpassen mit angepasster logarithmischer Funktion
+function adjustBrightness(rgb, value) {
+// Definiere die neue Funktion basierend auf den optimierten Parametern
+function brightnessFactor(x) {
+const a = 1.817;
+const b = 1.00;
+const c = 1.697;
+const factor = (a * Math.log(x + b)) / (1 + c * Math.log(x + b));
+return Math.min(factor, 1); // Begrenze den Faktor auf maximal 1
+}
+
+// Berechne den Faktor basierend auf der neuen Funktion
+const factor = brightnessFactor(value);
+
+// Passe die RGB-Werte an
+return {
+r: Math.min(255, Math.max(0, rgb.r * factor)),
+g: Math.min(255, Math.max(0, rgb.g * factor)),
+b: Math.min(255, Math.max(0, rgb.b * factor))
+};
+}
+
+  // Wähle die passende Farbe basierend auf dem Vorzeichen von value
+  const baseColor = value >= 0 ? positiveColor : negativeColor;
+
+  //console.log(baseColor);
+  // Konvertiere die Farbe in RGB
+  const rgb = hexToRgb(baseColor);
+
+  // Normiere den Wert auf den Bereich [0, 1] für positive und negative Werte
+  const normalizedFactor = Math.abs(value);
+
+  // Passe die Helligkeit an
+  const adjustedRgb = adjustBrightness(rgb, normalizedFactor);
+
+  // Konvertiere zurück zu Hex und gib die neue Farbe zurück
+  return rgbToHex(adjustedRgb);
+}
+
+window.adjustColor = adjustColor;
+

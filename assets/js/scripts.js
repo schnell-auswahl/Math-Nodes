@@ -1,8 +1,54 @@
 
+//Ausgewählte maschinen löschen
+function delNode(canvasId) {
+    console.log("funktion gestartet")
+    const canvas = document.getElementById(canvasId); // Canvas über ID holen
+    if (!canvas) {
+        alert(`Canvas mit ID "${canvasId}" nicht gefunden.`);
+        return;
+    }
+
+    const graph = canvas.graph; // LGraph-Objekt vom Canvas
+    if (!graph) {
+        alert(`Kein Graph mit Canvas-ID "${canvasId}" gefunden.`);
+        return;
+    }
+
+    //console.log(graph);
+    //console.log(typeof graph.list_of_graphcanvas[0].deleteSelectedNodes );
+
+    graph.list_of_graphcanvas[0].deleteSelectedNodes(); 
+
+    //console.log("did it")
+}
+
+// //Ausgewählte maschine kopieren
+// function copyNode(canvasId) {
+//     console.log("funktion gestartet")
+//     const canvas = document.getElementById(canvasId); // Canvas über ID holen
+//     if (!canvas) {
+//         alert(`Canvas mit ID "${canvasId}" nicht gefunden.`);
+//         return;
+//     }
+
+//     const graph = canvas.graph; // LGraph-Objekt vom Canvas
+//     if (!graph) {
+//         alert(`Kein Graph mit Canvas-ID "${canvasId}" gefunden.`);
+//         return;
+//     }
+
+//     console.log(graph);
+//     console.log(typeof graph.list_of_graphcanvas[0].onMenuNodeClon );
+
+//     graph.list_of_graphcanvas[0].onMenuNodeClone(); 
+
+//     //console.log("did it")
+
+// }
+
+
 
 // Graph speichern in datei
-
-
 function saveGraphToFile(canvasId) {
     const canvas = document.getElementById(canvasId); // Canvas über ID holen
     if (!canvas) {
@@ -30,57 +76,62 @@ function saveGraphToFile(canvasId) {
     //console.log(`Graph von Canvas "${canvasId}" wurde gespeichert.`);
 }
 
-
-function loadGraphFromFile(canvasId) {
-    const canvas = document.getElementById(canvasId); // Canvas über ID holen
-    if (!canvas) {
-        alert(`Canvas mit ID "${canvasId}" nicht gefunden.`);
-        return;
-    }
-
-    const graph = canvas.graph; // LGraph-Objekt vom Canvas
-    if (!graph) {
-        alert(`Kein Graph mit Canvas-ID "${canvasId}" gefunden.`);
-        return;
-    }
-
-    const input = document.createElement("input");
-    input.type = "file";
-    input.accept = "application/json";
-
-    input.addEventListener("change", function (event) {
-        const file = event.target.files[0];
-        if (file) {
-            const reader = new FileReader();
-            reader.onload = function (e) {
-                try {
-                    const json = JSON.parse(e.target.result);
-
-                    // Graph aktualisieren
-                    graph.stop();
-                    graph.clear();
-                    graph.configure(json);
-                    graph.start();
-
-                    autoPositionNodes(canvas.id);
-
-                    //console.log(`Graph von Canvas "${canvasId}" wurde erfolgreich geladen.`);
-                } catch (error) {
-                    console.error("Fehler beim Laden des Graphen:", error);
-                    alert("Ungültige Datei. Bitte überprüfe das JSON-Format.");
-                }
-            };
-            reader.readAsText(file);
-        }
-    });
-
-    input.click();
-}
-
-
-
 // Funktion zum Laden des Graphen aus einer Datei über einen Pfad
 
+function loadGraphFromFile(canvasId) {
+    // Zeige eine Bestätigungsabfrage
+    const confirmation = confirm("Möchtest du den aktuellen Graphen wirklich überschreiben? Alle nicht gespeicherten Änderungen gehen verloren!");
+  
+    // Wenn der Benutzer bestätigt, lade den Graphen
+    if (confirmation) {
+        const canvas = document.getElementById(canvasId); // Canvas über ID holen
+            if (!canvas) {
+                alert(`Canvas mit ID "${canvasId}" nicht gefunden.`);
+                return;
+            }
+        
+            const graph = canvas.graph; // LGraph-Objekt vom Canvas
+            if (!graph) {
+                alert(`Kein Graph mit Canvas-ID "${canvasId}" gefunden.`);
+                return;
+            }
+        
+            graph.clear();
+        
+            const input = document.createElement("input");
+            input.type = "file";
+            input.accept = "application/json";
+        
+            input.addEventListener("change", function (event) {
+                const file = event.target.files[0];
+                if (file) {
+                    const reader = new FileReader();
+                    reader.onload = function (e) {
+                        try {
+                            const json = JSON.parse(e.target.result);
+        
+                            // Graph aktualisieren
+                            graph.stop();
+                            graph.configure(json);
+                            graph.start();
+        
+                            autoPositionNodes(canvas.id);
+        
+                            //console.log(`Graph von Canvas "${canvasId}" wurde erfolgreich geladen.`);
+                        } catch (error) {
+                            console.error("Fehler beim Laden des Graphen:", error);
+                            alert("Ungültige Datei. Bitte überprüfe das JSON-Format.");
+                        }
+                    };
+                    reader.readAsText(file);
+                }
+            });
+        
+            input.click();
+    } else {
+      console.log("Ladevorgang abgebrochen.");
+    }
+  }
 
 function loadGraphFromServerAsync(canvasId, jsonFilePath) {
     return new Promise((resolve, reject) => {
@@ -94,6 +145,8 @@ function loadGraphFromServerAsync(canvasId, jsonFilePath) {
             return reject(`Kein Graph mit Canvas-ID "${canvasId}" gefunden.`);
         }
 
+        graph.clear();
+
         fetch(jsonFilePath)
             .then((response) => {
                 if (!response.ok) {
@@ -104,7 +157,7 @@ function loadGraphFromServerAsync(canvasId, jsonFilePath) {
             .then((json) => {
                 try {
                     graph.stop();
-                    graph.clear();
+                    
                     graph.configure(json);
                     graph.start();
 
@@ -122,6 +175,10 @@ function loadGraphFromServerAsync(canvasId, jsonFilePath) {
 }
 
 function clearGraph(canvasId) {
+ // Zeige eine Bestätigungsabfrage
+ const confirmation = confirm("Möchtest du den aktuellen Graphen wirklich löschen? Alle nicht gespeicherten Änderungen gehen verloren!");
+
+ if (confirmation) {
     const canvas = document.getElementById(canvasId);
     if (!canvas) {
         //alert(`Canvas mit ID "${canvasId}" nicht gefunden.`);
@@ -136,6 +193,7 @@ function clearGraph(canvasId) {
 
     graph.clear(); // Graph löschen
     //alert(`Graph von Canvas "${canvasId}" wurde geleert.`);
+    }
 }
 
 
@@ -298,6 +356,10 @@ document.addEventListener("DOMContentLoaded", () => {
     // Event Listener für Fensteränderungen hinzufügen
     window.addEventListener("resize", adjustAllCanvasAndNodePositions);
 });
+
+
+
+
 
 
 

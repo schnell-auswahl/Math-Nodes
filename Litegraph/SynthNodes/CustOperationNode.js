@@ -162,6 +162,10 @@ export function _OperationNode(){
                         //this.size = [120, 90];   
                     }
 
+                    this.inputs[0].color_off = "#000000";
+                    this.inputs[1].color_off = "#000000";
+                    this.outputs[0].color_off = "#000000";
+
                 if (this.getInputData(0) && this.getInputData(1)){
                     var In1_inputData = this.getInputData(0);
                     var In2_inputData = this.getInputData(1);
@@ -189,6 +193,8 @@ export function _OperationNode(){
                     this.properties.In1_isNumberNode = In1_inputData["isNumberNode"];
                     this.properties.In2_isNumberNode = In2_inputData["isNumberNode"];
 
+                    this.inputs[0].color_on = adjustColor("#00FF00","#FF0000",In1_Value);
+                    this.inputs[1].color_on = adjustColor("#00FF00","#FF0000",In2_Value);
 
 
                     
@@ -266,6 +272,7 @@ export function _OperationNode(){
 
 
                         this.setOutputData(0, { uvValue: UV_Value_internal, value: this.properties["Result_Value"], leftSide:   this.properties["Out_leftSideOfEquation"], rightSide:   this.properties["Out_rightSideOfEquation"], uvName: UV_Name_internal});
+                        this.outputs[0].color_on = adjustColor("#00FF00","#FF0000",this.properties["Result_Value"]);
                         this.boxcolor = null; // Zurücksetzen der Farbe bei Erfolg 
                     }
 

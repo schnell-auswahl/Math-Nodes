@@ -312,12 +312,20 @@ export function _FunctionNode() {
       if (this.properties.widgetVisible == false) {
       this.widgets = []; // Alle Widgets entfernen
       }
+
+      this.inputs[0].color_off = "#000000";
+      this.outputs[0].color_off = "#000000";
+      
       if (this.getInputData(0)) {
         var inputData = this.getInputData(0);
         var uvValue = inputData["value"]; // Wert der unabhängigen Variablen (x)
         var leftSideEquation = inputData["leftSide"]; // Neu: empfange die linke Seite der Gleichung
         var rightSideEquation = inputData["rightSide"]; // Zusatzinformationen zur Gleichung
         var uvNameFromInput = inputData["uvName"]; // Name der unabhängigen Variablen
+
+
+        this.inputs[0].color_off = "#000000";
+        this.inputs[0].color_on = adjustColor("#00FF00","#FF0000",inputData["value"]);
 
         // Speichere die Hauptunabhängige Variable (x) und Zusatzinfos in den Eigenschaften
         //this.properties["x"] = uvValue ?? this.properties["x"];
@@ -343,16 +351,30 @@ export function _FunctionNode() {
           let paramValues = {};
           for (let i = 0; i < 4; i++) {
             const paramInput = this.getInputData(i + 1); // Hole die Daten vom jeweiligen Eingang
+            this.inputs[i + 1].color_off = "#000000";
+
+        
+
             if (paramInput) {
               const paramName = paramInput["leftSide"]; // Name des Parameters
               const paramValue = paramInput["value"]; // Wert des Parameters
 
+            
+             
+
               if (paramName && paramValue !== undefined) {
+                this.inputs[i + 1].color_on = adjustColor("#00FF00","#FF0000",paramValue);
                 paramNames.push(paramName); // Speichere den Parameternamen
-                this.properties["paramNames"][i + 1] = paramName;
+                this.properties["paramNames"][i+1] = paramName;
                 paramValues[paramName] = paramValue; // Speichere den Parameterwert
-              }
+              } 
+            } else {
+              //paramNames[i+1]=""; //Lösche den Parameternamen 
+              this.properties["paramNames"][i+1] = "";
             }
+              
+          
+
           }
 
           // Speichere die Parameterwerte in den Eigenschaften des Knotens
@@ -368,7 +390,7 @@ export function _FunctionNode() {
               "\\$&"
             ); // Maskiere alle speziellen Zeichen
             if (paramName.includes(this.properties["uvName"])) {
-              let rightSideFromInput = this.getInputData(index + 1)[
+              let rightSideFromInput = this.getInputData(index )[
                 "rightSide"
               ];
               evaluatedFormula = evaluatedFormula.replace(
@@ -432,6 +454,9 @@ export function _FunctionNode() {
               evaluatedFormula: this.properties["evaluatedFormula"],
             });
             this.boxcolor = null; // Zurücksetzen der Farbe bei Erfolg
+
+            this.outputs[0].color_on = adjustColor("#00FF00","#FF0000",value);
+
           } catch (err) {
             console.error("Fehler in der Formel:", err); // Fehlerbehandlung bei Problemen mit der Formel
             this.boxcolor = "red"; // Fehlerfarbmarkierung

@@ -106,9 +106,12 @@ export function _CustomGraphicsPlot() {
       // Überprüfe alle vier Eingänge
       for (let i = 0; i < 4; i++) {
         const inputData = this.getInputData(i);
+        this.inputs[i].color_off = "#000000";
+
         if (inputData) {
           const equation = inputData["rightSide"];
           const uvName = inputData["uvName"] || "x";
+          this.inputs[i].color_on = adjustColor("#00FF00","#FF0000",inputData["value"]);
 
           if (equation) {
             this.equations[i] = equation;

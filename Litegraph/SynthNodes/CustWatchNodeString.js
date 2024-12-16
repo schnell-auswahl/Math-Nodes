@@ -22,8 +22,11 @@ export function _CustWatchNodeString() {
     }
 
     onExecute() {
+      this.inputs[0].color_off = "#000000";
+
       if (this.inputs[0]) {
         this.value = this.getInputData(0); // Holt den Wert der Gleichung
+        this.inputs[0].color_on = adjustColor("#00FF00","#FF0000",this.value["value"]);
       }
 
       //console.log(this.properties.GleichungvorMathJax);
