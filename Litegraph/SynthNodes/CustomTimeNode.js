@@ -52,6 +52,9 @@ export function _CustomTimeNode() { return (
       }
       this.setOutputData(0, outputMil);
       this.setOutputData(1, outputSec);
+
+      this.outputs[0].color_off = "#000000";
+      this.outputs[0].color_on = adjustColor("#00FF00","#FF0000",this.time);
     };
 
     onDrawForeground(ctx) {

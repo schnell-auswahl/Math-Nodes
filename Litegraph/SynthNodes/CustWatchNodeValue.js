@@ -32,11 +32,7 @@ export function _CustWatchNodeValue() { return(
   
       onExecute() {
 
-   // Eingabedaten holen
-    //const inputData = this.getInputData(0);
-
-    // Ausgabe der empfangenen Eingabedaten in der Konsole
-    //console.log("Empfangene Eingabedaten:", inputData);
+        this.inputs[0].color_off = "#000000";
 
 
         if (this.getInputData(0)) {
@@ -44,6 +40,8 @@ export function _CustWatchNodeValue() { return(
           this.properties.FormulaFromInput = this.inputData["rightSide"];
           this.properties.uvValueFromInput = this.inputData["uvValue"]; // Gegen UV Value tauschen
           this.properties.uvNameFromInput = this.inputData["uvName"]; 
+
+          
 
           if ( this.oldFormula != this.properties.FormulaFromInput || this.olduvValue != this.properties.uvValueFromInput || this.olduvNameFromInput != this.properties.uvNameFromInput) {
            
@@ -58,6 +56,7 @@ export function _CustWatchNodeValue() { return(
               this.oldFormula = this.properties.FormulaFromInput;
               this.olduvValue = this.properties.uvValueFromInput;
               this.olduvNameFromInput = this.properties.uvNameFromInput;
+              this.inputs[0].color_on = adjustColor("#00FF00","#FF0000",this.properties.displayValue);
             }
             catch (err) {
               console.error("Fehler in der Formel:", err); // Fehlerbehandlung bei Problemen mit der Formel

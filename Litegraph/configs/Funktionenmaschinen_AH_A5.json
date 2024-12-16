@@ -11,7 +11,7 @@
       "order": 13,
       "mode": 0,
       "inputs": [
-        { "name": "", "type": "object", "link": 9 },
+        { "name": "", "type": "object", "link": null },
         { "name": "", "type": "object", "link": null },
         { "name": "", "type": "object", "link": null },
         { "name": "", "type": "object", "link": null }
@@ -45,7 +45,7 @@
       "order": 15,
       "mode": 0,
       "inputs": [
-        { "name": "", "type": "object", "link": 13 },
+        { "name": "", "type": "object", "link": null },
         { "name": "", "type": "object", "link": null },
         { "name": "", "type": "object", "link": null },
         { "name": "", "type": "object", "link": null }
@@ -79,7 +79,7 @@
       "order": 8,
       "mode": 0,
       "inputs": [
-        { "name": "UV", "type": "object", "link": 12, "label": "x" },
+        { "name": "UV", "type": "object", "link": null, "label": "x" },
         { "name": "", "type": "object", "link": null, "label": "" },
         { "name": "", "type": "object", "link": null, "label": "" },
         { "name": "", "type": "object", "link": null, "label": "" },
@@ -89,7 +89,7 @@
         {
           "name": "",
           "type": "object",
-          "links": [11],
+          "links": null,
           "label": "m(x)",
           "slot_index": 0
         }
@@ -120,7 +120,7 @@
       "order": 11,
       "mode": 0,
       "inputs": [
-        { "name": "UV", "type": "object", "link": 7, "label": "x" },
+        { "name": "UV", "type": "object", "link": null, "label": "x" },
         { "name": "", "type": "object", "link": null, "label": "" },
         { "name": "", "type": "object", "link": null, "label": "" },
         { "name": "", "type": "object", "link": null, "label": "" },
@@ -130,7 +130,7 @@
         {
           "name": "",
           "type": "object",
-          "links": [8],
+          "links": null,
           "label": "q(x)",
           "slot_index": 0
         }
@@ -161,7 +161,7 @@
       "order": 16,
       "mode": 0,
       "inputs": [
-        { "name": "UV", "type": "object", "link": 11, "label": "x" },
+        { "name": "UV", "type": "object", "link": null, "label": "x" },
         { "name": "", "type": "object", "link": null, "label": "" },
         { "name": "", "type": "object", "link": null, "label": "" },
         { "name": "", "type": "object", "link": null, "label": "" },
@@ -171,7 +171,7 @@
         {
           "name": "",
           "type": "object",
-          "links": [13],
+          "links": null,
           "label": "q(x)",
           "slot_index": 0
         }
@@ -202,7 +202,7 @@
       "order": 7,
       "mode": 0,
       "inputs": [
-        { "name": "UV", "type": "object", "link": 10, "label": "x" },
+        { "name": "UV", "type": "object", "link": null, "label": "x" },
         { "name": "", "type": "object", "link": null, "label": "" },
         { "name": "", "type": "object", "link": null, "label": "" },
         { "name": "", "type": "object", "link": null, "label": "" },
@@ -212,7 +212,7 @@
         {
           "name": "",
           "type": "object",
-          "links": [7],
+          "links": null,
           "label": "n(x)",
           "slot_index": 0
         }
@@ -278,7 +278,7 @@
       "order": 5,
       "mode": 0,
       "inputs": [
-        { "name": "UV", "type": "object", "link": 1, "label": "x" },
+        { "name": "UV", "type": "object", "link": null, "label": "x" },
         { "name": "", "type": "object", "link": null, "label": "" },
         { "name": "", "type": "object", "link": null, "label": "" },
         { "name": "", "type": "object", "link": null, "label": "" },
@@ -288,7 +288,7 @@
         {
           "name": "",
           "type": "object",
-          "links": [2],
+          "links": null,
           "label": "t(x)",
           "slot_index": 0
         }
@@ -319,7 +319,7 @@
       "order": 9,
       "mode": 0,
       "inputs": [
-        { "name": "UV", "type": "object", "link": 8, "label": "x" },
+        { "name": "UV", "type": "object", "link": null, "label": "x" },
         { "name": "", "type": "object", "link": null, "label": "" },
         { "name": "", "type": "object", "link": null, "label": "" },
         { "name": "", "type": "object", "link": null, "label": "" },
@@ -329,7 +329,7 @@
         {
           "name": "",
           "type": "object",
-          "links": [9],
+          "links": null,
           "label": "g(x)",
           "slot_index": 0
         }
@@ -360,7 +360,7 @@
       "order": 10,
       "mode": 0,
       "inputs": [
-        { "name": "UV", "type": "object", "link": 2, "label": "x" },
+        { "name": "UV", "type": "object", "link": null, "label": "x" },
         { "name": "", "type": "object", "link": null, "label": "" },
         { "name": "", "type": "object", "link": null, "label": "" },
         { "name": "", "type": "object", "link": null, "label": "" },
@@ -370,7 +370,7 @@
         {
           "name": "",
           "type": "object",
-          "links": [3],
+          "links": null,
           "label": "r(x)",
           "slot_index": 0
         }
@@ -404,7 +404,7 @@
         {
           "name": "UV",
           "type": "object",
-          "link": 5,
+          "link": null,
           "label": "x",
           "slot_index": 0
         },
@@ -417,7 +417,7 @@
         {
           "name": "",
           "type": "object",
-          "links": [4],
+          "links": null,
           "label": "s(x)",
           "slot_index": 0
         }
@@ -448,14 +448,14 @@
       "order": 12,
       "mode": 0,
       "inputs": [
-        { "name": "", "type": "object", "link": 3 },
-        { "name": "", "type": "object", "link": 4 }
+        { "name": "", "type": "object", "link": null },
+        { "name": "", "type": "object", "link": null }
       ],
       "outputs": [
         {
           "name": "",
           "type": "object",
-          "links": [6],
+          "links": null,
           "slot_index": 0
         }
       ],
@@ -572,7 +572,7 @@
         {
           "name": "value",
           "type": "object",
-          "links": [1, 5, 10, 12],
+          "links": null,
           "slot_index": 0
         }
       ],
@@ -590,7 +590,7 @@
       "order": 14,
       "mode": 0,
       "inputs": [
-        { "name": "", "type": "object", "link": 6 },
+        { "name": "", "type": "object", "link": null },
         { "name": "", "type": "object", "link": null },
         { "name": "", "type": "object", "link": null },
         { "name": "", "type": "object", "link": null }
