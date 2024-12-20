@@ -12,12 +12,9 @@ export function _AudioNode() {
       this.context = new (window.AudioContext || window.webkitAudioContext)();
       this.context.suspend(); // Pausiere den AudioContext direkt nach der Erstellung
       this.isPlaying = false;
-    
 
       // Füge den Eingabekanal für die Funktion hinzu
-      this.addInput("function", "object");
-
-
+      this.addInput("", "object");
 
       // Button zum Starten und Stoppen der Wiedergabe
       this.addWidget("button", "Start/Stop", "", () => {
@@ -48,14 +45,8 @@ export function _AudioNode() {
         });
     }
 
-
-
-    
     // Funktion zum Verarbeiten der Eingabedaten
     onExecute() {
-  
-      
-
       const inputData = this.getInputData(0); // Hole die Eingabedaten
 
       if (inputData) {
@@ -63,12 +54,13 @@ export function _AudioNode() {
         this.properties.FormulafromInput = inputData["rightSide"];
         const uvName = inputData["uvName"];
         const value = inputData["value"];
+        //const uvValue = inputData["uvValue"]
 
         //console.log(this.adjustColor("#FF0000","#0000FF",value));
         //console.log(value);
 
         this.inputs[0].color_off = "#000000";
-        this.inputs[0].color_on = adjustColor("#00FF00","#FF0000",value);
+        this.inputs[0].color_on = adjustColor("#00FF00", "#FF0000", value);
 
         //console.log("AudioNode: Eingabedaten erhalten:", inputData);
 
@@ -87,9 +79,12 @@ export function _AudioNode() {
       } else {
         this.stop();
       }
+
+      // TODO: Wenn animationActive = true (Muss noch weitergereicht werden) soll auch abgespielt werden, 
+      // aber ab dem eingestellten UV Value -> Dann muss auch nicht parallelisiert werden, nur,
+      // dass animationActive = true ist und und die übergebene function um uv value nach links verschoben werden.
     }
 
-    
     // Funktion zum Setzen der zu berechnenden Funktion
     setFunction(func) {
       if (this.workletNode) {

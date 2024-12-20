@@ -1,13 +1,16 @@
-window.fbNodesColor = "#D0AF8B"; //Orange
-window.srcNodesColor = "#879BCE"; //Blau
-window.opNodesColor = "#88B19B"; //Grün
-window.paramNodesColor = "#D1AE8B"; //Senfgelb
+//window.fbNodesColor = "#D0AF8B"; //Orange
+window.fbNodesColor = "#879BCE"; //Blau
+//window.srcNodesColor = "#879BCE"; //Blau
+window.srcNodesColor = "#D0AF8B"; 
+window.opNodesColor = "#88B19B"; 
+//window.paramNodesColor = "#D1AE8B"; //Senfgelb
+window.paramNodesColor = "#D7817D";
 window.bgColor1 = "#FFFFFF"; //Weiß
 window.bgColor2 = "#7C8693"; //Grau
 window.outLabelsColor = fbNodesColor; //Orange
-window.inLabelsColor = opNodesColor; //Grün
+window.inLabelsColor = srcNodesColor; //Grün
 window.paramLabelsColor = paramNodesColor; //Senfgelb
-window.textAnzeigeColor = paramNodesColor; //Gelb
+window.textAnzeigeColor = "#D0AF8B"; //Orange
 window.canvasbgColor = "#232744"; //Dunkelblau
 
 // Arrays für die beiden Kategorien

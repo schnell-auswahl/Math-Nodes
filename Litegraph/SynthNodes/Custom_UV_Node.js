@@ -11,40 +11,85 @@ export function _uvNode() {
         this.properties = { value: 1.0, rightSide: "x", widgetVisible: true};
         this.numberWidget = this.addWidget("number", "Wert", 1, "value", { precision: 2 });
         this.nameWidget = this.addWidget("text", "Unabhängige", "x", "rightSide");
+
+        // Animationskram
+        this.lastbtpress = 0;
+        this.outputValue = 0;
+        this.animationActive = false;
+        this.addWidget(
+          "button",          // Typ des Widgets
+          "Animieren",             // Beschriftung auf dem Button
+          null,              // Kein Standardwert notwendig
+          () => {            // Callback-Funktion für den Button
+            //console.log("Button gedrückt!");  // Aktion, die bei einem Klick auf den Button ausgeführt wird
+            this.lastbtpress = this.graph.globaltime;       // Ruft eine Methode auf, die die Funktion ausführt
+
+            if (this.animationActive == true) {
+              this.animationActive = false;
+              //console.log(this.animationActive);
+            } else {
+              this.animationActive = true;
+              //console.log(this.animationActive);
+            }
+            
+
+          }
+        );
+
+
+
         this.widgets_up = true;
         //this.color = "#4C7468"; //Titelfarbe 
         //this.bgcolor = "#9FA8B4"; //Hintergrundfarbe
          this.shape = LiteGraph.ROUND_SHAPE; // Runde Ecken
-         this.size = [180, 60];
+         this.size = [180, 80];
          
       }
 
       onExecute() {
+       
         this.outputs[0].color_off = "#000000";
         if (this.properties.widgetVisible == false) {
           this.widgets = []; // Alle Widgets entfernen
           }
         // Hier wird die Rundung wie gewünscht angewendet
         const roundedValue = Math.round((parseFloat(this.properties["value"]) + Number.EPSILON) * 100) / 100;
+        const animatedValue = Math.round((parseFloat(this.graph.globaltime - this.lastbtpress+roundedValue) + Number.EPSILON) * 100) / 100;// Zeitzurücksetzen + Rundung
+
+        if (this.animationActive) {
+        this.outputValue = animatedValue;
+        console.log(this.outputValue);
+        } else {
+          this.outputValue = roundedValue;
+        }
 
         var output = {
-          value: roundedValue,
-          uvValue: roundedValue,
+          value: this.outputValue,
+          uvValue: this.outputValue,
           rightSide: this.properties["rightSide"],
           leftSide: this.properties["rightSide"],
           uvName: this.properties["rightSide"],
           isNumberNode: "UV",
+          toToolTip: () => {
+          
+            // Tooltip zusammensetzen
+            const tooltip = `${this.properties["rightSide"]} = ${Math.floor(this.outputValue * 10) / 10}`;
+            return tooltip;
+        }
           // funcList: ""
         }
         this.setOutputData(0, output);
         this.outputs[0].color_off = "#000000";
-        this.outputs[0].color_on = adjustColor("#00FF00","#FF0000",roundedValue);
+        this.outputs[0].color_on = adjustColor("#00FF00","#FF0000",this.outputValue);
       }
+
 
       getTitle() {
         let title = "Unabhängige"
-        if (this.properties["rightSide"]) {
+        if (this.properties["rightSide"] && !this.animationActive) {
           title = title + " " + this.properties["rightSide"];
+        } else if (this.properties["rightSide"] && this.animationActive) {
+          title = this.properties["rightSide"] + " = "  + Math.floor(this.outputValue * 10) / 10;
         }
         return title;
       }

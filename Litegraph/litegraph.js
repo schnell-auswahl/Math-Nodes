@@ -10219,7 +10219,7 @@ LGraphNode.prototype.executeAction = function(action)
 					{
 						var delta = x < 40 ? -1 : x > widget_width - 40 ? 1 : 0;
 						if (event.click_time < 200 && delta == 0) {
-							this.prompt("Value",w.value,function(v) {
+							this.prompt("Eingabe",w.value,function(v) {
 									// check if v is a valid equation or a number
 									  if (/^[0-9+\-*/()\s]+|\d+\.\d+$/.test(v)) {
 										try {//solve the equation if possible
@@ -10253,10 +10253,10 @@ LGraphNode.prototype.executeAction = function(action)
 				case "string":
 				case "text":
 					if (event.type == LiteGraph.pointerevents_method+"down") {
-						this.prompt("Value",w.value,function(v) {
+						this.prompt("Eingabe",w.value,function(v) {
 								inner_value_change(this, v);
 							}.bind(w),
-							event,w.options ? w.options.multiline : false );
+							event,w.options ? w.options.multiline : true );
 					}
 					break;
 				default:
@@ -11396,11 +11396,22 @@ LGraphNode.prototype.executeAction = function(action)
 
         var dialog = document.createElement("div");
         dialog.is_modified = false;
+        dialog.style.backgroundColor = "#232744";
+        //dialog.style.border = "2px solid white"; /* Dünner weißer Rand */
+        dialog.style.borderRadius = "1px"; /* Abgerundete Ecken */
+       
+        dialog.style.textTransform = "uppercase";
+        dialog.style.fontWeight = "600";
+        dialog.style.fontSize = "0.8em";
+        dialog.style.letterSpacing = "0.2em";
+        dialog.style.padding = "5px";
+        //dialog.style.color = "#ffffff";
         dialog.className = "graphdialog rounded";
+        
         if(multiline)
-	        dialog.innerHTML = "<span class='name'></span> <textarea autofocus class='value'></textarea><button class='rounded'>OK</button>";
+	        dialog.innerHTML = "<span class='name'></span> <textarea autofocus class='value'></textarea><button class='button primary small'>OK</button>";
 		else
-        	dialog.innerHTML = "<span class='name'></span> <input autofocus type='text' class='value'/><button class='rounded'>OK</button>";
+        	dialog.innerHTML = "<span class='name'></span> <input autofocus type='text' class='value'/><button class='button primary small'>OK</button>";
         dialog.close = function() {
             that.prompt_box = null;
             if (dialog.parentNode) {

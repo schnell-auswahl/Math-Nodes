@@ -145,7 +145,7 @@
       "flags": {},
       "order": 5,
       "mode": 0,
-      "inputs": [{ "name": "function", "type": "object", "link": 15 }],
+      "inputs": [{ "name": "", "type": "object", "link": 15 }],
       "title": "Audio",
       "properties": {
         "FormulafromInput": " Math.sin (1000 * x)"
