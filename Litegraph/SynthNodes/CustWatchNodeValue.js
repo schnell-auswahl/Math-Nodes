@@ -10,6 +10,8 @@ export function _CustWatchNodeValue() { return(
         this.addInput("","object");
         //this.addInput("UV", "object");
         this.inputData = 0;
+        this.minWidthX = 180;
+        this.minWidthY = 30;
         this.title = "Wert";
         this.desc = "Show value of input";
         
@@ -75,7 +77,7 @@ export function _CustWatchNodeValue() { return(
         return this.title;
       };
   
-      toString = function(o) {
+      roundtoString = function(o) {
         if (o == null) {
             return "";
         } 
@@ -85,7 +87,7 @@ export function _CustWatchNodeValue() { return(
          else {
             var num = o;
             num = Math.round((num + Number.EPSILON) * 100) / 100;
-            return num;
+            return num.toString();
         }
       };
   
@@ -107,6 +109,78 @@ export function _CustWatchNodeValue() { return(
         const width = labelWidth; // Breite der Basis (linke Seite)
         const height = labelHeight; // Höhe des Trichters (von Basis bis Spitze)
 
+
+        //Draw text:
+
+        this.displayString = this.roundtoString(this.properties.displayValue);
+        //this.inputs[0].label = displayString;
+        // const lableLength = this.displayString.length;
+        // //console.log(displayString);
+        // //console.log(lableLength);
+        // const minWidthX = 100; // Standardbreite des Knotens
+        // const extraWidthPerChar = 8; // Zusätzliche Breite pro Zeichen über der Standardlänge
+
+        // // Berechne die neue Breite, wenn der Titel länger ist als 20 Zeichen
+      
+
+        ctx.font = "14px Arial";
+        ctx.textAlign = "left";
+        const textinfo = ctx.measureText(this.displayString);
+        console.log(textinfo.width);
+  
+        //Setze die Knotengröße neu
+        if (this.getInputData(0) && textinfo.width + 4 * inputPosX > this.minWidthX ){
+          this.size = [textinfo.width + 4 * inputPosX , this.size[1]];
+        } else 
+        this.size[0] = this.minWidthX;
+
+      
+    const lineWidth = this.size[0]; // Breite der Node
+
+    // Zeilenbereiche und zugehörige Farben
+    const ranges = [10, 100, 1000, 100000, 10000000]; // Bereichsgrenzen
+    const colors = ["#FFCCCC", "#FF9999", "#FF6666", "#FF3333", "#FF1111"]; // Farben pro Bereich
+
+    // Hintergrund einfärben
+    let remainingValue = this.properties.displayValue;
+    
+
+    for (let i = 0; i < ranges.length; i++) {
+        const rangeStart = i === 0 ? 0 : ranges[i - 1];
+        const rangeEnd = ranges[i];
+        const rangeHeight = NODE_SLOT_HEIGHT; // Höhe einer Zeile
+        const topY =  i * rangeHeight;
+
+        // Berechnung des Anteils in der aktuellen Zeile
+        let fillRatio = 0;
+        if (this.properties.displayValue > rangeStart) {
+            const effectiveValue = Math.min(this.properties.displayValue, rangeEnd);
+            fillRatio = (effectiveValue - rangeStart) / (rangeEnd - rangeStart);
+            //remainingValue -= (rangeEnd - rangeStart);
+            if (i * NODE_SLOT_HEIGHT > this.minWidthY){
+            this.size[1] = (i+1) * NODE_SLOT_HEIGHT +5 ;
+            }
+            
+        }
+
+        // Zeichne den eingefärbten Bereich der Zeile
+        ctx.beginPath();
+        ctx.rect(0, topY, lineWidth * fillRatio, rangeHeight);
+        ctx.fillStyle = colors[i];
+        ctx.fill();
+        ctx.closePath();
+    }
+
+// Text nach Hintergrund schreiben, aber vorher berechnen
+ctx.fillStyle = "#FFFFFF";    
+ctx.fillText(
+      this.displayString,
+      2 * inputPosX,
+      LiteGraph.NODE_SLOT_HEIGHT
+      //(this.size[1] + LiteGraph.NODE_TITLE_HEIGHT) * 0.5
+      );
+
+
         // Beginne mit dem Zeichnen des Dreiecks
         ctx.beginPath();
 
@@ -123,21 +197,7 @@ export function _CustWatchNodeValue() { return(
         ctx.fillStyle = inLabelsColor;
         ctx.fill();
 
-        let displayString = this.toString(this.properties.displayValue).toString();
-        this.inputs[0].label = displayString;
-        const lableLength = displayString.length;
-        //console.log(displayString);
-        //console.log(lableLength);
-        const minWidth = 100; // Standardbreite des Knotens
-        const extraWidthPerChar = 8; // Zusätzliche Breite pro Zeichen über der Standardlänge
-
-        // Berechne die neue Breite, wenn der Titel länger ist als 20 Zeichen
-        const newWidth = lableLength > 10 ? minWidth + (lableLength - 10) * extraWidthPerChar : minWidth;
-
-        //Setze die Knotengröße neu
-        if (this.size[0] < newWidth){
-          this.size = [newWidth, this.size[1]];
-        }
+        
 
       };
     }

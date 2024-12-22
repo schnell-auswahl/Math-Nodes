@@ -228,7 +228,7 @@ export function _FunctionNode() {
         }
       }
 
-      //console.log("Maximale Länge der Labels:", inputLabelmaxLength);
+      ////console.log("Maximale Länge der Labels:", inputLabelmaxLength);
 
       // Setze das Label des Ausgangs basierend auf der Funktionsgleichung
       if (
@@ -398,7 +398,7 @@ export function _FunctionNode() {
           // Ersetze Parameter und UV in der Formel durch Werte oder Ausdrücke
           for (let i = 0; i < 4; i++) {
           //paramNames.forEach((paramName, index) => {
-            console.log(paramNames[i] +" Index "+ i)
+            //console.log(paramNames[i] +" Index "+ i)
             let escapedParamName = paramNames[i].replace(
               /[.*+?^${}()|[\]\\]/g,
               "\\$&"
@@ -409,13 +409,13 @@ export function _FunctionNode() {
               let rightSideFromInput = this.getInputData(i + 1)[
                 "rightSide" 
               ];
-              console.log(this.title +"indes "+ i + "rightSidefrominput" + rightSideFromInput)
+              //console.log(this.title +"indes "+ i + "rightSidefrominput" + rightSideFromInput)
 
               evaluatedFormula = evaluatedFormula.replace(
                 new RegExp(escapedParamName, "g"),
                 "(" + rightSideFromInput + ")"
               );
-              console.log(this.title + "Formula: " + evaluatedFormula)
+              //console.log(this.title + "Formula: " + evaluatedFormula)
             } else if (paramNames[i]) {
               if (paramValues[i] > 0) {
                 evaluatedFormula = evaluatedFormula.replace(
@@ -491,7 +491,7 @@ export function _FunctionNode() {
             this.outputs[0].color_on = adjustColor("#00FF00","#FF0000",value);
 
           } catch (err) {
-            console.error("Fehler in der Formel:", err); // Fehlerbehandlung bei Problemen mit der Formel
+            //console.error("Fehler in der Formel:", err); // Fehlerbehandlung bei Problemen mit der Formel
             this.boxcolor = "red"; // Fehlerfarbmarkierung
             //this.setOutputData(0, { uvValue: inputData["uvValue"], value: null, leftSide: this.properties["leftSide"], rightSide: finalEquation, uvName: this.properties.uvName });
           }

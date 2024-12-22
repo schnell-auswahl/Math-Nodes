@@ -95,7 +95,7 @@
       "order": 9,
       "mode": 0,
       "inputs": [
-        { "name": "", "type": "object", "link": 9, "label": "1600.23" }
+        { "name": "", "type": "object", "link": 9, "label": "" }
       ],
       "title": "Wert",
       "properties": {
