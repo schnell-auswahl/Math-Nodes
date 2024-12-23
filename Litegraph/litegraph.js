@@ -13533,6 +13533,35 @@ LGraphNode.prototype.executeAction = function(action)
         }
     };
 
+    LGraphCanvas.prototype.goFullscreen = function() {
+        const canvasContainer = this.canvas.parentNode; // Der Container des Canvas
+        if (!canvasContainer) {
+            console.error("Canvas container not found.");
+            return;
+        }
+    
+        if (canvasContainer.requestFullscreen) {
+            canvasContainer.requestFullscreen();
+        } else if (canvasContainer.mozRequestFullScreen) {
+            canvasContainer.mozRequestFullScreen();
+        } else if (canvasContainer.webkitRequestFullscreen) {
+            canvasContainer.webkitRequestFullscreen(Element.ALLOW_KEYBOARD_INPUT);
+        } else if (canvasContainer.msRequestFullscreen) {
+            canvasContainer.msRequestFullscreen();
+        } else {
+            throw "Fullscreen not supported";
+        }
+    
+        const self = this;
+        setTimeout(function() {
+            self.resize(); // Aktualisiere die Größe des Canvas im Vollbildmodus
+        }, 100);
+    };
+
+
+
+
+
     //API *************************************************
     function compareObjects(a, b) {
         for (var i in a) {

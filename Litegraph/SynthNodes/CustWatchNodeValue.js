@@ -1,7 +1,8 @@
 export function _CustWatchNodeValue() { return(
     class CustWatchNodeValue {
       constructor() {
-        this.size = [100, 30];
+        
+        
         //this.color = "#CE8A53"; //Titelfarbe
         this.color = fbNodesColor;
         //this.bgcolor = "#FFFFFF"; //Hintergrundfarbe
@@ -14,6 +15,8 @@ export function _CustWatchNodeValue() { return(
         this.minWidthY = 30;
         this.title = "Wert";
         this.desc = "Show value of input";
+
+        this.size = [this.minWidthX, (5 * LiteGraph.NODE_SLOT_HEIGHT) + 5]; 
         
         this.properties = {
           FormulaFromInput: "",   
@@ -28,13 +31,15 @@ export function _CustWatchNodeValue() { return(
         this.olduvValue = 0;
         this.olduvNameFromInput = "";
 
+        this.inputs[0].color_off = "#000000";
        
 
       }
   
       onExecute() {
+        this.size[1] = (5 * LiteGraph.NODE_SLOT_HEIGHT) + 5
 
-        this.inputs[0].color_off = "#000000";
+        
 
 
         if (this.getInputData(0)) {
@@ -67,6 +72,8 @@ export function _CustWatchNodeValue() { return(
 
 
           }  
+        } else {
+          this.properties.displayValue = 0;
         }
       };
   
@@ -123,60 +130,101 @@ export function _CustWatchNodeValue() { return(
         // // Berechne die neue Breite, wenn der Titel länger ist als 20 Zeichen
       
 
-        ctx.font = "14px Arial";
+        ctx.font = "16px Arial";;
         ctx.textAlign = "left";
         const textinfo = ctx.measureText(this.displayString);
-        console.log(textinfo.width);
+        //console.log(textinfo.width);
   
         //Setze die Knotengröße neu
-        if (this.getInputData(0) && textinfo.width + 4 * inputPosX > this.minWidthX ){
-          this.size = [textinfo.width + 4 * inputPosX , this.size[1]];
-        } else 
+        if (this.getInputData(0) && textinfo.width + 4 * inputPosX > this.size[0]){
+          this.size[0] = textinfo.width + 4 * inputPosX;
+        } else if (!this.getInputData(0)){
         this.size[0] = this.minWidthX;
+      } 
 
+      const lineWidth = this.size[0]; // Breite der Node
+
+      // Zeilenbereiche und zugehörige Farben
+      const ranges = [10, 100, 1000, 10000, 100000, 1000000, 10000000, 100000000, 1000000000, 10000000000]; // Bereichsgrenzen
+      const colors = [
+          "#CB857F", // Originalfarbe
+          "#B47470", // Etwas dunkler
+          "#9D635F", // Weiter dunkler
+          "#86524E", // Noch dunkler
+          "#6F413E", // Dunkler
+          "#59312F", // Sehr dunkler
+          "#43201F", // Fast dunkelbraun
+          "#2D100F", // Sehr dunkel
+          "#170807", // Fast schwarz mit rotem Stich
+          "#000000"  // Schwarz
+      ];
       
-    const lineWidth = this.size[0]; // Breite der Node
-
-    // Zeilenbereiche und zugehörige Farben
-    const ranges = [10, 100, 1000, 100000, 10000000]; // Bereichsgrenzen
-    const colors = ["#FFCCCC", "#FF9999", "#FF6666", "#FF3333", "#FF1111"]; // Farben pro Bereich
-
-    // Hintergrund einfärben
-    let remainingValue = this.properties.displayValue;
-    
-
-    for (let i = 0; i < ranges.length; i++) {
-        const rangeStart = i === 0 ? 0 : ranges[i - 1];
-        const rangeEnd = ranges[i];
-        const rangeHeight = NODE_SLOT_HEIGHT; // Höhe einer Zeile
-        const topY =  i * rangeHeight;
-
-        // Berechnung des Anteils in der aktuellen Zeile
-        let fillRatio = 0;
-        if (this.properties.displayValue > rangeStart) {
-            const effectiveValue = Math.min(this.properties.displayValue, rangeEnd);
-            fillRatio = (effectiveValue - rangeStart) / (rangeEnd - rangeStart);
-            //remainingValue -= (rangeEnd - rangeStart);
-            if (i * NODE_SLOT_HEIGHT > this.minWidthY){
-            this.size[1] = (i+1) * NODE_SLOT_HEIGHT +5 ;
-            }
-            
-        }
-
-        // Zeichne den eingefärbten Bereich der Zeile
-        ctx.beginPath();
-        ctx.rect(0, topY, lineWidth * fillRatio, rangeHeight);
-        ctx.fillStyle = colors[i];
-        ctx.fill();
-        ctx.closePath();
-    }
-
+      const colorsneg = [
+          "#7C8AB6", // Etwas dunkler
+          "#6D7BA2", // Weiter dunkler
+          "#5E6B8E", // Noch dunkler
+          "#4F5C7A", // Dunkler
+          "#404D66", // Sehr dunkler
+          "#313D52", // Noch dunkler
+          "#222E3E", // Fast schwarz mit blauem Stich
+          "#131F2A", // Sehr dunkelblau
+          "#0B141D", // Sehr dunkelblau
+          "#000000"  // Schwarz
+      ];
+      
+      // Hintergrund einfärben
+      let remainingValue = this.properties.displayValue;
+      
+      // Iteration über positive und negative Bereiche
+      for (let i = 0; i < ranges.length; i++) {
+          const rangeStart = 0; // Start des Bereichs (immer 0 für diese Logik)
+          const rangeEnd = ranges[i];
+          const rangeHeight = NODE_SLOT_HEIGHT; // Höhe einer Zeile
+          let topY = i * rangeHeight;
+      
+          if (i > 4) {
+              topY = 4 * rangeHeight; // Ab dem vierten Balken wird übergezeichnet
+          }
+      
+          // Berechnung für positive Werte
+          if (this.properties.displayValue > 0) {
+              let fillRatio = 0;
+              if (this.properties.displayValue > rangeStart) {
+                  const effectiveValue = Math.min(this.properties.displayValue, rangeEnd);
+                  fillRatio = (effectiveValue - rangeStart) / (rangeEnd - rangeStart);
+              }
+      
+              // Zeichne den eingefärbten Bereich der Zeile (von links nach rechts)
+              ctx.beginPath();
+              ctx.rect(0, topY, lineWidth * fillRatio, rangeHeight);
+              ctx.fillStyle = colors[i];
+              ctx.fill();
+              ctx.closePath();
+          }
+      
+          // Berechnung für negative Werte
+          if (this.properties.displayValue < 0) {
+              let fillRatio = 0;
+              const negativeValue = Math.abs(this.properties.displayValue); // Absolutwert für negative Logik
+              if (negativeValue > rangeStart) {
+                  const effectiveValue = Math.min(negativeValue, rangeEnd);
+                  fillRatio = (effectiveValue - rangeStart) / (rangeEnd - rangeStart);
+              }
+      
+              // Zeichne den eingefärbten Bereich der Zeile (von rechts nach links)
+              ctx.beginPath();
+              ctx.rect(lineWidth * (1 - fillRatio), topY, lineWidth * fillRatio, rangeHeight);
+              ctx.fillStyle = colorsneg[i];
+              ctx.fill();
+              ctx.closePath();
+          }
+      }
 // Text nach Hintergrund schreiben, aber vorher berechnen
 ctx.fillStyle = "#FFFFFF";    
 ctx.fillText(
       this.displayString,
-      2 * inputPosX,
-      LiteGraph.NODE_SLOT_HEIGHT
+      3 * inputPosX,
+      2 * LiteGraph.NODE_SLOT_HEIGHT - 5
       //(this.size[1] + LiteGraph.NODE_TITLE_HEIGHT) * 0.5
       );
 

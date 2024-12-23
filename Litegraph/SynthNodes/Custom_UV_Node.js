@@ -58,7 +58,7 @@ export function _uvNode() {
 
         if (this.animationActive) {
         this.outputValue = animatedValue;
-        console.log(this.outputValue);
+        //console.log(this.outputValue);
         } else {
           this.outputValue = roundedValue;
         }
@@ -96,7 +96,7 @@ export function _uvNode() {
 
       setValue(v) {
         this.setProperty("value", v);
-        console.log("in setValue");
+        //console.log("in setValue");
       }
 
       onDrawForeground(ctx) {
