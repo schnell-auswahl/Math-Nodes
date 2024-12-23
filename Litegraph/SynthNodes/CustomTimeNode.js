@@ -41,6 +41,12 @@ export function _CustomTimeNode() { return (
         uvName: this.properties["rightSide"],
         uvValue: this.time,
         isNumberNode: "UV",
+        toToolTip: () => {
+          
+          // Tooltip zusammensetzen
+          const tooltip = `${this.properties["leftSide"]} = ${this.time}`;
+          return tooltip;
+      }
       }
       var outputMil = {
         value: this.time * 1000,
@@ -49,6 +55,12 @@ export function _CustomTimeNode() { return (
         uvName: this.properties["rightSide"],
         uvValue: this.time * 1000,
         isNumberNode: "UV",
+        toToolTip: () => {
+          
+          // Tooltip zusammensetzen
+          const tooltip = `${this.properties["leftSide"]} = ${this.time*1000}`;
+          return tooltip;
+      }
       }
       this.setOutputData(0, outputMil);
       this.setOutputData(1, outputSec);

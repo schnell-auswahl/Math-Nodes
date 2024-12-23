@@ -1,13 +1,16 @@
-window.fbNodesColor = "#D0AF8B"; //Orange
-window.srcNodesColor = "#879BCE"; //Blau
-window.opNodesColor = "#88B19B"; //Grün
-window.paramNodesColor = "#D1AE8B"; //Senfgelb
+//window.fbNodesColor = "#D0AF8B"; //Orange
+window.fbNodesColor = "#879BCE"; //Blau
+//window.srcNodesColor = "#879BCE"; //Blau
+window.srcNodesColor = "#D0AF8B"; 
+window.opNodesColor = "#88B19B"; 
+//window.paramNodesColor = "#D1AE8B"; //Senfgelb
+window.paramNodesColor = "#D7817D";
 window.bgColor1 = "#FFFFFF"; //Weiß
 window.bgColor2 = "#7C8693"; //Grau
 window.outLabelsColor = fbNodesColor; //Orange
-window.inLabelsColor = opNodesColor; //Grün
+window.inLabelsColor = srcNodesColor; //Grün
 window.paramLabelsColor = paramNodesColor; //Senfgelb
-window.textAnzeigeColor = paramNodesColor; //Gelb
+window.textAnzeigeColor = "#D0AF8B"; //Orange
 window.canvasbgColor = "#232744"; //Dunkelblau
 
 // Arrays für die beiden Kategorien
@@ -261,21 +264,22 @@ export function createGraphInstance(canvasId) {
         <button id="menu-toggle" class="button primary small">Menü</button>
         <nav id="menu-content" style="display: none; margin-top: 10px;">
             <ul class="links">
-               <button onclick="saveGraphToFile('${canvasId}')" class="button fit small" style="margin-bottom: 10px;">speichern</button>
-                <button onclick="loadGraphFromFile('${canvasId}')" class="button fit small" style="margin-bottom: 10px;">laden</button>
+            <button id="fullscreen" onclick="goFullscreen('${canvasId}'); " class="button fit small" style="margin-bottom: 10px;">Vollbild</button>
+               <button id="save" onclick="saveGraphToFile('${canvasId}')" class="button fit small" style="margin-bottom: 10px;">speichern</button>
+                <button id="load" onclick="loadGraphFromFile('${canvasId}')" class="button fit small" style="margin-bottom: 10px;">laden</button>
                 <button onclick="clearGraph('${canvasId}')" class="button primary fit small" style="margin-bottom: 10px;">Alles Löschen</button>
                 <button id="newNode${canvasId}" class="button fit small" style="margin-bottom: 10px;">Neue Maschine</button>
-                    <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 10px;">
-                        <button id="zoomOut${canvasId}" class="button small" >Zoom -</button>
-                        <span id="zoomValue${canvasId}" style="font-size: 0.9em; font-weight: bold; ">1.0</span>
-                        <button id="zoomIn${canvasId}" class="button small" >Zoom +</button>
-                    </div>
-                <button	onclick="
+                    <div style="display: flex; align-items: center; justify-content: space-between; width: 100%; margin-bottom: 10px;">
+    <button id="zoomOut${canvasId}" class="button small" style="flex: 1; text-align: center;">Zoom -</button>
+    <span id="zoomValue${canvasId}" style="flex: 1; text-align: center; font-size: 0.9em; font-weight: bold;">1.0</span>
+    <button id="zoomIn${canvasId}" class="button small" style="flex: 1; text-align: center;">Zoom +</button>
+</div>
+                <button	id="position" onclick="
                 for (let i=0; i<5;i++){
                 autoPositionNodes('${canvasId}');
                 }
                 "class="button fit small" style="margin-bottom: 10px;">Maschinen sortieren</button>
-                <button onclick="delNode('${canvasId}')"  class="button fit small">Maschine löschen</button>
+                <button id="delnode" onclick="delNode('${canvasId}')"  class="button fit small">Maschine löschen</button>
                 
             </ul>
         </nav>       
@@ -297,14 +301,38 @@ export function createGraphInstance(canvasId) {
   menu.style.width = collapsedWidth;
 
 
-  // Füge Event Listener hinzu
-  menuToggle.addEventListener("click", () => {
-    const isExpanded = menuContent.style.display === "block";
+// Funktion zum Umschalten des Menüs
+function toggleMenu(isExpanded) {
+  menuContent.style.display = isExpanded ? "none" : "block";
+  menu.style.width = isExpanded ? collapsedWidth : expandedWidth;
+}
 
-    // Wechsel zwischen Zuständen
-    menuContent.style.display = isExpanded ? "none" : "block";
-    menu.style.width = isExpanded ? collapsedWidth : expandedWidth; // Breite entsprechend ändern
-  });
+// // Event Listener für den Menü-Button
+// menuToggle.addEventListener("click", () => {
+//   const isExpanded = menuContent.style.display === "block";
+//   toggleMenu(isExpanded); // Menü umschalten
+// });
+
+// Liste aller Buttons, die das Menü schließen sollen
+const menubuttons = [
+  menuToggle, // Beispiel: Menü-Umschalt-Button
+  document.getElementById(`fullscreen`),
+  document.getElementById(`save`),
+  document.getElementById(`load`),
+  document.getElementById(`position`),
+  document.getElementById(`delnode`),
+  document.getElementById("CloseNewNodeMenu")
+  ];
+
+// Füge jedem Button einen Event-Listener hinzu
+menubuttons.forEach((button) => {
+  if (button) {
+    button.addEventListener("click", () => {
+      const isExpanded = menuContent.style.display === "block";
+      toggleMenu(isExpanded); // Menü umschalten
+    });
+  }
+});
 
   // Zoom from canvas loading
   const zoomLevel = parseFloat(canvasElement.getAttribute("data-zoom")) || 1.0; // Default zoom is 1.0
@@ -400,6 +428,7 @@ export function createGraphInstance(canvasId) {
         button.textContent = node.name.replace(/_/g, " ");
         button.class = "links";
         button.style.margin = "5px";
+        button.className = "machine-button"; // Klasse für Stil hinzufügen
         button.style.listStyle = "none";
         button.style.textTransform = "uppercase";
         button.style.fontWeight = "600";
@@ -407,6 +436,32 @@ export function createGraphInstance(canvasId) {
         button.style.letterSpacing = "0.25em";
         button.style.borderBottom = "1px solid #31344F"; // Dünne Linie
         button.style.paddingBottom = "10px"; // Abstand vom Text zur Linie
+        button.style.transition = "background-color 0.3s, transform 0.1s"; // Smooth transitions
+
+// Standard-Stil
+button.style.backgroundColor = "transparent";
+button.style.color = "#ffffff";
+
+// Hover-Effekt
+button.addEventListener("mouseover", () => {
+  button.style.backgroundColor = "rgba(255, 255, 255, 0.1)"; // Leicht hervorgehoben
+});
+
+// Entferne Hover-Effekt
+button.addEventListener("mouseout", () => {
+  button.style.backgroundColor = "transparent"; // Zurücksetzen
+});
+
+// Klick-Effekt
+button.addEventListener("mousedown", () => {
+  button.style.backgroundColor = "rgba(255, 255, 255, 0.3)"; // Stärker hervorgehoben
+  button.style.transform = "scale(0.98)"; // Leichte Skalierung
+});
+
+button.addEventListener("mouseup", () => {
+  button.style.backgroundColor = "rgba(255, 255, 255, 0.1)"; // Zurück zur Hover-Farbe
+  button.style.transform = "scale(1)"; // Skalierung zurücksetzen
+});
         // Klick-Event für den Button
         button.addEventListener("click", () => {
           const newNode = LiteGraph.createNode(node.type);
@@ -415,7 +470,7 @@ export function createGraphInstance(canvasId) {
           newNode.pos = [50, canvasElement.height - 200];
           graph.add(newNode);
           //console.log(`Node hinzugefügt: ${uniqueName}`); // Aber bestätigung einbauen
-          document.body.removeChild(overlay); // Menü schließen <-Das funktioniert noch nicht
+          //document.body.removeChild(overlay); // Menü schließen <-Das funktioniert noch nicht
         });
 
         parent.appendChild(button);
@@ -433,6 +488,7 @@ export function createGraphInstance(canvasId) {
     // Schließen-Button für das Menü
     const closeButton = document.createElement("button");
     closeButton.textContent = "X";
+    closeButton.id = "CloseNewNodeMenu";
     closeButton.className = "button primary small";
     closeButton.style.position = "absolute"; // Absolut positionieren
     closeButton.style.top = "10px"; // Abstand vom oberen Rand

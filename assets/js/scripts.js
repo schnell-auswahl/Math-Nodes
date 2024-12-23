@@ -46,7 +46,58 @@ function delNode(canvasId) {
 
 // }
 
+function goFullscreen(canvasId) {
+    const canvas = document.getElementById(canvasId); // Canvas über ID holen
+    if (!canvas) {
+        alert(`Canvas mit ID "${canvasId}" nicht gefunden.`);
+        return;
+    }
 
+    const graph = canvas.graph; // LGraph-Objekt vom Canvas
+    if (!graph) {
+        alert(`Kein Graph mit Canvas-ID "${canvasId}" gefunden.`);
+        return;
+    }
+
+    const LGcanvas = graph.list_of_graphcanvas[0];
+    if (!LGcanvas) {
+        console.error("Kein gültiges LGraphCanvas-Objekt gefunden.");
+        return;
+    }
+
+    // Überprüfen, ob sich der Canvas im Vollbildmodus befindet
+    if (document.fullscreenElement === canvas.parentNode) {
+        // Vollbildmodus verlassen
+        document.exitFullscreen()
+            .then(() => {
+                setTimeout(() => {
+                LGcanvas.resize(); // Größe zurücksetzen
+                for (let i =0 ; i<3; i++){
+                adjustNodePositions(canvasId);
+                  }
+                }, 100); // Verzögerung von 100 ms
+            })
+            .catch((err) => {
+                console.error("Fehler beim Beenden des Vollbildmodus:", err);
+            });
+    } else {
+        // In den Vollbildmodus wechseln
+        canvas.parentNode.requestFullscreen()
+            .then(() => {
+                //console.log("Vollbildmodus gestartet.");
+                setTimeout(() => {
+                    LGcanvas.resize(); // Canvas-Größe anpassen
+                    for (let i = 0; i < 3; i++) {
+                        adjustNodePositions(canvasId); // Node-Positionen anpassen
+                    }
+                }, 100); // Verzögerung von 100 ms
+                
+            })
+            .catch((err) => {
+                console.error("Fehler beim Starten des Vollbildmodus:", err);
+            });
+    }
+}
 
 // Graph speichern in datei
 function saveGraphToFile(canvasId) {
@@ -272,7 +323,7 @@ function adjustNodePositions(canvasId) {
         return;
     }
     const zoomFactor = canvas.zoom|| 1;
-    console.log(zoomFactor);
+    //console.log(zoomFactor);
     const canvasWidth = canvas.width / zoomFactor;  
     const canvasHeight = canvas.height / zoomFactor;
     const margin = 20; // Randgröße
