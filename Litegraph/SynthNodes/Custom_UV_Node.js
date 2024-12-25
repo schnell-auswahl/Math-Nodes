@@ -43,12 +43,12 @@ export function _uvNode() {
         //this.bgcolor = "#9FA8B4"; //Hintergrundfarbe
          this.shape = LiteGraph.ROUND_SHAPE; // Runde Ecken
          this.size = [180, 80];
-         
+         this.outputs[0].color_off = "#000000";
       }
 
       onExecute() {
        
-        this.outputs[0].color_off = "#000000";
+        
         if (this.properties.widgetVisible == false) {
           this.widgets = []; // Alle Widgets entfernen
           }
@@ -70,6 +70,7 @@ export function _uvNode() {
           leftSide: this.properties["rightSide"],
           uvName: this.properties["rightSide"],
           isNumberNode: "UV",
+          animationOn: this.animationActive,
           toToolTip: () => {
           
             // Tooltip zusammensetzen
@@ -79,7 +80,7 @@ export function _uvNode() {
           // funcList: ""
         }
         this.setOutputData(0, output);
-        this.outputs[0].color_off = "#000000";
+        //this.outputs[0].color_off = "#000000";
         this.outputs[0].color_on = adjustColor("#00FF00","#FF0000",this.outputValue);
       }
 
