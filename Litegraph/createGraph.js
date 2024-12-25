@@ -265,6 +265,7 @@ export function createGraphInstance(canvasId) {
         <nav id="menu-content" style="display: none; margin-top: 10px;">
             <ul class="links">
             <button id="fullscreen" onclick="goFullscreen('${canvasId}'); " class="button fit small" style="margin-bottom: 10px;">Vollbild</button>
+            <button id="saveaspic" onclick="LightgraphtoImage('${canvasId}')" class="button fit small" style="margin-bottom: 10px;">Als Bild speichern</button>
                <button id="save" onclick="saveGraphToFile('${canvasId}')" class="button fit small" style="margin-bottom: 10px;">speichern</button>
                 <button id="load" onclick="loadGraphFromFile('${canvasId}')" class="button fit small" style="margin-bottom: 10px;">laden</button>
                 <button onclick="clearGraph('${canvasId}')" class="button primary fit small" style="margin-bottom: 10px;">Alles Löschen</button>
@@ -317,6 +318,7 @@ function toggleMenu(isExpanded) {
 const menubuttons = [
   menuToggle, // Beispiel: Menü-Umschalt-Button
   document.getElementById(`fullscreen`),
+  document.getElementById(`saveaspic`),
   document.getElementById(`save`),
   document.getElementById(`load`),
   document.getElementById(`position`),

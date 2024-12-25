@@ -470,6 +470,7 @@ export function _FunctionNode() {
               leftSide: this.properties["leftSide"],
               rightSide: finalEquation,
               uvName: this.properties.uvName,
+              animationOn: inputData["animationOn"],
               evaluatedFormula: this.properties["evaluatedFormula"],
               toToolTip: () => {
                 const uvName = this.properties.uvName;
