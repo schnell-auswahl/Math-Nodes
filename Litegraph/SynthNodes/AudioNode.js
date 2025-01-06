@@ -94,13 +94,13 @@ export function _AudioNode() {
             let shiftedFunc = new Function(uvName, `return ${shiftedFormula};`);
 
             // Nur loggen, wenn 2 Sekunden vergangen sind
-            let currentTime = Date.now();
-            if (currentTime - this.lastLogTime >= 2000) {
-              console.log(
-                "formel " + shiftedFormula + " function " + shiftedFunc
-              );
-              this.lastLogTime = currentTime; // Aktualisiere den letzten Log-Zeitpunkt
-            }
+            // let currentTime = Date.now();
+            // if (currentTime - this.lastLogTime >= 2000) {
+            //   console.log(
+            //     "formel " + shiftedFormula + " function " + shiftedFunc
+            //   );
+            //   this.lastLogTime = currentTime; // Aktualisiere den letzten Log-Zeitpunkt
+            // }
 
             this.setFunction(shiftedFunc);
           } catch (error) {
