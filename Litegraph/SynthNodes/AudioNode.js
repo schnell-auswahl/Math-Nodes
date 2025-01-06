@@ -12,17 +12,28 @@ export function _AudioNode() {
       this.context = new (window.AudioContext || window.webkitAudioContext)();
       this.context.suspend(); // Pausiere den AudioContext direkt nach der Erstellung
       this.isPlaying = false;
+      this.animationOn = false;
+      this.mute = true;
+      this.lastLogTime = 0; // Klassenvariable für das letzte Log
+      this.savedUVValue = 0;
+      this.uvValue = 0;
 
       // Füge den Eingabekanal für die Funktion hinzu
       this.addInput("", "object");
 
       // Button zum Starten und Stoppen der Wiedergabe
-      this.addWidget("button", "Start/Stop", "", () => {
-        if (this.isPlaying) {
-          this.stop();
+      this.addWidget("button", "Ton Ein/Aus", "", () => {
+        this.mute = !this.mute; // Umschalten zwischen true und false
+        console.log("mute ist ", this.mute);
+        // Visuelles Feedback
+        if (this.mute) {
+          this.bgcolor = bgColor2; //
         } else {
-          this.start();
+          this.bgcolor = fbNodesColor; //
+          this.savedUVValue = this.uvValue;
         }
+
+        this.setDirtyCanvas(true); // Aktualisiere das Widget
       });
 
       this.title = "Audio";
@@ -47,13 +58,21 @@ export function _AudioNode() {
 
     // Funktion zum Verarbeiten der Eingabedaten
     onExecute() {
-      const inputData = this.getInputData(0); // Hole die Eingabedaten
+      let inputData = this.getInputData(0); // Hole die Eingabedaten
 
       if (inputData) {
-        const formula = inputData["rightSide"];
+        let formula = inputData["rightSide"];
         this.properties.FormulafromInput = inputData["rightSide"];
-        const uvName = inputData["uvName"];
-        const value = inputData["value"];
+        let uvName = inputData["uvName"];
+        let value = inputData["value"];
+        this.uvValue = inputData["uvValue"];
+        this.animationOn = inputData["animationOn"];
+        //let savedUVValue = 0;
+
+        if (!this.animationOn) {
+          this.savedUVValue = this.uvValue;
+        }
+
         //const uvValue = inputData["uvValue"]
 
         //console.log(this.adjustColor("#FF0000","#0000FF",value));
@@ -65,36 +84,56 @@ export function _AudioNode() {
         //console.log("AudioNode: Eingabedaten erhalten:", inputData);
 
         // Wenn die Formel oder UV sich geändert haben, erstelle eine neue Funktion
+
         if (formula && uvName) {
           try {
-            const func = new Function(uvName, `return ${formula}`);
-            //console.log("AudioNode: Funktion erfolgreich ausgewertet");
+            let shiftedFormula = `${formula}`.replace(
+              new RegExp(`\\b${uvName}\\b`, "g"),
+              `(${uvName} + ${this.savedUVValue})`
+            );
+            let shiftedFunc = new Function(uvName, `return ${shiftedFormula};`);
 
-            // Sende die ausgewertete Funktion an den AudioProcessor
-            this.setFunction(func);
+            // Nur loggen, wenn 2 Sekunden vergangen sind
+            // let currentTime = Date.now();
+            // if (currentTime - this.lastLogTime >= 2000) {
+            //   console.log(
+            //     "formel " + shiftedFormula + " function " + shiftedFunc
+            //   );
+            //   this.lastLogTime = currentTime; // Aktualisiere den letzten Log-Zeitpunkt
+            // }
+
+            this.setFunction(shiftedFunc);
           } catch (error) {
-            //console.error("AudioNode: Fehler beim Erstellen der Funktion", error);
+            console.error(
+              "AudioNode: Fehler beim Erstellen der verschobenen Funktion",
+              error
+            );
           }
+        }
+
+        if (this.animationOn && !this.isPlaying && !this.mute) {
+          this.start();
+        } else if (!this.animationOn && this.isPlaying) {
+          this.stop();
+        } else if (this.mute) {
+          this.stop();
         }
       } else {
         this.stop();
       }
-
-      // TODO: Wenn animationActive = true (Muss noch weitergereicht werden) soll auch abgespielt werden, 
-      // aber ab dem eingestellten UV Value -> Dann muss auch nicht parallelisiert werden, nur,
-      // dass animationActive = true ist und und die übergebene function um uv value nach links verschoben werden.
     }
 
     // Funktion zum Setzen der zu berechnenden Funktion
     setFunction(func) {
       if (this.workletNode) {
+        const funcString = func.toString();
         this.workletNode.port.postMessage({
           type: "setFunction",
-          func: func.toString(),
+          func: funcString,
         });
-        //console.log("AudioNode: Funktion an AudioProcessor gesendet");
+        //console.log("Gesendete Funktion:", funcString , "evaluierte Funktion", eval(`(${funcString})`));
       } else {
-        //console.warn("AudioNode: WorkletNode ist noch nicht geladen");
+        console.warn("AudioNode: WorkletNode ist noch nicht geladen");
       }
     }
 
@@ -104,13 +143,13 @@ export function _AudioNode() {
         .resume()
         .then(() => {
           this.isPlaying = true;
-          this.bgcolor = fbNodesColor; // Orange, wenn Wiedergabe aktiv
+          //this.bgcolor = fbNodesColor; // Orange, wenn Wiedergabe aktiv
 
           if (this.workletNode) {
             this.workletNode.port.postMessage({ type: "start" });
           }
 
-          this.setDirtyCanvas(true); // Aktualisiere das Widget
+          //this.setDirtyCanvas(true); // Aktualisiere das Widget
         })
         .catch((error) => {
           console.error(
@@ -126,9 +165,9 @@ export function _AudioNode() {
         .suspend()
         .then(() => {
           this.isPlaying = false;
-          this.bgcolor = bgColor2; // grau, wenn Wiedergabe gestoppt
+          //this.bgcolor = bgColor2; // grau, wenn Wiedergabe gestoppt
           //console.log("AudioNode: Audiowiedergabe gestoppt");
-          this.setDirtyCanvas(true); // Aktualisiere das Widget
+          //this.setDirtyCanvas(true); // Aktualisiere das Widget
         })
         .catch((error) => {
           //console.error("AudioNode: Fehler beim Stoppen des AudioContext", error);
@@ -141,7 +180,7 @@ export function _AudioNode() {
       if (this.flags && this.flags.collapsed) {
         return; // Zeichne nichts, wenn die Node collapsed ist
       }
-      this.bgcolor = this.isPlaying ? fbNodesColor : bgColor2; // Hintergrundfarbe des Widgets
+      //this.bgcolor = this.isPlaying ? fbNodesColor : bgColor2; // Hintergrundfarbe des Widgets
 
       // Färbe den Eingang oder zeichne einen Kreis darum
       const NODE_SLOT_HEIGHT = LiteGraph.NODE_SLOT_HEIGHT;

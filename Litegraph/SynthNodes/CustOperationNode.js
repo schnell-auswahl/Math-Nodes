@@ -56,6 +56,7 @@ export function _OperationNode() {
 
       this.title = "Operation";
       this.desc = "Computes Funktions and Values with the choosen Operation"; // Beschreibung des Knotens
+      this.Out_AnimationActive = false;
       //this.size = [160, 150]; // Größe des Knotens in Pixeln
     }
 
@@ -175,6 +176,10 @@ export function _OperationNode() {
         var UV_Value_internal = 0; //Falls es zwei UVs gibt und sich für eine entschieden werden muss
         var UV_Name_internal = "";
 
+        var In1_AnimationActive = In1_inputData["animationOn"];
+        var In2_AnimationActive = In2_inputData["animationOn"];
+      
+
         // var In1_isNumberNode = In1_inputData["isNumberNode"];
         // var In2_isNumberNode = In2_inputData["isNumberNode"];
 
@@ -258,6 +263,12 @@ export function _OperationNode() {
           (In1_inputData && In2_inputData && In1_UV == "") || //Fall Parameter + Funktion oder Param + Param oder UV + Param
           (In1_inputData && In2_inputData && In2_UV == "")
         ) {
+          if (In1_AnimationActive || In2_AnimationActive) {
+          this.Out_AnimationActive = true;
+        } else { 
+          this.Out_AnimationActive = false;
+
+        }
           switch (this.properties["Operation"]) {
             case "+":
               this.properties["Result_Value"] = In1_Value + In2_Value;
@@ -310,6 +321,7 @@ export function _OperationNode() {
             leftSide: this.properties["Out_leftSideOfEquation"],
             rightSide: this.properties["Out_rightSideOfEquation"],
             uvName: UV_Name_internal,
+            animationOn: this.Out_AnimationActive,
             toToolTip: () => {
                 const uvName = UV_Name_internal;
                 const leftSide = this.properties["Out_leftSideOfEquation"];
