@@ -1,4 +1,4 @@
-// To Do: UV_Name und UV_Value Ausgabe je nachdem wo das angeschlossen ist -> gecheckt
+
 
 export function _OperationNode() {
   return class OperationNode {
