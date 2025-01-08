@@ -21,7 +21,7 @@ export function _TextInputNode() {
         this.size = [220, 150];
         this.padding = 15; // Abstand vom Rand der Box
         this.paddingtop = 40;
-        this.color = opNodesColor;
+        this.color = srcNodesColor;
         this.bgcolor = textAnzeigeColor;
 
       }
@@ -102,6 +102,7 @@ export function _TextInputNode() {
         ctx.fillStyle = "#000000";
     
         const words = this.displayedText.split(" "); // Zerlege den Text in Wörter
+        //console.log(words);
         const lineHeight = 14; // Höhe für jede Textzeile
         let y = this.padding + lineHeight +   this.paddingtop; // Anfangsposition für die erste Zeile
         let line = ""; // Aktuelle Zeile, die aufgebaut wird

@@ -27,8 +27,8 @@ window.labelHeight = 14; // Höhe des Trichters (von Basis bis Spitze)
 // Synth
 import { _FunctionNode } from "./SynthNodes/CustomFunctionNode.js";
 const FunctionNode = _FunctionNode();
-import { _CustomTimeNode } from "./SynthNodes/CustomTimeNode.js";
-const CustomTimeNode = _CustomTimeNode();
+//import { _CustomTimeNode } from "./SynthNodes/CustomTimeNode.js";
+//const CustomTimeNode = _CustomTimeNode();
 import { _CustNumberNode } from "./SynthNodes/CustomNumberNode.js";
 const CustNumberNode = _CustNumberNode();
 import { _uvNode } from "./SynthNodes/Custom_UV_Node.js";
@@ -93,10 +93,10 @@ export function createGraphInstance(canvasId) {
     "Funktionenmaschinen/Unabhängige_Variable",
     uvNode
   );
-  LiteGraph.registerNodeType(
-    "Funktionenmaschinen/Unabhängige_Variable_Zeit ",
-    CustomTimeNode
-  );
+  // LiteGraph.registerNodeType(
+  //   "Funktionenmaschinen/Unabhängige_Variable_Zeit ",
+  //   CustomTimeNode
+  // );
   LiteGraph.registerNodeType("Funktionenmaschinen/Parameter", CustNumberNode);
   LiteGraph.registerNodeType("Funktionenmaschinen/Funktion", FunctionNode);
   LiteGraph.registerNodeType("Funktionenmaschinen/Operation", OperationNode);
@@ -486,13 +486,28 @@ button.addEventListener("mouseup", () => {
       });
     };
 
-    // Buttons zu den Spalten hinzufügen
-    createNodeButtons(funcColumn, funcNodeTypes);
-    createNodeButtons(wordColumn, wordNodeTypes);
+    // // Buttons zu den Spalten hinzufügen
+    // createNodeButtons(funcColumn, funcNodeTypes);
+    // createNodeButtons(wordColumn, wordNodeTypes);
 
-    // Füge die Spalten zum Menü hinzu
-    menuContent.appendChild(funcColumn);
-    menuContent.appendChild(wordColumn);
+    // // Füge die Spalten zum Menü hinzu
+    // menuContent.appendChild(funcColumn);
+    // menuContent.appendChild(wordColumn);
+
+    // Bestimmen Sie den Typ der Maschinen basierend auf dem lgtype-Attribut
+const lgType = canvasElement.getAttribute("lgtype");
+if (lgType === "Wortmaschinen") {
+  createNodeButtons(wordColumn, wordNodeTypes);
+  menuContent.appendChild(wordColumn);
+} else if (lgType === "Funktionenmaschinen") {
+  createNodeButtons(funcColumn, funcNodeTypes);
+  menuContent.appendChild(funcColumn);
+} else {
+  createNodeButtons(funcColumn, funcNodeTypes);
+  createNodeButtons(wordColumn, wordNodeTypes);
+  menuContent.appendChild(funcColumn);
+  menuContent.appendChild(wordColumn);
+}
 
     // Schließen-Button für das Menü
     const closeButton = document.createElement("button");
@@ -544,13 +559,13 @@ button.addEventListener("mouseup", () => {
   function loop() {
     if (!isVisible) {
       isLooping = false;
-      //console.log("Loop stopped because canvas is not visible.");
+      //console.log("Loop stopped because canvas is not visible." + canvasId);
       return; // Stoppe den Loop, wenn Canvas nicht sichtbar
     }
 
     graph.runStep();
     canvas.draw(true, true); // Redraw every frame
-    //console.log("Loop running.");
+    //console.log("Loop running." + canvasId);
     requestAnimationFrame(loop); // Loop erneut aufrufen
   }
 
@@ -688,35 +703,38 @@ function adjustColor(positiveColor, negativeColor, value) {
     return `#${((1 << 24) + (r << 16) + (g << 8) + b).toString(16).slice(1).toUpperCase()}`;
   }
 
-// Hilfsfunktion: Helligkeit anpassen mit logarithmischer Skala
-// Hilfsfunktion: Helligkeit anpassen mit angepasster logarithmischer Funktion
-function adjustBrightness(rgb, value) {
-// Definiere die neue Funktion basierend auf den optimierten Parametern
-function brightnessFactor(x) {
-const a = 1.817;
-const b = 1.00;
-const c = 1.697;
-const factor = (a * Math.log(x + b)) / (1 + c * Math.log(x + b));
-return Math.min(factor, 1); // Begrenze den Faktor auf maximal 1
-}
+  // Hilfsfunktion: Helligkeit anpassen mit angepasster logarithmischer Funktion
+  function adjustBrightness(rgb, value) {
+    // Definiere die neue Funktion basierend auf den optimierten Parametern
+    function brightnessFactor(x) {
+      const a = 1.817;
+      const b = 1.00;
+      const c = 1.697;
+      const factor = (a * Math.log(x + b)) / (1 + c * Math.log(x + b));
+      return Math.min(factor, 1); // Begrenze den Faktor auf maximal 1
+    }
 
-// Berechne den Faktor basierend auf der neuen Funktion
-const factor = brightnessFactor(value);
+    // Berechne den Faktor basierend auf der neuen Funktion
+    const factor = brightnessFactor(value);
 
-// Passe die RGB-Werte an
-return {
-r: Math.min(255, Math.max(0, rgb.r * factor)),
-g: Math.min(255, Math.max(0, rgb.g * factor)),
-b: Math.min(255, Math.max(0, rgb.b * factor))
-};
-}
+    // Passe die RGB-Werte an
+    return {
+      r: Math.min(255, Math.max(0, rgb.r * factor)),
+      g: Math.min(255, Math.max(0, rgb.g * factor)),
+      b: Math.min(255, Math.max(0, rgb.b * factor))
+    };
+  }
+
+  // Hilfsfunktion: Überprüfen, ob der Input Hex oder RGB ist
+  function isHex(color) {
+    return typeof color === 'string' && color[0] === '#';
+  }
 
   // Wähle die passende Farbe basierend auf dem Vorzeichen von value
   const baseColor = value >= 0 ? positiveColor : negativeColor;
 
-  //console.log(baseColor);
-  // Konvertiere die Farbe in RGB
-  const rgb = hexToRgb(baseColor);
+  // Konvertiere die Farbe in RGB, falls sie in Hex vorliegt
+  const rgb = isHex(baseColor) ? hexToRgb(baseColor) : baseColor;
 
   // Normiere den Wert auf den Bereich [0, 1] für positive und negative Werte
   const normalizedFactor = Math.abs(value);
@@ -724,9 +742,10 @@ b: Math.min(255, Math.max(0, rgb.b * factor))
   // Passe die Helligkeit an
   const adjustedRgb = adjustBrightness(rgb, normalizedFactor);
 
-  // Konvertiere zurück zu Hex und gib die neue Farbe zurück
-  return rgbToHex(adjustedRgb);
+  // Konvertiere zurück zu Hex, falls der Input in Hex war, und gib die neue Farbe zurück
+  return isHex(baseColor) ? rgbToHex(adjustedRgb) : adjustedRgb;
 }
+
 
 window.adjustColor = adjustColor;
 

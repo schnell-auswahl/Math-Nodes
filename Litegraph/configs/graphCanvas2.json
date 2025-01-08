@@ -12,9 +12,7 @@
       "mode": 0,
       "inputs": [{ "name": "", "type": "string", "link": 3 }],
       "title": "Text Anzeige",
-      "properties": {},
-      "color": "#88B19B",
-      "bgcolor": "#D1AE8B"
+      "properties": {}
     },
     {
       "id": 4,
@@ -28,9 +26,7 @@
       "outputs": [
         { "name": "OUT", "type": "string", "links": [3], "slot_index": 0 }
       ],
-      "properties": {},
-      "color": "#88B19B",
-      "bgcolor": "#959EAA"
+      "properties": {}
     },
     {
       "id": 3,
@@ -46,9 +42,7 @@
       "outputs": [
         { "name": "OUT", "type": "string", "links": [2], "slot_index": 0 }
       ],
-      "properties": {},
-      "color": "#88B19B",
-      "bgcolor": "#959EAA"
+      "properties": {}
     },
     {
       "id": 5,
@@ -60,9 +54,7 @@
       "mode": 0,
       "outputs": [{ "name": "", "type": "string", "links": [4] }],
       "title": "Text Eingabe",
-      "properties": {},
-      "color": "#88B19B",
-      "bgcolor": "#D1AE8B"
+      "properties": {}
     }
   ],
   "links": [

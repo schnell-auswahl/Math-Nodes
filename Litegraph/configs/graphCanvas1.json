@@ -12,9 +12,7 @@
       "mode": 0,
       "inputs": [{ "name": "IN", "type": "string", "link": 2 }],
       "outputs": [{ "name": "OUT", "type": "string", "links": null }],
-      "properties": {},
-      "color": "#88B19B",
-      "bgcolor": "#959EAA"
+      "properties": {}
     },
     {
       "id": 3,
@@ -28,9 +26,7 @@
       "outputs": [
         { "name": "OUT", "type": "string", "links": [2], "slot_index": 0 }
       ],
-      "properties": {},
-      "color": "#88B19B",
-      "bgcolor": "#959EAA"
+      "properties": {}
     }
   ],
   "links": [[2, 3, 0, 4, 0, "string"]],

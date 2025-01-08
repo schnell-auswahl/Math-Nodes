@@ -72,9 +72,7 @@
         "completeEquationfromWidget": "f (x)=x^3",
         "finalEquation": "x**3",
         "widgetVisible": true
-      },
-      "color": "#88B19B",
-      "bgcolor": "#7C8693"
+      }
     },
     {
       "id": 8,
@@ -148,9 +146,7 @@
         "completeEquationfromWidget": "g(x)=e^x",
         "finalEquation": "Math.E**x",
         "widgetVisible": true
-      },
-      "color": "#88B19B",
-      "bgcolor": "#7C8693"
+      }
     },
     {
       "id": 15,
@@ -175,9 +171,7 @@
         "uvValueFromInput": 0,
         "uvNameFromInput": "x",
         "displayValue": 1
-      },
-      "color": "#879BCE",
-      "bgcolor": "#7C8693"
+      }
     },
     {
       "id": 11,
@@ -202,9 +196,7 @@
         "uvValueFromInput": 0,
         "uvNameFromInput": "x",
         "displayValue": 0
-      },
-      "color": "#879BCE",
-      "bgcolor": "#7C8693"
+      }
     },
     {
       "id": 1,
@@ -224,10 +216,7 @@
           "color_on": "#000000"
         }
       ],
-      "properties": { "value": 0, "rightSide": "x", "widgetVisible": true },
-      "color": "#D0AF8B",
-      "bgcolor": "#7C8693",
-      "shape": 2
+      "properties": { "value": 0, "rightSide": "x", "widgetVisible": true }
     }
   ],
   "links": [

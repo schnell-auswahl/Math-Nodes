@@ -32,9 +32,7 @@
         "uvNames": [null, null, null, null, "x"],
         "savedEquation": "3*(1/(Math.sin(x)))+1",
         "savedUV": "x"
-      },
-      "color": "#D0AF8B",
-      "bgcolor": "#000000"
+      }
     },
     {
       "id": 16,
@@ -66,9 +64,7 @@
         "uvNames": [null, null, null, null, "x"],
         "savedEquation": "1/(Math.sqrt(x))",
         "savedUV": "x"
-      },
-      "color": "#D0AF8B",
-      "bgcolor": "#000000"
+      }
     },
     {
       "id": 5,
@@ -107,9 +103,7 @@
         "uvError": false,
         "widgetVisible": false,
         "completeEquationfromWidget": "m(x)=sqrt(x)"
-      },
-      "color": "#88B19B",
-      "bgcolor": "#7C8693"
+      }
     },
     {
       "id": 8,
@@ -148,9 +142,7 @@
         "uvError": false,
         "widgetVisible": false,
         "completeEquationfromWidget": "q(x)=1/x"
-      },
-      "color": "#88B19B",
-      "bgcolor": "#7C8693"
+      }
     },
     {
       "id": 18,
@@ -189,9 +181,7 @@
         "uvError": false,
         "widgetVisible": false,
         "completeEquationfromWidget": "q(x)=1/x"
-      },
-      "color": "#88B19B",
-      "bgcolor": "#7C8693"
+      }
     },
     {
       "id": 4,
@@ -230,9 +220,7 @@
         "uvError": false,
         "widgetVisible": false,
         "completeEquationfromWidget": "n(x)=sin(x)"
-      },
-      "color": "#88B19B",
-      "bgcolor": "#7C8693"
+      }
     },
     {
       "id": 9,
@@ -265,9 +253,7 @@
         "uvError": false,
         "widgetVisible": false,
         "completeEquationfromWidget": "f(x)=x"
-      },
-      "color": "#88B19B",
-      "bgcolor": "#7C8693"
+      }
     },
     {
       "id": 2,
@@ -306,9 +292,7 @@
         "widgetVisible": false,
         "uvError": false,
         "completeEquationfromWidget": "t(x)=-0.3 * x"
-      },
-      "color": "#88B19B",
-      "bgcolor": "#7C8693"
+      }
     },
     {
       "id": 6,
@@ -347,9 +331,7 @@
         "widgetVisible": false,
         "uvError": false,
         "completeEquationfromWidget": "g(x)=3*x+1"
-      },
-      "color": "#88B19B",
-      "bgcolor": "#7C8693"
+      }
     },
     {
       "id": 7,
@@ -388,9 +370,7 @@
         "widgetVisible": false,
         "uvError": false,
         "completeEquationfromWidget": "r(x)=e^x"
-      },
-      "color": "#88B19B",
-      "bgcolor": "#7C8693"
+      }
     },
     {
       "id": 3,
@@ -435,9 +415,7 @@
         "widgetVisible": false,
         "uvError": false,
         "completeEquationfromWidget": "s(x)=sin(10*x)"
-      },
-      "color": "#88B19B",
-      "bgcolor": "#7C8693"
+      }
     },
     {
       "id": 11,
@@ -469,9 +447,7 @@
         "widgetVisible": false,
         "In1_isNumberNode": "",
         "In2_isNumberNode": ""
-      },
-      "color": "#88B19B",
-      "bgcolor": "#7C8693"
+      }
     },
     {
       "id": 10,
@@ -498,9 +474,7 @@
         "Fehlermeldung": "",
         "In1_isNumberNode": "",
         "In2_isNumberNode": ""
-      },
-      "color": "#88B19B",
-      "bgcolor": "#7C8693"
+      }
     },
     {
       "id": 13,
@@ -527,9 +501,7 @@
         "Fehlermeldung": "",
         "In1_isNumberNode": "",
         "In2_isNumberNode": ""
-      },
-      "color": "#88B19B",
-      "bgcolor": "#7C8693"
+      }
     },
     {
       "id": 12,
@@ -556,9 +528,7 @@
         "Fehlermeldung": "",
         "In1_isNumberNode": "",
         "In2_isNumberNode": ""
-      },
-      "color": "#88B19B",
-      "bgcolor": "#7C8693"
+      }
     },
     {
       "id": 17,
@@ -576,10 +546,7 @@
           "slot_index": 0
         }
       ],
-      "properties": { "value": 1, "rightSide": "x", "widgetVisible": false},
-      "color": "#879BCE",
-      "bgcolor": "#7C8693",
-      "shape": 2
+      "properties": { "value": 1, "rightSide": "x", "widgetVisible": false}
     },
     {
       "id": 15,
@@ -617,9 +584,7 @@
         "uvNames": [null, null, null, null, "x"],
         "savedEquation": "(Math.E**(-0.3 * x)) * (Math.sin(10*x))",
         "savedUV": "x"
-      },
-      "color": "#D0AF8B",
-      "bgcolor": "#000000"
+      }
     }
   ],
   "links": [],
