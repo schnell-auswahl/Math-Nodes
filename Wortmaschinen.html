@@ -99,7 +99,7 @@
 				<section>
 
 					<div class="image">
-						<canvas id="graphCanvas1" data-resize="true" data-zoom="1"
+						<canvas id="graphCanvas1" data-resize="true" data-zoom="1" lgtype="Wortmaschinen"
 							data-config-path="Litegraph/configs/Wortmaschinen1_config.json"></canvas>
 						<script type="module">
 							import { createGraphInstance } from './Litegraph/createGraph.js';
@@ -114,15 +114,14 @@
 							<p>Verbinde die unteren Maschinen wie im Beispiel oben, indem du ein Kabel vom Ausgang der
 								Texteingabe zum Eingang des Textdisplays ziehst. Wenn du das geschafft hast, klicke auf
 								das Texteingabefeld auf der Texteingabe-Maschine und gib etwas ein. Siehst du es auf dem
-								Display? Du kannst Verbidnungen auch wieder lösen indem du am Ausgang anfasst und die
+								Display? Du kannst Verbindungen auch wieder lösen indem du am Ausgang anfasst und die
 								Verbindung von da wieder löst. Versuche es!</p>
 						</div>
 					</div>
 				</section>
 				<section>
 					<div class="image">
-						<canvas id="graphCanvas2" data-resize="true"
-							data-config-path="Litegraph/configs/Wortmaschinen2_config.json"></canvas>
+						<canvas id="graphCanvas2" data-resize="true" data-config-path="Litegraph/configs/Wortmaschinen2_config.json" lgtype="Wortmaschinen"></canvas>
 						<script type="module">
 							import { createGraphInstance } from './Litegraph/createGraph.js';
 							createGraphInstance("graphCanvas2");
@@ -135,18 +134,13 @@
 							</header>
 							<p>Du kannst deinen Text mit verschiedenen Maschinen manipulieren. Verbinde dazu die
 								Texteingabe-Maschine mit der Alphabet-Countdown-Maschine und diese dann mit der
-								Textdisplay-Maschine. Gib jetzt etwas in die Texteingabe-Maschine ein. Was passiert mit
-								deinem Text? </p>
-							<ul class="actions">
-								<button
-									onclick="loadGraphFromServerAsync('graphCanvas2', 'Litegraph/configs/Wortmaschinen2_config.json')">Neustart</button>
-							</ul>
+								Textdisplay-Maschine. Was passiert mit deinem Text? </p>
 						</div>
 					</div>
 				</section>
 				<section>
 					<div class="image">
-						<canvas id="graphCanvas3" data-resize="true"
+						<canvas id="graphCanvas3" data-resize="true" lgtype="Wortmaschinen"
 							data-config-path="Litegraph/configs/Wortmaschinen3_config.json"></canvas>
 						<script type="module">
 							import { createGraphInstance } from './Litegraph/createGraph.js';
@@ -184,7 +178,7 @@
 			<!-- LiteGraph Canvas -->
 			<section id="litegraph">
 				<div id="graphstylefull">
-					<canvas id="graphCanvas4" data-resize="true"
+					<canvas id="graphCanvas4" data-resize="true" lgtype="Wortmaschinen"
 						data-config-path="Litegraph/configs/Wortmaschinen4_config.json"></canvas>
 				</div>
 				<script type="module">

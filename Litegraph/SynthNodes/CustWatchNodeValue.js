@@ -245,6 +245,8 @@ ctx.fillText(
         ctx.fillStyle = inLabelsColor;
         ctx.fill();
 
+        console.log(this.displayString);
+
         
 
       };

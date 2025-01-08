@@ -3,12 +3,15 @@ export function _TextDisplayNode() {
         constructor() {
             this.addInput("", "string");
             this.title = "Text Anzeige";
-            this.properties = { displayedText: ""};
+            this.properties = { displayedText: "",
+                savedText: ""
+            };
+
             //this.displayedText = "";
             this.size = [220, 100];
             this.padding = 15; // Abstand vom Rand der Box
-            this.color = opNodesColor;
-            this.bgcolor = textAnzeigeColor;
+            this.bgcolor = fbNodesColor;
+            this.color = fbNodesColor;
         }
 
      
@@ -16,9 +19,13 @@ export function _TextDisplayNode() {
             const inputText = this.getInputData(0);
             
             // Wenn Text vorhanden ist, anzeigen; andernfalls Text löschen
-            if (inputText !== undefined) {
+            if (inputText) {
                 this.properties.displayedText = inputText;
-            } 
+                //console.log("input text: " + inputText);
+            } else {// if (this.properties.displayedText !== "") {
+                //console.log("hey");
+                this.properties.displayedText = this.properties.savedText;
+            }
         }
 
         onConnectionsChange() {
@@ -82,7 +89,7 @@ export function _TextDisplayNode() {
         
             // Text-Styles einstellen
             ctx.font = "12px Arial";
-            ctx.fillStyle = "#000000";
+            ctx.fillStyle = "#FFFFFF";
         
             const words = this.properties.displayedText.split(" "); // Zerlege den Text in Wörter
             const lineHeight = 14; // Höhe für jede Textzeile

@@ -12,9 +12,7 @@
       "mode": 0,
       "inputs": [{ "name": "IN", "type": "string", "link": null }],
       "outputs": [{ "name": "OUT", "type": "string", "links": null }],
-      "properties": {},
-      "color": "#88B19B",
-      "bgcolor": "#7C8693"
+      "properties": {}
     },
     {
       "id": 4,
@@ -26,9 +24,7 @@
       "mode": 0,
       "inputs": [{ "name": "IN", "type": "string", "link": null }],
       "outputs": [{ "name": "OUT", "type": "string", "links": null }],
-      "properties": {},
-      "color": "#88B19B",
-      "bgcolor": "#7C8693"
+      "properties": {}
     },
     {
       "id": 5,
@@ -40,9 +36,7 @@
       "mode": 0,
       "inputs": [{ "name": "IN", "type": "string", "link": null }],
       "outputs": [{ "name": "OUT", "type": "string", "links": null }],
-      "properties": {},
-      "color": "#88B19B",
-      "bgcolor": "#7C8693"
+      "properties": {}
     },
     {
       "id": 6,
@@ -54,9 +48,7 @@
       "mode": 0,
       "outputs": [{ "name": "", "type": "string", "links": null }],
       "title": "Text Eingabe",
-      "properties": { "text": "" },
-      "color": "#88B19B",
-      "bgcolor": "#D1AE8B"
+      "properties": { "text": "" }
     },
     {
       "id": 8,
@@ -69,9 +61,7 @@
       "inputs": [{ "name": "IN", "type": "string", "link": null }],
       "outputs": [{ "name": "OUT", "type": "string", "links": null }],
       "title": "Vorwärts Rückwärts",
-      "properties": {},
-      "color": "#88B19B",
-      "bgcolor": "#7C8693"
+      "properties": {}
     },
     {
       "id": 9,
@@ -84,9 +74,7 @@
       "inputs": [{ "name": "IN", "type": "string", "link": null }],
       "outputs": [{ "name": "OUT", "type": "string", "links": null }],
       "title": "Konsonanten verdoppeln",
-      "properties": {},
-      "color": "#88B19B",
-      "bgcolor": "#7C8693"
+      "properties": {}
     },
     {
       "id": 10,
@@ -99,9 +87,7 @@
       "inputs": [{ "name": "IN", "type": "string", "link": null }],
       "outputs": [{ "name": "OUT", "type": "string", "links": null }],
       "title": "Vorwärts Rückwärts",
-      "properties": {},
-      "color": "#88B19B",
-      "bgcolor": "#7C8693"
+      "properties": {}
     },
     {
       "id": 7,
@@ -113,9 +99,7 @@
       "mode": 0,
       "inputs": [{ "name": "", "type": "string", "link": null }],
       "title": "Text Anzeige",
-      "properties": { "displayedText": "" },
-      "color": "#88B19B",
-      "bgcolor": "#D1AE8B"
+      "properties": { "displayedText": "" }
     },
     {
       "id": 1,
@@ -127,9 +111,7 @@
       "mode": 0,
       "outputs": [{ "name": "", "type": "string", "links": null }],
       "title": "Text Eingabe",
-      "properties": { "text": "" },
-      "color": "#88B19B",
-      "bgcolor": "#D1AE8B"
+      "properties": { "text": "" }
     },
     {
       "id": 2,
@@ -141,9 +123,7 @@
       "mode": 0,
       "inputs": [{ "name": "", "type": "string", "link": null }],
       "title": "Text Anzeige",
-      "properties": { "displayedText": "" },
-      "color": "#88B19B",
-      "bgcolor": "#D1AE8B"
+      "properties": { "displayedText": "" }
     }
   ],
   "links": [],

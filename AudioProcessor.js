@@ -1,4 +1,14 @@
+
+/**
+ * AudioProcessor class extends AudioWorkletProcessor to process audio data.
+ * It allows setting a custom function to generate audio samples and applies a fade-in effect.
+ */
 class AudioProcessor extends AudioWorkletProcessor {
+    /**
+     * Constructs an AudioProcessor instance.
+     * Initializes time, sampleRate, func, fadeDuration, and fadeSamples.
+     * Sets up a message handler to receive and process messages from the AudioNode.
+     */
     constructor() {
         super();
         this.time = 0; // Zeitvariable für die Funktion
@@ -7,7 +17,10 @@ class AudioProcessor extends AudioWorkletProcessor {
         this.fadeDuration = 0.01; // Fade-In-Dauer in Sekunden
         this.fadeSamples = Math.floor(this.sampleRate * this.fadeDuration); // Anzahl der Samples für das Fade-In
 
-        // Empfangene Nachrichten von der AudioNode verarbeiten
+        /**
+         * Handles messages received from the AudioNode.
+         * @param {MessageEvent} event - The message event containing data from the AudioNode.
+         */
         this.port.onmessage = (event) => {
             if (event.data.type === 'setFunction') {
                 try {
@@ -21,6 +34,13 @@ class AudioProcessor extends AudioWorkletProcessor {
         };
     }
 
+    /**
+     * Processes audio data.
+     * Generates audio samples using the set function, applies a fade-in effect, and limits the signal.
+     * @param {Array} inputs - The input audio data.
+     * @param {Array} outputs - The output audio data.
+     * @returns {boolean} - Returns true to continue processing.
+     */
     process(inputs, outputs) {
         const output = outputs[0][0];
         for (let i = 0; i < output.length; i++) {

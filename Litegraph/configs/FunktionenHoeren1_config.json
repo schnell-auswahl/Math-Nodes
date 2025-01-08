@@ -4,20 +4,20 @@
   "nodes": [
     {
       "id": 16,
-      "type": "Funktionenmaschinen/Unabhängige_Variable_Zeit ",
+      "type": "Funktionenmaschinen/Unabhängige_Variable",
       "pos": [27, 254],
       
       "flags": {},
       "order": 0,
       "mode": 0,
       "outputs": [
-        { "name": "in ms", "type": "object", "links": null },
-        { "name": "in sec", "type": "object", "links": [7] }
+        { "name": "value", "type": "object", "links": [7] }
       ],
       "title": "Time",
-      "properties": { "rightSide": "t", "leftSide": "t", "uvName": "t" },
-      "color": "#879BCE",
-      "bgcolor": "#7C8693"
+      "properties": {
+        "value": 0,
+        "rightSide": "t"
+      }
     },
     {
       "id": 11,
