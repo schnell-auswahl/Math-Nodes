@@ -13,13 +13,11 @@ export function createTextManipulationNode({ title, description, logic }) {
       this.description = description; // Beschreibung für die Node
       this.color = opNodesColor;
       this.bgcolor = bgColor2;
-    //   if (title == "Platzhalter") {        
-        // Verwende die adjustColor Funktion, um die Helligkeit der Farben anzupassen
-        // console.log("this.color: ", this.color);
-        // this.color = adjustColor(opNodesColor, "", -1); // Passe den Wert nach Bedarf an
-        // console.log("adjusted color ", this.color);
-        // this.bgcolor = adjustColor(bgColor2, "", -1); // Passe den Wert nach Bedarf an
-    //   }
+      if (title == "Platzhalter") {        
+        //Verwende die adjustColor Funktion, um die Helligkeit der Farben anzupassen
+        //this.color = "#CCF5DF"; // Passe den Wert nach Bedarf an
+        this.bgcolor = "#BFCAD7"; // Passe den Wert nach Bedarf an
+      }
     }
 
     onExecute() {

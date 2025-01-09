@@ -9,7 +9,30 @@ export function _CustNumberNode() {
         this.addOutput("value", "object");
         this.properties = { value: 1.0, rightSide: "a"};
         this.numberWidget = this.addWidget("number", "Wert", 1, "value", { precision: 2 });
-        this.nameWidget = this.addWidget("text", "Parametername", "a", "rightSide");
+        this.nameWidget = this.addWidget("text", "Parametername", "a", (v) => {
+          //console.log("Callback wurde aufgerufen");
+          const lowerCaseValue = v.toLowerCase();
+          if (lowerCaseValue.length === 0) {
+            console.error("Invalid input: Input cannot be empty.");
+            this.nameWidget.value = this.properties["rightSide"];
+            return;
+          }
+          const firstChar = lowerCaseValue.charAt(0);
+          if (!/^[a-z]$/.test(firstChar)) {
+            console.error("Invalid input: Only single letters are allowed.");
+            this.nameWidget.value = this.properties["rightSide"];
+            return;
+          }
+          let correctedValue;
+          if (firstChar === 'e' || firstChar === 'i') {
+            correctedValue = this.properties["rightSide"];
+          } else {
+            correctedValue = firstChar;
+          }
+          this.properties["rightSide"] = correctedValue;
+          this.nameWidget.value = correctedValue; // Aktualisiert den Wert im Widget
+        });
+
         this.widgets_up = true;
 // Animation
 

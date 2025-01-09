@@ -21,16 +21,15 @@ export function _FunctionNode() {
         leftSide: "", // Linke Seite der Gleichung -> Wird dynamisch erzeugt
         rightSide: "", // Rechte Seite der Gleichung -> Wird von der Eingabe extrahiert
         uvName: "", // Name der unabhängigen Variablen -> Wird aus der Funktionsgleichung extrahiert
+        paramsFromWidget: ["","","",""], // Parameter als String für Widget-Eingabe
         paramNames: ["", "", "", ""], // Namen der Parameter (Platzhalter für bis zu 4 Parameter)
-        paramValues: [0,0,0,0], // Objekt, das die Werte der Parameter speichert
+        paramValues: [0, 0, 0, 0], // Objekt, das die Werte der Parameter speichert
         evaluatedFormula: "", // Neu: Hinzufügen der Property für die ausgewertete Formel
         uvError: false, // Status für UV-Fehler
         completeEquationfromWidget: "",
         finalEquation: "",
-        widgetVisible: true
+        widgetVisible: true,
       };
-
-
 
       // Widget für die Eingabe der Funktionsgleichung
       this.code_widget = this.addWidget(
@@ -58,12 +57,14 @@ export function _FunctionNode() {
             .replace(/exp/g, "Math.exp") // Ersetzt Exponentialfunktion
             .replace(/\bpi\b/gi, "Math.PI") // Ersetzt pi durch Math.PI (unabhängig von Groß-/Kleinschreibung)
             .replace(/\be\b/g, "Math.E"); // Ersetzt e durch Math.E (unabhängig von Groß-/Kleinschreibung)
-        },
-    
-      );
-    
 
-      
+            // Parameter erkennen
+  
+          const parameterRegex = /\b[a-df-hj-z]\b/g; // Regex für alleinstehende Buchstaben außer e und i
+          const parameters = formulaFromWidget.match(parameterRegex);
+          this.properties.paramsFromWidget = parameters ? parameters.filter(param => param !== this.properties.uvName) : [];
+        }
+      );
 
       // Funktionsobjekt und alte Parameternamen zur Überprüfung
       this._func = null;
@@ -135,7 +136,7 @@ export function _FunctionNode() {
     onDrawForeground(ctx) {
       if (this.flags && this.flags.collapsed) {
         return; // Zeichne nichts, wenn die Node collapsed ist
-       }
+      }
       var inputData = this.getInputData(0);
       //console.log(inputData)
       // Setze das Label des ersten Eingangs basierend auf der unabhängigen Variablen (UV)
@@ -191,9 +192,9 @@ export function _FunctionNode() {
 
       // Setze die Labels der Parameter-Eingänge basierend auf den Parameternamen und Zeichne die Formen darum
       for (let i = 0; i < 4; i++) {
-        this.inputs[i+1].label = this.properties["paramNames"][i];
+        this.inputs[i + 1].label = this.properties["paramNames"][i];
 
-        const inputPosY = (i+1) * NODE_SLOT_HEIGHT + 14;
+        const inputPosY = (i + 1) * NODE_SLOT_HEIGHT + 14;
 
         ctx.beginPath();
         // Input Trichter
@@ -241,20 +242,10 @@ export function _FunctionNode() {
         this.outputs[0].label = `${this.properties["funcName"]}(${this.properties.uvName})`;
       }
 
-      // if (!this.outputs[0].label){
-      //   currentOutputLabelLength = 0
-      // } else {
-      //   currentOutputLabelLength = this.outputs[0].label.length;
-      // }
-
-      //if (this.properties["formula"] && this.properties["uvName"] && this.properties["funcName"]) { // Wenn alles ordentlich definiert ist:
-
-      //latex render versuch
+     
+      //latex rendering
       let equation = this.properties.completeEquationfromWidget;
 
-      //console.log(equation);
-
-      //console.log(latexEquation);
       // Prüfen, ob die Gleichung sich geändert hat
       if (this.lastRenderedEquation !== equation) {
         this.lastRenderedEquation = equation;
@@ -288,10 +279,13 @@ export function _FunctionNode() {
             2 * this.offsetX +
             2 * inputLabelmaxLength * 8;
         }
-        if (this.renderedImage.height < 2 * this.offsetY && this.properties.widgetVisible==false)  {
+        if (
+          this.renderedImage.height < 2 * this.offsetY &&
+          this.properties.widgetVisible == false
+        ) {
           this.size[1] = 2 * this.offsetY;
         } else if (this.renderedImage.height < 2 * this.offsetY) {
-          this.size[1] = 2* this.offsetY + NODE_SLOT_HEIGHT;
+          this.size[1] = 2 * this.offsetY + NODE_SLOT_HEIGHT;
         } else {
           this.size[1] = this.renderedImage.height + this.offsetY;
         }
@@ -310,12 +304,12 @@ export function _FunctionNode() {
     // Führt die Berechnung durch, wenn die Eingabedaten vorliegen
     onExecute() {
       if (this.properties.widgetVisible == false) {
-      this.widgets = []; // Alle Widgets entfernen
+        this.widgets = []; // Alle Widgets entfernen
       }
 
       this.inputs[0].color_off = "#000000";
       this.outputs[0].color_off = "#000000";
-      
+
       if (this.getInputData(0)) {
         var inputData = this.getInputData(0);
         var uvValue = inputData["value"]; // Wert der unabhängigen Variablen (x)
@@ -323,14 +317,17 @@ export function _FunctionNode() {
         var rightSideFromInput = inputData["rightSide"]; // Zusatzinformationen zur Gleichung
         var uvNameFromInput = inputData["uvName"]; // Name der unabhängigen Variablen
 
-
         this.inputs[0].color_off = "#000000";
-        this.inputs[0].color_on = adjustColor("#00FF00","#FF0000",inputData["value"]);
+        this.inputs[0].color_on = adjustColor(
+          "#00FF00",
+          "#FF0000",
+          inputData["value"]
+        );
 
         // Speichere die Hauptunabhängige Variable (x) und Zusatzinfos in den Eigenschaften
         //this.properties["x"] = uvValue ?? this.properties["x"];
         this.properties["rightSide"] =
-          rightSideFromInput ?? this.properties["rightSide"];
+          rightSideFromInput ?? this.properties["rightSide"]; 
 
         // Definiere die linke Seite der Gleichung als funcName(leftSide)
         if (this.properties["funcName"]) {
@@ -347,57 +344,50 @@ export function _FunctionNode() {
           this.properties.uvError = false;
 
           // Verarbeite die Parameter, die von den Eingängen geliefert werden
-          let paramNames = ["","","",""];
-          let paramValues = [0,0,0,0];
+          let paramNames = ["", "", "", ""];
+          let paramValues = [0, 0, 0, 0];
           for (let i = 0; i < 4; i++) {
             const paramInput = this.getInputData(i + 1); // Hole die Daten vom jeweiligen Eingang
             this.inputs[i + 1].color_off = "#000000";
 
-        
-
-            if (paramInput) {
+            if (paramInput !== null && paramInput !== undefined) {
               const paramName = paramInput["leftSide"]; // Name des Parameters
               const paramValue = paramInput["value"]; // Wert des Parameters
 
               //console.log(paramName);
               //console.log(paramValue);
 
-            
-             
-
-              if (paramName && paramValue) {
-                this.inputs[i + 1].color_on = adjustColor("#00FF00","#FF0000",paramValue);
+                      if (paramName && paramValue !== null && paramValue !== undefined) {                 
+                this.inputs[i + 1].color_on = adjustColor(
+                  "#00FF00",
+                  "#FF0000",
+                  paramValue
+                );
                 paramNames[i] = paramName; // Speichere den Parameternamen
                 this.properties["paramNames"] = paramNames;
                 //console.log(paramNames);
-            
+
                 paramValues[i] = paramValue; // Speichere den Parameterwert
-                 // Speichere die Parameterwerte in den Eigenschaften des Knotens
+                // Speichere die Parameterwerte in den Eigenschaften des Knotens
                 this.properties["paramValues"] = paramValues;
                 //console.log(paramValues);
-              } 
+              }
             } else {
-              //paramNames[i+1]=""; //Lösche den Parameternamen 
+              //paramNames[i+1]=""; //Lösche den Parameternamen
               paramNames[i] = "";
               this.properties["paramNames"] = paramNames;
               paramValues[i] = 0;
-               // Speichere die Parameterwerte in den Eigenschaften des Knotens
+              // Speichere die Parameterwerte in den Eigenschaften des Knotens
               this.properties["paramValues"] = paramValues;
-
             }
-              
-          
-
           }
-
-         
 
           // Kopiere die originale Formel
           let evaluatedFormula = this.properties.formula;
 
           // Ersetze Parameter und UV in der Formel durch Werte oder Ausdrücke
           for (let i = 0; i < 4; i++) {
-          //paramNames.forEach((paramName, index) => {
+            //paramNames.forEach((paramName, index) => {
             //console.log(paramNames[i] +" Index "+ i)
             let escapedParamName = paramNames[i].replace(
               /[.*+?^${}()|[\]\\]/g,
@@ -405,10 +395,7 @@ export function _FunctionNode() {
             ); // Maskiere alle speziellen Zeichen
 
             if (paramNames[i].includes(this.properties["uvName"])) {
-              
-              let rightSideFromInput = this.getInputData(i + 1)[
-                "rightSide" 
-              ];
+              let rightSideFromInput = this.getInputData(i + 1)["rightSide"];
               //console.log(this.title +"indes "+ i + "rightSidefrominput" + rightSideFromInput)
 
               evaluatedFormula = evaluatedFormula.replace(
@@ -433,7 +420,7 @@ export function _FunctionNode() {
                 );
               }
             }
-          };
+          }
 
           // Speichere die ausgewertete Formel in der neuen Property
           this.properties["evaluatedFormula"] = evaluatedFormula;
@@ -475,22 +462,23 @@ export function _FunctionNode() {
               toToolTip: () => {
                 const uvName = this.properties.uvName;
                 const leftSide = this.properties.leftSide;
-            
+
                 // RegExp für isolierte Vorkommen von uvName (z.B. x, aber nicht in xara oder 2*x)
                 const uvRegex = new RegExp(`\\b${uvName}\\b`, "g");
-            
+
                 // Ersetzen der isolierten Vorkommen von uvName in leftSide
                 const modifiedLeftSide = leftSide.replace(uvRegex, uvName);
-            
+
                 // Tooltip zusammensetzen
-                const tooltip = `${modifiedLeftSide} = ${Math.round(value * 10) / 10}`;
+                const tooltip = `${modifiedLeftSide} = ${
+                  Math.round(value * 10) / 10
+                }`;
                 return tooltip;
-            }
+              },
             });
             this.boxcolor = null; // Zurücksetzen der Farbe bei Erfolg
 
-            this.outputs[0].color_on = adjustColor("#00FF00","#FF0000",value);
-
+            this.outputs[0].color_on = adjustColor("#00FF00", "#FF0000", value);
           } catch (err) {
             //console.error("Fehler in der Formel:", err); // Fehlerbehandlung bei Problemen mit der Formel
             this.boxcolor = "red"; // Fehlerfarbmarkierung
