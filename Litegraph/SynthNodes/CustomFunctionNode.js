@@ -3,6 +3,7 @@ export function _FunctionNode() {
     constructor() {
       this.color = opNodesColor;
       this.bgcolor = bgColor2;
+      this.inputError = false;
       // Füge den Hauptinput für die unabhängige Variable (UV) hinzu, Typ "object"
       this.addInput("UV", "object");
 
@@ -21,7 +22,7 @@ export function _FunctionNode() {
         leftSide: "", // Linke Seite der Gleichung -> Wird dynamisch erzeugt
         rightSide: "", // Rechte Seite der Gleichung -> Wird von der Eingabe extrahiert
         uvName: "", // Name der unabhängigen Variablen -> Wird aus der Funktionsgleichung extrahiert
-        paramsFromWidget: ["","","",""], // Parameter als String für Widget-Eingabe
+        paramsFromWidget: ["", "", "", ""], // Parameter als String für Widget-Eingabe
         paramNames: ["", "", "", ""], // Namen der Parameter (Platzhalter für bis zu 4 Parameter)
         paramValues: [0, 0, 0, 0], // Objekt, das die Werte der Parameter speichert
         evaluatedFormula: "", // Neu: Hinzufügen der Property für die ausgewertete Formel
@@ -38,8 +39,41 @@ export function _FunctionNode() {
         "", // Beschreibung für das Widget
         (v, canvas, node) => {
           // Callback-Funktion für Eingabeänderungen
-          // Funktionsname und unabhängige Variable extrahieren
-          this.properties.completeEquationfromWidget = v;
+       
+          
+           // Überprüfung der Eingabe:
+                 const functionRegex = /^[a-zA-Z]+\([a-zA-Z]\)\s*=\s*[-+*/^()0-9a-zA-Z\s]*$/;
+         
+          // ^                - Start des Strings
+          // [a-zA-Z]+        - Ein oder mehrere Buchstaben (Funktionsname)
+          // \(               - Öffnende Klammer
+          // [a-zA-Z]         - Ein einzelner Buchstabe (unabhängige Variable)
+          // \)               - Schließende Klammer
+          // \s*              - Null oder mehr Leerzeichen
+          // =                - Gleichheitszeichen
+          // \s*              - Null oder mehr Leerzeichen
+          // [-+*/^()0-9a-zA-Z\s]* - Null oder mehr der folgenden Zeichen: 
+          //                        - Mathematische Operatoren: +, -, *, /, ^
+          //                        - Klammern: (, )
+          //                        - Ziffern: 0-9
+          //                        - Buchstaben: a-z, A-Z
+          //                        - Leerzeichen
+          // $                - Ende des Strings
+
+          if (!functionRegex.test(v)) {
+            console.error(
+              "Ungültige Funktionsgleichung. Bitte geben Sie eine gültige Gleichung ein."
+            );
+            this.boxcolor = "red"; // Fehlerfarbmarkierung
+            this.inputError = true; // Setze den Fehlerstatus auf "true"
+            return;
+          }
+          this.inputError = false; // Setze den Fehlerstatus auf "false"
+          this.boxcolor = null; // Zurücksetzen der Farbe bei Erfolg
+
+             // Funktionsname und unabhängige Variable extrahieren
+             this.properties.completeEquationfromWidget = v;
+
           var splitted = v.split("(");
           node.properties["funcName"] = splitted[0]; // Funktionsname
           node.properties["uvName"] = splitted[1][0]; // Unabhängige Variable
@@ -58,11 +92,13 @@ export function _FunctionNode() {
             .replace(/\bpi\b/gi, "Math.PI") // Ersetzt pi durch Math.PI (unabhängig von Groß-/Kleinschreibung)
             .replace(/\be\b/g, "Math.E"); // Ersetzt e durch Math.E (unabhängig von Groß-/Kleinschreibung)
 
-            // Parameter erkennen
-  
+          // Parameter erkennen
+
           const parameterRegex = /\b[a-df-hj-z]\b/g; // Regex für alleinstehende Buchstaben außer e und i
           const parameters = formulaFromWidget.match(parameterRegex);
-          this.properties.paramsFromWidget = parameters ? parameters.filter(param => param !== this.properties.uvName) : [];
+          this.properties.paramsFromWidget = parameters
+            ? parameters.filter((param) => param !== this.properties.uvName)
+            : [];
         }
       );
 
@@ -242,7 +278,6 @@ export function _FunctionNode() {
         this.outputs[0].label = `${this.properties["funcName"]}(${this.properties.uvName})`;
       }
 
-     
       //latex rendering
       let equation = this.properties.completeEquationfromWidget;
 
@@ -327,7 +362,7 @@ export function _FunctionNode() {
         // Speichere die Hauptunabhängige Variable (x) und Zusatzinfos in den Eigenschaften
         //this.properties["x"] = uvValue ?? this.properties["x"];
         this.properties["rightSide"] =
-          rightSideFromInput ?? this.properties["rightSide"]; 
+          rightSideFromInput ?? this.properties["rightSide"];
 
         // Definiere die linke Seite der Gleichung als funcName(leftSide)
         if (this.properties["funcName"]) {
@@ -357,7 +392,11 @@ export function _FunctionNode() {
               //console.log(paramName);
               //console.log(paramValue);
 
-                      if (paramName && paramValue !== null && paramValue !== undefined) {                 
+              if (
+                paramName &&
+                paramValue !== null &&
+                paramValue !== undefined
+              ) {
                 this.inputs[i + 1].color_on = adjustColor(
                   "#00FF00",
                   "#FF0000",
@@ -476,7 +515,12 @@ export function _FunctionNode() {
                 return tooltip;
               },
             });
-            this.boxcolor = null; // Zurücksetzen der Farbe bei Erfolg
+
+            // Färbe den Ausgang grün, wenn die Berechnung erfolgreich war und auch sonst kein Fehler vorliegt
+            if (this.inputError != true) {
+              this.boxcolor = null; // Zurücksetzen der Farbe bei Erfolg
+            }
+           
 
             this.outputs[0].color_on = adjustColor("#00FF00", "#FF0000", value);
           } catch (err) {
