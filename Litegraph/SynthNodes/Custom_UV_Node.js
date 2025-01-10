@@ -8,9 +8,9 @@ export function _uvNode() {
         this.color = srcNodesColor;
         this.bgcolor = bgColor2;
         this.addOutput("value", "object");
-        this.properties = { value: 1.0, rightSide: "x", widgetVisible: true};
+        this.properties = { value: 1.0, rightSide: "", widgetVisible: true};
         this.numberWidget = this.addWidget("number", "Wert", 1, "value", { precision: 2 });
-        this.nameWidget = this.addWidget("text", "Unabhängige", "x",   //Testen
+        this.nameWidget = this.addWidget("text", "Unabhängige", this.properties.rightSide,   //Testen
          (v) => {
           //console.log("Callback wurde aufgerufen");
           const lowerCaseValue = v.toLowerCase();

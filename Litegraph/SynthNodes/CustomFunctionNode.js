@@ -39,20 +39,19 @@ export function _FunctionNode() {
         "", // Beschreibung für das Widget
         (v, canvas, node) => {
           // Callback-Funktion für Eingabeänderungen
-       
-          
-           // Überprüfung der Eingabe:
-                 const functionRegex = /^[a-zA-Z]+\([a-zA-Z]\)\s*=\s*[-+*/^()0-9a-zA-Z\s]*$/;
-         
+
+          // Überprüfung der Eingabe:
+          const functionRegex = /^[a-zA-Z]\([a-zA-Z]\)\s*=\s*[-+*/^()0-9a-zA-Z\s]*$/;
+
           // ^                - Start des Strings
-          // [a-zA-Z]+        - Ein oder mehrere Buchstaben (Funktionsname)
+          // [a-zA-Z]        - Ein Buchstabe (Funktionsname)
           // \(               - Öffnende Klammer
           // [a-zA-Z]         - Ein einzelner Buchstabe (unabhängige Variable)
           // \)               - Schließende Klammer
           // \s*              - Null oder mehr Leerzeichen
           // =                - Gleichheitszeichen
           // \s*              - Null oder mehr Leerzeichen
-          // [-+*/^()0-9a-zA-Z\s]* - Null oder mehr der folgenden Zeichen: 
+          // [-+*/^()0-9a-zA-Z\s]* - Null oder mehr der folgenden Zeichen:
           //                        - Mathematische Operatoren: +, -, *, /, ^
           //                        - Klammern: (, )
           //                        - Ziffern: 0-9
@@ -71,8 +70,8 @@ export function _FunctionNode() {
           this.inputError = false; // Setze den Fehlerstatus auf "false"
           this.boxcolor = null; // Zurücksetzen der Farbe bei Erfolg
 
-             // Funktionsname und unabhängige Variable extrahieren
-             this.properties.completeEquationfromWidget = v;
+          // Funktionsname und unabhängige Variable extrahieren
+          let completeEquation = v;
 
           var splitted = v.split("(");
           node.properties["funcName"] = splitted[0]; // Funktionsname
@@ -94,11 +93,29 @@ export function _FunctionNode() {
 
           // Parameter erkennen
 
-          const parameterRegex = /\b[a-df-hj-z]\b/g; // Regex für alleinstehende Buchstaben außer e und i
-          const parameters = formulaFromWidget.match(parameterRegex);
-          this.properties.paramsFromWidget = parameters
-            ? parameters.filter((param) => param !== this.properties.uvName)
-            : [];
+        //   const parameterRegex = /\b[a-df-hj-z]\b(?!\()/g; // Regex für alleinstehende Buchstaben außer 'e' und 'i', die nicht von '(' gefolgt werden
+        //   const parameters = formulaFromWidget.match(parameterRegex);
+        //   console.log(parameters);
+        //   if (parameters) {
+        //     this.properties.paramsFromWidget = parameters.filter(function(param) {
+        //         return param !== this.properties.uvName;
+        //     }.bind(this)); // bind stellt sicher, dass 'this' korrekt referenziert wird
+        // } else {
+        //     this.properties.paramsFromWidget = [];
+        // }
+        //   if (this.properties.paramsFromWidget && this.properties.paramsFromWidget.length > 4) {
+        //     console.error(
+        //       "Zu viele Parameter. Maximal 4 Parameter sind erlaubt."
+        //     );
+        //     this.boxcolor = "red"; // Fehlerfarbmarkierung
+        //     this.inputError = true; // Setze den Fehlerstatus auf "true"
+        //     return;
+        //   }
+          this.inputError = false; // Setze den Fehlerstatus auf "false"
+          this.boxcolor = null; // Zurücksetzen der Farbe bei Erfolg
+          this.properties.completeEquationfromWidget = completeEquation;
+          //this.properties.paramsFromWidget = parameters
+       
         }
       );
 
@@ -228,7 +245,15 @@ export function _FunctionNode() {
 
       // Setze die Labels der Parameter-Eingänge basierend auf den Parameternamen und Zeichne die Formen darum
       for (let i = 0; i < 4; i++) {
-        this.inputs[i + 1].label = this.properties["paramNames"][i];
+      //   if (this.properties.paramsFromWidget && this.properties.paramsFromWidget[i]) {
+      //     this.inputs[i + 1].label = this.properties.paramsFromWidget[i];
+      // } else 
+      
+      if (this.properties["paramNames"] && this.properties["paramNames"][i]) {
+          this.inputs[i + 1].label = this.properties["paramNames"][i];
+      } else { 
+          this.inputs[i + 1].label = ""; // Standardmäßig leer
+      }
 
         const inputPosY = (i + 1) * NODE_SLOT_HEIGHT + 14;
 
@@ -402,6 +427,8 @@ export function _FunctionNode() {
                   "#FF0000",
                   paramValue
                 );
+
+
                 paramNames[i] = paramName; // Speichere den Parameternamen
                 this.properties["paramNames"] = paramNames;
                 //console.log(paramNames);
@@ -516,7 +543,7 @@ export function _FunctionNode() {
               },
             });
 
-            // Färbe den Ausgang grün, wenn die Berechnung erfolgreich war und auch sonst kein Fehler vorliegt
+            // Färbe den Ausgang grün, wenn die Berechnung erfolgreich war und auch sonst kein Fehler Vorliegt
             if (this.inputError != true) {
               this.boxcolor = null; // Zurücksetzen der Farbe bei Erfolg
             }
