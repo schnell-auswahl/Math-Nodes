@@ -4122,8 +4122,8 @@ input, select, textarea {
 
 /* Stile für LiteGraph-Container */
 #litegraph {
-    border-top: 2px solid white; /* Weiße Linie oben */
-    border-bottom: 2px solid white; /* Weiße Linie unten */
+   /* border-top: 2px solid white;  Weiße Linie oben */
+    /* border-bottom: 2px solid white;  Weiße Linie unten */
  
 }
 
@@ -4132,6 +4132,13 @@ input, select, textarea {
 #litegraph-buttons {
     border-top: 2px solid white; /* Weiße Linie oben */
 	padding: 20px 0; /* Kein Innenabstand */    
+}
+
+#graphstylehalfheight {
+    height: 400px;
+	position: relative; /* Setzt den Canvas-Bereich als Referenzpunkt */
+    width: 100%;
+    display: block; /* Sicherstellen, dass der Canvas-Bereich blockweise dargestellt wird */
 }
 
 #graphstylefull {

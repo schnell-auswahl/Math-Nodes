@@ -32,27 +32,9 @@
       "bgcolor": "#879BCE"
     },
     {
-      "id": 9,
-      "type": "Wortmaschinen/TextInputNode",
-      "pos": [95, 140],
-      "size": [220, 150],
-      "flags": {},
-      "order": 2,
-      "mode": 0,
-      "outputs": [
-        { "name": "", "type": "string", "links": [], "slot_index": 0 }
-      ],
-      "title": "Text Eingabe",
-      "properties": {
-        "text": "In Frankreich heissen Tortendiagramme Camenbert-Diagramme"
-      },
-      "color": "#D0AF8B",
-      "bgcolor": "#D0AF8B"
-    },
-    {
       "id": 12,
       "type": "Wortmaschinen/TextInputNode",
-      "pos": [73, 463],
+      "pos": [73, 263],
       "size": [220, 150],
       "flags": {},
       "order": 3,
