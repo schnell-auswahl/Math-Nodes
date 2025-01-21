@@ -4,10 +4,8 @@ export function createTextManipulationNode({ title, description, logic }) {
       this.addInput("IN", "string");
       this.addOutput("OUT", "string");
       // Platzhalter ohne Titel anzeigen, sonst Titel dynamisch vergeben
-      this.title = title;
-      if (title == "Platzhalter") {
-        this.title = "\u200B";
-      }
+      this.nodeName = title;
+      this.title = this.nodeName;
       this.size = [220, 100];
       this.resizable = false;
       if (title == "Platzhalter") {
@@ -16,17 +14,24 @@ export function createTextManipulationNode({ title, description, logic }) {
       this.description = description; // Beschreibung für die Node
       this.color = opNodesColor;
       this.bgcolor = bgColor2;
-      if (title == "Platzhalter") {        
+      if (this.nodeName == "Platzhalter") {        
         //Verwende die adjustColor Funktion, um die Helligkeit der Farben anzupassen
         //this.color = "#CCF5DF"; // Passe den Wert nach Bedarf an
         this.bgcolor = "#BFCAD7"; // Passe den Wert nach Bedarf an
+        this.properties = {titelfortitle: "\u200B"};
       }
     }
 
     onExecute() {
-      const inputText = this.getInputData(0);
+      let inputText = this.getInputData(0);
+      if (inputText && inputText.includes("\u200B")) {
+        inputText = inputText.replace(/\u200B/g, "");
+      }
       if (inputText) {
         this.setOutputData(0, logic(inputText));
+      }
+      if (this.nodeName == "Platzhalter") {
+        this.title = this.properties.titelfortitle;
       }
     }
 

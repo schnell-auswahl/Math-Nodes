@@ -555,19 +555,44 @@ if (lgType === "Wortmaschinen") {
 
   graph.start(30);
 
-  // Loop-Funktion
-  function loop() {
-    if (!isVisible) {
-      isLooping = false;
-      //console.log("Loop stopped because canvas is not visible." + canvasId);
-      return; // Stoppe den Loop, wenn Canvas nicht sichtbar
-    }
 
-    graph.runStep();
-    canvas.draw(true, true); // Redraw every frame
-    //console.log("Loop running." + canvasId);
-    requestAnimationFrame(loop); // Loop erneut aufrufen
+
+function loop() {
+  // Schleife läuft kontinuierlich
+  requestAnimationFrame(loop);
+
+    
+  // if (manualDraw == true) {
+  //   console.log("Manual draw requested.");
+  //   graph.runStep();
+  //   canvas.draw(true, true); // Redraw
+  //   manualDraw = false;
+  // }
+
+  // Überprüfen, ob das Canvas sichtbar ist
+  if (!isVisible && !manualDraw) { 
+    console.log("Canvas is not visible. Skipping draw." + canvasId);
+    return; // Überspringe das Zeichnen, wenn Canvas nicht sichtbar
   }
+
+  const graph = canvas.graph;
+  const hasActiveAnim = graph ? hasActiveAnimation(graph) : false;
+
+  // Überprüfen, ob eine aktive Animation vorhanden ist oder der Timer aktiv ist
+  if (!hasActiveAnim && !manualDraw) {
+    console.log("No active animation and draw timer inactive. Skipping draw." + canvasId);
+    return; // Überspringe das Zeichnen, wenn keine aktive Animation vorhanden und der Timer nicht aktiv ist
+  }
+
+  console.log("Loop running." + canvasId);
+  graph.runStep();
+  canvas.draw(true, true); // Redraw every frame
+}
+    
+    // Starten der Schleife
+    requestAnimationFrame(loop);
+
+
 
   /**
    * Observer to monitor the visibility of the canvas element.
@@ -576,26 +601,36 @@ if (lgType === "Wortmaschinen") {
    *
    * @param {IntersectionObserverEntry[]} entries - Array of intersection observer entries.
    */
+
+  const options = {
+    root: null, // Standardmäßig der Viewport
+    rootMargin: '0px', // Margin um den Root
+    threshold: 0.1 // Schwellenwert für die Sichtbarkeit (0.1 bedeutet 10% sichtbar)
+  };
+  
   const observer = new IntersectionObserver((entries) => {
     entries.forEach((entry) => {
+      const canvas = entry.target;
       isVisible = entry.isIntersecting; // Prüft, ob das Canvas sichtbar ist
-      //console.log(`Canvas visibility changed: ${isVisible}`);
-      if (isVisible && !isLooping) {
-        // Starte den Loop, wenn sichtbar und nicht bereits laufend
-        //console.log("Starting loop as canvas is now visible.");
-        isLooping = true;
-        loop();
-      } else if (!isVisible && isLooping) {
-        //console.log("Stopping loop as canvas is no longer visible.");
-        isLooping = false;
-      }
     });
-  });
-
+  }, options);
+  
   // Beobachte den Canvas
   observer.observe(canvasElement);
 
-  // loop(); // Start the loop
+    // ...existing code...
+  
+  /**
+   * Überprüft, ob eine der Nodes im Canvas animation.active == true hat.
+   * @param {Object} graph - Das Graph-Objekt des Canvas.
+   * @returns {boolean} - True, wenn eine Node animation.active == true hat, sonst false.
+   */
+  function hasActiveAnimation(graph) {
+   // console.log("Current nodes in graph:", graph._nodes);
+    return graph._nodes.some(node => node.animationActive);
+  }
+
+  
 
   //console.log(`Graph für Canvas "${canvasId}" erstellt.`);
   return { graph, canvas };
@@ -603,6 +638,19 @@ if (lgType === "Wortmaschinen") {
 
 // Exportiere die Funktion
 window.createGraphInstance = createGraphInstance;
+
+
+// Funktioniert, aber noch nicht sensitiv für verschiedene Graphen. canvas id implementieren
+let manualDraw = false;
+
+export function manualDrawFkt(Delay) {
+  console.log("Manual draw fkt started.");
+  manualDraw = true;
+  setTimeout(() => {
+    manualDraw = false;
+  }, Delay);
+}
+
 
 // Funktionen fuer verschiedenen Kram
 

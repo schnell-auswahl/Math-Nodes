@@ -1,3 +1,5 @@
+import { manualDrawFkt } from '../createGraph.js'; // Importiere die Funktion
+
 export function _FunctionNode() {
   return class FunctionNode {
     constructor() {
@@ -115,7 +117,10 @@ export function _FunctionNode() {
           this.boxcolor = null; // Zurücksetzen der Farbe bei Erfolg
           this.properties.completeEquationfromWidget = completeEquation;
           //this.properties.paramsFromWidget = parameters
-       
+          // Starte den Render-Timer für 5000ms (5 Sekunden)
+           
+            manualDrawFkt(400);
+           
         }
       );
 
@@ -356,7 +361,6 @@ export function _FunctionNode() {
           this.offsetX + inputLabelmaxLength * 8,
           this.offsetY - (1 / 2) * this.renderedImage.height //zentrierung i der node
         );
-
         this.Pause == false;
       }
     }

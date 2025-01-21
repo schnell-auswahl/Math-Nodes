@@ -4135,7 +4135,7 @@ input, select, textarea {
 }
 
 #graphstylehalfheight {
-    height: 400px;
+    height: 470px;
 	position: relative; /* Setzt den Canvas-Bereich als Referenzpunkt */
     width: 100%;
     display: block; /* Sicherstellen, dass der Canvas-Bereich blockweise dargestellt wird */
