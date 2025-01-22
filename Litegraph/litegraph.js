@@ -5373,7 +5373,7 @@ LGraphNode.prototype.executeAction = function(action)
 		this.read_only = false; //if set to true users cannot modify the graph
         this.render_only_selected = true;
         this.live_mode = false;
-        this.show_info = true; // renderinfos unten links auf dem canvas
+        this.show_info = false; // renderinfos unten links auf dem canvas
         this.allow_dragcanvas = true;
         this.allow_dragnodes = true;
         this.allow_interaction = true; //allow to control widgets, buttons, collapse, etc
@@ -5390,10 +5390,10 @@ LGraphNode.prototype.executeAction = function(action)
 		this.set_canvas_dirty_on_mouse_event = true; //forces to redraw the canvas if the mouse does anything
         this.always_render_background = false;
         this.render_shadows = true;
-        this.render_canvas_border = true;
+        this.render_canvas_border = false;
         this.render_connections_shadows = false; //too much cpu
-        this.render_connections_border = true;
-        this.render_curved_connections = false;
+        this.render_connections_border = false;
+        this.render_curved_connections = true;
         this.render_connection_arrows = false;
         this.render_collapsed_slots = true;
         this.render_execution_order = false;
@@ -8033,7 +8033,7 @@ LGraphNode.prototype.executeAction = function(action)
                 }
                 ctx.fill();
 
-                ctx.fillStyle = "#ffcc00";
+                ctx.fillStyle = "#ffffff";
                 if (this._highlight_input) {
                     ctx.beginPath();
                     var shape = this._highlight_input_slot.shape;
@@ -8533,14 +8533,15 @@ LGraphNode.prototype.executeAction = function(action)
         if (ctx.finish) {
             ctx.finish();
         }
-console.log(this.dirty_bgcanvas);
+//console.log(this.dirty_bgcanvas);
 
+// Rendering Nachlauf
 if (!this.timeoutRunning) {
     this.timeoutRunning = true;
     setTimeout(() => {
         this.dirty_bgcanvas = false;
         this.timeoutRunning = false;
-        console.log(this.dirty_bgcanvas);
+        //console.log(this.dirty_bgcanvas);
     }, 400);
 }
 
@@ -9017,7 +9018,7 @@ this.dirty_canvas = true; //to force to repaint the front canvas with the bgcanv
 			return;
 		text = text.substr(0,30); //avoid weird
 
-		ctx.font = "14px Courier New";
+		ctx.font = "14px Arial";
 		var info = ctx.measureText(text);
 		var w = info.width + 20;
 		var h = 24;
@@ -9025,7 +9026,7 @@ this.dirty_canvas = true; //to force to repaint the front canvas with the bgcanv
 		ctx.shadowOffsetX = 2;
 		ctx.shadowOffsetY = 2;
 		ctx.shadowBlur = 3;
-		ctx.fillStyle = "#454";
+		ctx.fillStyle = fbNodesColor;
 		ctx.beginPath();
 		ctx.roundRect( pos[0] - w*0.5, pos[1] - 15 - h, w, h, [3]);
 		ctx.moveTo( pos[0] - 10, pos[1] - 15 );
@@ -13253,6 +13254,7 @@ this.dirty_canvas = true; //to force to repaint the front canvas with the bgcanv
             options = node.getMenuOptions(this);
         } 
         else {
+            //Kontext: Hier wird das Kontextmenü für die Nodes erstellt
             options = [//Zum debuggen ein uns auskommentieren
                 {
                     content: "Inputs",
@@ -13718,7 +13720,7 @@ this.dirty_canvas = true; //to force to repaint the front canvas with the bgcanv
      * - ignore_item_callbacks: ignores the callback inside the item, it just calls the options.callback
      * - event: you can pass a MouseEvent, this way the ContextMenu appears in that position
      */
-    function ContextMenu(values, options) {
+    function ContextMenu(values, options) { // Hier koennen sachen fuer das Kontextmenue eingestellt werden
         options = options || {};
         this.options = options;
         var that = this;
@@ -14105,6 +14107,7 @@ this.dirty_canvas = true; //to force to repaint the front canvas with the bgcanv
         return false;
     };
 
+    //used to create menus from an array of options
     LiteGraph.ContextMenu = ContextMenu;
 
     LiteGraph.closeAllContextMenus = function(ref_window) {
