@@ -277,10 +277,10 @@ export function createGraphInstance(canvasId) {
         <button id="menu-toggle" class="button primary small">Menü</button>
         <nav id="menu-content" style="display: none; margin-top: 10px;">
             <ul class="links">
-            <button id="fullscreen" onclick="goFullscreen('${canvasId}'); " class="button fit small" style="margin-bottom: 10px;">Vollbild</button>
-            <button id="saveaspic" onclick="LightgraphtoImage('${canvasId}')" class="button fit small" style="margin-bottom: 10px;">Als Bild speichern</button>
-               <button id="save" onclick="saveGraphToFile('${canvasId}')" class="button fit small" style="margin-bottom: 10px;">speichern</button>
-                <button id="load" onclick="loadGraphFromFile('${canvasId}')" class="button fit small" style="margin-bottom: 10px;">laden</button>
+            <button id="fullscreen${canvasId}" onclick="goFullscreen('${canvasId}'); " class="button fit small" style="margin-bottom: 10px;">Vollbild</button>
+            <button id="saveaspic${canvasId}" onclick="LightgraphtoImage('${canvasId}')" class="button fit small" style="margin-bottom: 10px;">Als Bild speichern</button>
+               <button id="save${canvasId}" onclick="saveGraphToFile('${canvasId}')" class="button fit small" style="margin-bottom: 10px;">speichern</button>
+                <button id="load${canvasId}" onclick="loadGraphFromFile('${canvasId}')" class="button fit small" style="margin-bottom: 10px;">laden</button>
                 <button onclick="clearGraph('${canvasId}')" class="button primary fit small" style="margin-bottom: 10px;">Alles Löschen</button>
                 <button id="newNode${canvasId}" class="button fit small" style="margin-bottom: 10px;">Neue Maschine</button>
                     <div style="display: flex; align-items: center; justify-content: space-between; width: 100%; margin-bottom: 10px;">
@@ -330,13 +330,13 @@ function toggleMenu(isExpanded) {
 // Liste aller Buttons, die das Menü schließen sollen
 const menubuttons = [
   menuToggle, // Beispiel: Menü-Umschalt-Button
-  document.getElementById(`fullscreen`),
-  document.getElementById(`saveaspic`),
-  document.getElementById(`save`),
-  document.getElementById(`load`),
-  document.getElementById(`position`),
-  document.getElementById(`delnode`),
-  document.getElementById("CloseNewNodeMenu")
+  document.getElementById(`fullscreen${canvasId}`),
+  document.getElementById(`saveaspic${canvasId}`),
+  document.getElementById(`save${canvasId}`),
+  document.getElementById(`load${canvasId}`),
+  document.getElementById(`position${canvasId}`),
+  document.getElementById(`delnode${canvasId}`),
+  document.getElementById(`CloseNewNodeMenu${canvasId}`)
   ];
 
 // Füge jedem Button einen Event-Listener hinzu

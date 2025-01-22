@@ -243,7 +243,7 @@ async function loadAllGraphs() {
     // setTimeout(() => {
     //   canvases.forEach((canvas) => autoPositionNodes(canvas.id));
     // }, 500);
-    console.log("Alle Graphen wurden erfolgreich geladen.");
+    //console.log("Alle Graphen wurden erfolgreich geladen.");
   } catch (error) {
     console.error("Fehler beim Laden eines oder mehrerer Graphen:", error);
   }
@@ -373,11 +373,11 @@ function adjustAllCanvasAndNodePositions(shouldAdjustCanvasSize = true, shouldau
   // Für jedes Canvas die Größe und Node-Positionen anpassen
   canvases.forEach((canvas) => {
     if (shouldAdjustCanvasSize) {
-      console.log("adjusting canvas size");
+      //console.log("adjusting canvas size");
       adjustCanvasSize(canvas.id);
     }
     if (shouldautoPositionNodes) {
-      console.log("adjusting node positions");
+      //console.log("adjusting node positions");
       autoPositionNodes(canvas.id);
     }
     // const graph = canvas.graph; // LGraph-Objekt vom Canvas
@@ -395,7 +395,6 @@ document.addEventListener("DOMContentLoaded", () => {
   window.addEventListener("resize", adjustAllCanvasAndNodePositions);
 });
 
-// Platz optimieren
 
 
 /**
@@ -486,6 +485,8 @@ function autoPositionNodes(canvasId) {
  * covert canvas to image
  * and save the image file
  */
+
+// Canvas2Image v1.0.9
 
 var Canvas2Image = (function () {
   // check if support sth.
@@ -815,7 +816,9 @@ if (removeBackground) {
           false
         );
         canvas.clear_background_color = canvasbgColor;
+        canvas.draw(true, true); // Zweiter Parameter "true" sorgt für komplet
       }, 100); // Kurze Verzögerung, um sicherzustellen, dass der Canvas neu gezeichnet wurde
+      
 } else {
     Canvas2Image.saveAsPNG(
       canvasElement,
