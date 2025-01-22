@@ -1,4 +1,3 @@
-import { manualDrawFkt } from '../createGraph.js'; // Importiere die Funktion
 
 export function _FunctionNode() {
   return class FunctionNode {
@@ -119,7 +118,6 @@ export function _FunctionNode() {
           //this.properties.paramsFromWidget = parameters
           // Starte den Render-Timer für 5000ms (5 Sekunden)
            
-            manualDrawFkt(400);
            
         }
       );
@@ -364,6 +362,11 @@ export function _FunctionNode() {
         this.Pause == false;
       }
     }
+
+// onconnectionsChange() {
+//   manualDrawFkt(400);
+// }
+
 
     // Führt die Berechnung durch, wenn die Eingabedaten vorliegen
     onExecute() {

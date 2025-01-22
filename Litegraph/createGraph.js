@@ -199,7 +199,7 @@ export function createGraphInstance(canvasId) {
       const touchedNode = graph.getNodeOnPos(x, y);
   
       if (touchedNode) {
-        console.log("Node getroffen:", touchedNode.title);
+        //console.log("Node getroffen:", touchedNode.title);
         e.preventDefault(); // Unterdrücke das Scrollen
       }
   
@@ -227,7 +227,7 @@ export function createGraphInstance(canvasId) {
       const movedNode = graph.getNodeOnPos(x, y);
 
       if (movedNode) {
-        console.log("Node wird bewegt:", movedNode.title);
+        //console.log("Node wird bewegt:", movedNode.title);
         e.preventDefault(); // Unterdrücke das Scrollen
       }
 
@@ -370,7 +370,7 @@ menubuttons.forEach((button) => {
     canvas.setZoom(currentZoom, [0, 0]);
     canvasElement.zoom = currentZoom; // Zoom-Wert im Canvas speichern
     zoomValueLabel.textContent = currentZoom.toFixed(1); // Aktualisiere die Anzeige
-    console.log(canvasElement.zoom);
+    //console.log(canvasElement.zoom);
   }
 
   // Event-Listener für die Buttons
@@ -545,7 +545,7 @@ if (lgType === "Wortmaschinen") {
         }
       });
     }
-  });
+  });    
 
  
 
@@ -554,7 +554,6 @@ if (lgType === "Wortmaschinen") {
   let isLooping = false;
 
   graph.start(30);
-
 
 
 function loop() {
@@ -570,21 +569,21 @@ function loop() {
   // }
 
   // Überprüfen, ob das Canvas sichtbar ist
-  if (!isVisible && !manualDraw) { 
-    console.log("Canvas is not visible. Skipping draw." + canvasId);
-    return; // Überspringe das Zeichnen, wenn Canvas nicht sichtbar
-  }
+  // if (!isVisible) { 
+  //   console.log("Canvas is not visible. Skipping draw." + canvasId);
+  //   return; // Überspringe das Zeichnen, wenn Canvas nicht sichtbar
+  // }
 
   const graph = canvas.graph;
   const hasActiveAnim = graph ? hasActiveAnimation(graph) : false;
 
   // Überprüfen, ob eine aktive Animation vorhanden ist oder der Timer aktiv ist
   if (!hasActiveAnim && !manualDraw) {
-    console.log("No active animation and draw timer inactive. Skipping draw." + canvasId);
+    //console.log("No active animation and manualdraw inactive. Skipping draw." + canvasId);
     return; // Überspringe das Zeichnen, wenn keine aktive Animation vorhanden und der Timer nicht aktiv ist
   }
 
-  console.log("Loop running." + canvasId);
+  //console.log("Loop running." + canvasId);
   graph.runStep();
   canvas.draw(true, true); // Redraw every frame
 }
@@ -594,29 +593,30 @@ function loop() {
 
 
 
-  /**
-   * Observer to monitor the visibility of the canvas element.
-   * When the canvas becomes visible, it starts the loop function.
-   * When the canvas is no longer visible, it stops the loop function.
-   *
-   * @param {IntersectionObserverEntry[]} entries - Array of intersection observer entries.
-   */
+  // /**
+  //  * Observer to monitor the visibility of the canvas element.
+  //  * When the canvas becomes visible, it starts the loop function.
+  //  * When the canvas is no longer visible, it stops the loop function.
+  //  *
+  //  * @param {IntersectionObserverEntry[]} entries - Array of intersection observer entries.
+  //  */
 
-  const options = {
-    root: null, // Standardmäßig der Viewport
-    rootMargin: '0px', // Margin um den Root
-    threshold: 0.1 // Schwellenwert für die Sichtbarkeit (0.1 bedeutet 10% sichtbar)
-  };
+  // const options = {
+  //   root: null, // Standardmäßig der Viewport
+  //   rootMargin: '0px', // Margin um den Root
+  //   threshold: 0.1 // Schwellenwert für die Sichtbarkeit (0.1 bedeutet 10% sichtbar)
+  // };
   
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach((entry) => {
-      const canvas = entry.target;
-      isVisible = entry.isIntersecting; // Prüft, ob das Canvas sichtbar ist
-    });
-  }, options);
+  // const observer = new IntersectionObserver((entries) => {
+  //   entries.forEach((entry) => {
+  //     const canvas = entry.target;
+  //     isVisible = entry.isIntersecting; // Prüft, ob das Canvas sichtbar ist
+  //     //manualDrawFkt(400); // Startet die manuelle Zeichnung, wenn Graph sichtbar wird für alle aktuell sichtbaren graphen
+  //   });
+  // }, options);
   
-  // Beobachte den Canvas
-  observer.observe(canvasElement);
+  // // Beobachte den Canvas
+  // observer.observe(canvasElement);
 
     // ...existing code...
   
@@ -640,10 +640,13 @@ function loop() {
 window.createGraphInstance = createGraphInstance;
 
 
+
+
+
 // Funktioniert, aber noch nicht sensitiv für verschiedene Graphen. canvas id implementieren
 let manualDraw = false;
 
-export function manualDrawFkt(Delay) {
+function manualDrawFkt(Delay) {
   console.log("Manual draw fkt started.");
   manualDraw = true;
   setTimeout(() => {
@@ -651,6 +654,7 @@ export function manualDrawFkt(Delay) {
   }, Delay);
 }
 
+window.manualDrawFkt = manualDrawFkt;
 
 // Funktionen fuer verschiedenen Kram
 

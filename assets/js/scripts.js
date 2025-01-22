@@ -12,8 +12,8 @@ function delNode(canvasId) {
     return;
   }
   graph.list_of_graphcanvas[0].deleteSelectedNodes();
+  
 }
-
 
 
 function goFullscreen(canvasId) {
@@ -44,7 +44,7 @@ function goFullscreen(canvasId) {
         setTimeout(() => {
           LGcanvas.resize(); // Größe zurücksetzen
           for (let i = 0; i < 3; i++) {
-            adjustNodePositions(canvasId);
+            autoPositionNodes(canvasId);
           }
         }, 100); // Verzögerung von 100 ms
       })
@@ -60,7 +60,7 @@ function goFullscreen(canvasId) {
         setTimeout(() => {
           LGcanvas.resize(); // Canvas-Größe anpassen
           for (let i = 0; i < 3; i++) {
-            adjustNodePositions(canvasId); // Node-Positionen anpassen
+            autoPositionNodes(canvasId); // Node-Positionen anpassen
           }
         }, 100); // Verzögerung von 100 ms
       })
@@ -186,8 +186,10 @@ function loadGraphFromServerAsync(canvasId, jsonFilePath) {
           graph.configure(json);
           graph.start();
 
-      
           resolve(); // Ladevorgang erfolgreich abgeschlossen
+
+          //autoPositionNodes(canvas.id); // wird bei loadallgraphesfrooomserver schon aufgerufen
+          adjus
         } catch (error) {
           reject(`Fehler beim Konfigurieren des Graphen: ${error.message}`);
         }
@@ -234,9 +236,14 @@ async function loadAllGraphs() {
 
   try {
     await Promise.all(loadPromises); // Warten, bis alle Graphen geladen sind
-
-    // Nodes anpassen, nachdem alle Graphen geladen sind
     canvases.forEach((canvas) => autoPositionNodes(canvas.id));
+    // Nodes anpassen, nachdem alle Graphen geladen sind
+    manualDrawFkt(500);
+    
+    // setTimeout(() => {
+    //   canvases.forEach((canvas) => autoPositionNodes(canvas.id));
+    // }, 500);
+    console.log("Alle Graphen wurden erfolgreich geladen.");
   } catch (error) {
     console.error("Fehler beim Laden eines oder mehrerer Graphen:", error);
   }
@@ -284,67 +291,67 @@ function adjustAllCanvasSizes() {
 }
 //Node positions
 
-function adjustNodePositions(canvasId) {
-  const canvas = document.getElementById(canvasId);
-  if (!canvas) {
-    console.error(`Canvas mit ID "${canvasId}" nicht gefunden.`);
-    return;
-  }
+// function adjustNodePositions(canvasId) {
+//   const canvas = document.getElementById(canvasId);
+//   if (!canvas) {
+//     console.error(`Canvas mit ID "${canvasId}" nicht gefunden.`);
+//     return;
+//   }
 
-  const graph = canvas.graph;
-  if (!graph) {
-    console.error(`Kein Graph mit Canvas-ID "${canvasId}" gefunden.`);
-    return;
-  }
-  const zoomFactor = canvas.zoom || 1;
+//   const graph = canvas.graph;
+//   if (!graph) {
+//     console.error(`Kein Graph mit Canvas-ID "${canvasId}" gefunden.`);
+//     return;
+//   }
+//   const zoomFactor = canvas.zoom || 1;
 
-  const canvasWidth = canvas.width / zoomFactor;
-  const canvasHeight = canvas.height / zoomFactor;
-  const margin = 20; // Randgröße
-  const titleHeight = LiteGraph.NODE_TITLE_HEIGHT || 30; // Höhe des Titels
+//   const canvasWidth = canvas.width / zoomFactor;
+//   const canvasHeight = canvas.height / zoomFactor;
+//   const margin = 20; // Randgröße
+//   const titleHeight = LiteGraph.NODE_TITLE_HEIGHT || 30; // Höhe des Titels
 
-  // Ursprüngliche Positionen sammeln
-  const nodePositions = graph._nodes.map((node) => ({
-    node: node,
-    x: node.pos[0],
-    y: node.pos[1],
-    width: node.size ? node.size[0] : 150, // Standardbreite eines Nodes
-    height: node.size ? node.size[1] : 100, // Standardhöhe eines Nodes
-  }));
+//   // Ursprüngliche Positionen sammeln
+//   const nodePositions = graph._nodes.map((node) => ({
+//     node: node,
+//     x: node.pos[0],
+//     y: node.pos[1],
+//     width: node.size ? node.size[0] : 150, // Standardbreite eines Nodes
+//     height: node.size ? node.size[1] : 100, // Standardhöhe eines Nodes
+//   }));
 
-  // Extremwerte finden, wobei wir die rechte Seite der Nodes berücksichtigen
-  const minX = Math.min(...nodePositions.map((pos) => pos.x));
-  const maxX = Math.max(...nodePositions.map((pos) => pos.x + pos.width)); // Rechte Seite des Nodes
-  const minY = Math.min(...nodePositions.map((pos) => pos.y));
-  const maxY = Math.max(...nodePositions.map((pos) => pos.y + pos.height)); // Untere Seite des Nodes
+//   // Extremwerte finden, wobei wir die rechte Seite der Nodes berücksichtigen
+//   const minX = Math.min(...nodePositions.map((pos) => pos.x));
+//   const maxX = Math.max(...nodePositions.map((pos) => pos.x + pos.width)); // Rechte Seite des Nodes
+//   const minY = Math.min(...nodePositions.map((pos) => pos.y));
+//   const maxY = Math.max(...nodePositions.map((pos) => pos.y + pos.height)); // Untere Seite des Nodes
 
-  // Skalenfaktoren für X und Y berechnen
-  const scaleX =
-    maxX === minX
-      ? 1 // Wenn alle X-Werte gleich sind, keine Skalierung erforderlich
-      : (canvasWidth - 2 * margin) / (maxX - minX);
+//   // Skalenfaktoren für X und Y berechnen
+//   const scaleX =
+//     maxX === minX
+//       ? 1 // Wenn alle X-Werte gleich sind, keine Skalierung erforderlich
+//       : (canvasWidth - 2 * margin) / (maxX - minX);
 
-  const scaleY =
-    maxY === minY
-      ? 1 // Wenn alle Y-Werte gleich sind, keine Skalierung erforderlich
-      : (canvasHeight - 2 * margin - titleHeight) / (maxY - minY);
+//   const scaleY =
+//     maxY === minY
+//       ? 1 // Wenn alle Y-Werte gleich sind, keine Skalierung erforderlich
+//       : (canvasHeight - 2 * margin - titleHeight) / (maxY - minY);
 
-  // Kleineren Skalierungsfaktor verwenden, um das Verhältnis zu erhalten
-  const scale = Math.min(scaleX, scaleY);
+//   // Kleineren Skalierungsfaktor verwenden, um das Verhältnis zu erhalten
+//   const scale = Math.min(scaleX, scaleY);
 
-  // Offset berechnen, um die Nodes innerhalb des Canvas zu verschieben
-  const offsetX = margin - minX * scale;
-  const offsetY = margin + titleHeight - minY * scale;
+//   // Offset berechnen, um die Nodes innerhalb des Canvas zu verschieben
+//   const offsetX = margin - minX * scale;
+//   const offsetY = margin + titleHeight - minY * scale;
 
-  // Nodes neu positionieren
-  nodePositions.forEach(({ node, x, y }) => {
-    // Neue Position basierend auf Skalierung und Offset berechnen
-    node.pos[0] = x * scale + offsetX;
-    node.pos[1] = y * scale + offsetY;
+//   // Nodes neu positionieren
+//   nodePositions.forEach(({ node, x, y }) => {
+//     // Neue Position basierend auf Skalierung und Offset berechnen
+//     node.pos[0] = x * scale + offsetX;
+//     node.pos[1] = y * scale + offsetY;
 
-  });
+//   });
 
-}
+// }
 
 // Dynamisches Resizing für alle Canvas mit data-resize="true"
 function adjustAllNodePositions() {
@@ -359,21 +366,30 @@ function adjustAllNodePositions() {
 }
 
 // Dynamisches Resizing für alle Canvas und Neupositionierung der Nodes
-function adjustAllCanvasAndNodePositions() {
+function adjustAllCanvasAndNodePositions(shouldAdjustCanvasSize = true, shouldautoPositionNodes = true) {
   // Alle Canvas-Elemente mit dem Attribut data-resize="true" auswählen
   const canvases = document.querySelectorAll("canvas");
 
   // Für jedes Canvas die Größe und Node-Positionen anpassen
   canvases.forEach((canvas) => {
-    adjustCanvasSize(canvas.id);
-    autoPositionNodes(canvas.id);
+    if (shouldAdjustCanvasSize) {
+      console.log("adjusting canvas size");
+      adjustCanvasSize(canvas.id);
+    }
+    if (shouldautoPositionNodes) {
+      console.log("adjusting node positions");
+      autoPositionNodes(canvas.id);
+    }
+    // const graph = canvas.graph; // LGraph-Objekt vom Canvas
+    // const LGcanvas = graph.list_of_graphcanvas[0];
+    // LGcanvas.dirty_bgcanvas = true; // Setzen von dirty_bgcanvas
 
   });
 }
 
 // Beim Laden der Seite die Canvas-Größen und node positionsinitial anpassen
 document.addEventListener("DOMContentLoaded", () => {
-  adjustAllCanvasAndNodePositions(); // Initial aufrufen
+  adjustAllCanvasAndNodePositions(true,false); // Initial aufrufen
 
   // Event Listener für Fensteränderungen hinzufügen
   window.addEventListener("resize", adjustAllCanvasAndNodePositions);
@@ -392,7 +408,6 @@ document.addEventListener("DOMContentLoaded", () => {
  * @throws Will log an error if the graph associated with the canvas is not found.
  * @throws Will log an error if no nodes are found in the graph.
  */
-
 function autoPositionNodes(canvasId) {
   const canvas = document.getElementById(canvasId);
   if (!canvas) {
@@ -407,7 +422,6 @@ function autoPositionNodes(canvasId) {
   }
 
   const zoomFactor = canvas.zoom || 1;
-
 
   const canvasWidth = canvas.width / zoomFactor;
   const canvasHeight = canvas.height / zoomFactor;
@@ -455,9 +469,15 @@ function autoPositionNodes(canvasId) {
 
   nodePositions.forEach(({ node, y }) => {
     node.pos[1] = y * scaleY + offsetY;
+
+    // Überprüfen, ob die Node im Rechteck 120px x 70px in der oberen linken Ecke liegt
+    if (node.pos[0] < 120 && node.pos[1] < 70) {
+      node.pos[1] = 70 + titleHeight + margin; // Verschieben der y-Position unter das Rechteck
+    }
   });
 
-  
+  const LGcanvas = graph.list_of_graphcanvas[0];
+  LGcanvas.dirty_bgcanvas = true; // Setzen von dirty_bgcanvas
 }
 
 
