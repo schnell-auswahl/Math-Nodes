@@ -1775,7 +1775,10 @@ input, select, textarea {
 		width: -ms-max-content;
 		width: max-content;
 		margin-bottom: 2em;
+		position: relative; /* Stellt sicher, dass das absolute Positionieren innerhalb dieses divs erfolgt */
 	}
+
+
 
 		header.major > :first-child {
 			margin-bottom: 0;
@@ -2988,13 +2991,47 @@ input, select, textarea {
 				align-items: center;
 				padding: 2em 3em 0.1em 3em ;
 				width: 33%;
+				position: relative;
 			}
 
+			
+
+
+				.icon-text-container {
+					position: absolute; /* Positionierung relativ zum Eltern-Element */
+					bottom: 10px; /* Abstand vom unteren Rand */
+					right: 2cap; /* Abstand vom rechten Rand */
+				
+					display: flex; /* Anordnung der Kinder-Elemente in einer Reihe */
+					align-items: center; /* Vertikale Ausrichtung der Kinder-Elemente */
+				}
+
+				.worksheet-icon {
+					float: right;
+					width: 8rem; /* Breite des Icons relativ zur Breite des übergeordneten Elements */
+					height: 8rem; /* Höhe des Icons wird automatisch angepasst, um das Seitenverhältnis beizubehalten */
+					margin-right: 0.0rem; /* Abstand zwischen dem Icon und dem Text */
+					max-width: 80px; /* Maximale Breite des Icons */
+					max-height: 100px; /* Maximale Höhe des Icons */
+				}
+
+				.icon-text {
+					float: right;
+					font-size: 1rem; /* Schriftgröße des Textes */
+					color: #ffffff; /* Farbe des Textes */
+					font-weight: 600;
+					
+				}
+
 				.spotlights > section > .content > .inner {
+					padding-bottom: 80px; /* Platz für das Icon */
 					margin: 0 auto;
 					max-width: 100%;
 					width: 65em;
 				}
+
+			
+
 
 			.spotlights > section:nth-child(2n) {
 				-moz-flex-direction: row-reverse;
@@ -3057,20 +3094,23 @@ input, select, textarea {
 			.spotlights > section {
 				display: block;
 			}
-				.spotlights > section > .content {
-					padding: 4em 3em 2em 3em ;
-					width: 100%;
-					word-wrap: break-word;
-    				overflow-wrap: break-word;
-				}
+			
 
 				.spotlights > section > .image {
 					width: 100%;
+					
 				}
 
 				.spotlights > section > .image canvas {
 					width: 100%; /* Füllt den Bereich der Eltern-Div */
 					height: 100%;
+				}
+				.spotlights > section > .content {
+					padding: 4em 3em 2em 3em ;
+					width: 100%;
+					word-wrap: break-word;
+    				overflow-wrap: break-word;
+					
 				}
 
 				
@@ -4082,8 +4122,8 @@ input, select, textarea {
 
 /* Stile für LiteGraph-Container */
 #litegraph {
-    border-top: 2px solid white; /* Weiße Linie oben */
-    border-bottom: 2px solid white; /* Weiße Linie unten */
+   /* border-top: 2px solid white;  Weiße Linie oben */
+    /* border-bottom: 2px solid white;  Weiße Linie unten */
  
 }
 
@@ -4092,6 +4132,13 @@ input, select, textarea {
 #litegraph-buttons {
     border-top: 2px solid white; /* Weiße Linie oben */
 	padding: 20px 0; /* Kein Innenabstand */    
+}
+
+#graphstylehalfheight {
+    height: 470px;
+	position: relative; /* Setzt den Canvas-Bereich als Referenzpunkt */
+    width: 100%;
+    display: block; /* Sicherstellen, dass der Canvas-Bereich blockweise dargestellt wird */
 }
 
 #graphstylefull {

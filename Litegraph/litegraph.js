@@ -5373,12 +5373,12 @@ LGraphNode.prototype.executeAction = function(action)
 		this.read_only = false; //if set to true users cannot modify the graph
         this.render_only_selected = true;
         this.live_mode = false;
-        this.show_info = false; // renderinfos unten links auf dem canvas
+        this.show_info = true; // renderinfos unten links auf dem canvas
         this.allow_dragcanvas = true;
         this.allow_dragnodes = true;
         this.allow_interaction = true; //allow to control widgets, buttons, collapse, etc
         this.multi_select = false; //allow selecting multi nodes without pressing extra keys
-        this.allow_searchbox = true;
+        this.allow_searchbox = false;
         this.allow_reconnect_links = true; //allows to change a connection with having to redo it again
 		this.align_to_grid = false; //snap to grid
 
@@ -7854,7 +7854,10 @@ LGraphNode.prototype.executeAction = function(action)
      * @method drawFrontCanvas
      **/
     LGraphCanvas.prototype.drawFrontCanvas = function() {
-        this.dirty_canvas = false;
+        
+       // setTimeout(() => {
+            this.dirty_canvas = false;
+        //}, 5000);
 
         if (!this.ctx) {
             this.ctx = this.bgcanvas.getContext("2d");
@@ -8530,9 +8533,18 @@ LGraphNode.prototype.executeAction = function(action)
         if (ctx.finish) {
             ctx.finish();
         }
+console.log(this.dirty_bgcanvas);
 
+if (!this.timeoutRunning) {
+    this.timeoutRunning = true;
+    setTimeout(() => {
         this.dirty_bgcanvas = false;
-        this.dirty_canvas = true; //to force to repaint the front canvas with the bgcanvas
+        this.timeoutRunning = false;
+        console.log(this.dirty_bgcanvas);
+    }, 400);
+}
+
+this.dirty_canvas = true; //to force to repaint the front canvas with the bgcanvas
     };
 
     var temp_vec2 = new Float32Array(2);

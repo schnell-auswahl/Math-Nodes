@@ -19,18 +19,18 @@ export function _TextDisplayNode() {
             const inputText = this.getInputData(0);
             
             // Wenn Text vorhanden ist, anzeigen; andernfalls Text löschen
-            if (inputText) {
+            if (inputText && inputText.includes("\u200B")) {
+                this.properties.displayedText = "verschlüsselt";
+            } else if (inputText) {
                 this.properties.displayedText = inputText;
                 //console.log("input text: " + inputText);
-            } else {// if (this.properties.displayedText !== "") {
-                //console.log("hey");
+            } else {
                 this.properties.displayedText = this.properties.savedText;
             }
         }
 
         onConnectionsChange() {
             this.properties.displayedText = ""; // Text zurücksetzen, wenn keine Eingabe vorhanden
-
         }
 
              //Minimale Größe Festlegen
@@ -43,6 +43,7 @@ export function _TextDisplayNode() {
             this.size[1] = 100
             }
         }
+
 
         onDrawForeground(ctx) {
             if (this.flags && this.flags.collapsed) {

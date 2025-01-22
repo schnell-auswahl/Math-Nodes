@@ -8,11 +8,35 @@ export function _uvNode() {
         this.color = srcNodesColor;
         this.bgcolor = bgColor2;
         this.addOutput("value", "object");
-        this.properties = { value: 1.0, rightSide: "x", widgetVisible: true};
+        this.properties = { value: 1.0, rightSide: "", widgetVisible: true};
         this.numberWidget = this.addWidget("number", "Wert", 1, "value", { precision: 2 });
-        this.nameWidget = this.addWidget("text", "Unabhängige", "x", "rightSide");
+        this.nameWidget = this.addWidget("text", "Unabhängige", this.properties.rightSide,   //Testen
+         (v) => {
+          //console.log("Callback wurde aufgerufen");
+          const lowerCaseValue = v.toLowerCase();
+          if (lowerCaseValue.length === 0) {
+            console.error("Invalid input: Input cannot be empty.");
+            this.nameWidget.value = this.properties["rightSide"];
+            return;
+          }
+          const firstChar = lowerCaseValue.charAt(0);
+          if (!/^[a-z]$/.test(firstChar)) {
+            console.error("Invalid input: Only single letters are allowed.");
+            this.nameWidget.value = this.properties["rightSide"];
+            return;
+          }
+          let correctedValue;
+          if (firstChar === 'e' || firstChar === 'i') {
+            correctedValue = this.properties["rightSide"];
+          } else {
+            correctedValue = firstChar;
+          }
+          this.properties["rightSide"] = correctedValue;
+          this.nameWidget.value = correctedValue; // Aktualisiert den Wert im Widget
+        }
+      );
 
-        // Animationskram
+
         this.lastbtpress = 0;
         this.outputValue = 0;
         this.animationActive = false;

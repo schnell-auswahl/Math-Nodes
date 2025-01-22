@@ -1,0 +1,41 @@
+{
+  "last_node_id": 10,
+  "last_link_id": 0,
+  "nodes": [
+    {
+      "id": 6,
+      "type": "Wortmaschinen/TextInputNode",
+      "pos": [237, 258],
+      "size": [220, 150],
+      "flags": {},
+      "order": 0,
+      "mode": 0,
+      "outputs": [{ "name": "", "type": "string", "links": null }],
+      "title": "Text Eingabe",
+      "properties": {
+        "text": "Czr Vnqs „Lzsgd“ jnlls mtq hm dhmdl Rgzjdrodzqd-Rstdbj unq, „Cdq Vhcdqrodmrshfdm Yzdgltmf“"
+      },
+      "color": "#D0AF8B",
+      "bgcolor": "#D0AF8B"
+    },
+    {
+      "id": 7,
+      "type": "Wortmaschinen/TextDisplayNode",
+      "pos": [1001, 309],
+      "size": [220, 100],
+      "flags": {},
+      "order": 1,
+      "mode": 0,
+      "inputs": [{ "name": "", "type": "string", "link": null }],
+      "title": "Text Anzeige",
+      "properties": { "displayedText": "", "savedText": "" },
+      "color": "#879BCE",
+      "bgcolor": "#879BCE"
+    }
+  ],
+  "links": [],
+  "groups": [],
+  "config": {},
+  "extra": {},
+  "version": 0.4
+}

@@ -4,13 +4,47 @@ export function _CustNumberNode() {
   return (
     class CustNumberNode {
       constructor() {
+        this.lastLogTime = 0; // Zeitstempel des letzten Logs
+
+
         this.color = paramNodesColor;
         this.bgcolor = bgColor2;
+        this.addInput("value", "object");
         this.addOutput("value", "object");
-        this.properties = { value: 1.0, rightSide: "a"};
+        this.properties = { value: 1.0, rightSide: ""};
         this.numberWidget = this.addWidget("number", "Wert", 1, "value", { precision: 2 });
-        this.nameWidget = this.addWidget("text", "Parametername", "a", "rightSide");
+        this.nameWidget = this.addWidget("text", "Parametername", this.properties.rightSide, (v) => {
+          //this.logWithThrottle("Callback wurde aufgerufen");
+          const lowerCaseValue = v.toLowerCase();
+          if (lowerCaseValue.length === 0) {
+            console.error("Invalid input: Input cannot be empty.");
+            this.nameWidget.value = this.properties["rightSide"];
+            return;
+          }
+          const firstChar = lowerCaseValue.charAt(0);
+          if (!/^[a-z]$/.test(firstChar)) {
+            console.error("Invalid input: Only single letters are allowed.");
+            this.nameWidget.value = this.properties["rightSide"];
+            return;
+          }
+          let correctedValue;
+          if (firstChar === 'e' || firstChar === 'i') {
+            correctedValue = this.properties["rightSide"];
+          } else {
+            correctedValue = firstChar;
+          }
+          this.properties["rightSide"] = correctedValue;
+          this.nameWidget.value = correctedValue; // Aktualisiert den Wert im Widget
+        });
+
         this.widgets_up = true;
+
+        this.leftSide = "";
+        this.rightSide = "";
+        this.uvValue = 0;
+        this.uvName = "";
+        this.InputData = null;
+        this.animationOnFromInput = false;
 // Animation
 
         this.lastbtpress = 0;
@@ -21,15 +55,15 @@ export function _CustNumberNode() {
           "Animieren",             // Beschriftung auf dem Button
           null,              // Kein Standardwert notwendig
           () => {            // Callback-Funktion für den Button
-            //console.log("Button gedrückt!");  // Aktion, die bei einem Klick auf den Button ausgeführt wird
+            //this.logWithThrottle("Button gedrückt!");  // Aktion, die bei einem Klick auf den Button ausgeführt wird
             this.lastbtpress = this.graph.globaltime;       // Ruft eine Methode auf, die die Funktion ausführt
 
             if (this.animationActive == true) {
               this.animationActive = false;
-              //console.log(this.animationActive);
+              //this.logWithThrottle(this.animationActive);
             } else {
               this.animationActive = true;
-              //console.log(this.animationActive);
+              //this.logWithThrottle(this.animationActive);
             }
             
 
@@ -42,34 +76,95 @@ export function _CustNumberNode() {
          this.size = [180, 80];
       }
 
+      logWithThrottle(message, data) {
+        const currentTime = Date.now();
+        if (currentTime - this.lastLogTime >= 4000) { // 4000 Millisekunden = 4 Sekunden
+          console.log(message, data);
+          this.lastLogTime = currentTime;
+        }
+      }
+
       onExecute() {
 
+        if (this.isInputConnected(0)) {
+          this.InputData = this.getInputData(0); // Holt den Wert der Gleichung
+          //this.logWithThrottle("InputData received:", this.InputData);
+          this.inputs[0].color_on = adjustColor("#00FF00","#FF0000",this.InputData["value"]);
+          this.outputValue = this.InputData["value"];
+          this.uvValue = this.InputData.uvValue;
+          this.rightSide = this.InputData.rightSide;
+          this.leftSide = this.properties["rightSide"] + "(" + this.InputData.uvName + ")";
+          this.uvName = this.InputData.uvName;
+          this.animationOnFromInput = this.InputData.animationOn;
+          //this.logWithThrottle("Processed input data:", {
+          //   outputValue: this.outputValue,
+          //   uvValue: this.uvValue,
+          //   rightSide: this.rightSide,
+          //   leftSide: this.leftSide,
+          //   uvName: this.uvName
+          // });
+
+
+
+          
+       
+        } else {
+          //this.logWithThrottle("No input data, using properties");
+
            // Hier wird die Rundung wie gewünscht angewendet
+           this.animationOnFromInput = false;
            const roundedValue = Math.round((parseFloat(this.properties["value"]) + Number.EPSILON) * 100) / 100;
            const animatedValue = Math.round((parseFloat(this.graph.globaltime - this.lastbtpress+roundedValue) + Number.EPSILON) * 100) / 100;// Zeitzurücksetzen + Rundung
+           //this.logWithThrottle("Rounded value:", roundedValue);
+           //this.logWithThrottle("Animated value:", animatedValue);
    
            if (this.animationActive) {
            this.outputValue = animatedValue;
-           //console.log(this.outputValue);
+           this.uvValue = this.outputValue;
+           this.rightSide = this.outputValue;
+           this.leftSide = this.properties["rightSide"];
+           this.uvName = "";
+           //this.logWithThrottle("Animation active, output values:", {
+          //    outputValue: this.outputValue,
+          //    uvValue: this.uvValue,
+          //    rightSide: this.rightSide,
+          //    leftSide: this.leftSide,
+          //    uvName: this.uvName
+          //  });
            } else {
              this.outputValue = roundedValue;
-           }
+             this.uvValue = this.outputValue;
+             this.rightSide = this.outputValue;
+             this.leftSide = this.properties["rightSide"];
+             this.uvName = "";
+            //  this.logWithThrottle("Animation not active, output values:", {
+            //    outputValue: this.outputValue,
+            //    uvValue: this.uvValue,
+            //    rightSide: this.rightSide,
+            //    leftSide: this.leftSide,
+            //    uvName: this.uvName
+            //  });
+            }
+
+          }
 
         var output = {
           value: this.outputValue,
-          uvValue: this.outputValue,
-          rightSide: this.outputValue,
-          leftSide: this.properties["rightSide"],
-          uvName: "",
+          uvValue: this.uvValue,
+          rightSide: this.rightSide,
+          leftSide: this.leftSide,
+          uvName: this.uvName,
           isNumberNode: "Parameter",
+          animationOn: this.animationOnFromInput,
           toToolTip: () => {
           
             // Tooltip zusammensetzen
-            const tooltip = `${this.properties["rightSide"]} = ${Math.floor(this.outputValue * 10) / 10}`;
+            const tooltip = `${this.leftSide} = ${Math.floor(this.outputValue * 10) / 10}`;
             return tooltip;
         }
           // funcList: ""
         }
+        //this.logWithThrottle("Final output:", output);
         this.setOutputData(0, output);
         this.outputs[0].color_off = "#000000";
         this.outputs[0].color_on = adjustColor("#00FF00","#FF0000",this.outputValue);
@@ -78,16 +173,16 @@ export function _CustNumberNode() {
       getTitle() {
         let title = "Parameter"
         if (this.properties["rightSide"] && !this.animationActive) {
-          title = title + " " + this.properties["rightSide"];
+          title = title + " " + this.leftSide;
         } else if (this.properties["rightSide"] && this.animationActive) {
-          title = this.properties["rightSide"] + " = "  + Math.floor(this.outputValue * 10) / 10;
+          title = this.leftSide + " = "  + Math.floor(this.outputValue * 10) / 10;
         }
         return title;
       }
 
       setValue(v) {
         this.setProperty("value", v);
-        console.log("in setValue");
+        //this.logWithThrottle("in setValue");
       }
 
      
@@ -122,6 +217,23 @@ export function _CustNumberNode() {
         ctx.closePath();
         ctx.fillStyle = outLabelsColor;
         ctx.fill();
+
+
+      // Beginne mit dem Zeichnen des Dreiecks
+      ctx.beginPath();
+
+      // Input Trichter
+      ctx.moveTo(0, inputPosY - height / 2);
+      ctx.lineTo(inputPosX, inputPosY - height / 2);
+      ctx.arc(inputPosX, inputPosY, height / 2, 0, 2 * Math.PI);
+      ctx.lineTo(inputPosX, inputPosY + height / 2);
+      ctx.lineTo(0, inputPosY + height / 2);
+      ctx.lineTo(0, inputPosY + height / 2);
+      ctx.closePath();
+
+      // Füllen des Trichters
+      ctx.fillStyle = inLabelsColor;
+      ctx.fill();
 
 
         

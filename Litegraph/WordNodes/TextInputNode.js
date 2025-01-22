@@ -2,7 +2,9 @@ export function _TextInputNode() {
     return class TextInputNode {
       constructor() {
         this.addOutput("", "string");
-        this.properties = { text: ""};
+        this.properties = { text: "",
+          geheim: false,
+        };
         this.textInput_widget = this.addWidget("text", "", "", (v) => {
           // Ersetze die speziellen Zeichen
           this.properties.text = v
@@ -39,6 +41,15 @@ export function _TextInputNode() {
 
       onExecute() {
    
+        if (this.properties.geheim == "true") {
+          this.flags.collapsed = true;
+            this.properties.text = "\u200B" + this.properties.text;
+        } else {
+          if (this.properties.text.includes("\u200B")) {
+          this.properties.text = this.properties.text.replace(/\u200B/g, "");
+          }
+          //console.log(this.properties.text);
+        }
 
         const inputText = this.properties.text;
 
@@ -51,6 +62,7 @@ export function _TextInputNode() {
         } else {
             this.displayedText = ""; // Text zurücksetzen, wenn keine Eingabe vorhanden
         }
+        //console.log(this.displayedText);
 
       }
       

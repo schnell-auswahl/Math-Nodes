@@ -1,0 +1,138 @@
+{
+  "last_node_id": 14,
+  "last_link_id": 14,
+  "nodes": [
+    {
+      "id": 14,
+      "type": "Wortmaschinen/platzhalter",
+      "pos": [589, 401],
+      "size": [220, 100],
+      "flags": {},
+      "order": 5,
+      "mode": 0,
+      "inputs": [{ "name": "IN", "type": "string", "link": 13 }],
+      "outputs": [
+        { "name": "OUT", "type": "string", "links": [14], "slot_index": 0 }
+      ],
+      "title": "​",
+      "properties": {},
+      "color": "#88B19B",
+      "bgcolor": "#BFCAD7"
+    },
+    {
+      "id": 12,
+      "type": "Wortmaschinen/platzhalter",
+      "pos": [322, 398],
+      "size": [220, 100],
+      "flags": {},
+      "order": 3,
+      "mode": 0,
+      "inputs": [{ "name": "IN", "type": "string", "link": 12 }],
+      "outputs": [
+        { "name": "OUT", "type": "string", "links": [13], "slot_index": 0 }
+      ],
+      "title": "​",
+      "properties": {},
+      "color": "#88B19B",
+      "bgcolor": "#BFCAD7"
+    },
+    {
+      "id": 13,
+      "type": "Wortmaschinen/platzhalter",
+      "pos": [316, 184],
+      "size": [220, 100],
+      "flags": {},
+      "order": 2,
+      "mode": 0,
+      "inputs": [{ "name": "IN", "type": "string", "link": 7 }],
+      "outputs": [
+        { "name": "OUT", "type": "string", "links": [11], "slot_index": 0 }
+      ],
+      "title": "​",
+      "properties": {},
+      "color": "#88B19B",
+      "bgcolor": "#BFCAD7"
+    },
+    {
+      "id": 4,
+      "type": "Wortmaschinen/TextDisplayNode",
+      "pos": [638, 178],
+      "size": [220, 100],
+      "flags": {},
+      "order": 4,
+      "mode": 0,
+      "inputs": [{ "name": "", "type": "string", "link": 11 }],
+      "title": "Text Anzeige",
+      "properties": {
+        "displayedText": "Chd Kndrtmfdm cdq mzdbgrsdm Lzsgdzqadhs khdfdm zte cdl Czbgancdm cdq Rbgtkd",
+        "savedText": "Chd Kndrtmfdm cdq mzdbgrsdm Lzsgdzqadhs khdfdm zte cdl Czbgancdm cdq Rbgtkd"
+      },
+      "color": "#879BCE",
+      "bgcolor": "#879BCE"
+    },
+    {
+      "id": 3,
+      "type": "Wortmaschinen/TextDisplayNode",
+      "pos": [839, 379],
+      "size": [220, 100],
+      "flags": {},
+      "order": 6,
+      "mode": 0,
+      "inputs": [{ "name": "", "type": "string", "link": 14 }],
+      "title": "Text Anzeige",
+      "properties": {
+        "displayedText": "Schiltit min zwii Finktiuninmischinin wii hiir hintiriinindir, ninnt min diisi Finktiunin virkittit.",
+        "savedText": "Schiltit min zwii Finktiuninmischinin wii hiir hintiriinindir, ninnt min diisi Finktiunin virkittit."
+      },
+      "color": "#879BCE",
+      "bgcolor": "#879BCE"
+    },
+    {
+      "id": 2,
+      "type": "Wortmaschinen/TextInputNode",
+      "pos": [35, 162],
+      "size": [220, 150],
+      "flags": {},
+      "order": 0,
+      "mode": 0,
+      "outputs": [
+        { "name": "", "type": "string", "links": [7], "slot_index": 0 }
+      ],
+      "title": "Text Eingabe",
+      "properties": {
+        "text": "Die Loesungen der naechsten Mathearbeit liegen auf dem Dachboden der Schule"
+      },
+      "color": "#D0AF8B",
+      "bgcolor": "#D0AF8B"
+    },
+    {
+      "id": 1,
+      "type": "Wortmaschinen/TextInputNode",
+      "pos": [34, 369],
+      "size": [220, 150],
+      "flags": {},
+      "order": 1,
+      "mode": 0,
+      "outputs": [
+        { "name": "", "type": "string", "links": [12], "slot_index": 0 }
+      ],
+      "title": "Text Eingabe",
+      "properties": {
+        "text": "Schaltet man zwei Funktionenmaschinen wie hier hintereinander, nennt man diese Funktionen verkettet."
+      },
+      "color": "#D0AF8B",
+      "bgcolor": "#D0AF8B"
+    }
+  ],
+  "links": [
+    [7, 2, 0, 13, 0, "string"],
+    [11, 13, 0, 4, 0, "string"],
+    [12, 1, 0, 12, 0, "string"],
+    [13, 12, 0, 14, 0, "string"],
+    [14, 14, 0, 3, 0, "string"]
+  ],
+  "groups": [],
+  "config": {},
+  "extra": {},
+  "version": 0.4
+}

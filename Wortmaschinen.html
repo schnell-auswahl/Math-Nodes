@@ -66,7 +66,7 @@
 
 		<!-- Banner -->
 		<!-- Note: The "styleN" class below should match that of the header element. -->
-		<section id="banner" class="style2">
+		<section id="banner" class="style1">
 			<div class="inner">
 				<span class="image">
 					<img src="images/pic07.jpg" alt="" />
@@ -90,22 +90,20 @@
 						<h2>Wie funktioniert es?</h2>
 					</header>
 					<p>Hier kannst du Nachrichten verschlüsseln und entschlüsseln und dabei spielerisch das Verketten
-						von Funktionen verstehen.</p>
+						von Funktionen verstehen. Später lernst du auch etwas über Umkehrfunktionen.</p>
+					<p>Zu dieser Seite gehört ein Arbeitsheft, wo du deine Ergebnisse festhalten sollst. Du kannst es
+						hier herunterladen: </p>
+					<ul class="actions">
+						<a href="#" class="button icon solid fa-download">Arbeitsheft Download</a>
+					</ul>
 				</div>
+
 			</section>
 
 			<!-- Two -->
 			<section id="two" class="spotlights">
 				<section>
 
-					<div class="image">
-						<canvas id="graphCanvas1" data-resize="true" data-zoom="1" lgtype="Wortmaschinen"
-							data-config-path="Litegraph/configs/Wortmaschinen1_config.json"></canvas>
-						<script type="module">
-							import { createGraphInstance } from './Litegraph/createGraph.js';
-							createGraphInstance("graphCanvas1");
-						</script>
-					</div>
 					<div class="content">
 						<div class="inner">
 							<header class="major">
@@ -118,27 +116,65 @@
 								Verbindung von da wieder löst. Versuche es!</p>
 						</div>
 					</div>
-				</section>
-				<section>
 					<div class="image">
-						<canvas id="graphCanvas2" data-resize="true" data-config-path="Litegraph/configs/Wortmaschinen2_config.json" lgtype="Wortmaschinen"></canvas>
+						<canvas id="graphCanvas1" data-resize="true" data-zoom="1" lgtype="Wortmaschinen"
+							data-config-path="Litegraph/configs/Wortmaschinen1_config.json"></canvas>
 						<script type="module">
 							import { createGraphInstance } from './Litegraph/createGraph.js';
-							createGraphInstance("graphCanvas2");
+							createGraphInstance("graphCanvas1");
 						</script>
 					</div>
+
+				</section>
+				<section>
 					<div class="content">
 						<div class="inner">
 							<header class="major">
 								<h3>Deinen ersten Text verschlüsseln</h3>
 							</header>
 							<p>Du kannst deinen Text mit verschiedenen Maschinen manipulieren. Verbinde dazu die
-								Texteingabe-Maschine mit der Alphabet-Countdown-Maschine und diese dann mit der
-								Textdisplay-Maschine. Was passiert mit deinem Text? </p>
+								Texteingabe-Maschine mit der Vokaltanz-Maschine und diese dann mit der
+								Text-Anzeige-Maschine. Was passiert mit deinem Text?
+							</p>
+							<p> Du kannst natürlich auch mehrere Maschinen hintereinander
+								verwenden. Das nennt man in der Mathematik verketten. Die Maschinen bilden dann
+								gemeinsam eine neue Maschine, die deinen Text in der verbundenen Reihenfolge verändert.
+								Probiere es aus! Notiere dein Ergebnis im Arbeitsheft. </p>
 						</div>
+						<div class="icon-text-container">
+							<div class="icon-text"><span>Aufgabe 1</span></div>
+							<div class="worksheet-icon"><img src="images/Worksheet-icon.svg" alt="Worksheet Icon"></div>
+						</div>
+					</div>
+					<div class="image">
+						<canvas id="graphCanvas2" data-resize="true"
+							data-config-path="Litegraph/configs/Wortmaschinen2_config.json"
+							lgtype="Wortmaschinen"></canvas>
+						<script type="module">
+							import { createGraphInstance } from './Litegraph/createGraph.js';
+							createGraphInstance("graphCanvas2");
+						</script>
 					</div>
 				</section>
 				<section>
+
+					<div class="content">
+						<div class="inner">
+							<header class="major">
+								<h3>Maschinen verketten</h3>
+							</header>
+							<p> Zwei Maschinen kannst du in unterschiedlicher Reihenfolge verbinden. Spielt die
+								Reihenfolge eine Rolle für das Ergebnis? Probiere es aus und begründe deine Antwort im
+								Arbeitsheft. </p>
+							<p> Ist das immer so? Über "Menü" und dann "Neue Maschine" kannst du andere Maschinen in
+								MATH-NODES laden. Findest du zwei, bei denen die Reihenfolge egal ist? Notiere dein
+								Ergebnis. </p>
+						</div>
+						<div class="icon-text-container">
+							<div class="icon-text"><span>Aufgabe 2</span></div>
+							<div class="worksheet-icon"><img src="images/Worksheet-icon.svg" alt="Worksheet Icon"></div>
+						</div>
+					</div>
 					<div class="image">
 						<canvas id="graphCanvas3" data-resize="true" lgtype="Wortmaschinen"
 							data-config-path="Litegraph/configs/Wortmaschinen3_config.json"></canvas>
@@ -147,46 +183,64 @@
 							createGraphInstance("graphCanvas3");
 						</script>
 					</div>
+				</section>
+				<section>
+
 					<div class="content">
 						<div class="inner">
 							<header class="major">
-								<h3>Mehrere Maschinen verketten</h3>
+								<h3>Welche Maschine war es?</h3>
 							</header>
-							<p>Du kannst natürlich auch mehrere Maschinen zum Text manipulieren hintereinander
-								verwenden. Das nennt man in der Mathematik verketten. Verbinde die Maschinen im Beispiel
-								und verschlüssel deine Botschaft. Spielt die Reihenfolge dabei eine Rolle? Du kannst das
-								zweite Textdisplay zusätzlich an die erste Maschine zum Textmanipulieren anschließen, um
-								das Zwischenergebnis zu überprüfen. </p>
+							<p> Hier sind zwei Nachrichten verschlüsselt worden. Einmal mit einer
+								Maschine und einmal mit zwei Maschinen hintereinander. </p>
+							<p> Überlege erst was am Text verändert wurde und welche Maschinen es gewesen sein könnten.
+								Probiere es aus und schreib den Namen der
+								richtigen Maschine in das entsprechende Feld im Arbeitsheft. Dort findest du auch eine
+								Übersicht über alle Maschinen. </p>
 						</div>
+						<div class="icon-text-container">
+							<div class="icon-text"><span>Aufgabe 3</span></div>
+							<div class="worksheet-icon"><img src="images/Worksheet-icon.svg" alt="Worksheet Icon"></div>
+						</div>
+					</div>
+					<div class="image">
+						<canvas id="graphCanvas4" data-resize="true" lgtype="Wortmaschinen"
+							data-config-path="Litegraph/configs/Wortmaschinen_A3_config.json"></canvas>
+						<script type="module">
+							import { createGraphInstance } from './Litegraph/createGraph.js';
+							createGraphInstance("graphCanvas4");
+						</script>
 					</div>
 				</section>
 			</section>
-			<section id="three">
+			<section id="three" style="position: relative;">
 				<div class="inner">
 					<header class="major">
-						<h2>Probiere es aus</h2>
+						<h2> Entschlüsseln einer Nachricht</h2>
 					</header>
-					<p>Über den Schalter "Menü" und dann "Maschine hinzufügen", kannst du in Math-Nodes neue Maschinen
-						hinzufügen. Sie sind in die zwei Bereiche Wortmaschinen und Funktionenmaschinen aufgeteilt. Hier
-						konzentrieren wir uns auf die Wortmaschinen. Klicke zum Laden auf die entsprechende Maschine.
-						Sie erscheint dann unten links in der
-						Ecke des Arbeitsbereichs. Verlasse das Menü, wenn du alle Maschinen hinzugefügt hast über den
-						Button oben rechts.</p>
+					<p>Mit der Alphabet-Countdown-Maschine wurde eine Nachricht verschlüsselt. Entwickle im Arbeitsheft eine Maschine,
+						um die Nachricht wieder zu entschlüsseln. Gib ihr einen Namen und beschreibe ihre Funktion auf
+						der Karte.
+					</p>
+					<p> Genau die richtige Maschine zum Entschlüsseln der Botschaft scheint es in MATH-NODES nicht zu
+						geben. Kannst du Sie aus anderen Maschinen zusammenbauen? Wie lautet die Botschaft? </p>
+						
+				</div>
+				<div class="icon-text-container">
+					<div class="icon-text"><span>Aufgabe 4</span></div>
+					<div class="worksheet-icon"><img src="images/Worksheet-icon.svg" alt="Worksheet Icon"></div>
 				</div>
 			</section>
 			<!-- Three -->
 			<!-- LiteGraph Canvas -->
 			<section id="litegraph">
-				<div id="graphstylefull">
-					<canvas id="graphCanvas4" data-resize="true" lgtype="Wortmaschinen"
-						data-config-path="Litegraph/configs/Wortmaschinen4_config.json"></canvas>
+				<div id="graphstylehalfheight">
+					<canvas id="graphCanvas5" data-resize="true" lgtype="Wortmaschinen"
+						data-config-path="Litegraph/configs/Wortmaschinen_A4_config.json"></canvas>
 				</div>
 				<script type="module">
 					import { createGraphInstance } from './Litegraph/createGraph.js';
-					// Erstelle die Graphen für beide Canvas-Elemente
-					createGraphInstance("graphCanvas4");
-					//createGraphInstance("graphCanvas2");
-					//createGraphInstance("graphCanvas3");
+					createGraphInstance("graphCanvas5");
 				</script>
 			</section>
 
@@ -195,7 +249,7 @@
 		<!-- Contact -->
 		<section id="contact">
 			<div class="inner">
-				
+
 				<section>
 					<section>
 						<div class="contact-method">
@@ -216,9 +270,9 @@
 			</div>
 		</section>
 
-	  
 
-	<!-- Footer -->
+
+		<!-- Footer -->
 		<footer id="footer">
 			<div class="inner">
 				<ul class="icons">
@@ -229,7 +283,8 @@
 					<li><a href="#" class="icon brands alt fa-linkedin-in"><span class="label">LinkedIn</span></a></li>
 				</ul>
 				<ul class="copyright">
-					<li>&copy; Nicolas Regel 2024</li><li>Designtemplate: <a href="https://html5up.net">HTML5 UP</a></li>
+					<li>&copy; Nicolas Regel 2024</li>
+					<li>Designtemplate: <a href="https://html5up.net">HTML5 UP</a></li>
 				</ul>
 			</div>
 		</footer>

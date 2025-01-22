@@ -67,10 +67,14 @@ export function _OperationNode() {
         return "UV unterschiedlich";
       } else if (this.properties["Operation"]) {
         if (this.properties["Operation"] == "*") {
-          return "·";
+          return "Multiplikation";
+        } else if (this.properties["Operation"] == "+") {
+          return "Addition";
+        } else if (this.properties["Operation"] == "-") {
+          return "Subtraktion";
         } else {
-          return this.properties.Operation;
-        }
+          return "Division";
+        } 
       } else {
         return "Wähle Operation";
       }
@@ -146,7 +150,7 @@ export function _OperationNode() {
     onExecute() {
       if (this.properties.widgetVisible == false) {
         this.widgets = []; // Alle Widgets entfernen
-        this.size = [100, 80];
+        this.size = [120, 80];
       } else {
         //this.size = [120, 90];
       }

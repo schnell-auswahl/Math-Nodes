@@ -14,19 +14,6 @@ export const TextManipulationLogic = [
     },
 
     {
-        title: "Alphabet-Sprung",
-        description: "Erhöhe jeden Buchstaben um 2\n" +
-                     "Positionen im Alphabet.",
-        logic: (text) => {
-            const step = 2;
-            return text.replace(/[a-zA-Z]/g, (c) => {
-                const base = c === c.toLowerCase() ? 97 : 65;
-                return String.fromCharCode(((c.charCodeAt(0) - base + step) % 26) + base);
-            });
-        }
-    },
-
-    {
         title: "Rückwärtslesen",
         description: "Kehrt den eingegebenen\n" +
                      "Text um.",
@@ -35,12 +22,12 @@ export const TextManipulationLogic = [
 
     {
         title: "Vokal-Verwandlung",
-        description: "Mache aus jeden A, I und U\n" +
+        description: "Mache aus jedem A, I, O und U\n" +
                      "ein E.",
                      logic: (text) => {
                         return text
-                            .replace(/[AIU]/g, "E") // Großbuchstaben (A, I, U)
-                            .replace(/[aiu]/g, "e"); // Kleinbuchstaben (a, i, u)
+                            .replace(/[AIOU]/g, "E") // Großbuchstaben (A, I, U)
+                            .replace(/[aiou]/g, "e"); // Kleinbuchstaben (a, i, u)
                     }
     },
 
@@ -100,7 +87,7 @@ export const TextManipulationLogic = [
     },
 
     {
-        title: "Buchstabenballet",
+        title: "Buchstabenballett",
         description: "Nimm immer drei aufeinander\n" +
                      "folgende Buchstaben und\n" +
                      "rutsche sie zyklisch um 1\n" +
@@ -110,10 +97,10 @@ export const TextManipulationLogic = [
 
     {
         title: "Vokaltanz",
-        description: "Tausche jeden Vokal im Wort\n" +
+        description: "Tausche jeden Vokal \n" +
                      "mit dem folgenden Vokal im\n" +
                      "Alphabet aus. A wird zu E,\n" +
-                     "E zu I, I zu O, O zu U usw.",
+                     "E zu I, I zu O, O zu U, U zu A",
         logic: (text) => text.replace(/[AEIOUaeiou]/g, (c) => {
                         const vowelsUpper = "AEIOU"; // Zyklus für Großbuchstaben
                         const vowelsLower = "aeiou"; // Zyklus für Kleinbuchstaben
@@ -176,6 +163,9 @@ export const TextManipulationLogic = [
     {
         title: "Platzhalter",
         description:"",
-        logic: undefined
+        logic: (text) => {
+            
+            return "";
+        }
     },
 ];
