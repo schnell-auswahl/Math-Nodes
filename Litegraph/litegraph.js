@@ -5387,6 +5387,9 @@ LGraphNode.prototype.executeAction = function(action)
 
         this.filter = null; //allows to filter to only accept some type of nodes in a graph
 
+        this.process_right_click = true //if context menu should not be used, aktivate this flag
+        this.shouldShowLinkMenu = false; //if the link menu should be shown, when left clicking on it
+
 		this.set_canvas_dirty_on_mouse_event = true; //forces to redraw the canvas if the mouse does anything
         this.always_render_background = false;
         this.render_shadows = true;
@@ -6257,7 +6260,9 @@ LGraphNode.prototype.executeAction = function(action)
 								continue;
 							}
 							//link clicked
+                            if (this.shouldShowLinkMenu) {
 							this.showLinkMenu(link, e);
+                            }
 							this.over_link_center = null; //clear tooltip
 							break;
 						}
@@ -6361,8 +6366,8 @@ LGraphNode.prototype.executeAction = function(action)
             	this.dragging_canvas = true;
             }
 
-        	
-        } else if (e.which == 3 || this.pointer_is_double) {
+        	//Process rechte Maustaste
+        } else if (this.process_right_click===true && (e.which == 3 || this.pointer_is_double)) { 
 			
             //right button
 			if (this.allow_interaction && !skip_action && !this.read_only){
@@ -13752,6 +13757,7 @@ this.dirty_canvas = true; //to force to repaint the front canvas with the bgcanv
             options.event = null;
         }
 
+        // Kontextmenü div erstellen <- Styling hier?
         var root = document.createElement("div");
         root.className = "litegraph litecontextmenu litemenubar-panel";
         if (options.className) {

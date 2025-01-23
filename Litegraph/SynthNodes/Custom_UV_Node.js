@@ -40,7 +40,7 @@ export function _uvNode() {
         this.lastbtpress = 0;
         this.outputValue = 0;
         this.animationActive = false;
-        this.addWidget(
+        this.animationWidget = this.addWidget(
           "button",          // Typ des Widgets
           "Animieren",             // Beschriftung auf dem Button
           null,              // Kein Standardwert notwendig
@@ -71,11 +71,17 @@ export function _uvNode() {
       }
 
       onExecute() {
-       
-        
-        if (this.properties.widgetVisible == false) {
-          this.widgets = []; // Alle Widgets entfernen
+   
+          if (this.properties.widgetVisible == false || this.properties.widgetVisible == "false" ) {
+            this.widgets = []; // Alle Widgets entfernen
+            this.size = [180, 35];
+          } else if ((this.properties.widgetVisible == true || this.properties.widgetVisible == "true") && this.widgets.length === 0) {
+            // Widget neu zeichnen, wenn es vorher entfernt wurde
+            this.widgets = [ this.numberWidget ,   this.nameWidget , this.animationWidget];
+            this.size = [180, 100];
           }
+
+
         // Hier wird die Rundung wie gewünscht angewendet
         const roundedValue = Math.round((parseFloat(this.properties["value"]) + Number.EPSILON) * 100) / 100;
         const animatedValue = Math.round((parseFloat(this.graph.globaltime - this.lastbtpress+roundedValue) + Number.EPSILON) * 100) / 100;// Zeitzurücksetzen + Rundung

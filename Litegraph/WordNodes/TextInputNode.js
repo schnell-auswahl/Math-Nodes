@@ -4,6 +4,7 @@ export function _TextInputNode() {
         this.addOutput("", "string");
         this.properties = { text: "",
           geheim: false,
+          widgetVisible: true,
         };
         this.textInput_widget = this.addWidget("text", "", "", (v) => {
           // Ersetze die speziellen Zeichen
@@ -40,6 +41,14 @@ export function _TextInputNode() {
      }
 
       onExecute() {
+        if (this.properties.widgetVisible == false || this.properties.widgetVisible == "false" ) {
+          this.widgets = []; // Alle Widgets entfernen
+          this.paddingtop = 0;
+        } else if ((this.properties.widgetVisible == true || this.properties.widgetVisible == "true") && this.widgets.length === 0) {
+          // Widget neu zeichnen, wenn es vorher entfernt wurde
+          this.widgets = [textInput_widget];
+          this.paddingtop = 40;
+        }
    
         if (this.properties.geheim == "true") {
           this.flags.collapsed = true;
