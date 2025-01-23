@@ -54,6 +54,7 @@ export function _OperationNode() {
         { values: ["+", "-", "·", ":"] } // Optionen für das Dropdown-Menü
       );
 
+      
       this.title = "Operation";
       this.desc = "Computes Funktions and Values with the choosen Operation"; // Beschreibung des Knotens
       this.Out_AnimationActive = false;
@@ -148,11 +149,13 @@ export function _OperationNode() {
     }
 
     onExecute() {
-      if (this.properties.widgetVisible == false) {
+      if (this.properties.widgetVisible == false || this.properties.widgetVisible == "false" ) {
         this.widgets = []; // Alle Widgets entfernen
         this.size = [120, 80];
-      } else {
-        //this.size = [120, 90];
+      } else if ((this.properties.widgetVisible == true || this.properties.widgetVisible == "true") && this.widgets.length === 0) {
+        // Widget neu zeichnen, wenn es vorher entfernt wurde
+        this.widgets = [this.code_widget];
+        this.size = [120, 90];
       }
 
       this.inputs[0].color_off = "#000000";

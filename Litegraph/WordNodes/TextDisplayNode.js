@@ -4,7 +4,8 @@ export function _TextDisplayNode() {
             this.addInput("", "string");
             this.title = "Text Anzeige";
             this.properties = { displayedText: "",
-                savedText: ""
+                savedText: "",
+                textVisible: true
             };
 
             //this.displayedText = "";
@@ -19,7 +20,9 @@ export function _TextDisplayNode() {
             const inputText = this.getInputData(0);
             
             // Wenn Text vorhanden ist, anzeigen; andernfalls Text löschen
-            if (inputText && inputText.includes("\u200B")) {
+            if ( this.properties.textVisible == false || this.properties.textVisible == "false" ) {
+                this.properties.displayedText = "";
+            } else if (inputText && inputText.includes("\u200B")) {
                 this.properties.displayedText = "verschlüsselt";
             } else if (inputText) {
                 this.properties.displayedText = inputText;

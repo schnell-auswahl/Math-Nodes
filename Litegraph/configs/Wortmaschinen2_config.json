@@ -35,7 +35,7 @@
       "id": 12,
       "type": "Wortmaschinen/TextInputNode",
       "pos": [73, 263],
-      "size": [220, 150],
+      "size": [220, 90],
       "flags": {},
       "order": 3,
       "mode": 0,
@@ -43,7 +43,7 @@
         { "name": "", "type": "string", "links": [], "slot_index": 0 }
       ],
       "title": "Text Eingabe",
-      "properties": { "text": "Jede ungerade Zahl hat ein „e“ in sich." },
+      "properties": { "text": "Die Zahlwörter ungerader Zahlen enthalten alle ein e" , "widgetVisible" : false},
       "color": "#D0AF8B",
       "bgcolor": "#D0AF8B"
     },

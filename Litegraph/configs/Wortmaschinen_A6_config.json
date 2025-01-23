@@ -1,0 +1,139 @@
+{
+  "last_node_id": 18,
+  "last_link_id": 6,
+  "nodes": [
+    {
+      "id": 15,
+      "type": "Wortmaschinen/platzhalter",
+      "pos": [513, 75],
+      "size": [220, 100],
+      "flags": {},
+      "order": 1,
+      "mode": 0,
+      "inputs": [{ "name": "IN", "type": "string", "link": 1 }],
+      "outputs": [
+        { "name": "OUT", "type": "string", "links": [2], "slot_index": 0 }
+      ],
+      "title": "​Maschine A",
+      "properties": { "titelfortitle": "​Maschine A" },
+      "color": "#88B19B",
+      "bgcolor": "#BFCAD7"
+    },
+    {
+      "id": 11,
+      "type": "Wortmaschinen/platzhalter",
+      "pos": [788, 71],
+      "size": [220, 100],
+      "flags": {},
+      "order": 3,
+      "mode": 0,
+      "inputs": [{ "name": "IN", "type": "string", "link": 2 }],
+      "outputs": [
+        { "name": "OUT", "type": "string", "links": [3], "slot_index": 0 }
+      ],
+      "title": "​Maschine B",
+      "properties": { "titelfortitle": "​Maschine B" },
+      "color": "#88B19B",
+      "bgcolor": "#BFCAD7"
+    },
+    {
+      "id": 17,
+      "type": "Wortmaschinen/platzhalter",
+      "pos": [509, 247],
+      "size": [220, 100],
+      "flags": {},
+      "order": 2,
+      "mode": 0,
+      "inputs": [{ "name": "IN", "type": "string", "link": 4 }],
+      "outputs": [
+        { "name": "OUT", "type": "string", "links": [5], "slot_index": 0 }
+      ],
+      "title": "​Maschine B",
+      "properties": { "titelfortitle": "​Maschine B" },
+      "color": "#88B19B",
+      "bgcolor": "#BFCAD7"
+    },
+    {
+      "id": 16,
+      "type": "Wortmaschinen/platzhalter",
+      "pos": [785, 242],
+      "size": [220, 100],
+      "flags": {},
+      "order": 4,
+      "mode": 0,
+      "inputs": [{ "name": "IN", "type": "string", "link": 5 }],
+      "outputs": [
+        { "name": "OUT", "type": "string", "links": [6], "slot_index": 0 }
+      ],
+      "title": "​Maschine A",
+      "properties": { "titelfortitle": "​Maschine A" },
+      "color": "#88B19B",
+      "bgcolor": "#BFCAD7"
+    },
+    {
+      "id": 7,
+      "type": "Wortmaschinen/TextDisplayNode",
+      "pos": [1121, 59],
+      "size": [296, 146.359375],
+      "flags": {},
+      "order": 5,
+      "mode": 0,
+      "inputs": [{ "name": "", "type": "string", "link": 3 }],
+      "title": "Text Anzeige",
+      "properties": {
+        "displayedText": "Manche Funktionenmaschinen heben sich gegenseitig genau auf. Wenn du beide hintereinander schaltest, ist der Text am Anfang und am Ende gleich. Wenn es dabei egal ist, in welcher Reihenfolge die Funktionenmaschinen verschaltet werden, nennen wir sie Umkehrfunktionen zueinander.",
+        "savedText": "Manche Funktionenmaschinen heben sich gegenseitig genau auf. Wenn du beide hintereinander schaltest, ist der Text am Anfang und am Ende gleich. Wenn es dabei egal ist, in welcher Reihenfolge die Funktionenmaschinen verschaltet werden, nennen wir sie Umkehrfunktionen zueinander."
+      },
+      "color": "#879BCE",
+      "bgcolor": "#879BCE"
+    },
+    {
+      "id": 18,
+      "type": "Wortmaschinen/TextDisplayNode",
+      "pos": [1090, 183],
+      "size": [285, 146.359375],
+      "flags": { "collapsed": false },
+      "order": 6,
+      "mode": 0,
+      "inputs": [{ "name": "", "type": "string", "link": 6 }],
+      "title": "Text Anzeige",
+      "properties": {
+        "displayedText": "Manche Funktionenmaschinen heben sich gegenseitig genau auf. Wenn du beide hintereinander schaltest, ist der Text am Anfang und am Ende gleich. Wenn es dabei egal ist, in welcher Reihenfolge die Funktionenmaschinen verschaltet werden, nennen wir sie Umkehrfunktionen zueinander.",
+        "savedText": "Manche Funktionenmaschinen heben sich gegenseitig genau auf. Wenn du beide hintereinander schaltest, ist der Text am Anfang und am Ende gleich. Wenn es dabei egal ist, in welcher Reihenfolge die Funktionenmaschinen verschaltet werden, nennen wir sie Umkehrfunktionen zueinander."
+      },
+      "color": "#879BCE",
+      "bgcolor": "#879BCE"
+    },
+    {
+      "id": 6,
+      "type": "Wortmaschinen/TextInputNode",
+      "pos": [194, 143],
+      "size": [249, 165],
+      "flags": {},
+      "order": 0,
+      "mode": 0,
+      "outputs": [
+        { "name": "", "type": "string", "links": [1, 4], "slot_index": 0 }
+      ],
+      "title": "Text Eingabe",
+      "properties": {
+        "text": "Manche Funktionenmaschinen heben sich gegenseitig genau auf. Wenn du beide hintereinander schaltest, ist der Text am Anfang und am Ende gleich. Wenn es dabei egal ist, in welcher Reihenfolge die Funktionenmaschinen verschaltet werden, nennen wir sie Umkehrfunktionen zueinander.",
+        "widgetVisible": false
+      },
+      "color": "#D0AF8B",
+      "bgcolor": "#D0AF8B"
+    }
+  ],
+  "links": [
+    [1, 6, 0, 15, 0, "string"],
+    [2, 15, 0, 11, 0, "string"],
+    [3, 11, 0, 7, 0, "string"],
+    [4, 6, 0, 17, 0, "string"],
+    [5, 17, 0, 16, 0, "string"],
+    [6, 16, 0, 18, 0, "string"]
+  ],
+  "groups": [],
+  "config": {},
+  "extra": {},
+  "version": 0.4
+}

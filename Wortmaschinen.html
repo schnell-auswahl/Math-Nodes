@@ -82,17 +82,16 @@
 
 		<!-- Main -->
 		<div id="main">
-
 			<!-- One -->
-			<section id="one">
+			<section id="one" class="aufgabenEnde">
 				<div class="inner">
-					<header class="major">
+					<header class="major" class="liteGraph">
 						<h2>Wie funktioniert es?</h2>
 					</header>
 					<p>Hier kannst du Nachrichten verschlüsseln und entschlüsseln und dabei spielerisch das Verketten
 						von Funktionen verstehen. Später lernst du auch etwas über Umkehrfunktionen.</p>
-					<p>Zu dieser Seite gehört ein Arbeitsheft, wo du deine Ergebnisse festhalten sollst. Du kannst es
-						hier herunterladen: </p>
+					<p>	<p>Zu dieser Seite gehört das erste Kapitel im Arbeitsheft. Dort sollst du deine Ergebnisse festhalten. Du kannst es
+						hier herunterladen: </p> </p>
 					<ul class="actions">
 						<a href="#" class="button icon solid fa-download">Arbeitsheft Download</a>
 					</ul>
@@ -104,7 +103,7 @@
 			<section id="two" class="spotlights">
 				<section>
 
-					<div class="content">
+					<div class="content styleoneColor">
 						<div class="inner">
 							<header class="major">
 								<h3>Deine erste Verbindung</h3>
@@ -112,7 +111,7 @@
 							<p>Verbinde die unteren Maschinen wie im Beispiel oben, indem du ein Kabel vom Ausgang der
 								Texteingabe zum Eingang des Textdisplays ziehst. Wenn du das geschafft hast, klicke auf
 								das Texteingabefeld auf der Texteingabe-Maschine und gib etwas ein. Siehst du es auf dem
-								Display? Du kannst Verbindungen auch wieder lösen indem du am Ausgang anfasst und die
+								Display? Du kannst Verbindungen auch wieder lösen, indem du am Ausgang anfasst und die
 								Verbindung von da wieder löst. Versuche es!</p>
 						</div>
 					</div>
@@ -127,7 +126,7 @@
 
 				</section>
 				<section>
-					<div class="content">
+					<div class="content styleoneColor">
 						<div class="inner">
 							<header class="major">
 								<h3>Deinen ersten Text verschlüsseln</h3>
@@ -158,7 +157,7 @@
 				</section>
 				<section>
 
-					<div class="content">
+					<div class="content styleoneColor">
 						<div class="inner">
 							<header class="major">
 								<h3>Maschinen verketten</h3>
@@ -186,7 +185,7 @@
 				</section>
 				<section>
 
-					<div class="content">
+					<div class="content styleoneColor">
 						<div class="inner">
 							<header class="major">
 								<h3>Welche Maschine war es?</h3>
@@ -213,25 +212,27 @@
 					</div>
 				</section>
 			</section>
-			<section id="three" style="position: relative;">
+			<!-- Three -->
+			<section id="three" style="position: relative;" class="styleoneColor">
 				<div class="inner">
 					<header class="major">
 						<h2> Entschlüsseln einer Nachricht</h2>
 					</header>
-					<p>Mit der Alphabet-Countdown-Maschine wurde eine Nachricht verschlüsselt. Entwickle im Arbeitsheft eine Maschine,
-						um die Nachricht wieder zu entschlüsseln. Gib ihr einen Namen und beschreibe ihre Funktion auf
+					<p>Mit der Alphabet-Countdown-Maschine wurde eine Nachricht verschlüsselt. Entwickle im Arbeitsheft
+						eine Maschine,
+						um die Nachricht wieder zu entschlüsseln. Gib ihr einen Namen und beschreibe ihre Funktionsweise
+						auf
 						der Karte.
 					</p>
 					<p> Genau die richtige Maschine zum Entschlüsseln der Botschaft scheint es in MATH-NODES nicht zu
 						geben. Kannst du Sie aus anderen Maschinen zusammenbauen? Wie lautet die Botschaft? </p>
-						
+
 				</div>
 				<div class="icon-text-container">
 					<div class="icon-text"><span>Aufgabe 4</span></div>
 					<div class="worksheet-icon"><img src="images/Worksheet-icon.svg" alt="Worksheet Icon"></div>
 				</div>
 			</section>
-			<!-- Three -->
 			<!-- LiteGraph Canvas -->
 			<section id="litegraph">
 				<div id="graphstylehalfheight">
@@ -243,7 +244,107 @@
 					createGraphInstance("graphCanvas5");
 				</script>
 			</section>
+			<!-- Four -->
+			<section id="four" style="position: relative;" class="styleoneColor">
+				<div class="inner">
+					<header class="major">
+						<h2> Umkehrbar oder nicht?</h2>
+					</header>
+					<p>Kannst du dir zu jeder Maschine eine Maschine ausdenken, die die damit verschlüsselte Nachricht
+						wieder entschlüsselt?
+						Finde in MATH-NODES mindestens ein Beispiel, bei dem es nicht geht und begründe im Arbeitsheft
+						warum. </p>
+					<h4> Bonusaufgabe: </h4>
+					<p> Mit welcher Maschine wurde hier verschlüsselt und wie kannst du das Rückgängig machen?
+					</p>
 
+				</div>
+				<div class="icon-text-container">
+					<div class="icon-text"><span>Aufgabe 5</span></div>
+					<div class="worksheet-icon"><img src="images/Worksheet-icon.svg" alt="Worksheet Icon"></div>
+				</div>
+			</section>
+			<!-- LiteGraph Canvas -->
+			<section id="litegraph">
+				<div id="graphstylehalfheight">
+					<canvas id="graphCanvas6" data-resize="true" lgtype="Wortmaschinen"
+						data-config-path="Litegraph/configs/Wortmaschinen_A5_config.json"></canvas>
+				</div>
+				<script type="module">
+					import { createGraphInstance } from './Litegraph/createGraph.js';
+					createGraphInstance("graphCanvas6");
+				</script>
+			</section>
+			<!-- Five -->
+			<section id="five" style="position: relative;" class="styleoneColor">
+				<div class="inner">
+					<header class="major">
+						<h2> Umkehrfunktionen</h2>
+					</header>
+					<p>Überlege welche der Wortmaschinen Umkehrfunktionen zueinander sind. Gib Sie an, begründe deine
+						Entscheidung im Arbeitsheft und prüfe
+						an einem Beispiel. Eine Übersicht über alle Maschinen findest du am Ende des Arbeitshefts.
+					</p>
+
+
+				</div>
+				<div class="icon-text-container">
+					<div class="icon-text"><span>Aufgabe 6</span></div>
+					<div class="worksheet-icon"><img src="images/Worksheet-icon.svg" alt="Worksheet Icon"></div>
+				</div>
+			</section>
+			<!-- LiteGraph Canvas -->
+			<section id="litegraph">
+				<div id="graphstylehalfheight">
+					<canvas id="graphCanvas7" data-resize="true" lgtype="Wortmaschinen"
+						data-config-path="Litegraph/configs/Wortmaschinen_A6_config.json"></canvas>
+				</div>
+				<script type="module">
+					import { createGraphInstance } from './Litegraph/createGraph.js';
+					createGraphInstance("graphCanvas7");
+				</script>
+			</section>
+			<!-- Six -->
+			<section id="six" class="styleoneColor">
+				<div class="inner ">
+					<div class="row">
+						<div class="col-6 col-12-small">
+							<header class="major">
+								<h3>Geheime Nachrichten senden</h3>
+							</header>
+							<p>Überleg dir eine Nachrichten für die Person neben dir und schreib sie auf. Wähle bis zu
+								drei Wortmaschinen zum Verschlüsseln aus, gib sie an und verschlüssele deine Nachricht
+								damit. Achte bei der Auswahl deiner Wortmaschinen darauf, dass die Nachricht auch wieder
+								entschlüsselbar ist.
+							</p>
+						</div>
+						<div class="col-6 col-12-small">
+							<header class="major">
+								<h3> Geheime Nachrichten empfangen</h3>
+							</header>
+							<p>Tauscht eure verschlüsselten Nachrichten aus und probiert sie wieder zu entschlüsseln.
+								Notiere deine empfangene Nachricht und deine Lösung. </p>
+
+							<div class="icon-text-container">
+								<div class="icon-text"><span>Aufgabe 7/8</span></div>
+								<div class="worksheet-icon"><img src="images/Worksheet-icon.svg" alt="Worksheet Icon">
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</section>
+			<!-- LiteGraph Canvas -->
+			<section id="litegraph">
+				<div id="graphstylehalfheight">
+					<canvas id="graphCanvas8" data-resize="true" lgtype="Wortmaschinen"
+						data-config-path="Litegraph/configs/Wortmaschinen_A7,8_config.json"></canvas>
+				</div>
+				<script type="module">
+					import { createGraphInstance } from './Litegraph/createGraph.js';
+					createGraphInstance("graphCanvas8");
+				</script>
+			</section>
 		</div>
 
 		<!-- Contact -->

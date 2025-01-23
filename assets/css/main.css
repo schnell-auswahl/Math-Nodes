@@ -302,6 +302,7 @@ input, select, textarea {
 		flex-wrap: wrap;
 		box-sizing: border-box;
 		align-items: stretch;
+		position: relative;
 	}
 
 		.row > * {
@@ -2942,6 +2943,8 @@ input, select, textarea {
 			-ms-flex-direction: row;
 			flex-direction: row;
 			background-color: #2e3450;
+			border-bottom: solid 2px #ffffff;
+
 		}
 
 			.spotlights > section > .image {
@@ -3428,7 +3431,9 @@ input, select, textarea {
 		}
 
 			#header.alt.style1 .logo strong {
-				color: #6fc3df;
+				/* color: #6fc3df; */
+				color: #77ADC9;
+				
 			}
 
 			#header.alt.style2 .logo strong {
@@ -4120,11 +4125,14 @@ input, select, textarea {
 			visibility: visible;
 		}
 
-/* Stile für LiteGraph-Container */
+/* Aufgabenende */
+.aufgabenEnde{
+	border-bottom: 2px solid white; 
+}
+
+		/* Stile für LiteGraph-Container */
 #litegraph {
-   /* border-top: 2px solid white;  Weiße Linie oben */
-    /* border-bottom: 2px solid white;  Weiße Linie unten */
- 
+    border-bottom: 2px solid white; 
 }
 
 
@@ -4135,7 +4143,7 @@ input, select, textarea {
 }
 
 #graphstylehalfheight {
-    height: 470px;
+    height: 550px;
 	position: relative; /* Setzt den Canvas-Bereich als Referenzpunkt */
     width: 100%;
     display: block; /* Sicherstellen, dass der Canvas-Bereich blockweise dargestellt wird */
@@ -4175,4 +4183,12 @@ input, select, textarea {
     color: #ffffff;
     font-weight: bold;
     cursor: pointer;
+}
+
+.styleoneColor {
+	background-color: #77ADC9;
+}
+
+.styletwoColor {
+	background-color: #8d82c4;
 }

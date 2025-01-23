@@ -91,7 +91,7 @@
       "id": 2,
       "type": "Wortmaschinen/TextInputNode",
       "pos": [35, 162],
-      "size": [220, 150],
+      "size": [220, 90],
       "flags": {},
       "order": 0,
       "mode": 0,
@@ -100,7 +100,7 @@
       ],
       "title": "Text Eingabe",
       "properties": {
-        "text": "Die Loesungen der naechsten Mathearbeit liegen auf dem Dachboden der Schule"
+        "text": "Die Loesungen der naechsten Mathearbeit liegen auf dem Dachboden der Schule" , "widgetVisible" : false
       },
       "color": "#D0AF8B",
       "bgcolor": "#D0AF8B"
@@ -109,7 +109,7 @@
       "id": 1,
       "type": "Wortmaschinen/TextInputNode",
       "pos": [34, 369],
-      "size": [220, 150],
+      "size": [220, 100],
       "flags": {},
       "order": 1,
       "mode": 0,
@@ -118,7 +118,7 @@
       ],
       "title": "Text Eingabe",
       "properties": {
-        "text": "Schaltet man zwei Funktionenmaschinen wie hier hintereinander, nennt man diese Funktionen verkettet."
+        "text": "Schaltet man zwei Funktionenmaschinen wie hier hintereinander, nennt man diese Funktionen verkettet.", "widgetVisible" : false
       },
       "color": "#D0AF8B",
       "bgcolor": "#D0AF8B"
