@@ -1,0 +1,103 @@
+{
+  "last_node_id": 14,
+  "last_link_id": 8,
+  "nodes": [
+    {
+      "id": 7,
+      "type": "Wortmaschinen/TextDisplayNode",
+      "pos": [612, 56],
+      "size": [220, 100],
+      "flags": {},
+      "order": 2,
+      "mode": 0,
+      "inputs": [{ "name": "", "type": "string", "link": 6 }],
+      "title": "Text Anzeige",
+      "properties": {
+        "displayedText": "ieDId e eesdSa zet vsn oytPaghrao wsr aerbite dsn eabBloyienn rebur e001 J0hra ver oytPaghrao bskaentn.",
+        "savedText": "ieDId e eesdSa zet vsn oytPaghrao wsr aerbite dsn eabBloyienn rebur e001 J0hra ver oytPaghrao bskaentn."
+      },
+      "color": "#879BCE",
+      "bgcolor": "#879BCE"
+    },
+    {
+      "id": 13,
+      "type": "Wortmaschinen/platzhalter",
+      "pos": [346, 241],
+      "size": [220, 150.4375],
+      "flags": {},
+      "order": 1,
+      "mode": 0,
+      "inputs": [{ "name": "IN", "type": "string", "link": 4 }],
+      "outputs": [
+        { "name": "OUT", "type": "string", "links": [6, 7], "slot_index": 0 }
+      ],
+      "title": "​",
+      "properties": {},
+      "color": "#88B19B",
+      "bgcolor": "#BFCAD7"
+    },
+    {
+      "id": 12,
+      "type": "Wortmaschinen/platzhalter",
+      "pos": [629, 242],
+      "size": [248, 164.4375],
+      "flags": {},
+      "order": 3,
+      "mode": 0,
+      "inputs": [{ "name": "IN", "type": "string", "link": 7 }],
+      "outputs": [
+        { "name": "OUT", "type": "string", "links": [8], "slot_index": 0 }
+      ],
+      "title": "​",
+      "properties": {},
+      "color": "#88B19B",
+      "bgcolor": "#BFCAD7"
+    },
+    {
+      "id": 14,
+      "type": "Wortmaschinen/TextDisplayNode",
+      "pos": [943, 182],
+      "size": [220, 100],
+      "flags": {},
+      "order": 4,
+      "mode": 0,
+      "inputs": [{ "name": "", "type": "string", "link": 8 }],
+      "title": "Text Anzeige",
+      "properties": {
+        "displayedText": "Die Idee des Satzes von Pythagoras war bereits den Babyloniern über 1000 Jahre vor Pythagoras bekannt.",
+        "savedText": "Die Idee des Satzes von Pythagoras war bereits den Babyloniern über 1000 Jahre vor Pythagoras bekannt."
+      },
+      "color": "#879BCE",
+      "bgcolor": "#879BCE"
+    },
+    {
+      "id": 6,
+      "type": "Wortmaschinen/TextInputNode",
+      "pos": [48, 86],
+      "size": [220, 100],
+      "flags": {},
+      "order": 0,
+      "mode": 0,
+      "outputs": [
+        { "name": "", "type": "string", "links": [4], "slot_index": 0 }
+      ],
+      "title": "Text Eingabe",
+      "properties": {
+        "text": "Die Idee des Satzes von Pythagoras war bereits den Babyloniern ueber 1000 Jahre vor Pythagoras bekannt.",
+        "widgetVisible": false
+      },
+      "color": "#D0AF8B",
+      "bgcolor": "#D0AF8B"
+    }
+  ],
+  "links": [
+    [4, 6, 0, 13, 0, "string"],
+    [6, 13, 0, 7, 0, "string"],
+    [7, 13, 0, 12, 0, "string"],
+    [8, 12, 0, 14, 0, "string"]
+  ],
+  "groups": [],
+  "config": {},
+  "extra": {},
+  "version": 0.4
+}
