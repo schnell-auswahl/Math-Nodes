@@ -6198,11 +6198,11 @@ LGraphNode.prototype.executeAction = function(action)
                     //double clicking
                     if (this.allow_interaction && is_double_click && this.selected_nodes[node.id]) {
                         //double click node
-                        // if (node.onDblClick) {
-                        //     node.onDblClick( e, pos, this );
-                        // }
-                        // this.processNodeDblClicked(node);
-                        // block_drag_node = true;
+                        if (node.onDblClick) {
+                            node.onDblClick( e, pos, this );
+                        }
+                        //this.processNodeDblClicked(node);
+                        block_drag_node = true;
                     }
 
                     //if do not capture mouse

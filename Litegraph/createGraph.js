@@ -185,6 +185,30 @@ export function createGraphInstance(canvasId) {
   canvas.allow_dragcanvas = false; // Prevent dragging the canvas
   canvas.allow_zoom = false; // Prevent zooming in/out
 
+// Doppelklick auf Node um Menü aufzurufen außer bei UV und Parameter
+canvasElement.addEventListener(
+  "dblclick",
+  (e) => {
+    const rect = canvasElement.getBoundingClientRect();
+    
+    // Berechne die unskalierten Koordinaten
+    const x = (e.clientX - rect.left) / canvasElement.zoom;
+    const y = (e.clientY - rect.top) / canvasElement.zoom;
+
+    // Prüfen, ob eine Node getroffen wurde
+    const clickedNode = graph.getNodeOnPos(x, y);
+
+
+    if (clickedNode && clickedNode.type !== "Funktionenmaschinen/Unabhängige_Variable" && clickedNode.type !== "Funktionenmaschinen/Parameter") { 
+      // Hier können Sie den gewünschten Code einfügen, der bei einem Doppelklick auf eine Node ausgeführt werden soll
+      //console.log("Node doppelt geklickt:", clickedNode);
+      e.preventDefault(); // Unterdrücke das Standardverhalten
+      showNewMachineMenu(graph, canvasElement, clickedNode);
+    }
+  },
+  false
+);
+
   canvasElement.addEventListener(
     "touchstart",
     (e) => {
@@ -256,6 +280,8 @@ export function createGraphInstance(canvasId) {
     },
     false
   );
+
+
 
   //Menü:
 
@@ -382,155 +408,7 @@ menubuttons.forEach((button) => {
 
   //Menueoverlay neue node
 
-  // Funktion, um das neue Menü anzuzeigen
-  function showNewMachineMenu(graph, canvasElement) {
-    // Erstelle ein Overlay für das Menü
-    const overlay = document.createElement("div");
-    //overlay.id = "new-machine-overlay";
-    overlay.style.position = "absolute";
-    overlay.style.top = "0";
-    overlay.style.left = "0";
-    overlay.style.width = "100%";
-    overlay.style.height = "100%";
-    overlay.style.backgroundColor = "rgba(26, 29, 41, 0.9)";
-    //overlay.style.opacity = "0.5";
-    overlay.style.zIndex = "300";
-    overlay.style.display = "flex";
-    overlay.style.justifyContent = "center";
-    overlay.style.alignItems = "center";
-    overlay.style.color = "#ffffff";
-
-    // Füge das Menü in den Canvas-Container ein
-    //canvasElement.parentElement.appendChild(overlay);
-
-    // Menü-Inhalt
-    const menuContent = document.createElement("div");
-    menuContent.class = "inner";
-    menuContent.style.display = "flex";
-    menuContent.style.width = "80%";
-    menuContent.style.justifyContent = "center"; // Zentriert die Elemente horizontal
-    menuContent.style.width = "80%";
-    menuContent.style.gap = "20px";
-
-
-    // Spalte für Funktionenmaschinen
-    const funcColumn = document.createElement("ul");
-    funcColumn.innerHTML =
-      '<header class="major"> <h3>Funktionenmaschinen</h3></header>';
-
-    // Spalte für Wortmaschinen
-    const wordColumn = document.createElement("ul");
-    wordColumn.style.columnCount = "2"; /* Maximale Anzahl der Spalten */
-    wordColumn.style.columnGap = "20px"; /* Abstand zwischen den Spalten */
-    wordColumn.style.maxHeight =
-      canvasElement.height - 20; /* Begrenzung auf die Höhe des Containers */
-    //wordColumn.style.overflowY = "auto"; /* Scrollen, falls nötig */
-    //wordColumn.class="col-6 col-12-small";;
-    //wordColumn.style.margin = "10px";
-    wordColumn.innerHTML =
-      '<header class="major"> <h3>Wortmaschinen</h3></header>';
-
-    // Funktion, um Buttons für Nodes zu erstellen
-    const createNodeButtons = (parent, nodeTypes) => {
-      nodeTypes.forEach((node) => {
-        const button = document.createElement("li");
-        button.textContent = node.name.replace(/_/g, " ");
-        button.class = "links";
-        button.style.margin = "5px";
-        button.className = "machine-button"; // Klasse für Stil hinzufügen
-        button.style.listStyle = "none";
-        button.style.textTransform = "uppercase";
-        button.style.fontWeight = "600";
-        button.style.fontSize = "0.6em";
-        button.style.letterSpacing = "0.25em";
-        button.style.borderBottom = "1px solid #31344F"; // Dünne Linie
-        button.style.paddingBottom = "10px"; // Abstand vom Text zur Linie
-        button.style.transition = "background-color 0.3s, transform 0.1s"; // Smooth transitions
-
-// Standard-Stil
-button.style.backgroundColor = "transparent";
-button.style.color = "#ffffff";
-
-// Hover-Effekt
-button.addEventListener("mouseover", () => {
-  button.style.backgroundColor = "rgba(255, 255, 255, 0.1)"; // Leicht hervorgehoben
-});
-
-// Entferne Hover-Effekt
-button.addEventListener("mouseout", () => {
-  button.style.backgroundColor = "transparent"; // Zurücksetzen
-});
-
-// Klick-Effekt
-button.addEventListener("mousedown", () => {
-  button.style.backgroundColor = "rgba(255, 255, 255, 0.3)"; // Stärker hervorgehoben
-  button.style.transform = "scale(0.98)"; // Leichte Skalierung
-});
-
-button.addEventListener("mouseup", () => {
-  button.style.backgroundColor = "rgba(255, 255, 255, 0.1)"; // Zurück zur Hover-Farbe
-  button.style.transform = "scale(1)"; // Skalierung zurücksetzen
-});
-        // Klick-Event für den Button
-        button.addEventListener("click", () => {
-          const newNode = LiteGraph.createNode(node.type);
-          const uniqueName = `${node.name}_${Date.now()}`; // Dynamischer Name
-          //newNode.title = uniqueName;
-          newNode.pos = [50, canvasElement.height - 200];
-          graph.add(newNode);
-          //console.log(`Node hinzugefügt: ${uniqueName}`); // Aber bestätigung einbauen
-          //document.body.removeChild(overlay); // Menü schließen <-Das funktioniert noch nicht
-        });
-
-        parent.appendChild(button);
-      });
-    };
-
-    // // Buttons zu den Spalten hinzufügen
-    // createNodeButtons(funcColumn, funcNodeTypes);
-    // createNodeButtons(wordColumn, wordNodeTypes);
-
-    // // Füge die Spalten zum Menü hinzu
-    // menuContent.appendChild(funcColumn);
-    // menuContent.appendChild(wordColumn);
-
-    // Bestimmen Sie den Typ der Maschinen basierend auf dem lgtype-Attribut
-const lgType = canvasElement.getAttribute("lgtype");
-if (lgType === "Wortmaschinen") {
-  createNodeButtons(wordColumn, wordNodeTypes);
-  menuContent.appendChild(wordColumn);
-} else if (lgType === "Funktionenmaschinen") {
-  createNodeButtons(funcColumn, funcNodeTypes);
-  menuContent.appendChild(funcColumn);
-} else {
-  createNodeButtons(funcColumn, funcNodeTypes);
-  createNodeButtons(wordColumn, wordNodeTypes);
-  menuContent.appendChild(funcColumn);
-  menuContent.appendChild(wordColumn);
-}
-
-    // Schließen-Button für das Menü
-    const closeButton = document.createElement("button");
-    closeButton.textContent = "X";
-    closeButton.id = "CloseNewNodeMenu";
-    closeButton.className = "button primary small";
-    closeButton.style.position = "absolute"; // Absolut positionieren
-    closeButton.style.top = "10px"; // Abstand vom oberen Rand
-    closeButton.style.right = "10px"; // Abstand vom rechten Rand
-
-
-    closeButton.addEventListener("click", () => {
-      canvasElement.parentElement.removeChild(overlay);
-    });
-
-    // Schließen-Button hinzufügen
-    overlay.appendChild(closeButton);
-
-    // Menü und Overlay hinzufügen
-    overlay.appendChild(menuContent);
-    //canvasContainer.appendChild(overlay); // Füge das Overlay in den Canvas-Container ein
-    canvasElement.parentElement.appendChild(overlay);
-  }
+ 
 
   // Verknüpfen der Funktion mit dem Button
   document.addEventListener("DOMContentLoaded", () => {
@@ -647,7 +525,7 @@ window.createGraphInstance = createGraphInstance;
 let manualDraw = false;
 
 function manualDrawFkt(Delay) {
-  console.log("Manual draw fkt started.");
+  //console.log("Manual draw fkt started.");
   manualDraw = true;
   setTimeout(() => {
     manualDraw = false;
@@ -798,6 +676,200 @@ function adjustColor(positiveColor, negativeColor, value) {
   return isHex(baseColor) ? rgbToHex(adjustedRgb) : adjustedRgb;
 }
 
-
 window.adjustColor = adjustColor;
 
+
+ // Funktion, um das neue Menü anzuzeigen
+function showNewMachineMenu(graph, canvasElement, placeholderNode) {
+  // Erstelle ein Overlay für das Menü
+  //console.log("Show new machine menu" + graph + canvasElement);
+  const overlay = document.createElement("div");
+  //overlay.id = "new-machine-overlay";
+  overlay.style.position = "absolute";
+  overlay.style.top = "0";
+  overlay.style.left = "0";
+  overlay.style.width = "100%";
+  overlay.style.height = "100%";
+  overlay.style.backgroundColor = "rgba(26, 29, 41, 0.9)";
+  //overlay.style.opacity = "0.5";
+  overlay.style.zIndex = "300";
+  overlay.style.display = "flex";
+  overlay.style.justifyContent = "center";
+  overlay.style.alignItems = "center";
+  overlay.style.color = "#ffffff";
+
+  // Füge das Menü in den Canvas-Container ein
+  //canvasElement.parentElement.appendChild(overlay);
+
+  // Menü-Inhalt
+  const menuContent = document.createElement("div");
+  menuContent.class = "inner";
+  menuContent.style.display = "flex";
+  menuContent.style.width = "80%";
+  menuContent.style.justifyContent = "center"; // Zentriert die Elemente horizontal
+  menuContent.style.width = "80%";
+  menuContent.style.gap = "20px";
+
+  // Spalte für Funktionenmaschinen
+  const funcColumn = document.createElement("ul");
+  funcColumn.innerHTML =
+    '<header class="major"> <h3>Funktionenmaschinen</h3></header>';
+
+  // Spalte für Wortmaschinen
+  const wordColumn = document.createElement("ul");
+  wordColumn.style.columnCount = "2"; /* Maximale Anzahl der Spalten */
+  wordColumn.style.columnGap = "20px"; /* Abstand zwischen den Spalten */
+  wordColumn.style.maxHeight =
+    canvasElement.height - 20; /* Begrenzung auf die Höhe des Containers */
+  //wordColumn.style.overflowY = "auto"; /* Scrollen, falls nötig */
+  //wordColumn.class="col-6 col-12-small";;
+  //wordColumn.style.margin = "10px";
+  wordColumn.innerHTML =
+    '<header class="major"> <h3>Wortmaschinen</h3></header>';
+
+  // Funktion, um Buttons für Nodes zu erstellen
+  const createNodeButtons = (parent, nodeTypes) => {
+    nodeTypes.forEach((node) => {
+      const button = document.createElement("li");
+      button.textContent = node.name.replace(/_/g, " ");
+      button.class = "links";
+      button.style.margin = "5px";
+      button.className = "machine-button"; // Klasse für Stil hinzufügen
+      button.style.listStyle = "none";
+      button.style.textTransform = "uppercase";
+      button.style.fontWeight = "600";
+      button.style.fontSize = "0.6em";
+      button.style.letterSpacing = "0.25em";
+      button.style.borderBottom = "1px solid #31344F"; // Dünne Linie
+      button.style.paddingBottom = "10px"; // Abstand vom Text zur Linie
+      button.style.transition = "background-color 0.3s, transform 0.1s"; // Smooth transitions
+
+      // Standard-Stil
+      button.style.backgroundColor = "transparent";
+      button.style.color = "#ffffff";
+
+      // Hover-Effekt
+      button.addEventListener("mouseover", () => {
+        button.style.backgroundColor = "rgba(255, 255, 255, 0.1)"; // Leicht hervorgehoben
+      });
+
+      // Entferne Hover-Effekt
+      button.addEventListener("mouseout", () => {
+        button.style.backgroundColor = "transparent"; // Zurücksetzen
+      });
+
+      // Klick-Effekt
+      button.addEventListener("mousedown", () => {
+        button.style.backgroundColor = "rgba(255, 255, 255, 0.3)"; // Stärker hervorgehoben
+        button.style.transform = "scale(0.98)"; // Leichte Skalierung
+      });
+
+      button.addEventListener("mouseup", () => {
+        button.style.backgroundColor = "rgba(255, 255, 255, 0.1)"; // Zurück zur Hover-Farbe
+        button.style.transform = "scale(1)"; // Skalierung zurücksetzen
+      });
+      // Klick-Event für den Button
+      button.addEventListener("click", () => {
+        if (placeholderNode) {
+          replacePlaceholderNode(node.type);
+          canvasElement.parentElement.removeChild(overlay); // Menü schließen
+        } else {
+        const newNode = LiteGraph.createNode(node.type);
+        //const uniqueName = `${node.name}_${Date.now()}`; // Dynamischer Name
+        //newNode.title = uniqueName;
+        newNode.pos = [50, canvasElement.height - 200];
+        graph.add(newNode);
+        //console.log(`Node hinzugefügt: ${uniqueName}`); // Aber bestätigung einbauen
+        //document.body.removeChild(overlay); // Menü schließen <-Das funktioniert noch nicht
+        }
+      });
+
+      parent.appendChild(button);
+    });
+  };
+
+  // // Buttons zu den Spalten hinzufügen
+  // createNodeButtons(funcColumn, funcNodeTypes);
+  // createNodeButtons(wordColumn, wordNodeTypes);
+
+  // // Füge die Spalten zum Menü hinzu
+  // menuContent.appendChild(funcColumn);
+  // menuContent.appendChild(wordColumn);
+
+  // Bestimmen Sie den Typ der Maschinen basierend auf dem lgtype-Attribut
+  const lgType = canvasElement.getAttribute("lgtype");
+  if (lgType === "Wortmaschinen") {
+    createNodeButtons(wordColumn, wordNodeTypes);
+    menuContent.appendChild(wordColumn);
+  } else if (lgType === "Funktionenmaschinen") {
+    createNodeButtons(funcColumn, funcNodeTypes);
+    menuContent.appendChild(funcColumn);
+  } else {
+    createNodeButtons(funcColumn, funcNodeTypes);
+    createNodeButtons(wordColumn, wordNodeTypes);
+    menuContent.appendChild(funcColumn);
+    menuContent.appendChild(wordColumn);
+  }
+
+  // Schließen-Button für das Menü
+  const closeButton = document.createElement("button");
+  closeButton.textContent = "X";
+  closeButton.id = "CloseNewNodeMenu";
+  closeButton.className = "button primary small";
+  closeButton.style.position = "absolute"; // Absolut positionieren
+  closeButton.style.top = "10px"; // Abstand vom oberen Rand
+  closeButton.style.right = "10px"; // Abstand vom rechten Rand
+
+  closeButton.addEventListener("click", () => {
+    canvasElement.parentElement.removeChild(overlay);
+  });
+
+  // Schließen-Button hinzufügen
+  overlay.appendChild(closeButton);
+
+  // Menü und Overlay hinzufügen
+  overlay.appendChild(menuContent);
+  //canvasContainer.appendChild(overlay); // Füge das Overlay in den Canvas-Container ein
+  canvasElement.parentElement.appendChild(overlay);
+
+  // Funktion, um eine neue Node zu erstellen und die Platzhalter-Node zu ersetzen
+  function replacePlaceholderNode(newNodeType) {
+    const newNode = LiteGraph.createNode(newNodeType);
+    newNode.pos = placeholderNode.pos.slice(); // Position übernehmen
+    graph.add(newNode);
+
+    //Verbindungen wiederherstellen
+    if (placeholderNode.inputs) {
+      if (newNode.inputs) {
+        placeholderNode.inputs.forEach((input, index) => {
+          if (input.link !== null) {
+            const link = graph.links[input.link];
+            const originNode = graph.getNodeById(link.origin_id);
+            if (newNode.inputs[index]) {
+              originNode.connect(link.origin_slot, newNode, index);
+            }
+          }
+        });
+      }
+    }
+    if (placeholderNode.outputs) {
+      if (newNode.outputs) {
+        placeholderNode.outputs.forEach((output, index) => {
+          if (output.links && output.links.length) {
+            output.links.forEach((linkId) => {
+              const link = graph.links[linkId];
+              const targetNode = graph.getNodeById(link.target_id);
+              if (newNode.outputs[index]) {
+                newNode.connect(index, link.target_id, link.target_slot);
+              }
+            });
+          }
+        });
+      }
+    }
+
+    // Platzhalter-Node löschen
+    graph.remove(placeholderNode);
+    //console.log("Platzhalter-Node ersetzt durch:", newNode);
+  }
+}

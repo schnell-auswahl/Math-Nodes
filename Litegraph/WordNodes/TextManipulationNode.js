@@ -1,3 +1,4 @@
+
 export function createTextManipulationNode({ title, description, logic }) {
   const NodeClass = class {
     constructor() {
@@ -34,6 +35,17 @@ export function createTextManipulationNode({ title, description, logic }) {
         this.title = this.properties.titelfortitle;
       }
     }
+
+    //   // Event-Listener für Doppelklicks auf Nodes
+    //   onDblClick() {
+    //     if (this.nodeName === "Platzhalter") {
+           
+    //         // Menü aufrufen
+    //         const canvasElement = document.querySelector('canvas'); // Beispiel: das erste Canvas-Element auswählen
+    //         console.log("Platzhalter-Node geklickt." + this.graph + canvasElement + this);
+    //         //showNewMachineMenufromNode();
+    //     }
+    // }
 
     onDrawForeground(ctx) {
       if (this.flags && this.flags.collapsed) {
