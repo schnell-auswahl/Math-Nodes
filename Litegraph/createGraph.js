@@ -198,13 +198,41 @@ canvasElement.addEventListener(
     // Prüfen, ob eine Node getroffen wurde
     const clickedNode = graph.getNodeOnPos(x, y);
 
-
     if (clickedNode && clickedNode.type !== "Funktionenmaschinen/Unabhängige_Variable" && clickedNode.type !== "Funktionenmaschinen/Parameter") { 
       // Hier können Sie den gewünschten Code einfügen, der bei einem Doppelklick auf eine Node ausgeführt werden soll
       //console.log("Node doppelt geklickt:", clickedNode);
       e.preventDefault(); // Unterdrücke das Standardverhalten
       showNewMachineMenu(graph, canvasElement, clickedNode);
     }
+  },
+  false
+);
+
+// Doppeltipp auf Node um Menü aufzurufen außer bei UV und Parameter
+let lastTouchEnd = 0;
+canvasElement.addEventListener(
+  "touchend",
+  (e) => {
+    const now = new Date().getTime();
+    if (now - lastTouchEnd <= 300) { // 300ms als Schwellenwert für Doppeltipp
+      const touch = e.changedTouches[0];
+      const rect = canvasElement.getBoundingClientRect();
+      
+      // Berechne die unskalierten Koordinaten
+      const x = (touch.clientX - rect.left) / canvasElement.zoom;
+      const y = (touch.clientY - rect.top) / canvasElement.zoom;
+
+      // Prüfen, ob eine Node getroffen wurde
+      const clickedNode = graph.getNodeOnPos(x, y);
+
+      if (clickedNode && clickedNode.type !== "Funktionenmaschinen/Unabhängige_Variable" && clickedNode.type !== "Funktionenmaschinen/Parameter") { 
+        // Hier können Sie den gewünschten Code einfügen, der bei einem Doppeltipp auf eine Node ausgeführt werden soll
+        //console.log("Node doppelt getippt:", clickedNode);
+        e.preventDefault(); // Unterdrücke das Standardverhalten
+        showNewMachineMenu(graph, canvasElement, clickedNode);
+      }
+    }
+    lastTouchEnd = now;
   },
   false
 );
