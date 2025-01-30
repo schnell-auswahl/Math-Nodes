@@ -1,0 +1,83 @@
+{
+  "last_node_id": 7,
+  "last_link_id": 5,
+  "nodes": [
+    {
+      "id": 5,
+      "type": "Wortmaschinen/TextInputNode",
+      "pos": [22, 388],
+      "size": [220, 150],
+      "flags": {},
+      "order": 0,
+      "mode": 0,
+      "outputs": [{ "name": "", "type": "string", "links": [5] }],
+      "title": "Text Eingabe",
+      "properties": {
+        "text": "Die Anordnung der Samen in einer Sonnenblume spiegelt das Verhaeltnis des Goldenen Schnitts wider.",
+        "geheim": false,
+        "widgetVisible": "false"
+      },
+      "color": "#D0AF8B",
+      "bgcolor": "#D0AF8B"
+    },
+    {
+      "id": 6,
+      "type": "Wortmaschinen/TextDisplayNode",
+      "pos": [702, 42],
+      "size": [220, 100],
+      "flags": {},
+      "order": 3,
+      "mode": 0,
+      "inputs": [{ "name": "", "type": "string", "link": 4 }],
+      "title": "Text Anzeige",
+      "properties": {
+        "displayedText": "oiDEn rduann dgr iemSn in oonir iunSinnlabi mposgiit lesdVi herltiosndi  Gsldunii Snhnctto wsdior.",
+        "savedText": "",
+        "textVisible": true
+      },
+      "color": "#879BCE",
+      "bgcolor": "#879BCE"
+    },
+    {
+      "id": 4,
+      "type": "Wortmaschinen/vokaltanz",
+      "pos": [404, 150],
+      "size": [220, 100],
+      "flags": {},
+      "order": 2,
+      "mode": 0,
+      "inputs": [{ "name": "IN", "type": "string", "link": 3 }],
+      "outputs": [
+        { "name": "OUT", "type": "string", "links": [4], "slot_index": 0 }
+      ],
+      "properties": {},
+      "color": "#88B19B",
+      "bgcolor": "#7C8693"
+    },
+    {
+      "id": 7,
+      "type": "Wortmaschinen/buchstabenballett",
+      "pos": [278, 383],
+      "size": [220, 100],
+      "flags": {},
+      "order": 1,
+      "mode": 0,
+      "inputs": [
+        { "name": "IN", "type": "string", "link": 5, "slot_index": 0 }
+      ],
+      "outputs": [{ "name": "OUT", "type": "string", "links": [3] }],
+      "properties": {},
+      "color": "#88B19B",
+      "bgcolor": "#7C8693"
+    }
+  ],
+  "links": [
+    [3, 7, 0, 4, 0, "string"],
+    [4, 4, 0, 6, 0, "string"],
+    [5, 5, 0, 7, 0, "string"]
+  ],
+  "groups": [],
+  "config": {},
+  "extra": {},
+  "version": 0.4
+}

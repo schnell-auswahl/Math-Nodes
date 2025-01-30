@@ -198,13 +198,45 @@ canvasElement.addEventListener(
     // Prüfen, ob eine Node getroffen wurde
     const clickedNode = graph.getNodeOnPos(x, y);
 
-
     if (clickedNode && clickedNode.type !== "Funktionenmaschinen/Unabhängige_Variable" && clickedNode.type !== "Funktionenmaschinen/Parameter") { 
       // Hier können Sie den gewünschten Code einfügen, der bei einem Doppelklick auf eine Node ausgeführt werden soll
       //console.log("Node doppelt geklickt:", clickedNode);
       e.preventDefault(); // Unterdrücke das Standardverhalten
       showNewMachineMenu(graph, canvasElement, clickedNode);
+    } else { 
+      showNewMachineMenu(graph,canvasElement,"", x, y)
     }
+  },
+  false
+);
+
+// Doppeltipp auf Node um Menü aufzurufen außer bei UV und Parameter
+let lastTouchEnd = 0;
+canvasElement.addEventListener(
+  "touchend",
+  (e) => {
+    const now = new Date().getTime();
+    if (now - lastTouchEnd <= 300) { // 300ms als Schwellenwert für Doppeltipp
+      const touch = e.changedTouches[0];
+      const rect = canvasElement.getBoundingClientRect();
+      
+      // Berechne die unskalierten Koordinaten
+      const x = (touch.clientX - rect.left) / canvasElement.zoom;
+      const y = (touch.clientY - rect.top) / canvasElement.zoom;
+
+      // Prüfen, ob eine Node getroffen wurde
+      const clickedNode = graph.getNodeOnPos(x, y);
+
+      if (clickedNode && clickedNode.type !== "Funktionenmaschinen/Unabhängige_Variable" && clickedNode.type !== "Funktionenmaschinen/Parameter") { 
+        // Hier können Sie den gewünschten Code einfügen, der bei einem Doppeltipp auf eine Node ausgeführt werden soll
+        //console.log("Node doppelt getippt:", clickedNode);
+        e.preventDefault(); // Unterdrücke das Standardverhalten
+        showNewMachineMenu(graph, canvasElement, clickedNode);
+      } else { 
+        showNewMachineMenu(graph,canvasElement,"", x, y)
+      }
+    }
+    lastTouchEnd = now;
   },
   false
 );
@@ -680,7 +712,7 @@ window.adjustColor = adjustColor;
 
 
  // Funktion, um das neue Menü anzuzeigen
-function showNewMachineMenu(graph, canvasElement, placeholderNode) {
+function showNewMachineMenu(graph, canvasElement, placeholderNode,x,y) {
   // Erstelle ein Overlay für das Menü
   //console.log("Show new machine menu" + graph + canvasElement);
   const overlay = document.createElement("div");
@@ -713,7 +745,7 @@ function showNewMachineMenu(graph, canvasElement, placeholderNode) {
   // Spalte für Funktionenmaschinen
   const funcColumn = document.createElement("ul");
   funcColumn.innerHTML =
-    '<header class="major"> <h3>Funktionenmaschinen</h3></header>';
+    '<header class="major"> <h3>Funktionsmaschinen</h3></header>';
 
   // Spalte für Wortmaschinen
   const wordColumn = document.createElement("ul");
@@ -777,8 +809,13 @@ function showNewMachineMenu(graph, canvasElement, placeholderNode) {
         const newNode = LiteGraph.createNode(node.type);
         //const uniqueName = `${node.name}_${Date.now()}`; // Dynamischer Name
         //newNode.title = uniqueName;
+        if(x && y){
+          newNode.pos = [x, y];
+        }else{
         newNode.pos = [50, canvasElement.height - 200];
+        }
         graph.add(newNode);
+        canvasElement.parentElement.removeChild(overlay); // Menü schließen
         //console.log(`Node hinzugefügt: ${uniqueName}`); // Aber bestätigung einbauen
         //document.body.removeChild(overlay); // Menü schließen <-Das funktioniert noch nicht
         }
@@ -801,7 +838,7 @@ function showNewMachineMenu(graph, canvasElement, placeholderNode) {
   if (lgType === "Wortmaschinen") {
     createNodeButtons(wordColumn, wordNodeTypes);
     menuContent.appendChild(wordColumn);
-  } else if (lgType === "Funktionenmaschinen") {
+  } else if (lgType === "Funktionsmaschinen") {
     createNodeButtons(funcColumn, funcNodeTypes);
     menuContent.appendChild(funcColumn);
   } else {

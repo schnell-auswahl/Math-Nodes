@@ -1,0 +1,235 @@
+<!DOCTYPE HTML>
+<!--
+	Forty by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+
+<head>
+	<title>Anleitung</title>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+	<link rel="stylesheet" href="assets/css/main.css" />
+	<noscript>
+		<link rel="stylesheet" href="assets/css/noscript.css" />
+	</noscript>
+
+	<!-- Ab hier brauchen wir alles für Litegraph -->
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.13.11/dist/katex.min.css">
+
+	<!-- Einbinden der KaTeX JavaScript-Datei, die für das Rendern von mathematischen Ausdrücken verantwortlich ist -->
+	<script src="https://cdn.jsdelivr.net/npm/katex@0.13.11/dist/katex.min.js"></script>
+
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/10.2.0/math.min.js"></script>
+
+	<!-- Mathjax als KAtex Alternative -->
+	<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
+
+	<!-- Stile für den LiteGraph Inspector (kann angepasst werden) -->
+	<link rel="stylesheet" type="text/css" href="./inspector.css">
+	<link rel="stylesheet" type="text/css" href="./Litegraph/litegraph.css">
+	<script type="text/javascript" src="./Litegraph/litegraph.js"></script>
+	<script type="module" src="./Litegraph/createGraph.js" ;></script>
+
+
+</head>
+
+<body class="is-preload">
+			
+			<!-- Two -->
+			<section id="two" class="spotlights">
+				<section id="content-section" style="border-bottom: 0px;">
+					<div id="Anleitung_content-page" class="content stylesixColor">
+						<div class="inner">
+							<header class="major">
+								<h4>Maschinen verschieben</h4>
+							</header>
+							<p>Maschinen können mit der Maus oder dem Finger frei in der Arbeitsfläche verschoben werden. </p>
+							<button class="small" onclick="loadPageContent(3);">Weiter</button>
+						</div>
+					</div>
+					<div class="image">
+						<canvas id="graphCanvas1" data-resize="true" data-zoom="1"
+							data-config-path="Litegraph/configs/Anleitung_content-page-1_config.json"></canvas>
+						<script type="module">
+							import { createGraphInstance } from './Litegraph/createGraph.js';
+							createGraphInstance("graphCanvas1");
+						</script>
+					</div>
+
+			</section>
+
+		
+			
+
+		<!-- Scripts -->
+		<script src="assets/js/jquery.min.js"></script>
+		<script src="assets/js/jquery.scrolly.min.js"></script>
+		<script src="assets/js/jquery.scrollex.min.js"></script>
+		<script src="assets/js/browser.min.js"></script>
+		<script src="assets/js/breakpoints.min.js"></script>
+		<script src="assets/js/util.js"></script>
+		<script src="assets/js/main.js"></script>
+		<script src="assets/js/scripts.js"></script>
+
+		<script>
+
+	
+//   // Inhaltsverzeichnis laden
+//   fetch('Inhaltsverzeichnis_Anleitung.html')
+//         .then(response => response.text())
+//         .then(data => {
+//             // Füge den geladenen Inhalt in das Element mit der ID 'toc' ein
+//             document.getElementById('toc').innerHTML = data;
+
+//             // Event-Listener für alle Elemente mit der Klasse 'toggle' hinzufügen
+//             document.querySelectorAll('.toggle').forEach(function(toggle) {
+//                 toggle.addEventListener('click', function(event) {
+//                     event.preventDefault(); // Verhindert das Standardverhalten des Links
+//                     const sublist = this.nextElementSibling; // Nächstes Geschwisterelement (die Unterliste)
+//                     // Umschalten der Anzeige der Unterliste
+//                     if (sublist.style.display === 'none') {
+//                         sublist.style.display = 'block';
+//                     } else {
+//                         sublist.style.display = 'none';
+//                     }
+//                 });
+//             });
+
+//             // Vorselektierte Toggles basierend auf der URL öffnen
+//             const urlParams = new URLSearchParams(window.location.search);
+//             const openSections = urlParams.get('openSections');
+//             if (openSections) {
+//                 openSections.split(',').forEach(function(sectionId) {
+//                     // Wählt das Toggle-Element basierend auf der ID aus
+// 					const toggle = document.querySelector(`a[href="${sectionId}.html"]`);
+//                     if (toggle) {
+//                         const sublist = toggle.nextElementSibling; // Nächstes Geschwisterelement (die Unterliste)
+//                         if (sublist) {
+//                             sublist.style.display = 'block'; // Setzt die Anzeige der Unterliste auf 'block'
+//                         }
+//                     }
+//                 });
+//             }
+//         })
+//         .catch(error => console.error('Error loading TOC:', error));
+
+    /*
+    Dieser Code lädt das Inhaltsverzeichnis aus einer separaten HTML-Datei und fügt es in das aktuelle Dokument ein.
+    Anschließend werden Event-Listener für alle Elemente mit der Klasse 'toggle' hinzugefügt, um das Ein- und Ausblenden
+    der Unterlisten zu ermöglichen. Zusätzlich werden basierend auf den URL-Parametern bestimmte Unterlisten automatisch
+    geöffnet. 
+
+    Wichtige Punkte bei der Implementierung:
+    1. Stelle sicher, dass die Datei 'Inhaltsverzeichnis_Anleitung.html' existiert und korrekt verlinkt ist.
+    2. Die Elemente, die als Toggles fungieren sollen, müssen die Klasse 'toggle' haben.
+    3. Die URL-Parameter müssen korrekt gesetzt sein, um die gewünschten Abschnitte vorab zu öffnen.
+    4. Achte darauf, dass die IDs in den URL-Parametern mit den href-Attributen der Toggle-Links übereinstimmen.
+	// Beispiel-URL: https://example.com/Anleitung_Landing.html?openSections=arbeitsoberflaeche,das-menue
+    */
+	
+	//const totalPages = 12; // Gesamtanzahl der Seiten
+
+	// function loadPageContent(pageNumber) {
+	// 	fetch('Anleitung_content-page.html')
+	// 		.then(response => response.text())
+
+	// 		.then(data => {
+	// 			const parser = new DOMParser();
+	// 			const doc = parser.parseFromString(data, 'text/html');
+	// 			const content = doc.getElementById(`page-${pageNumber}`).innerHTML;
+	// 			document.getElementById('Anleitung_content-page').innerHTML = content;
+	// 			reinitializeScripts();
+	// 			loadGraphFromServerAsync('graphCanvas1', `Litegraph/configs/Anleitung_content-page-${pageNumber}_config.json`)
+	// 				.then(() => {
+	// 					console.log('Graph erfolgreich geladen');
+	// 					autoPositionNodes('graphCanvas1');
+	// 				})
+	// 				.catch(error => console.error('Fehler beim Laden des Graphen:', error));
+	// 			updatePagination(pageNumber);
+	// 		})
+	// 		.catch(error => console.error('Error loading page content:', error));
+	// }
+
+	// 		function reinitializeScripts() {
+	// 			const scripts = document.querySelectorAll('#Anleitung_content-page script[type="module"]');
+	// 			scripts.forEach(script => {
+	// 				const newScript = document.createElement('script');
+	// 				newScript.type = 'module';
+	// 				newScript.textContent = script.textContent;
+	// 				document.body.appendChild(newScript);
+	// 				document.body.removeChild(newScript);
+	// 			});
+	// 		}
+
+			// function updatePagination(currentPage) {
+			// 	const pagination = document.querySelector('.pagination');
+			// 	pagination.innerHTML = '';
+
+			// 	const prevButton = document.createElement('li');
+			// 	prevButton.innerHTML = `<a href="#" class="button small prev ${currentPage === 1 ? 'disabled' : ''}">zurück</a>`;
+			// 	pagination.appendChild(prevButton);
+
+			// 	const createPageItem = (page) => {
+			// 		const li = document.createElement('li');
+			// 		li.innerHTML = `<a href="#" class="page ${page === currentPage ? 'active' : ''}" data-page="${page}">${page}</a>`;
+			// 		li.querySelector('a').addEventListener('click', function (e) {
+			// 			e.preventDefault();
+			// 			loadPageContent(page);
+			// 		});
+			// 		return li;
+			// 	};
+
+			// 	pagination.appendChild(createPageItem(1));
+			// 	pagination.appendChild(createPageItem(2));
+
+			// 	if (currentPage > 4) {
+			// 		const ellipsis = document.createElement('li');
+			// 		ellipsis.innerHTML = '<span>&hellip;</span>';
+			// 		pagination.appendChild(ellipsis);
+			// 	}
+
+			// 	for (let i = Math.max(3, currentPage - 1); i <= Math.min(totalPages - 2, currentPage + 1); i++) {
+			// 		pagination.appendChild(createPageItem(i));
+			// 	}
+
+			// 	if (currentPage < totalPages - 3) {
+			// 		const ellipsis = document.createElement('li');
+			// 		ellipsis.innerHTML = '<span>&hellip;</span>';
+			// 		pagination.appendChild(ellipsis);
+			// 	}
+
+			// 	pagination.appendChild(createPageItem(totalPages - 1));
+			// 	pagination.appendChild(createPageItem(totalPages));
+
+			// 	const naechsteButton = document.createElement('li');
+			// 	naechsteButton.innerHTML = `<a href="#" class="button small naechste ${currentPage === totalPages ? 'disabled' : ''}">weiter</a>`;
+			// 	pagination.appendChild(naechsteButton);
+
+			// 	document.querySelector('.pagination .button.naechste').addEventListener('click', function (e) {
+			// 		e.preventDefault();
+			// 		const naechstePage = currentPage + 1;
+			// 		if (naechstePage <= totalPages) {
+			// 			loadPageContent(naechstePage);
+			// 		}
+			// 	});
+
+			// 	document.querySelector('.pagination .button.prev').addEventListener('click', function (e) {
+			// 		e.preventDefault();
+			// 		const prevPage = currentPage - 1;
+			// 		if (prevPage >= 1) {
+			// 			loadPageContent(prevPage);
+			// 		}
+			// 	});
+			// }
+
+			// // Initiale Paginierung und Laden der ersten Seite
+			// updatePagination(1);
+			loadPageContent(1);
+		</script>
+
+
+</body>
+
+</html>

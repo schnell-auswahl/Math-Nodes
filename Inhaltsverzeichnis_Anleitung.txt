@@ -1,0 +1,61 @@
+Die Arbeitsoberfläche
+    Maschinen verschieben
+    Maschinen verbinden
+    Maschinen hinzufügen
+    Das Menü
+        Maschinen hinzufügen
+        Maschinen löschen
+        Maschinen sortieren
+        Speichern
+        Laden
+        Zoom
+Wortmaschinen
+Funktionsmaschinen
+    Eine Funktionenmaschine erstellen
+    Feedbackmaschinen verwenden
+        Wert
+        Gleichung
+        Graph
+        Audio
+    Funktionen verketten
+    Funktionen verknüpfen
+    Parameter verwenden
+        Funktionen als Parameter
+        Funktionen umdefinieren
+    Funktionen hören
+
+Einzelne Maschinen im Detail
+    Wortmaschinen
+            Text Eingabe
+            Text Display
+            Alphabet-Countdown
+            Rückwärtslesen
+            Vokal-Verwandlung
+            Kn Vkl n mnm Txt
+            Buchstabenwechsel
+            Buchstaben-Sprung
+            Alphabetischer Sprung
+            Buchstaben-Überlappung
+            Vokalwechsel
+            Buchstabenballett
+            Vokaltanz
+            Vokalium
+            Konsonanten verdoppeln
+            Doppelt hält besser
+            Vorwärts Rückwärts
+    Funktionsmaschinen
+            Unabhängige Variable
+            Parameter
+            Funktion
+            Operation
+            Feedback Gleichung
+            Feedback Wert
+            Feedback Graph
+            Feedback Audio
+    
+Infos für Experten   
+    Widgets verstecken
+    Graphen speichern     
+
+
+Jeder wichtige Unterpunkt bekommt eine Klasse -> di kommen alle in ein array. wenn getoggled wird alle auf display style none bis auf ausgewähltes
