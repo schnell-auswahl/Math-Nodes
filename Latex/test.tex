@@ -1,0 +1,96 @@
+\documentclass{article}
+
+\usepackage[default]{sourcesanspro}
+\usepackage[T1]{fontenc}
+\usepackage{titlesec}
+\usepackage{xcolor}
+\usepackage{graphicx}
+\usepackage{soul} % For letter spacing and background color
+\usepackage[letterspace=300]{microtype} 
+\usepackage{background}
+
+\usepackage[margin=2cm]{geometry}
+\usepackage[ngerman]{babel}
+
+
+\backgroundsetup{
+  scale=1,
+  color=white,
+  opacity=0,
+  angle=0,
+  position=current page.center,
+  vshift=0cm,
+  hshift=0cm,
+  contents={}
+}
+
+\definecolor{customgreen}{HTML}{89B19B}
+\definecolor{customblue}{HTML}{8FA0D4}
+
+\DeclareRobustCommand{\ebseries}{\fontseries{eb}\selectfont}
+\DeclareTextFontCommand{\texteb}{\ebseries}
+
+\DeclareRobustCommand{\sbseries}{\fontseries{sb}\selectfont}
+\DeclareTextFontCommand{\textsb}{\sbseries}
+
+\DeclareRobustCommand{\elseries}{\fontseries{el}\selectfont}
+\DeclareTextFontCommand{\textel}{\elseries}
+
+\DeclareRobustCommand{\lseries}{\fontseries{l}\selectfont}
+\DeclareTextFontCommand{\textl}{\lseries}
+
+\renewcommand{\seriesdefault}{l} % Set default series to light
+
+
+
+% Define the chapter start page style with color
+\newcommand{\chapterstartpage}[3]{
+    \newpage % Start a new page
+    \backgroundsetup{
+        scale=1,
+        color=#3,
+        opacity=1,
+        angle=0,
+        position=current page.north,
+        vshift=-2cm,
+        hshift=0cm,
+        contents={\begin{tikzpicture}[remember picture,overlay]
+          \fill[color=#3] (current page.north west) rectangle ([yshift=-4.78cm]current page.north east);
+        \end{tikzpicture}}
+      }
+    \BgThispage % Apply the background to this page only
+    \color{white} % Set text color to white
+    \noindent\sffamily{\sbseries\fontsize{22}{26}\selectfont #1} % Chapter title in Source Sans SemiBold, size 22
+    \newline\vspace{0pt} % Space between line and subtitle
+    \newline\noindent\rule{\textwidth}{0.8pt} % White line 0.8pt thick
+    \newline\vspace{4pt} % Space between line and subtitle
+    \newline\sffamily{\bfseries\fontsize{7}{9}\selectfont\textls[300]{#2}} % Subtitle in bold, size 7, all caps, letter spacing 30%
+    \newline\vspace{10pt} % Space after subtitle
+    \color{black} % Set text color back to black
+}
+
+
+\begin{document}
+
+\section{Lorem ipsum dolor sit amet}
+loren ipsum dolor sit amet loren ipsum dolor sit amet loren ipsum dolor sit amet loren ipsum dolor sit amet loren ipsum dolor sit amet loren ipsum dolor sit amet loren ipsum dolor sit amet loren ipsum dolor sit amet loren ipsum dolor sit amet loren ipsum dolor sit amet loren ipsum dolor sit amet loren ipsum dolor sit amet loren ipsum dolor sit amet loren ipsum dolor sit amet loren ipsum dolor sit amet loren ipsum dolor sit amet 
+
+test teset teset
+{\sffamily\elseries extra-light text}
+
+{\sffamily\lseries light text}
+
+{\sffamily regular text}
+
+{\sffamily\sbseries semi-bold text}
+
+{\sffamily\bfseries bold text}
+
+{\sffamily\ebseries black text}
+
+\chapterstartpage{Anleitung}{HIER FINDEST DU EINE DETAILLIERTE ANLEITUNG ZU ALLEN FUNKTIONEN VON MATH-NODES}{customgreen}
+
+\section{Lorem ipsum dolor sit amet}
+loren ipsum dolor sit amet loren ipsum dolor sit amet loren ipsum dolor sit amet loren ipsum dolor sit amet loren ipsum dolor sit amet loren ipsum dolor sit amet loren ipsum dolor sit amet loren ipsum dolor sit amet loren ipsum dolor sit amet loren ipsum dolor sit amet loren ipsum dolor sit amet loren ipsum dolor sit amet loren ipsum dolor sit amet loren ipsum dolor sit amet loren ipsum dolor sit amet loren ipsum dolor sit amet 
+
+\end{document}
