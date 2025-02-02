@@ -1,0 +1,7 @@
+\babel@toc {ngerman}{}
+\contentsline {chapter}{\numberline {1}Introduction}{2}%
+\contentsline {section}{\numberline {1.1}Lorem ipsum dolor sit amet}{2}%
+\contentsline {chapter}{\numberline {2}Anleitung}{3}%
+\contentsline {section}{\numberline {2.1}Lorem ipsum dolor sit amet}{4}%
+\contentsline {section}{\numberline {2.2}Lorem ipsum dolor sit amet}{5}%
+\contentsline {chapter}{\numberline {3}Test}{6}%

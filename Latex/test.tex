@@ -1,13 +1,16 @@
-\documentclass{article}
+\documentclass{report}
 
 \usepackage[default]{sourcesanspro}
 \usepackage[T1]{fontenc}
 \usepackage{titlesec}
 \usepackage{xcolor}
 \usepackage{graphicx}
+\usepackage{fancyhdr}
+\usepackage{everypage}
 \usepackage{soul} % For letter spacing and background color
 \usepackage[letterspace=300]{microtype} 
 \usepackage{background}
+\usepackage{lipsum}% for some dummy text
 
 \usepackage[margin=2cm]{geometry}
 \usepackage[ngerman]{babel}
@@ -27,6 +30,8 @@
 \definecolor{customgreen}{HTML}{89B19B}
 \definecolor{customblue}{HTML}{8FA0D4}
 
+
+
 \DeclareRobustCommand{\ebseries}{\fontseries{eb}\selectfont}
 \DeclareTextFontCommand{\texteb}{\ebseries}
 
@@ -41,41 +46,98 @@
 
 \renewcommand{\seriesdefault}{l} % Set default series to light
 
+\titleformat{\chapter}
+  {\color{white}\sffamily\sbseries\fontsize{22}{26}\selectfont } % Format of the chapter title
+    {\thechapter.} % Chapter number
+    {10pt} % Space between chapter number and title
+    {} % Format of the chapter title text
+
+\titlespacing*{\chapter}{0pt}{-18pt}{8pt} % Adjust the spacing
+
+% Definition des ersten Hintergrunds
+\newcommand{\backgroundOne}[1]{
+  \backgroundsetup{
+    scale=1,
+    color=red,
+    opacity=1,
+    angle=0,
+    position=current page.north,
+    vshift=-2cm,
+    hshift=0cm,
+    contents={\begin{tikzpicture}[remember picture,overlay]
+      \fill[color=#1] (current page.north west) rectangle ([yshift=-4.78cm]current page.north east);
+    \end{tikzpicture}}
+  }
+}
+
+% Definition des zweiten Hintergrunds
+\newcommand{\backgroundTwo}[1]{
+  \backgroundsetup{
+    scale=1,
+    color=blue,
+    opacity=1,
+    angle=0,
+    position=current page.north,
+    vshift=-2cm,
+    hshift=0cm,
+    contents={\begin{tikzpicture}[remember picture,overlay]
+      \fill[color=#1] (current page.north west) rectangle ([yshift=-1.76cm]current page.north east);
+    \end{tikzpicture}}
+  }
+}
+
 
 
 % Define the chapter start page style with color
 \newcommand{\chapterstartpage}[3]{
     \newpage % Start a new page
-    \backgroundsetup{
-        scale=1,
-        color=#3,
-        opacity=1,
-        angle=0,
-        position=current page.north,
-        vshift=-2cm,
-        hshift=0cm,
-        contents={\begin{tikzpicture}[remember picture,overlay]
-          \fill[color=#3] (current page.north west) rectangle ([yshift=-4.78cm]current page.north east);
-        \end{tikzpicture}}
-      }
-    \BgThispage % Apply the background to this page only
+    \chapter{#1}
+    % \addcontentsline{toc}{chapter}{#1} % Add the chapter title to the table of contents
+    \backgroundOne{#3} % Erster Hintergrund
+    \BgThispage % Hintergrund auf dieser Seite anwenden
+    
     \color{white} % Set text color to white
-    \noindent\sffamily{\sbseries\fontsize{22}{26}\selectfont #1} % Chapter title in Source Sans SemiBold, size 22
+    \noindent\rule{\textwidth}{0.8pt} % White line 0.8pt thick
     \newline\vspace{0pt} % Space between line and subtitle
-    \newline\noindent\rule{\textwidth}{0.8pt} % White line 0.8pt thick
-    \newline\vspace{4pt} % Space between line and subtitle
     \newline\sffamily{\bfseries\fontsize{7}{9}\selectfont\textls[300]{#2}} % Subtitle in bold, size 7, all caps, letter spacing 30%
     \newline\vspace{10pt} % Space after subtitle
     \color{black} % Set text color back to black
+  \newpage
+  \backgroundTwo{#3} % Zweiter Hintergrund
+ % Hintergrund auf dieser Seite anwenden
+% Entfernen des Hooks
 }
+
+
 
 
 \begin{document}
 
-\section{Lorem ipsum dolor sit amet}
-loren ipsum dolor sit amet loren ipsum dolor sit amet loren ipsum dolor sit amet loren ipsum dolor sit amet loren ipsum dolor sit amet loren ipsum dolor sit amet loren ipsum dolor sit amet loren ipsum dolor sit amet loren ipsum dolor sit amet loren ipsum dolor sit amet loren ipsum dolor sit amet loren ipsum dolor sit amet loren ipsum dolor sit amet loren ipsum dolor sit amet loren ipsum dolor sit amet loren ipsum dolor sit amet 
+\begin{titlepage}
+    \centering
+    \vspace*{2cm}
+    \includegraphics[width=0.15\textwidth]{example-image-1x1}\par\vspace{1cm}
+    {\scshape\LARGE Columbidae University \par}
+    \vspace{1cm}
+    {\scshape\Large Final year project\par}
+    \vspace{1.5cm}
+    {\huge\bfseries Pigeons love doves\par}
+    \vspace{2cm}
+    {\Large\itshape John Birdwatch\par}
+    \vfill
+    supervised by\par
+    Dr.~Mark \textsc{Brown}
 
-test teset teset
+    \vfill
+\end{titlepage}
+
+\tableofcontents
+
+\chapter{Introduction}
+
+\section{Lorem ipsum dolor sit amet}
+\lipsum[2]
+
 {\sffamily\elseries extra-light text}
 
 {\sffamily\lseries light text}
@@ -86,11 +148,23 @@ test teset teset
 
 {\sffamily\bfseries bold text}
 
-{\sffamily\ebseries black text}
-
 \chapterstartpage{Anleitung}{HIER FINDEST DU EINE DETAILLIERTE ANLEITUNG ZU ALLEN FUNKTIONEN VON MATH-NODES}{customgreen}
 
 \section{Lorem ipsum dolor sit amet}
 loren ipsum dolor sit amet loren ipsum dolor sit amet loren ipsum dolor sit amet loren ipsum dolor sit amet loren ipsum dolor sit amet loren ipsum dolor sit amet loren ipsum dolor sit amet loren ipsum dolor sit amet loren ipsum dolor sit amet loren ipsum dolor sit amet loren ipsum dolor sit amet loren ipsum dolor sit amet loren ipsum dolor sit amet loren ipsum dolor sit amet loren ipsum dolor sit amet loren ipsum dolor sit amet 
 
+\newpage
+
+\section{Lorem ipsum dolor sit amet}
+\lipsum[2]
+
+\chapterstartpage{Test}{HIER FINDEST DU EINE DETAILLIERTE ANLEITUNG ZU ALLEN FUNKTIONEN VON MATH-NODES}{customblue}
+\lipsum[4]
+
+\newpage
+
+\lipsum[4]
+\newpage
+
+\lipsum[4]
 \end{document}
