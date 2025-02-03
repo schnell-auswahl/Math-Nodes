@@ -6,8 +6,10 @@ INPUT /Users/nico/Library/Mobile Documents/com~apple~CloudDocs/Promotion/Synthes
 OUTPUT /Users/nico/Library/Mobile Documents/com~apple~CloudDocs/Promotion/Synthesizer/Code/mathe-synthesizer/Latex/test.log
 INPUT /usr/local/texlive/2020/texmf-dist/tex/latex/base/report.cls
 INPUT /usr/local/texlive/2020/texmf-dist/tex/latex/base/report.cls
-INPUT /usr/local/texlive/2020/texmf-dist/tex/latex/base/size10.clo
-INPUT /usr/local/texlive/2020/texmf-dist/tex/latex/base/size10.clo
+INPUT /usr/local/texlive/2020/texmf-dist/tex/latex/base/size12.clo
+INPUT /usr/local/texlive/2020/texmf-dist/tex/latex/base/size12.clo
+INPUT /usr/local/texlive/2020/texmf-dist/fonts/map/fontname/texfonts.map
+INPUT /usr/local/texlive/2020/texmf-dist/fonts/tfm/public/cm/cmr12.tfm
 INPUT /usr/local/texlive/2020/texmf-dist/tex/latex/sourcesanspro/sourcesanspro.sty
 INPUT /usr/local/texlive/2020/texmf-dist/tex/latex/sourcesanspro/sourcesanspro.sty
 INPUT /usr/local/texlive/2020/texmf-dist/tex/generic/iftex/ifxetex.sty
@@ -27,8 +29,7 @@ INPUT /usr/local/texlive/2020/texmf-dist/tex/latex/ly1/ly1enc.def
 INPUT /usr/local/texlive/2020/texmf-dist/tex/latex/ly1/ly1enc.def
 INPUT /usr/local/texlive/2020/texmf-dist/tex/latex/base/ly1enc.dfu
 INPUT /usr/local/texlive/2020/texmf-dist/tex/latex/base/ly1enc.dfu
-INPUT /usr/local/texlive/2020/texmf-dist/fonts/map/fontname/texfonts.map
-INPUT /usr/local/texlive/2020/texmf-dist/fonts/tfm/jknappen/ec/ecrm1000.tfm
+INPUT /usr/local/texlive/2020/texmf-dist/fonts/tfm/jknappen/ec/ecrm1200.tfm
 INPUT /usr/local/texlive/2020/texmf-dist/tex/latex/base/fontenc.sty
 INPUT /usr/local/texlive/2020/texmf-dist/tex/latex/base/fontenc.sty
 INPUT /usr/local/texlive/2020/texmf-dist/tex/latex/sourcesanspro/T1SourceSansPro-LF.fd
@@ -159,16 +160,42 @@ INPUT /usr/local/texlive/2020/texmf-dist/tex/generic/pgf/frontendlayer/tikz/libr
 INPUT /usr/local/texlive/2020/texmf-dist/tex/generic/pgf/frontendlayer/tikz/libraries/tikzlibrarytopaths.code.tex
 INPUT /usr/local/texlive/2020/texmf-dist/tex/latex/tools/afterpage.sty
 INPUT /usr/local/texlive/2020/texmf-dist/tex/latex/tools/afterpage.sty
-INPUT /usr/local/texlive/2020/texmf-dist/tex/latex/lipsum/lipsum.sty
-INPUT /usr/local/texlive/2020/texmf-dist/tex/latex/lipsum/lipsum.sty
-INPUT /usr/local/texlive/2020/texmf-dist/tex/latex/l3kernel/expl3.sty
-INPUT /usr/local/texlive/2020/texmf-dist/tex/latex/l3kernel/expl3.sty
-INPUT /usr/local/texlive/2020/texmf-dist/tex/latex/l3backend/l3backend-pdfmode.def
-INPUT /usr/local/texlive/2020/texmf-dist/tex/latex/l3backend/l3backend-pdfmode.def
-INPUT /usr/local/texlive/2020/texmf-dist/tex/latex/l3packages/xparse/xparse.sty
-INPUT /usr/local/texlive/2020/texmf-dist/tex/latex/l3packages/xparse/xparse.sty
-INPUT /usr/local/texlive/2020/texmf-dist/tex/latex/lipsum/lipsum.ltd.tex
-INPUT /usr/local/texlive/2020/texmf-dist/tex/latex/lipsum/lipsum.ltd.tex
+INPUT /usr/local/texlive/2020/texmf-dist/tex/latex/parskip/parskip.sty
+INPUT /usr/local/texlive/2020/texmf-dist/tex/latex/parskip/parskip.sty
+INPUT /usr/local/texlive/2020/texmf-dist/tex/latex/kvoptions/kvoptions.sty
+INPUT /usr/local/texlive/2020/texmf-dist/tex/latex/kvoptions/kvoptions.sty
+INPUT /usr/local/texlive/2020/texmf-dist/tex/generic/ltxcmds/ltxcmds.sty
+INPUT /usr/local/texlive/2020/texmf-dist/tex/generic/ltxcmds/ltxcmds.sty
+INPUT /usr/local/texlive/2020/texmf-dist/tex/generic/kvsetkeys/kvsetkeys.sty
+INPUT /usr/local/texlive/2020/texmf-dist/tex/generic/kvsetkeys/kvsetkeys.sty
+INPUT /usr/local/texlive/2020/texmf-dist/tex/latex/etoolbox/etoolbox.sty
+INPUT /usr/local/texlive/2020/texmf-dist/tex/latex/etoolbox/etoolbox.sty
+INPUT /usr/local/texlive/2020/texmf-dist/tex/latex/amsmath/amsmath.sty
+INPUT /usr/local/texlive/2020/texmf-dist/tex/latex/amsmath/amsmath.sty
+INPUT /usr/local/texlive/2020/texmf-dist/tex/latex/amsmath/amstext.sty
+INPUT /usr/local/texlive/2020/texmf-dist/tex/latex/amsmath/amstext.sty
+INPUT /usr/local/texlive/2020/texmf-dist/tex/latex/amsmath/amsgen.sty
+INPUT /usr/local/texlive/2020/texmf-dist/tex/latex/amsmath/amsgen.sty
+INPUT /usr/local/texlive/2020/texmf-dist/tex/latex/amsmath/amsbsy.sty
+INPUT /usr/local/texlive/2020/texmf-dist/tex/latex/amsmath/amsbsy.sty
+INPUT /usr/local/texlive/2020/texmf-dist/tex/latex/amsmath/amsopn.sty
+INPUT /usr/local/texlive/2020/texmf-dist/tex/latex/amsmath/amsopn.sty
+INPUT /usr/local/texlive/2020/texmf-dist/tex/latex/adjustbox/adjustbox.sty
+INPUT /usr/local/texlive/2020/texmf-dist/tex/latex/adjustbox/adjustbox.sty
+INPUT /usr/local/texlive/2020/texmf-dist/tex/latex/adjustbox/adjcalc.sty
+INPUT /usr/local/texlive/2020/texmf-dist/tex/latex/adjustbox/adjcalc.sty
+INPUT /usr/local/texlive/2020/texmf-dist/tex/latex/adjustbox/trimclip.sty
+INPUT /usr/local/texlive/2020/texmf-dist/tex/latex/adjustbox/trimclip.sty
+INPUT /usr/local/texlive/2020/texmf-dist/tex/latex/collectbox/collectbox.sty
+INPUT /usr/local/texlive/2020/texmf-dist/tex/latex/collectbox/collectbox.sty
+INPUT /usr/local/texlive/2020/texmf-dist/tex/latex/adjustbox/tc-pdftex.def
+INPUT /usr/local/texlive/2020/texmf-dist/tex/latex/adjustbox/tc-pdftex.def
+INPUT /usr/local/texlive/2020/texmf-dist/tex/latex/ifoddpage/ifoddpage.sty
+INPUT /usr/local/texlive/2020/texmf-dist/tex/latex/ifoddpage/ifoddpage.sty
+INPUT /usr/local/texlive/2020/texmf-dist/tex/latex/ifoddpage/ifoddpage.sty
+INPUT /usr/local/texlive/2020/texmf-dist/tex/latex/varwidth/varwidth.sty
+INPUT /usr/local/texlive/2020/texmf-dist/tex/latex/varwidth/varwidth.sty
+INPUT /usr/local/texlive/2020/texmf-dist/tex/latex/varwidth/varwidth.sty
 INPUT /usr/local/texlive/2020/texmf-dist/tex/latex/geometry/geometry.sty
 INPUT /usr/local/texlive/2020/texmf-dist/tex/latex/geometry/geometry.sty
 INPUT /usr/local/texlive/2020/texmf-dist/tex/generic/iftex/ifvtex.sty
@@ -181,6 +208,10 @@ INPUT /usr/local/texlive/2020/texmf-dist/tex/generic/babel-german/ngerman.ldf
 INPUT /usr/local/texlive/2020/texmf-dist/tex/generic/babel-german/ngermanb.ldf
 INPUT /usr/local/texlive/2020/texmf-dist/tex/generic/babel/babel.def
 INPUT /usr/local/texlive/2020/texmf-dist/tex/generic/babel/txtbabel.def
+INPUT /usr/local/texlive/2020/texmf-dist/tex/latex/tocloft/tocloft.sty
+INPUT /usr/local/texlive/2020/texmf-dist/tex/latex/tocloft/tocloft.sty
+INPUT /usr/local/texlive/2020/texmf-dist/tex/latex/l3backend/l3backend-pdfmode.def
+INPUT /usr/local/texlive/2020/texmf-dist/tex/latex/l3backend/l3backend-pdfmode.def
 INPUT /Users/nico/Library/Mobile Documents/com~apple~CloudDocs/Promotion/Synthesizer/Code/mathe-synthesizer/Latex/test.aux
 INPUT /Users/nico/Library/Mobile Documents/com~apple~CloudDocs/Promotion/Synthesizer/Code/mathe-synthesizer/Latex/test.aux
 OUTPUT /Users/nico/Library/Mobile Documents/com~apple~CloudDocs/Promotion/Synthesizer/Code/mathe-synthesizer/Latex/test.aux
@@ -191,20 +222,6 @@ INPUT /usr/local/texlive/2020/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
 INPUT /usr/local/texlive/2020/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
 INPUT /usr/local/texlive/2020/texmf-dist/tex/latex/epstopdf-pkg/epstopdf-base.sty
 INPUT /usr/local/texlive/2020/texmf-dist/tex/latex/epstopdf-pkg/epstopdf-base.sty
-INPUT /usr/local/texlive/2020/texmf-dist/tex/generic/infwarerr/infwarerr.sty
-INPUT /usr/local/texlive/2020/texmf-dist/tex/generic/infwarerr/infwarerr.sty
-INPUT /usr/local/texlive/2020/texmf-dist/tex/latex/grfext/grfext.sty
-INPUT /usr/local/texlive/2020/texmf-dist/tex/latex/grfext/grfext.sty
-INPUT /usr/local/texlive/2020/texmf-dist/tex/generic/kvdefinekeys/kvdefinekeys.sty
-INPUT /usr/local/texlive/2020/texmf-dist/tex/generic/kvdefinekeys/kvdefinekeys.sty
-INPUT /usr/local/texlive/2020/texmf-dist/tex/latex/kvoptions/kvoptions.sty
-INPUT /usr/local/texlive/2020/texmf-dist/tex/latex/kvoptions/kvoptions.sty
-INPUT /usr/local/texlive/2020/texmf-dist/tex/generic/ltxcmds/ltxcmds.sty
-INPUT /usr/local/texlive/2020/texmf-dist/tex/generic/ltxcmds/ltxcmds.sty
-INPUT /usr/local/texlive/2020/texmf-dist/tex/generic/kvsetkeys/kvsetkeys.sty
-INPUT /usr/local/texlive/2020/texmf-dist/tex/generic/kvsetkeys/kvsetkeys.sty
-INPUT /usr/local/texlive/2020/texmf-dist/tex/latex/pdftexcmds/pdftexcmds.sty
-INPUT /usr/local/texlive/2020/texmf-dist/tex/latex/pdftexcmds/pdftexcmds.sty
 INPUT /usr/local/texlive/2020/texmf-dist/tex/latex/latexconfig/epstopdf-sys.cfg
 INPUT /usr/local/texlive/2020/texmf-dist/tex/latex/latexconfig/epstopdf-sys.cfg
 INPUT /usr/local/texlive/2020/texmf-dist/tex/latex/mwe/example-image-1x1.pdf
@@ -231,36 +248,96 @@ INPUT /usr/local/texlive/2020/texmf-dist/fonts/vf/adobe/sourcesanspro/SourceSans
 INPUT /usr/local/texlive/2020/texmf-dist/fonts/tfm/adobe/sourcesanspro/SourceSansPro-Light-lf-t1--base.tfm
 INPUT /usr/local/texlive/2020/texmf-dist/fonts/vf/adobe/sourcesanspro/SourceSansPro-Light-lf-sc-t1.vf
 INPUT /usr/local/texlive/2020/texmf-dist/fonts/tfm/adobe/sourcesanspro/SourceSansPro-Light-lf-sc-t1--base.tfm
-INPUT /usr/local/texlive/2020/texmf-dist/fonts/tfm/adobe/sourcesanspro/SourceSansPro-Semibold-lf-t1.tfm
-INPUT /usr/local/texlive/2020/texmf-dist/fonts/tfm/adobe/sourcesanspro/SourceSansPro-Semibold-lf-t1.tfm
 INPUT /Users/nico/Library/Mobile Documents/com~apple~CloudDocs/Promotion/Synthesizer/Code/mathe-synthesizer/Latex/test.toc
 INPUT /Users/nico/Library/Mobile Documents/com~apple~CloudDocs/Promotion/Synthesizer/Code/mathe-synthesizer/Latex/test.toc
 INPUT /usr/local/texlive/2020/texmf-dist/fonts/tfm/adobe/sourcesanspro/SourceSansPro-Bold-lf-t1.tfm
 INPUT /usr/local/texlive/2020/texmf-dist/tex/latex/microtype/mt-cmr.cfg
 INPUT /usr/local/texlive/2020/texmf-dist/tex/latex/microtype/mt-cmr.cfg
+INPUT /usr/local/texlive/2020/texmf-dist/fonts/tfm/public/cm/cmr8.tfm
+INPUT /usr/local/texlive/2020/texmf-dist/fonts/tfm/public/cm/cmr6.tfm
+INPUT /usr/local/texlive/2020/texmf-dist/fonts/tfm/public/cm/cmmi12.tfm
+INPUT /usr/local/texlive/2020/texmf-dist/fonts/tfm/public/cm/cmmi8.tfm
+INPUT /usr/local/texlive/2020/texmf-dist/fonts/tfm/public/cm/cmmi6.tfm
+INPUT /usr/local/texlive/2020/texmf-dist/fonts/tfm/public/cm/cmsy10.tfm
+INPUT /usr/local/texlive/2020/texmf-dist/fonts/tfm/public/cm/cmsy8.tfm
+INPUT /usr/local/texlive/2020/texmf-dist/fonts/tfm/public/cm/cmsy6.tfm
+INPUT /usr/local/texlive/2020/texmf-dist/fonts/tfm/public/cm/cmex10.tfm
+INPUT /usr/local/texlive/2020/texmf-dist/fonts/tfm/public/amsfonts/cmextra/cmex8.tfm
+INPUT /usr/local/texlive/2020/texmf-dist/fonts/tfm/public/amsfonts/cmextra/cmex7.tfm
 OUTPUT /Users/nico/Library/Mobile Documents/com~apple~CloudDocs/Promotion/Synthesizer/Code/mathe-synthesizer/Latex/test.toc
+INPUT /usr/local/texlive/2020/texmf-dist/fonts/vf/adobe/sourcesanspro/SourceSansPro-Bold-lf-t1.vf
+INPUT /usr/local/texlive/2020/texmf-dist/fonts/tfm/adobe/sourcesanspro/SourceSansPro-Bold-lf-t1--base.tfm
+INPUT /usr/local/texlive/2020/texmf-dist/fonts/tfm/adobe/sourcesanspro/SourceSansPro-Semibold-lf-t1.tfm
+INPUT /usr/local/texlive/2020/texmf-dist/fonts/tfm/adobe/sourcesanspro/SourceSansPro-Semibold-lf-t1.tfm
+INPUT /usr/local/texlive/2020/texmf-dist/fonts/tfm/adobe/sourcesanspro/SourceSansPro-Bold-lf-t1.tfm
+INPUT /usr/local/texlive/2020/texmf-dist/fonts/tfm/adobe/sourcesanspro/SourceSansPro-Bold-lf-t1.tfm
+INPUT /usr/local/texlive/2020/texmf-dist/fonts/tfm/public/amsfonts/cmextra/cmex7.tfm
+INPUT /usr/local/texlive/2020/texmf-dist/fonts/tfm/public/amsfonts/cmextra/cmex7.tfm
+INPUT /Users/nico/Library/Mobile Documents/com~apple~CloudDocs/Promotion/Synthesizer/Code/mathe-synthesizer/Latex/../images/MATH-NODES_Logo.png
+INPUT /Users/nico/Library/Mobile Documents/com~apple~CloudDocs/Promotion/Synthesizer/Code/mathe-synthesizer/Latex/../images/MATH-NODES_Logo.png
+INPUT /Users/nico/Library/Mobile Documents/com~apple~CloudDocs/Promotion/Synthesizer/Code/mathe-synthesizer/Latex/../images/MATH-NODES_Logo.png
+INPUT /Users/nico/Library/Mobile Documents/com~apple~CloudDocs/Promotion/Synthesizer/Code/mathe-synthesizer/Latex/../images/MATH-NODES_Logo.png
+INPUT /Users/nico/Library/Mobile Documents/com~apple~CloudDocs/Promotion/Synthesizer/Code/mathe-synthesizer/Latex/../images/MATH-NODES_Logo.png
 INPUT /usr/local/texlive/2020/texmf-dist/fonts/vf/adobe/sourcesanspro/SourceSansPro-Semibold-lf-t1.vf
 INPUT /usr/local/texlive/2020/texmf-dist/fonts/tfm/adobe/sourcesanspro/SourceSansPro-Semibold-lf-t1--base.tfm
 INPUT /usr/local/texlive/2020/texmf-dist/fonts/vf/adobe/sourcesanspro/SourceSansPro-Bold-lf-t1.vf
 INPUT /usr/local/texlive/2020/texmf-dist/fonts/tfm/adobe/sourcesanspro/SourceSansPro-Bold-lf-t1--base.tfm
-INPUT /usr/local/texlive/2020/texmf-dist/fonts/tfm/adobe/sourcesanspro/SourceSansPro-Bold-lf-t1.tfm
-INPUT /usr/local/texlive/2020/texmf-dist/fonts/tfm/adobe/sourcesanspro/SourceSansPro-ExtraLight-lf-t1.tfm
-INPUT /usr/local/texlive/2020/texmf-dist/fonts/vf/adobe/sourcesanspro/SourceSansPro-Bold-lf-t1.vf
-INPUT /usr/local/texlive/2020/texmf-dist/fonts/tfm/adobe/sourcesanspro/SourceSansPro-Bold-lf-t1--base.tfm
-INPUT /usr/local/texlive/2020/texmf-dist/fonts/vf/adobe/sourcesanspro/SourceSansPro-ExtraLight-lf-t1.vf
-INPUT /usr/local/texlive/2020/texmf-dist/fonts/tfm/adobe/sourcesanspro/SourceSansPro-ExtraLight-lf-t1--base.tfm
+INPUT /usr/local/texlive/2020/texmf-dist/fonts/tfm/adobe/sourcesanspro/SourceSansPro-Semibold-lf-t1.tfm
+INPUT /Users/nico/Library/Mobile Documents/com~apple~CloudDocs/Promotion/Synthesizer/Code/mathe-synthesizer/Latex/Bilder/Wortmaschinen_A1_config.png
+INPUT /Users/nico/Library/Mobile Documents/com~apple~CloudDocs/Promotion/Synthesizer/Code/mathe-synthesizer/Latex/Bilder/Wortmaschinen_A1_config.png
+INPUT /Users/nico/Library/Mobile Documents/com~apple~CloudDocs/Promotion/Synthesizer/Code/mathe-synthesizer/Latex/Bilder/Wortmaschinen_A1_config.png
+INPUT /Users/nico/Library/Mobile Documents/com~apple~CloudDocs/Promotion/Synthesizer/Code/mathe-synthesizer/Latex/Bilder/Wortmaschinen_A2_config.png
+INPUT /Users/nico/Library/Mobile Documents/com~apple~CloudDocs/Promotion/Synthesizer/Code/mathe-synthesizer/Latex/Bilder/Wortmaschinen_A2_config.png
+INPUT /Users/nico/Library/Mobile Documents/com~apple~CloudDocs/Promotion/Synthesizer/Code/mathe-synthesizer/Latex/Bilder/Wortmaschinen_A2_config.png
+INPUT /Users/nico/Library/Mobile Documents/com~apple~CloudDocs/Promotion/Synthesizer/Code/mathe-synthesizer/Latex/../images/MATH-NODES_Logo.png
+INPUT /Users/nico/Library/Mobile Documents/com~apple~CloudDocs/Promotion/Synthesizer/Code/mathe-synthesizer/Latex/../images/MATH-NODES_Logo.png
 INPUT /usr/local/texlive/2020/texmf-dist/fonts/vf/adobe/sourcesanspro/SourceSansPro-Semibold-lf-t1.vf
 INPUT /usr/local/texlive/2020/texmf-dist/fonts/tfm/adobe/sourcesanspro/SourceSansPro-Semibold-lf-t1--base.tfm
-INPUT /usr/local/texlive/2020/texmf-dist/fonts/tfm/adobe/sourcesanspro/SourceSansPro-Bold-lf-t1.tfm
-INPUT /usr/local/texlive/2020/texmf-dist/fonts/tfm/adobe/sourcesanspro/SourceSansPro-Bold-lf-t1.tfm
-INPUT /usr/local/texlive/2020/texmf-dist/fonts/vf/adobe/sourcesanspro/SourceSansPro-Bold-lf-t1.vf
-INPUT /usr/local/texlive/2020/texmf-dist/fonts/tfm/adobe/sourcesanspro/SourceSansPro-Bold-lf-t1--base.tfm
+INPUT /Users/nico/Library/Mobile Documents/com~apple~CloudDocs/Promotion/Synthesizer/Code/mathe-synthesizer/Latex/Bilder/Wortmaschinen_A2b_config.png
+INPUT /Users/nico/Library/Mobile Documents/com~apple~CloudDocs/Promotion/Synthesizer/Code/mathe-synthesizer/Latex/Bilder/Wortmaschinen_A2b_config.png
+INPUT /Users/nico/Library/Mobile Documents/com~apple~CloudDocs/Promotion/Synthesizer/Code/mathe-synthesizer/Latex/Bilder/Wortmaschinen_A2b_config.png
+INPUT /Users/nico/Library/Mobile Documents/com~apple~CloudDocs/Promotion/Synthesizer/Code/mathe-synthesizer/Latex/Bilder/Wortmaschinen_A3_config.png
+INPUT /Users/nico/Library/Mobile Documents/com~apple~CloudDocs/Promotion/Synthesizer/Code/mathe-synthesizer/Latex/Bilder/Wortmaschinen_A3_config.png
+INPUT /Users/nico/Library/Mobile Documents/com~apple~CloudDocs/Promotion/Synthesizer/Code/mathe-synthesizer/Latex/Bilder/Wortmaschinen_A3_config.png
+INPUT /Users/nico/Library/Mobile Documents/com~apple~CloudDocs/Promotion/Synthesizer/Code/mathe-synthesizer/Latex/../images/MATH-NODES_Logo.png
+INPUT /Users/nico/Library/Mobile Documents/com~apple~CloudDocs/Promotion/Synthesizer/Code/mathe-synthesizer/Latex/../images/MATH-NODES_Logo.png
+INPUT /Users/nico/Library/Mobile Documents/com~apple~CloudDocs/Promotion/Synthesizer/Code/mathe-synthesizer/Latex/Bilder/Wortmaschinen_A4_config.png
+INPUT /Users/nico/Library/Mobile Documents/com~apple~CloudDocs/Promotion/Synthesizer/Code/mathe-synthesizer/Latex/Bilder/Wortmaschinen_A4_config.png
+INPUT /Users/nico/Library/Mobile Documents/com~apple~CloudDocs/Promotion/Synthesizer/Code/mathe-synthesizer/Latex/Bilder/Wortmaschinen_A4_config.png
+INPUT /Users/nico/Library/Mobile Documents/com~apple~CloudDocs/Promotion/Synthesizer/Code/mathe-synthesizer/Latex/../images/MATH-NODES_Logo.png
+INPUT /Users/nico/Library/Mobile Documents/com~apple~CloudDocs/Promotion/Synthesizer/Code/mathe-synthesizer/Latex/../images/MATH-NODES_Logo.png
+INPUT /Users/nico/Library/Mobile Documents/com~apple~CloudDocs/Promotion/Synthesizer/Code/mathe-synthesizer/Latex/Bilder/Wortmaschinen_A5_config.png
+INPUT /Users/nico/Library/Mobile Documents/com~apple~CloudDocs/Promotion/Synthesizer/Code/mathe-synthesizer/Latex/Bilder/Wortmaschinen_A5_config.png
+INPUT /Users/nico/Library/Mobile Documents/com~apple~CloudDocs/Promotion/Synthesizer/Code/mathe-synthesizer/Latex/Bilder/Wortmaschinen_A5_config.png
+INPUT /Users/nico/Library/Mobile Documents/com~apple~CloudDocs/Promotion/Synthesizer/Code/mathe-synthesizer/Latex/Bilder/Wortmaschinen_A6_config.png
+INPUT /Users/nico/Library/Mobile Documents/com~apple~CloudDocs/Promotion/Synthesizer/Code/mathe-synthesizer/Latex/Bilder/Wortmaschinen_A6_config.png
+INPUT /Users/nico/Library/Mobile Documents/com~apple~CloudDocs/Promotion/Synthesizer/Code/mathe-synthesizer/Latex/Bilder/Wortmaschinen_A6_config.png
+INPUT /Users/nico/Library/Mobile Documents/com~apple~CloudDocs/Promotion/Synthesizer/Code/mathe-synthesizer/Latex/../images/MATH-NODES_Logo.png
+INPUT /Users/nico/Library/Mobile Documents/com~apple~CloudDocs/Promotion/Synthesizer/Code/mathe-synthesizer/Latex/../images/MATH-NODES_Logo.png
+INPUT /usr/local/texlive/2020/texmf-dist/fonts/vf/adobe/sourcesanspro/SourceSansPro-Semibold-lf-t1.vf
+INPUT /usr/local/texlive/2020/texmf-dist/fonts/tfm/adobe/sourcesanspro/SourceSansPro-Semibold-lf-t1--base.tfm
+INPUT /Users/nico/Library/Mobile Documents/com~apple~CloudDocs/Promotion/Synthesizer/Code/mathe-synthesizer/Latex/Bilder/Wortmaschinen_A7_config.png
+INPUT /Users/nico/Library/Mobile Documents/com~apple~CloudDocs/Promotion/Synthesizer/Code/mathe-synthesizer/Latex/Bilder/Wortmaschinen_A7_config.png
+INPUT /Users/nico/Library/Mobile Documents/com~apple~CloudDocs/Promotion/Synthesizer/Code/mathe-synthesizer/Latex/Bilder/Wortmaschinen_A7_config.png
+INPUT /Users/nico/Library/Mobile Documents/com~apple~CloudDocs/Promotion/Synthesizer/Code/mathe-synthesizer/Latex/Bilder/Wortmaschinen_A8_config.png
+INPUT /Users/nico/Library/Mobile Documents/com~apple~CloudDocs/Promotion/Synthesizer/Code/mathe-synthesizer/Latex/Bilder/Wortmaschinen_A8_config.png
+INPUT /Users/nico/Library/Mobile Documents/com~apple~CloudDocs/Promotion/Synthesizer/Code/mathe-synthesizer/Latex/Bilder/Wortmaschinen_A8_config.png
+INPUT /Users/nico/Library/Mobile Documents/com~apple~CloudDocs/Promotion/Synthesizer/Code/mathe-synthesizer/Latex/Bilder/Uebersicht_Wortmaschinen.png
+INPUT /Users/nico/Library/Mobile Documents/com~apple~CloudDocs/Promotion/Synthesizer/Code/mathe-synthesizer/Latex/Bilder/Uebersicht_Wortmaschinen.png
+INPUT /Users/nico/Library/Mobile Documents/com~apple~CloudDocs/Promotion/Synthesizer/Code/mathe-synthesizer/Latex/Bilder/Uebersicht_Wortmaschinen.png
+INPUT /Users/nico/Library/Mobile Documents/com~apple~CloudDocs/Promotion/Synthesizer/Code/mathe-synthesizer/Latex/../images/MATH-NODES_Logo.png
+INPUT /Users/nico/Library/Mobile Documents/com~apple~CloudDocs/Promotion/Synthesizer/Code/mathe-synthesizer/Latex/../images/MATH-NODES_Logo.png
+INPUT /Users/nico/Library/Mobile Documents/com~apple~CloudDocs/Promotion/Synthesizer/Code/mathe-synthesizer/Latex/../images/MATH-NODES_Logo.png
+INPUT /Users/nico/Library/Mobile Documents/com~apple~CloudDocs/Promotion/Synthesizer/Code/mathe-synthesizer/Latex/../images/MATH-NODES_Logo.png
+INPUT /Users/nico/Library/Mobile Documents/com~apple~CloudDocs/Promotion/Synthesizer/Code/mathe-synthesizer/Latex/../images/MATH-NODES_Logo.png
+INPUT /Users/nico/Library/Mobile Documents/com~apple~CloudDocs/Promotion/Synthesizer/Code/mathe-synthesizer/Latex/../images/MATH-NODES_Logo.png
+INPUT /Users/nico/Library/Mobile Documents/com~apple~CloudDocs/Promotion/Synthesizer/Code/mathe-synthesizer/Latex/../images/MATH-NODES_Logo.png
+INPUT /Users/nico/Library/Mobile Documents/com~apple~CloudDocs/Promotion/Synthesizer/Code/mathe-synthesizer/Latex/../images/MATH-NODES_Logo.png
 INPUT /Users/nico/Library/Mobile Documents/com~apple~CloudDocs/Promotion/Synthesizer/Code/mathe-synthesizer/Latex/test.aux
 INPUT /usr/local/texlive/2020/texmf-dist/fonts/enc/dvips/sourcesanspro/a_ggs4wk.enc
 INPUT /usr/local/texlive/2020/texmf-dist/fonts/enc/dvips/sourcesanspro/a_5tbsmu.enc
 INPUT /usr/local/texlive/2020/texmf-dist/fonts/enc/dvips/sourcesanspro/a_mhce32.enc
 INPUT /usr/local/texlive/2020/texmf-dist/fonts/type1/adobe/sourcesanspro/SourceSansPro-Bold.pfb
-INPUT /usr/local/texlive/2020/texmf-dist/fonts/type1/adobe/sourcesanspro/SourceSansPro-ExtraLight.pfb
 INPUT /usr/local/texlive/2020/texmf-dist/fonts/type1/adobe/sourcesanspro/SourceSansPro-Light.pfb
 INPUT /usr/local/texlive/2020/texmf-dist/fonts/type1/adobe/sourcesanspro/SourceSansPro-LightIt.pfb
 INPUT /usr/local/texlive/2020/texmf-dist/fonts/type1/adobe/sourcesanspro/SourceSansPro-Semibold.pfb

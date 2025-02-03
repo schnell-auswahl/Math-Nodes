@@ -1,7 +1,13 @@
 \babel@toc {ngerman}{}
-\contentsline {chapter}{\numberline {1}Introduction}{2}%
-\contentsline {section}{\numberline {1.1}Lorem ipsum dolor sit amet}{2}%
-\contentsline {chapter}{\numberline {2}Anleitung}{3}%
-\contentsline {section}{\numberline {2.1}Lorem ipsum dolor sit amet}{4}%
-\contentsline {section}{\numberline {2.2}Lorem ipsum dolor sit amet}{5}%
-\contentsline {chapter}{\numberline {3}Test}{6}%
+\contentsline {chapter}{\numberline {1}Wortmaschinen}{2}%
+\contentsline {section}{\numberline {Aufgabe 1}Deinen ersten Text verschlüsseln}{3}%
+\contentsline {section}{\numberline {Aufgabe 2} Maschinen verketten}{3}%
+\contentsline {section}{\numberline {Aufgabe 3}Welche Maschine war es?}{4}%
+\contentsline {section}{\numberline {Aufgabe 4}Entschlüsseln einer Nachricht}{5}%
+\contentsline {section}{\numberline {Aufgabe 5} Umkehrbar oder nicht?}{5}%
+\contentsline {subsection}{\numberline {a)}Bonusaufgabe:}{6}%
+\contentsline {section}{\numberline {Aufgabe 6}Umkehrfunktionen}{6}%
+\contentsline {section}{\numberline {Aufgabe 7}Geheime Nachrichten senden}{7}%
+\contentsline {section}{\numberline {Aufgabe 8}Geheime Nachrichten empfangen}{7}%
+\contentsline {section}{Übersicht über alle Wortmaschinen}{8}%
+\contentsline {chapter}{\numberline {2}Funktionsmaschinen}{9}%
