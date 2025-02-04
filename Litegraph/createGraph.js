@@ -203,7 +203,7 @@ canvasElement.addEventListener(
       //console.log("Node doppelt geklickt:", clickedNode);
       e.preventDefault(); // Unterdrücke das Standardverhalten
       showNewMachineMenu(graph, canvasElement, clickedNode);
-    } else { 
+    } else if (!clickedNode){
       showNewMachineMenu(graph,canvasElement,"", x, y)
     }
   },

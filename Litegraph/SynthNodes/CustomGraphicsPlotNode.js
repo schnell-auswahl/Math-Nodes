@@ -23,6 +23,7 @@ export function _CustomGraphicsPlot() {
         uvNames: ["", "", "", "", ""],
         savedEquation: "",
         savedUV: "",
+        whiteBackground: false,
       };
 
       // Widgets für xRange und yRange als Knobs
@@ -165,7 +166,11 @@ export function _CustomGraphicsPlot() {
       const inputPosY = 0 * NODE_SLOT_HEIGHT + 14;
 
       // Hintergrund zeichnen
+      if (this.properties.whiteBackground === true || this.properties.whiteBackground === "true") {
+        ctx.fillStyle = "#FFF";
+      } else {
       ctx.fillStyle = "#000";
+      }
       ctx.fillRect(0, 0, size[0], size[1]);
 
       // labels zeichnen
@@ -190,6 +195,7 @@ export function _CustomGraphicsPlot() {
       this.drawGrid(ctx, size, scaleX, scaleY, offsetX, offsetY, marginTop);
 
       // Plotte jede Funktion in einer anderen Farbe
+      if (!(this.properties.whiteBackground === true || this.properties.whiteBackground === "true")) { 
       for (let i = 0; i < this.properties.equations.length; i++) {
         const equation = this.properties.equations[i];
         const uvName = this.properties.uvNames[i];
@@ -256,6 +262,7 @@ export function _CustomGraphicsPlot() {
           ctx.stroke();
         }
       }
+    }
 
       // Achsenbeschriftungen hinzufügen
       this.drawLabels(
@@ -275,7 +282,11 @@ export function _CustomGraphicsPlot() {
     // Gitternetzlinien zeichnen
     drawGrid(ctx, size, scaleX, scaleY, offsetX, offsetY, marginTop) {
       const margin = this.properties.margin;
+      if (this.properties.whiteBackground === true || this.properties.whiteBackground === "true") {
+        ctx.strokeStyle = "#000";
+      } else {
       ctx.strokeStyle = "#555";
+      }
       ctx.lineWidth = 0.5;
 
       const gridSize =
@@ -310,8 +321,11 @@ export function _CustomGraphicsPlot() {
           ctx.stroke();
         }
       }
-
+      if (this.properties.whiteBackground === true || this.properties.whiteBackground === "true") {
+        ctx.strokeStyle = "#000";
+      } else {
       ctx.strokeStyle = "#FFF";
+      }
       ctx.lineWidth = 1.0;
 
       // X-Achse
@@ -340,7 +354,11 @@ export function _CustomGraphicsPlot() {
       margin,
       marginTop
     ) {
+      if (this.properties.whiteBackground === true || this.properties.whiteBackground === "true") {
+        ctx.fillStyle = "#000";
+      } else {
       ctx.fillStyle = "#FFF";
+      }
       ctx.font = "10px Arial";
       ctx.textAlign = "center";
 
