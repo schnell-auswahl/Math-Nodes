@@ -1,0 +1,201 @@
+{
+  "last_node_id": 14,
+  "last_link_id": 9,
+  "nodes": [
+    {
+      "id": 10,
+      "type": "Wortmaschinen/TextDisplayNode",
+      "pos": [951.0438799076211, 55],
+      "size": [220, 100],
+      "flags": {},
+      "order": 4,
+      "mode": 0,
+      "inputs": [{ "name": "", "type": "string", "link": 7 }],
+      "title": "Text Anzeige",
+      "properties": {
+        "displayedText": "Helle",
+        "savedText": "",
+        "textVisible": true
+      },
+      "color": "#879BCE",
+      "bgcolor": "#879BCE"
+    },
+    {
+      "id": 11,
+      "type": "Wortmaschinen/vokal-verwandlung",
+      "pos": [561, 130],
+      "size": [220, 100],
+      "flags": {},
+      "order": 2,
+      "mode": 0,
+      "inputs": [{ "name": "IN", "type": "string", "link": 6 }],
+      "outputs": [
+        { "name": "OUT", "type": "string", "links": [7], "slot_index": 0 }
+      ],
+      "properties": {},
+      "color": "#88B19B",
+      "bgcolor": "#7C8693"
+    },
+    {
+      "id": 14,
+      "type": "Funktionenmaschinen/Feedback_Wert",
+      "pos": [893, 402],
+      "size": [180, 105],
+      "flags": {},
+      "order": 5,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "",
+          "type": "object",
+          "link": 9,
+          "color_off": "#000000",
+          "color_on": "#00D200"
+        }
+      ],
+      "title": "Wert",
+      "properties": {
+        "FormulaFromInput": "2*x+3",
+        "uvValueFromInput": 1.6,
+        "uvNameFromInput": "x",
+        "displayValue": 6.2
+      },
+      "color": "#879BCE",
+      "bgcolor": "#7C8693"
+    },
+    {
+      "id": 9,
+      "type": "Wortmaschinen/TextInputNode",
+      "pos": [167, 55],
+      "size": [220, 90],
+      "flags": {},
+      "order": 0,
+      "mode": 0,
+      "outputs": [
+        { "name": "", "type": "string", "links": [6], "slot_index": 0 }
+      ],
+      "title": "Text Eingabe",
+      "properties": {
+        "text": "Hallo",
+        "geheim": false,
+        "widgetVisible": false
+      },
+      "color": "#D0AF8B",
+      "bgcolor": "#D0AF8B"
+    },
+    {
+      "id": 12,
+      "type": "Funktionenmaschinen/Unabhängige_Variable",
+      "pos": [131, 402],
+      "size": [180, 80],
+      "flags": { "collapsed": false },
+      "order": 1,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "value",
+          "type": "object",
+          "links": [8],
+          "color_off": "#000000",
+          "label": "",
+          "color_on": "#00A800",
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "value": 1.6000000000000005,
+        "rightSide": "x",
+        "widgetVisible": true
+      },
+      "color": "#D0AF8B",
+      "bgcolor": "#7C8693",
+      "shape": 2
+    },
+    {
+      "id": 13,
+      "type": "Funktionenmaschinen/Funktion",
+      "pos": [519, 454],
+      "size": [185, 140],
+      "flags": {},
+      "order": 3,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "UV",
+          "type": "object",
+          "link": 8,
+          "label": "x",
+          "color_off": "#000000",
+          "color_on": "#00A800"
+        },
+        {
+          "name": "",
+          "type": "object",
+          "link": null,
+          "label": "",
+          "color_off": "#000000"
+        },
+        {
+          "name": "",
+          "type": "object",
+          "link": null,
+          "label": "",
+          "color_off": "#000000"
+        },
+        {
+          "name": "",
+          "type": "object",
+          "link": null,
+          "label": "",
+          "color_off": "#000000"
+        },
+        {
+          "name": "",
+          "type": "object",
+          "link": null,
+          "label": "",
+          "color_off": "#000000"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "",
+          "type": "object",
+          "links": [9],
+          "color_off": "#000000",
+          "slot_index": 0,
+          "label": "f(x)",
+          "color_on": "#00D200"
+        }
+      ],
+      "title": "Funktion",
+      "properties": {
+        "funcName": "f",
+        "formula": "2*x+3",
+        "leftSide": "f(x)",
+        "rightSide": "x",
+        "uvName": "x",
+        "paramsFromWidget": ["", "", "", ""],
+        "paramNames": ["", "", "", ""],
+        "paramValues": [0, 0, 0, 0],
+        "evaluatedFormula": "2*x+3",
+        "uvError": false,
+        "completeEquationfromWidget": "f(x)=2*x+3",
+        "finalEquation": "2*x+3",
+        "widgetVisible": "false"
+      },
+      "color": "#88B19B",
+      "bgcolor": "#7C8693"
+    }
+  ],
+  "links": [
+    [6, 9, 0, 11, 0, "string"],
+    [7, 11, 0, 10, 0, "string"],
+    [8, 12, 0, 13, 0, "object"],
+    [9, 13, 0, 14, 0, "object"]
+  ],
+  "groups": [],
+  "config": {},
+  "extra": {},
+  "version": 0.4
+}

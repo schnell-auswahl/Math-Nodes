@@ -1,0 +1,1 @@
+erkläre genau die Funktionen der audion-Maschine für eine Anleitung. Wichtig sind alle Funktionen, aber nciht die genaue umsetzung. es ist für die anleitung. du findest den code hier:  #file:AudioNode.js  gib mir den text in latex aus

@@ -1,123 +1,189 @@
 {
   "last_node_id": 14,
-  "last_link_id": 17,
+  "last_link_id": 19,
   "nodes": [
     {
-      "id": 5,
-      "type": "Funktionenmaschinen/Funktion",
-      "pos": [367.2999035679846, 55.44],
-
+      "id": 1,
+      "type": "Funktionenmaschinen/Unabhängige_Variable",
+      "pos": [84.19609808015876, 578.0806431679665],
+      "size": [180, 80],
       "flags": {},
-      "order": 2,
+      "order": 0,
       "mode": 0,
-      "inputs": [
-        { "name": "UV", "type": "object", "link": 1, "label": "x" },
-        { "name": "", "type": "object", "link": null, "label": "" },
-        { "name": "", "type": "object", "link": null, "label": "" },
-        { "name": "", "type": "object", "link": null, "label": "" },
-        { "name": "", "type": "object", "link": null }
-      ],
       "outputs": [
-        { "name": "", "type": "object", "links": [4], "label": "f(x)" }
+        {
+          "name": "value",
+          "type": "object",
+          "links": [1, 2, 14],
+          "label": "",
+          "color_on": "#00EC00"
+        }
       ],
-      "title": "Funktion",
-      "properties": {
-        "funcName": "f",
-        "formula": " x-2",
-        "leftSide": "f(x)",
-        "completeEquationfromWidget": "f(x)=x-2",
-        "rightSide": "x",
-        "uvName": "x",
-        "paramNames": ["", "", "", ""],
-        "paramValues": {},
-        "evaluatedFormula": " x-2",
-        "uvError": false
-      }
+      "properties": { "value": 42, "rightSide": "x", "widgetVisible": true },
+      "color": "#D0AF8B",
+      "bgcolor": "#7C8693",
+      "shape": 2
     },
     {
-      "id": 7,
-      "type": "Funktionenmaschinen/Funktion",
-      "pos": [690.7377049180327, 50],
-
+      "id": 6,
+      "type": "Funktionenmaschinen/Operation",
+      "pos": [969, 314],
+      "size": [120, 80],
       "flags": {},
-      "order": 6,
+      "order": 7,
       "mode": 0,
       "inputs": [
-        { "name": "UV", "type": "object", "link": 4, "label": "f(x)" },
-        { "name": "", "type": "object", "link": 5, "label": "h(x)" },
-        { "name": "", "type": "object", "link": null, "label": "" },
-        { "name": "", "type": "object", "link": null, "label": "" },
-        { "name": "", "type": "object", "link": null }
+        {
+          "name": "",
+          "type": "object",
+          "link": 16,
+          "color_off": "#000000",
+          "color_on": "#140000"
+        },
+        {
+          "name": "",
+          "type": "object",
+          "link": 7,
+          "color_off": "#000000",
+          "color_on": "#00FD00"
+        }
       ],
       "outputs": [
         {
           "name": "",
           "type": "object",
-          "links": [8, 9, 10],
-          "label": "g(f(x))"
+          "links": [18],
+          "label": "",
+          "slot_index": 0,
+          "color_off": "#000000",
+          "color_on": "#00FD00"
+        }
+      ],
+      "title": "Operation",
+      "properties": {
+        "Out_leftSideOfEquation": "f(x) + h(x)",
+        "Out_rightSideOfEquation": "( Math.sin (1000 * x)) + ( x**2+0.2)",
+        "Result_Value": 1764.1522040586012,
+        "Operation": "+",
+        "Fehlermeldung": "",
+        "widgetVisible": false
+      },
+      "color": "#88B19B",
+      "bgcolor": "#7C8693"
+    },
+    {
+      "id": 9,
+      "type": "Funktionenmaschinen/Funktion",
+      "pos": [433, 126],
+      "size": [217, 120],
+      "flags": {},
+      "order": 3,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "UV",
+          "type": "object",
+          "link": 14,
+          "label": "x",
+          "color_off": "#000000",
+          "color_on": "#00EC00"
+        },
+        {
+          "name": "",
+          "type": "object",
+          "link": null,
+          "label": "",
+          "color_off": "#000000"
+        },
+        {
+          "name": "",
+          "type": "object",
+          "link": null,
+          "label": "",
+          "color_off": "#000000"
+        },
+        {
+          "name": "",
+          "type": "object",
+          "link": null,
+          "label": "",
+          "color_off": "#000000"
+        },
+        {
+          "name": "",
+          "type": "object",
+          "link": null,
+          "color_off": "#000000",
+          "label": ""
+        }
+      ],
+      "outputs": [
+        {
+          "name": "",
+          "type": "object",
+          "links": [15, 16],
+          "label": "f(x)",
+          "slot_index": 0,
+          "color_off": "#000000",
+          "color_on": "#140000"
         }
       ],
       "title": "Funktion",
       "properties": {
-        "funcName": "g",
-        "formula": " 1/x+h(x)",
-        "completeEquationfromWidget": "g(x)=1/x+h(x)",
-        "leftSide": "g(f(x))",
-        "rightSide": " x-2",
+        "funcName": "f",
+        "formula": " Math.sin (1000 * x)",
+        "leftSide": "f(x)",
+        "rightSide": "x",
         "uvName": "x",
-        "paramNames": ["", "h(x)", "", ""],
-        "paramValues": { "h(x)": 1764.2 },
-        "evaluatedFormula": " 1/x+( x**2+0.2)",
-        "uvError": false
-      }
-    },
-    {
-      "id": 10,
-      "type": "Funktionenmaschinen/Feedback_Gleichung",
-      "pos": [1056.7849566055932, 53.008],
-
-      "flags": {},
-      "order": 8,
-      "mode": 0,
-      "inputs": [{ "name": "value", "type": 0, "link": 8, "label": "" }],
-      "title": "Gleichung",
-      "properties": {
-        "GleichungvorMathJax": "g(f(x)) =  1/( x-2)+( ( x-2)^2+0.2)",
-        "GleichungvorKaTex": "\\mathrm{g}\\left(\\mathrm{f}\\left( x\\right)\\right) = \\frac{1}{\\left( x-2\\right)}+\\left({\\left( x-2\\right)}^{2}+0.2\\right)"
-      }
-    },
-    {
-      "id": 11,
-      "type": "Funktionenmaschinen/Feedback_Wert",
-      "pos": [1080, 188],
-
-      "flags": {},
-      "order": 9,
-      "mode": 0,
-      "inputs": [
-        { "name": "", "type": "object", "link": 9, "label": "" }
-      ],
-      "title": "Wert",
-      "properties": {
-        "FormulaFromInput": " 1/( x-2)+( ( x-2)**2+0.2)",
-        "uvValueFromInput": 42,
-        "uvNameFromInput": "x",
-        "displayValue": 1600.2250000000001
-      }
+        "paramsFromWidget": ["", "", "", ""],
+        "paramNames": ["", "", "", ""],
+        "paramValues": [0, 0, 0, 0],
+        "evaluatedFormula": " Math.sin (1000 * x)",
+        "uvError": false,
+        "completeEquationfromWidget": "f(x)=sin (1000 * x)",
+        "finalEquation": " Math.sin (1000 * x)",
+        "widgetVisible": false
+      },
+      "color": "#88B19B",
+      "bgcolor": "#7C8693"
     },
     {
       "id": 14,
       "type": "Funktionenmaschinen/Feedback_Graph",
-      "pos": [1030, 292],
-
+      "pos": [1438, 156],
+      "size": [350, 380],
       "flags": {},
       "order": 10,
       "mode": 0,
       "inputs": [
-        { "name": "", "type": "object", "link": 10 },
-        { "name": "", "type": "object", "link": null },
-        { "name": "", "type": "object", "link": null },
-        { "name": "", "type": "object", "link": 17 }
+        {
+          "name": "",
+          "type": "object",
+          "link": null,
+          "color_off": "#000000",
+          "color_on": "#00FC00"
+        },
+        {
+          "name": "",
+          "type": "object",
+          "link": 18,
+          "color_off": "#000000",
+          "color_on": "#00FD00"
+        },
+        {
+          "name": "",
+          "type": "object",
+          "link": 19,
+          "color_off": "#000000",
+          "color_on": "#00FC00"
+        },
+        {
+          "name": "",
+          "type": "object",
+          "link": null,
+          "color_off": "#000000",
+          "color_on": "#00FD00"
+        }
       ],
       "title": "Graph",
       "properties": {
@@ -132,102 +198,301 @@
         "xRange": [-10.4, 10.4],
         "yRange": [-11, 11],
         "equations": [
+          "",
+          "( Math.sin (1000 * x)) + ( x**2+0.2)",
           " 1/( x-2)+( ( x-2)**2+0.2)",
-          "( Math.sin (1000 * x)) + ( x**2+0.2)"
-        ]
-      }
+          "",
+          ""
+        ],
+        "uvNames": ["", "x", "x", "", ""],
+        "savedEquation": "",
+        "savedUV": ""
+      },
+      "color": "#879BCE",
+      "bgcolor": "#000000"
+    },
+    {
+      "id": 10,
+      "type": "Funktionenmaschinen/Feedback_Gleichung",
+      "pos": [1429, 704],
+      "size": { "0": 309, "1": 77 },
+      "flags": {},
+      "order": 8,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "value",
+          "type": 0,
+          "link": 8,
+          "label": "",
+          "color_off": "#000000",
+          "color_on": "#00FC00"
+        }
+      ],
+      "title": "Gleichung",
+      "properties": {
+        "GleichungvorMathJax": "g(f(x)) =  1/( x-2)+( ( x-2)^2+0.2)",
+        "GleichungvorKaTex": "\\mathrm{g}\\left(\\mathrm{f}\\left( x\\right)\\right) = \\frac{1}{\\left( x-2\\right)}+\\left({\\left( x-2\\right)}^{2}+0.2\\right)"
+      },
+      "color": "#879BCE",
+      "bgcolor": "#7C8693"
+    },
+    {
+      "id": 11,
+      "type": "Funktionenmaschinen/Feedback_Wert",
+      "pos": [1450, 1107],
+      "size": [338, 105],
+      "flags": {},
+      "order": 9,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "",
+          "type": "object",
+          "link": 9,
+          "label": "",
+          "color_on": "#00FC00"
+        }
+      ],
+      "title": "Wert",
+      "properties": {
+        "FormulaFromInput": " 1/( x-2)+( ( x-2)**2+0.2)",
+        "uvValueFromInput": 42,
+        "uvNameFromInput": "x",
+        "displayValue": 1600.2250000000001
+      },
+      "color": "#879BCE",
+      "bgcolor": "#7C8693"
     },
     {
       "id": 3,
       "type": "Funktionenmaschinen/Feedback_Audio",
-      "pos": [681, 293],
-
+      "pos": [979, 92],
+      "size": { "0": 150, "1": 58 },
       "flags": {},
       "order": 5,
       "mode": 0,
-      "inputs": [{ "name": "", "type": "object", "link": 15 }],
+      "inputs": [
+        {
+          "name": "",
+          "type": "object",
+          "link": 15,
+          "color_off": "#000000",
+          "color_on": "#140000"
+        }
+      ],
       "title": "Audio",
-      "properties": {
-        "FormulafromInput": " Math.sin (1000 * x)"
-      }
+      "properties": { "FormulafromInput": " Math.sin (1000 * x)" },
+      "color": "#879BCE",
+      "bgcolor": "#7C8693"
     },
     {
-      "id": 9,
+      "id": 5,
       "type": "Funktionenmaschinen/Funktion",
-      "pos": [363, 286],
-
+      "pos": [596, 1165],
+      "size": [165, 120],
       "flags": {},
-      "order": 3,
+      "order": 2,
       "mode": 0,
       "inputs": [
-        { "name": "UV", "type": "object", "link": 14, "label": "x" },
-        { "name": "", "type": "object", "link": null, "label": "" },
-        { "name": "", "type": "object", "link": null, "label": "" },
-        { "name": "", "type": "object", "link": null, "label": "" },
-        { "name": "", "type": "object", "link": null }
+        {
+          "name": "UV",
+          "type": "object",
+          "link": 1,
+          "label": "x",
+          "color_off": "#000000",
+          "color_on": "#00EC00"
+        },
+        {
+          "name": "",
+          "type": "object",
+          "link": null,
+          "label": "",
+          "color_off": "#000000"
+        },
+        {
+          "name": "",
+          "type": "object",
+          "link": null,
+          "label": "",
+          "color_off": "#000000"
+        },
+        {
+          "name": "",
+          "type": "object",
+          "link": null,
+          "label": "",
+          "color_off": "#000000"
+        },
+        {
+          "name": "",
+          "type": "object",
+          "link": null,
+          "color_off": "#000000",
+          "label": ""
+        }
       ],
       "outputs": [
         {
           "name": "",
           "type": "object",
-          "links": [15, 16],
+          "links": [4],
           "label": "f(x)",
-          "slot_index": 0
+          "color_off": "#000000",
+          "color_on": "#00EB00"
         }
       ],
       "title": "Funktion",
       "properties": {
         "funcName": "f",
-        "formula": " Math.sin (1000 * x)",
+        "formula": " x-2",
         "leftSide": "f(x)",
         "rightSide": "x",
         "uvName": "x",
-        "completeEquationfromWidget": "f(x)=sin (1000 * x)",
+        "paramsFromWidget": ["", "", "", ""],
         "paramNames": ["", "", "", ""],
-        "paramValues": {},
-        "evaluatedFormula": " Math.sin (1000 * x)",
-        "uvError": false
-      }
+        "paramValues": [0, 0, 0, 0],
+        "evaluatedFormula": " x-2",
+        "uvError": false,
+        "completeEquationfromWidget": "f(x)=x-2",
+        "finalEquation": " x-2",
+        "widgetVisible": false
+      },
+      "color": "#88B19B",
+      "bgcolor": "#7C8693"
     },
     {
-      "id": 1,
-      "type": "Funktionenmaschinen/Unabhängige_Variable",
-      "pos": [99, 269],
-
+      "id": 7,
+      "type": "Funktionenmaschinen/Funktion",
+      "pos": [949, 925],
+      "size": [248, 120],
       "flags": {},
-      "order": 0,
+      "order": 6,
       "mode": 0,
-      "outputs": [
+      "inputs": [
         {
-          "name": "value",
+          "name": "UV",
           "type": "object",
-          "links": [1, 2, 14],
-          "label": "42.000"
+          "link": 4,
+          "label": "f(x)",
+          "color_off": "#000000",
+          "color_on": "#00EB00"
+        },
+        {
+          "name": "",
+          "type": "object",
+          "link": 5,
+          "label": "h(x)",
+          "color_off": "#000000",
+          "color_on": "#00FD00"
+        },
+        {
+          "name": "",
+          "type": "object",
+          "link": null,
+          "label": "",
+          "color_off": "#000000"
+        },
+        {
+          "name": "",
+          "type": "object",
+          "link": null,
+          "label": "",
+          "color_off": "#000000"
+        },
+        {
+          "name": "",
+          "type": "object",
+          "link": null,
+          "color_off": "#000000",
+          "label": ""
         }
       ],
+      "outputs": [
+        {
+          "name": "",
+          "type": "object",
+          "links": [8, 9, 19],
+          "label": "g(f(x))",
+          "color_off": "#000000",
+          "color_on": "#00FC00"
+        }
+      ],
+      "title": "Funktion",
       "properties": {
-        "value": 42,
-        "rightSide": "x"
+        "funcName": "g",
+        "formula": " 1/x+h(x)",
+        "leftSide": "g(f(x))",
+        "rightSide": " x-2",
+        "uvName": "x",
+        "paramsFromWidget": ["", "", "", ""],
+        "paramNames": ["h(x)", "", "", ""],
+        "paramValues": [1764.2, 0, 0, 0],
+        "evaluatedFormula": " 1/x+( x**2+0.2)",
+        "uvError": false,
+        "completeEquationfromWidget": "g(x)=1/x+h(x)",
+        "finalEquation": " 1/( x-2)+( ( x-2)**2+0.2)",
+        "widgetVisible": false
       },
-      "shape": 2
+      "color": "#88B19B",
+      "bgcolor": "#7C8693"
     },
     {
       "id": 8,
       "type": "Funktionenmaschinen/Funktion",
-      "pos": [363, 528],
-
+      "pos": [672, 453],
+      "size": [176, 120],
       "flags": {},
       "order": 4,
       "mode": 0,
       "inputs": [
-        { "name": "UV", "type": "object", "link": 2, "label": "x" },
-        { "name": "", "type": "object", "link": 3, "label": "b" },
-        { "name": "", "type": "object", "link": null, "label": "" },
-        { "name": "", "type": "object", "link": null, "label": "" },
-        { "name": "", "type": "object", "link": null }
+        {
+          "name": "UV",
+          "type": "object",
+          "link": 2,
+          "label": "x",
+          "color_off": "#000000",
+          "color_on": "#00EC00"
+        },
+        {
+          "name": "",
+          "type": "object",
+          "link": 3,
+          "label": "b",
+          "color_off": "#000000",
+          "color_on": "#004000"
+        },
+        {
+          "name": "",
+          "type": "object",
+          "link": null,
+          "label": "",
+          "color_off": "#000000"
+        },
+        {
+          "name": "",
+          "type": "object",
+          "link": null,
+          "label": "",
+          "color_off": "#000000"
+        },
+        {
+          "name": "",
+          "type": "object",
+          "link": null,
+          "color_off": "#000000",
+          "label": ""
+        }
       ],
       "outputs": [
-        { "name": "", "type": "object", "links": [5, 7], "label": "h(x)" }
+        {
+          "name": "",
+          "type": "object",
+          "links": [5, 7],
+          "label": "h(x)",
+          "color_off": "#000000",
+          "color_on": "#00FD00"
+        }
       ],
       "title": "Funktion",
       "properties": {
@@ -235,59 +500,41 @@
         "formula": " x**2+b",
         "leftSide": "h(x)",
         "rightSide": "x",
-        "completeEquationfromWidget": "h(x)=x^2+b",
         "uvName": "x",
-        "paramNames": ["", "b", "", ""],
-        "paramValues": { "b": 0.2 },
+        "paramsFromWidget": ["", "", "", ""],
+        "paramNames": ["b", "", "", ""],
+        "paramValues": [0.2, 0, 0, 0],
         "evaluatedFormula": " x**2+0.2",
-        "uvError": false
-      }
-    },
-    {
-      "id": 6,
-      "type": "Funktionenmaschinen/Operation",
-      "pos": [702, 515],
-
-      "flags": {},
-      "order": 7,
-      "mode": 0,
-      "inputs": [
-        { "name": "", "type": "object", "link": 16 },
-        { "name": "", "type": "object", "link": 7 }
-      ],
-      "outputs": [
-        {
-          "name": "",
-          "type": "object",
-          "links": [17],
-          "label": "",
-          "slot_index": 0
-        }
-      ],
-      "title": "Operation",
-      "properties": {
-        "Out_leftSideOfEquation": "f(x) + h(x)",
-        "Out_rightSideOfEquation": "( Math.sin (1000 * x)) + ( x**2+0.2)",
-        "Result_Value": 1764.1522040586012,
-        "Operation": "+",
-        "Fehlermeldung": ""
-      }
+        "uvError": false,
+        "completeEquationfromWidget": "h(x)=x^2+b",
+        "finalEquation": " x**2+0.2",
+        "widgetVisible": false
+      },
+      "color": "#88B19B",
+      "bgcolor": "#7C8693"
     },
     {
       "id": 2,
       "type": "Funktionenmaschinen/Parameter",
-      "pos": [54, 581],
-
+      "pos": [411, 606],
+      "size": [180, 80],
       "flags": {},
       "order": 1,
       "mode": 0,
+      "inputs": [{ "name": "value", "type": "object", "link": null }],
       "outputs": [
-        { "name": "value", "type": "object", "links": [3], "label": "0.200" }
+        {
+          "name": "value",
+          "type": "object",
+          "links": [3],
+          "label": "0.200",
+          "color_off": "#000000",
+          "color_on": "#004000"
+        }
       ],
-      "properties": {
-        "value": 0.2,
-        "rightSide": "b"
-      },
+      "properties": { "value": 0.2, "rightSide": "b" },
+      "color": "#D7817D",
+      "bgcolor": "#7C8693",
       "shape": 2
     }
   ],
@@ -300,11 +547,11 @@
     [7, 8, 0, 6, 1, "object"],
     [8, 7, 0, 10, 0, "object"],
     [9, 7, 0, 11, 0, "object"],
-    [10, 7, 0, 14, 0, "object"],
     [14, 1, 0, 9, 0, "object"],
     [15, 9, 0, 3, 0, "object"],
     [16, 9, 0, 6, 0, "object"],
-    [17, 6, 0, 14, 3, "object"]
+    [18, 6, 0, 14, 1, "object"],
+    [19, 7, 0, 14, 2, "object"]
   ],
   "groups": [],
   "config": {},
