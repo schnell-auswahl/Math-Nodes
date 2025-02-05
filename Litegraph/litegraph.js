@@ -8542,6 +8542,7 @@ LGraphNode.prototype.executeAction = function(action)
 
 // Rendering Nachlauf
 if (!this.timeoutRunning) {
+    //console.log("nachlauf läuft" + this.dirty_bgcanvas);
     this.timeoutRunning = true;
     setTimeout(() => {
         this.dirty_bgcanvas = false;

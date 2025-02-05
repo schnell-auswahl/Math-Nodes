@@ -96,7 +96,7 @@
 					<p>Zu dieser Seite gehört das zweite Kapitel im Arbeitsheft. Dort sollst du deine Ergebnisse festhalten. Du kannst es
 						hier herunterladen: </p>
 					<ul class="actions">
-						<a href="#" class="button icon solid fa-download">Arbeitsheft Download</a>
+						<a href="Latex/Arbeitsheft_Math-Nodes.pdf" class="button icon solid fa-download">Arbeitsheft Download</a>
 					</ul>
 				</div>
 
@@ -112,7 +112,7 @@
 								<h3>Von der Wortmaschine zur Funktion</h3>
 							</header>
 							<p>Funktionsmaschinen funktionieren auf die gleiche Weise wie die Wortmaschinen. Genau genommen sind die Wortmaschinen auch spezielle Funktionsmaschinen.</p>
-							<p> Auch hier gibt es eine Eingabe in Form einer Maschine für die <b>Unabhängigen Variable</b>. Diese wird von einer oder mehreren <b>Funktionsmaschinen</b> verarbeitet und das Ergebnis mit Hilfe von verschiedenen <b>Feedback-Maschinen</b> angezeigt. </p>
+							<p> Auch hier gibt es eine Eingabe in Form einer Maschine für die <b>Unabhängige Variable</b>. Diese wird von einer oder mehreren <b>Funktionsmaschinen</b> verarbeitet und das Ergebnis mit Hilfe von verschiedenen <b>Feedback-Maschinen</b> angezeigt. </p>
 							<p> Probiere verschiedene Werte aus und beobachte, wie sich das Ergebnis verändert.
 							</p>
 						</div>
@@ -145,7 +145,7 @@
 					</div>
 					<div class="image">
 						<canvas id="graphCanvas2" data-resize="true"
-							data-config-path="Litegraph/configs/Funktionsmaschinen_2.json"
+						data-config-path="Litegraph/configs/Funktionsmaschinen_1.json"
 							lgtype="Funktionsmaschinen"></canvas>
 						<script type="module">
 							import { createGraphInstance } from './Litegraph/createGraph.js';
@@ -154,76 +154,132 @@
 					</div>
 				</section>
 				<section>
-
-					<div class="content styletwoColor">
-						<div class="inner">
-							<header class="major">
-								<h3>Maschinen verketten</h3>
-							</header>
-							<p> Zwei Maschinen kannst du in unterschiedlicher Reihenfolge verbinden. Spielt die
-								Reihenfolge eine Rolle für das Ergebnis? Probiere es aus und begründe deine Antwort im
-								Arbeitsheft. </p>
-							<p> Ist das immer so? Über "Menü" und dann "Neue Maschine" kannst du andere Maschinen in
-								MATH-NODES laden. Findest du zwei, bei denen die Reihenfolge egal ist? Notiere dein
-								Ergebnis. </p>
-						</div>
-						<div class="icon-text-container">
-							<div class="icon-text"><span>Aufgabe 2</span></div>
-							<div class="worksheet-icon"><img src="images/Worksheet-icon.svg" alt="Worksheet Icon"></div>
-						</div>
-					</div>
-					<div class="image">
-						<canvas id="graphCanvas3" data-resize="true" lgtype="Funktionsmaschinen"
-							data-config-path="Litegraph/configs/Wortmaschinen3_config.json"></canvas>
-						<script type="module">
-							import { createGraphInstance } from './Litegraph/createGraph.js';
-							createGraphInstance("graphCanvas3");
-						</script>
-					</div>
-				</section>
-				<section>
-
-					<div class="content styletwoColor">
-						<div class="inner">
-							<header class="major">
-								<h3>Welche Maschine war es?</h3>
-							</header>
-							<p> Hier sind zwei Nachrichten verschlüsselt worden. Einmal mit einer
-								Maschine und einmal mit zwei Maschinen hintereinander. </p>
-							<p> Überlege erst was am Text verändert wurde und welche Maschinen es gewesen sein könnten.
-								Probiere es aus und schreib den Namen der
-								richtigen Maschine in das entsprechende Feld im Arbeitsheft. Dort findest du auch eine
-								Übersicht über alle Maschinen. </p>
-						</div>
-						<div class="icon-text-container">
-							<div class="icon-text"><span>Aufgabe 3</span></div>
-							<div class="worksheet-icon"><img src="images/Worksheet-icon.svg" alt="Worksheet Icon"></div>
-						</div>
-					</div>
-					<div class="image">
-						<canvas id="graphCanvas4" data-resize="true" lgtype="Funktionsmaschinen"
-							data-config-path="Litegraph/configs/Wortmaschinen_A3_config.json"></canvas>
-						<script type="module">
-							import { createGraphInstance } from './Litegraph/createGraph.js';
-							createGraphInstance("graphCanvas4");
-						</script>
-					</div>
-				</section>
+                    <div class="content styletwoColor">
+                        <div class="inner">
+                            <header class="major">
+                                <h3>Ergebnisse anders darstellen</h3>
+                            </header>
+                            <p>In Math-Nodes kannst du dir außer dem Wert zu einer unabhängigen Variable auch die Gleichung, den Graph und sogar den Ton einer Funktion ausgeben lassen. Dazu gibt es jeweils eine eigene Feedback-Maschine. Feedback-Maschinen sind immer blau.</p>
+                            <p>Verbinde die Funktionen mit den verschiedenen Feedback-Maschinen und gib die Gleichung und den Graphen der verketteten Funktionen an.</p>
+                        </div>
+                        <div class="icon-text-container">
+                            <div class="icon-text"><span>Aufgabe 2</span></div>
+                            <div class="worksheet-icon"><img src="images/Worksheet-icon.svg" alt="Worksheet Icon"></div>
+                        </div>
+                    </div>
+                    <div class="image">
+                        <canvas id="graphCanvas3" data-resize="true"
+						data-config-path="Litegraph/configs/Funktionsmaschinen_1.json"
+                            lgtype="Funktionsmaschinen"></canvas>
+                        <script type="module">
+                            import { createGraphInstance } from './Litegraph/createGraph.js';
+                            createGraphInstance("graphCanvas3");
+                        </script>
+                    </div>
+                </section>
+                <section>
+                    <div class="content styletwoColor">
+                        <div class="inner">
+                            <header class="major">
+                                <h3>Die Funktionsgleichung ablesen</h3>
+                            </header>
+                            <p>Gib die Funktionsgleichung für die verketteten Funktionenmaschinen an. Skizziere den Graph. Überprüfe deine Ergebnisse in Math-Nodes.</p>
+                        </div>
+                        <div class="icon-text-container">
+                            <div class="icon-text"><span>Aufgabe 3</span></div>
+                            <div class="worksheet-icon"><img src="images/Worksheet-icon.svg" alt="Worksheet Icon"></div>
+                        </div>
+                    </div>
+                    <div class="image">
+                        <canvas id="graphCanvas4" data-resize="true"
+						data-config-path="Litegraph/configs/Funktionsmaschinen_1.json"
+                            lgtype="Funktionsmaschinen"></canvas>
+                        <script type="module">
+                            import { createGraphInstance } from './Litegraph/createGraph.js';
+                            createGraphInstance("graphCanvas4");
+                        </script>
+                    </div>
+                </section>
+                <section>
+                    <div class="content styletwoColor">
+                        <div class="inner">
+                            <header class="major">
+                                <h3>Funktionen verknüpfen</h3>
+                            </header>
+                            <p>Du kannst zwei Funktionsmaschinen nicht nur verketten, sondern auch mittels einer Operationsmaschine mit den typischen Operationen wie Addition, Multiplikation, usw. verknüpfen. Das siehst du hier im Beispiel.</p>
+                            <p>Gib für die zweite Verknüpfung den Funktionsterm für die verknüpften Funktionenmaschinen an. Wie könnte der Graph aussehen? Diskutiere mit der Person neben dir. Skizziere den Graph.</p>
+                        </div>
+                        <div class="icon-text-container">
+                            <div class="icon-text"><span>Aufgabe 4</span></div>
+                            <div class="worksheet-icon"><img src="images/Worksheet-icon.svg" alt="Worksheet Icon"></div>
+                        </div>
+                    </div>
+                    <div class="image">
+                        <canvas id="graphCanvas5" data-resize="true"
+						data-config-path="Litegraph/configs/Funktionsmaschinen_1.json"
+                            lgtype="Funktionsmaschinen"></canvas>
+                        <script type="module">
+                            import { createGraphInstance } from './Litegraph/createGraph.js';
+                            createGraphInstance("graphCanvas5");
+                        </script>
+                    </div>
+                </section>
+                <section>
+                    <div class="content styletwoColor">
+                        <div class="inner">
+                            <header class="major">
+                                <h3>Verknüpfen und Verketten</h3>
+                            </header>
+                            <p>Verknüpfe und verkette die Maschinen so, dass du den angegebenen Funktionsterm erhältst. Wie könnte der Graph aussehen? Diskutiere mit der Person neben dir. Skizziere den Graph.</p>
+                        </div>
+                        <div class="icon-text-container">
+                            <div class="icon-text"><span>Aufgabe 5</span></div>
+                            <div class="worksheet-icon"><img src="images/Worksheet-icon.svg" alt="Worksheet Icon"></div>
+                        </div>
+                    </div>
+                    <div class="image">
+                        <canvas id="graphCanvas6" data-resize="true"
+						data-config-path="Litegraph/configs/Funktionsmaschinen_1.json"
+                            lgtype="Funktionsmaschinen"></canvas>
+                        <script type="module">
+                            import { createGraphInstance } from './Litegraph/createGraph.js';
+                            createGraphInstance("graphCanvas6");
+                        </script>
+                    </div>
+                </section>
+                <section>
+                    <div class="content styletwoColor">
+                        <div class="inner">
+                            <header class="major">
+                                <h3>Den Graphen treffen</h3>
+                            </header>
+                            <p>Verknüpfe und verkette die Maschinen so, dass der grüne Graph entsteht. Gib den zugehörigen Funktionsterm an.</p>
+                        </div>
+                        <div class="icon-text-container">
+                            <div class="icon-text"><span>Aufgabe 6</span></div>
+                            <div class="worksheet-icon"><img src="images/Worksheet-icon.svg" alt="Worksheet Icon"></div>
+                        </div>
+                    </div>
+                    <div class="image">
+                        <canvas id="graphCanvas7" data-resize="true"
+						data-config-path="Litegraph/configs/Funktionsmaschinen_1.json"
+                            lgtype="Funktionsmaschinen"></canvas>
+                        <script type="module">
+                            import { createGraphInstance } from './Litegraph/createGraph.js';
+                            createGraphInstance("graphCanvas7");
+                        </script>
+                    </div>
+                </section>
 			</section>
 			<!-- Three -->
 			<section id="three" style="position: relative;" class="styletwoColor">
 				<div class="inner">
 					<header class="major">
-						<h2> Entschlüsseln einer Nachricht</h2>
+						<h2> Funktionenpuzzle</h2>
 					</header>
-					<p>Mit der Alphabet-Countdown-Maschine wurde eine Nachricht verschlüsselt. Entwickle im Arbeitsheft
-						eine Maschine,
-						um die Nachricht wieder zu entschlüsseln. Gib ihr einen Namen und beschreibe ihre Funktionsweise
-						auf
-						der Karte.
+					<p>Verknüpfe und/oder verkette die Maschinen so, dass die weißen Graphen entstehen. Gib jeweils den zugehörigen Funktionsterm an. Du brauchst nicht ganz alle Maschinen.
 					</p>
-					<p> Genau die richtige Maschine zum Entschlüsseln der Botschaft scheint es in MATH-NODES nicht zu
-						geben. Kannst du Sie aus anderen Maschinen zusammenbauen? Wie lautet die Botschaft? </p>
+					
 
 				</div>
 				<div class="icon-text-container">
@@ -233,13 +289,13 @@
 				<!-- LiteGraph Canvas -->
 				<section id="litegraph">
 					<div id="graphstylefulldouble">
-						<canvas id="graphCanvas5" data-resize="true" lgtype="Funktionsmaschinen"
+						<canvas id="graphCanvas8" data-resize="true" 	data-zoom="0.9"lgtype="Funktionsmaschinen"
 							data-config-path="Litegraph/configs/Funktionsmaschinen_AH_A5.json"></canvas>
 					</div>
 					<script type="module">
 						import { createGraphInstance } from './Litegraph/createGraph.js';
 						// Erstelle die Graphen für beide Canvas-Elemente
-						createGraphInstance("graphCanvas5");
+						createGraphInstance("graphCanvas8");
 					</script>
 				</section>
 			</section>

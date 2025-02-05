@@ -4244,7 +4244,7 @@ div.tableofcontents a.toggle:hover {
 }
 
 #graphstylefulldouble {
-    height: 1430px;
+    height: 1000px;
 	position: relative; /* Setzt den Canvas-Bereich als Referenzpunkt */
     width: 100%;
     display: block; /* Sicherstellen, dass der Canvas-Bereich blockweise dargestellt wird */

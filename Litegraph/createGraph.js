@@ -1,8 +1,8 @@
 //window.fbNodesColor = "#D0AF8B"; //Orange
 window.fbNodesColor = "#879BCE"; //Blau
 //window.srcNodesColor = "#879BCE"; //Blau
-window.srcNodesColor = "#D0AF8B"; 
-window.opNodesColor = "#88B19B"; 
+window.srcNodesColor = "#D0AF8B";
+window.opNodesColor = "#88B19B";
 //window.paramNodesColor = "#D1AE8B"; //Senfgelb
 window.paramNodesColor = "#D7817D";
 window.bgColor1 = "#FFFFFF"; //Weiß
@@ -51,7 +51,6 @@ import { _TextDisplayNode } from "./WordNodes/TextDisplayNode.js";
 const TextDisplayNode = _TextDisplayNode();
 import { TextManipulationLogic } from "./WordNodes/TextManipulationLogic.js";
 import { createTextManipulationNode } from "./WordNodes/TextManipulationNode.js";
-
 
 /**
  * Creates and initializes a LiteGraph instance on a specified canvas element.
@@ -185,80 +184,97 @@ export function createGraphInstance(canvasId) {
   canvas.allow_dragcanvas = false; // Prevent dragging the canvas
   canvas.allow_zoom = false; // Prevent zooming in/out
 
-// Doppelklick auf Node um Menü aufzurufen außer bei UV und Parameter
-canvasElement.addEventListener(
-  "dblclick",
-  (e) => {
-    const rect = canvasElement.getBoundingClientRect();
-    
-    // Berechne die unskalierten Koordinaten
-    const x = (e.clientX - rect.left) / canvasElement.zoom;
-    const y = (e.clientY - rect.top) / canvasElement.zoom;
-
-    // Prüfen, ob eine Node getroffen wurde
-    const clickedNode = graph.getNodeOnPos(x, y);
-
-    if (clickedNode && clickedNode.type !== "Funktionenmaschinen/Unabhängige_Variable" && clickedNode.type !== "Funktionenmaschinen/Parameter") { 
-      // Hier können Sie den gewünschten Code einfügen, der bei einem Doppelklick auf eine Node ausgeführt werden soll
-      //console.log("Node doppelt geklickt:", clickedNode);
-      e.preventDefault(); // Unterdrücke das Standardverhalten
-      showNewMachineMenu(graph, canvasElement, clickedNode);
-    } else if (!clickedNode){
-      showNewMachineMenu(graph,canvasElement,"", x, y)
-    }
-  },
-  false
-);
-
-// Doppeltipp auf Node um Menü aufzurufen außer bei UV und Parameter
-let lastTouchEnd = 0;
-canvasElement.addEventListener(
-  "touchend",
-  (e) => {
-    const now = new Date().getTime();
-    if (now - lastTouchEnd <= 300) { // 300ms als Schwellenwert für Doppeltipp
-      const touch = e.changedTouches[0];
+  // Doppelklick auf Node um Menü aufzurufen außer bei UV und Parameter
+  canvasElement.addEventListener(
+    "dblclick",
+    (e) => {
       const rect = canvasElement.getBoundingClientRect();
-      
+
       // Berechne die unskalierten Koordinaten
-      const x = (touch.clientX - rect.left) / canvasElement.zoom;
-      const y = (touch.clientY - rect.top) / canvasElement.zoom;
+      const x = (e.clientX - rect.left) / canvasElement.zoom;
+      const y = (e.clientY - rect.top) / canvasElement.zoom;
 
       // Prüfen, ob eine Node getroffen wurde
       const clickedNode = graph.getNodeOnPos(x, y);
 
-      if (clickedNode && clickedNode.type !== "Funktionenmaschinen/Unabhängige_Variable" && clickedNode.type !== "Funktionenmaschinen/Parameter") { 
-        // Hier können Sie den gewünschten Code einfügen, der bei einem Doppeltipp auf eine Node ausgeführt werden soll
-        //console.log("Node doppelt getippt:", clickedNode);
+      if (
+        clickedNode &&
+        clickedNode.type !== "Funktionenmaschinen/Unabhängige_Variable" &&
+        clickedNode.type !== "Funktionenmaschinen/Parameter" &&
+        clickedNode.type !== "Funktionenmaschinen/Funktion"
+      ) {
+        // Hier können Sie den gewünschten Code einfügen, der bei einem Doppelklick auf eine Node ausgeführt werden soll
+        //console.log("Node doppelt geklickt:", clickedNode);
         e.preventDefault(); // Unterdrücke das Standardverhalten
         showNewMachineMenu(graph, canvasElement, clickedNode);
-      } else { 
-        showNewMachineMenu(graph,canvasElement,"", x, y)
+      } else if (
+        clickedNode &&
+        clickedNode.type === "Funktionenmaschinen/Funktion"
+      ) {
+        console.log("Node doppelt geklickt:", clickedNode);
+        e.preventDefault(); // Unterdrücke das Standardverhalten
+        showFrequentlyUsedFunctionsMenu(graph, canvasElement, clickedNode);
+      } else if (!clickedNode) {
+        showNewMachineMenu(graph, canvasElement, "", x, y);
       }
-    }
-    lastTouchEnd = now;
-  },
-  false
-);
+    },
+    false
+  );
+
+  // Doppeltipp auf Node um Menü aufzurufen außer bei UV und Parameter
+  let lastTouchEnd = 0;
+  canvasElement.addEventListener(
+    "touchend",
+    (e) => {
+      const now = new Date().getTime();
+      if (now - lastTouchEnd <= 300) {
+        // 300ms als Schwellenwert für Doppeltipp
+        const touch = e.changedTouches[0];
+        const rect = canvasElement.getBoundingClientRect();
+
+        // Berechne die unskalierten Koordinaten
+        const x = (touch.clientX - rect.left) / canvasElement.zoom;
+        const y = (touch.clientY - rect.top) / canvasElement.zoom;
+
+        // Prüfen, ob eine Node getroffen wurde
+        const clickedNode = graph.getNodeOnPos(x, y);
+
+        if (
+          clickedNode &&
+          clickedNode.type !== "Funktionenmaschinen/Unabhängige_Variable" &&
+          clickedNode.type !== "Funktionenmaschinen/Parameter"
+        ) {
+          // Hier können Sie den gewünschten Code einfügen, der bei einem Doppeltipp auf eine Node ausgeführt werden soll
+          //console.log("Node doppelt getippt:", clickedNode);
+          e.preventDefault(); // Unterdrücke das Standardverhalten
+          showNewMachineMenu(graph, canvasElement, clickedNode);
+        } else {
+          showNewMachineMenu(graph, canvasElement, "", x, y);
+        }
+      }
+      lastTouchEnd = now;
+    },
+    false
+  );
 
   canvasElement.addEventListener(
     "touchstart",
     (e) => {
       const touch = e.touches[0];
       const rect = canvasElement.getBoundingClientRect();
-      
+
       // Berechne die unskalierten Koordinaten
       const x = (touch.clientX - rect.left) / canvasElement.zoom;
       const y = (touch.clientY - rect.top) / canvasElement.zoom;
-  
+
       // Prüfen, ob eine Node getroffen wurde
       const touchedNode = graph.getNodeOnPos(x, y);
-  
+
       if (touchedNode) {
         //console.log("Node getroffen:", touchedNode.title);
         e.preventDefault(); // Unterdrücke das Scrollen
       }
-  
+
       // Simuliere den mousedown-Event für LiteGraph
       const simulatedEvent = new MouseEvent("mousedown", {
         bubbles: true,
@@ -313,8 +329,6 @@ canvasElement.addEventListener(
     false
   );
 
-
-
   //Menü:
 
   // ** Menü erstellen **
@@ -357,7 +371,7 @@ canvasElement.addEventListener(
         </nav>       
     `;
 
-    //  <button onclick="copyNode('${canvasId}')"  class="button fit small" style="margin-bottom: 10px;">Maschine kopieren</button>
+  //  <button onclick="copyNode('${canvasId}')"  class="button fit small" style="margin-bottom: 10px;">Maschine kopieren</button>
   // Füge das Menü in den Canvas-Container ein
   canvasElement.parentElement.appendChild(menu);
 
@@ -372,45 +386,43 @@ canvasElement.addEventListener(
   // Setze die initiale Breite
   menu.style.width = collapsedWidth;
 
+  // Funktion zum Umschalten des Menüs
+  function toggleMenu(isExpanded) {
+    menuContent.style.display = isExpanded ? "none" : "block";
+    menu.style.width = isExpanded ? collapsedWidth : expandedWidth;
+  }
 
-// Funktion zum Umschalten des Menüs
-function toggleMenu(isExpanded) {
-  menuContent.style.display = isExpanded ? "none" : "block";
-  menu.style.width = isExpanded ? collapsedWidth : expandedWidth;
-}
+  // // Event Listener für den Menü-Button
+  // menuToggle.addEventListener("click", () => {
+  //   const isExpanded = menuContent.style.display === "block";
+  //   toggleMenu(isExpanded); // Menü umschalten
+  // });
 
-// // Event Listener für den Menü-Button
-// menuToggle.addEventListener("click", () => {
-//   const isExpanded = menuContent.style.display === "block";
-//   toggleMenu(isExpanded); // Menü umschalten
-// });
-
-// Liste aller Buttons, die das Menü schließen sollen
-const menubuttons = [
-  menuToggle, // Beispiel: Menü-Umschalt-Button
-  document.getElementById(`fullscreen${canvasId}`),
-  document.getElementById(`saveaspic${canvasId}`),
-  document.getElementById(`save${canvasId}`),
-  document.getElementById(`load${canvasId}`),
-  document.getElementById(`position${canvasId}`),
-  document.getElementById(`delnode${canvasId}`),
-  document.getElementById(`CloseNewNodeMenu${canvasId}`)
+  // Liste aller Buttons, die das Menü schließen sollen
+  const menubuttons = [
+    menuToggle, // Beispiel: Menü-Umschalt-Button
+    document.getElementById(`fullscreen${canvasId}`),
+    document.getElementById(`saveaspic${canvasId}`),
+    document.getElementById(`save${canvasId}`),
+    document.getElementById(`load${canvasId}`),
+    document.getElementById(`position${canvasId}`),
+    document.getElementById(`delnode${canvasId}`),
+    document.getElementById(`CloseNewNodeMenu${canvasId}`),
   ];
 
-// Füge jedem Button einen Event-Listener hinzu
-menubuttons.forEach((button) => {
-  if (button) {
-    button.addEventListener("click", () => {
-      const isExpanded = menuContent.style.display === "block";
-      toggleMenu(isExpanded); // Menü umschalten
-    });
-  }
-});
+  // Füge jedem Button einen Event-Listener hinzu
+  menubuttons.forEach((button) => {
+    if (button) {
+      button.addEventListener("click", () => {
+        const isExpanded = menuContent.style.display === "block";
+        toggleMenu(isExpanded); // Menü umschalten
+      });
+    }
+  });
 
   // Zoom from canvas loading
   const zoomLevel = parseFloat(canvasElement.getAttribute("data-zoom")) || 1.0; // Default zoom is 1.0
   canvasElement.zoom = zoomLevel;
-  
 
   // Apply the zoom level
   const centerPoint = [0, 0]; //[canvasElement.width / 2, canvasElement.height / 2];
@@ -440,8 +452,6 @@ menubuttons.forEach((button) => {
 
   //Menueoverlay neue node
 
- 
-
   // Verknüpfen der Funktion mit dem Button
   document.addEventListener("DOMContentLoaded", () => {
     const button = document.getElementById(`newNode${canvasId}`);
@@ -455,9 +465,7 @@ menubuttons.forEach((button) => {
         }
       });
     }
-  });    
-
- 
+  });
 
   // Initialisiere Loop-Variablen
   let isVisible = false;
@@ -465,43 +473,39 @@ menubuttons.forEach((button) => {
 
   graph.start(30);
 
-
-function loop() {
-  // Schleife läuft kontinuierlich
-  requestAnimationFrame(loop);
-
-    
-  // if (manualDraw == true) {
-  //   console.log("Manual draw requested.");
-  //   graph.runStep();
-  //   canvas.draw(true, true); // Redraw
-  //   manualDraw = false;
-  // }
-
-  // Überprüfen, ob das Canvas sichtbar ist
-  // if (!isVisible) { 
-  //   console.log("Canvas is not visible. Skipping draw." + canvasId);
-  //   return; // Überspringe das Zeichnen, wenn Canvas nicht sichtbar
-  // }
-
-  const graph = canvas.graph;
-  const hasActiveAnim = graph ? hasActiveAnimation(graph) : false;
-
-  // Überprüfen, ob eine aktive Animation vorhanden ist oder der Timer aktiv ist
-  if (!hasActiveAnim && !manualDraw) {
-    //console.log("No active animation and manualdraw inactive. Skipping draw." + canvasId);
-    return; // Überspringe das Zeichnen, wenn keine aktive Animation vorhanden und der Timer nicht aktiv ist
-  }
-
-  //console.log("Loop running." + canvasId);
-  graph.runStep();
-  canvas.draw(true, true); // Redraw every frame
-}
-    
-    // Starten der Schleife
+  function loop() {
+    // Schleife läuft kontinuierlich
     requestAnimationFrame(loop);
 
+    // if (manualDraw == true) {
+    //   console.log("Manual draw requested.");
+    //   graph.runStep();
+    //   canvas.draw(true, true); // Redraw
+    //   manualDraw = false;
+    // }
 
+    // Überprüfen, ob das Canvas sichtbar ist
+    // if (!isVisible) {
+    //   console.log("Canvas is not visible. Skipping draw." + canvasId);
+    //   return; // Überspringe das Zeichnen, wenn Canvas nicht sichtbar
+    // }
+
+    const graph = canvas.graph;
+    const hasActiveAnim = graph ? hasActiveAnimation(graph) : false;
+
+    // Überprüfen, ob eine aktive Animation vorhanden ist oder der Timer aktiv ist
+    if (!hasActiveAnim && !manualDraw) {
+      //console.log("No active animation and manualdraw inactive. Skipping draw." + canvasId);
+      return; // Überspringe das Zeichnen, wenn keine aktive Animation vorhanden und der Timer nicht aktiv ist
+    }
+
+    //console.log("Loop running." + canvasId);
+    graph.runStep();
+    canvas.draw(true, true); // Redraw every frame
+  }
+
+  // Starten der Schleife
+  requestAnimationFrame(loop);
 
   // /**
   //  * Observer to monitor the visibility of the canvas element.
@@ -516,7 +520,7 @@ function loop() {
   //   rootMargin: '0px', // Margin um den Root
   //   threshold: 0.1 // Schwellenwert für die Sichtbarkeit (0.1 bedeutet 10% sichtbar)
   // };
-  
+
   // const observer = new IntersectionObserver((entries) => {
   //   entries.forEach((entry) => {
   //     const canvas = entry.target;
@@ -524,23 +528,21 @@ function loop() {
   //     //manualDrawFkt(400); // Startet die manuelle Zeichnung, wenn Graph sichtbar wird für alle aktuell sichtbaren graphen
   //   });
   // }, options);
-  
+
   // // Beobachte den Canvas
   // observer.observe(canvasElement);
 
-    // ...existing code...
-  
+  // ...existing code...
+
   /**
    * Überprüft, ob eine der Nodes im Canvas animation.active == true hat.
    * @param {Object} graph - Das Graph-Objekt des Canvas.
    * @returns {boolean} - True, wenn eine Node animation.active == true hat, sonst false.
    */
   function hasActiveAnimation(graph) {
-   // console.log("Current nodes in graph:", graph._nodes);
-    return graph._nodes.some(node => node.animationActive);
+    // console.log("Current nodes in graph:", graph._nodes);
+    return graph._nodes.some((node) => node.animationActive);
   }
-
-  
 
   //console.log(`Graph für Canvas "${canvasId}" erstellt.`);
   return { graph, canvas };
@@ -548,10 +550,6 @@ function loop() {
 
 // Exportiere die Funktion
 window.createGraphInstance = createGraphInstance;
-
-
-
-
 
 // Funktioniert, aber noch nicht sensitiv für verschiedene Graphen. canvas id implementieren
 let manualDraw = false;
@@ -649,8 +647,6 @@ function convertToLatex(expression) {
 // Macht die Funktion global verfügbar
 window.convertToLatex = convertToLatex;
 
-
-
 function adjustColor(positiveColor, negativeColor, value) {
   // Hilfsfunktion: Hex-Farbe zu RGB konvertieren
   function hexToRgb(hex) {
@@ -662,7 +658,10 @@ function adjustColor(positiveColor, negativeColor, value) {
 
   // Hilfsfunktion: RGB zu Hex konvertieren
   function rgbToHex({ r, g, b }) {
-    return `#${((1 << 24) + (r << 16) + (g << 8) + b).toString(16).slice(1).toUpperCase()}`;
+    return `#${((1 << 24) + (r << 16) + (g << 8) + b)
+      .toString(16)
+      .slice(1)
+      .toUpperCase()}`;
   }
 
   // Hilfsfunktion: Helligkeit anpassen mit angepasster logarithmischer Funktion
@@ -670,7 +669,7 @@ function adjustColor(positiveColor, negativeColor, value) {
     // Definiere die neue Funktion basierend auf den optimierten Parametern
     function brightnessFactor(x) {
       const a = 1.817;
-      const b = 1.00;
+      const b = 1.0;
       const c = 1.697;
       const factor = (a * Math.log(x + b)) / (1 + c * Math.log(x + b));
       return Math.min(factor, 1); // Begrenze den Faktor auf maximal 1
@@ -683,13 +682,13 @@ function adjustColor(positiveColor, negativeColor, value) {
     return {
       r: Math.min(255, Math.max(0, rgb.r * factor)),
       g: Math.min(255, Math.max(0, rgb.g * factor)),
-      b: Math.min(255, Math.max(0, rgb.b * factor))
+      b: Math.min(255, Math.max(0, rgb.b * factor)),
     };
   }
 
   // Hilfsfunktion: Überprüfen, ob der Input Hex oder RGB ist
   function isHex(color) {
-    return typeof color === 'string' && color[0] === '#';
+    return typeof color === "string" && color[0] === "#";
   }
 
   // Wähle die passende Farbe basierend auf dem Vorzeichen von value
@@ -710,9 +709,8 @@ function adjustColor(positiveColor, negativeColor, value) {
 
 window.adjustColor = adjustColor;
 
-
- // Funktion, um das neue Menü anzuzeigen
-function showNewMachineMenu(graph, canvasElement, placeholderNode,x,y) {
+// Funktion, um das neue Menü anzuzeigen
+function showNewMachineMenu(graph, canvasElement, placeholderNode, x, y) {
   // Erstelle ein Overlay für das Menü
   //console.log("Show new machine menu" + graph + canvasElement);
   const overlay = document.createElement("div");
@@ -806,25 +804,24 @@ function showNewMachineMenu(graph, canvasElement, placeholderNode,x,y) {
           replacePlaceholderNode(node.type);
           canvasElement.parentElement.removeChild(overlay); // Menü schließen
         } else {
-        const newNode = LiteGraph.createNode(node.type);
-        //const uniqueName = `${node.name}_${Date.now()}`; // Dynamischer Name
-        //newNode.title = uniqueName;
-        if(x && y){
-          newNode.pos = [x, y];
-        }else{
-        newNode.pos = [50, canvasElement.height - 200];
-        }
-        graph.add(newNode);
-        canvasElement.parentElement.removeChild(overlay); // Menü schließen
-        //console.log(`Node hinzugefügt: ${uniqueName}`); // Aber bestätigung einbauen
-        //document.body.removeChild(overlay); // Menü schließen <-Das funktioniert noch nicht
+          const newNode = LiteGraph.createNode(node.type);
+          //const uniqueName = `${node.name}_${Date.now()}`; // Dynamischer Name
+          //newNode.title = uniqueName;
+          if (x && y) {
+            newNode.pos = [x, y];
+          } else {
+            newNode.pos = [50, canvasElement.height - 200];
+          }
+          graph.add(newNode);
+          canvasElement.parentElement.removeChild(overlay); // Menü schließen
+          //console.log(`Node hinzugefügt: ${uniqueName}`); // Aber bestätigung einbauen
+          //document.body.removeChild(overlay); // Menü schließen <-Das funktioniert noch nicht
         }
       });
 
       parent.appendChild(button);
     });
   };
-
   // // Buttons zu den Spalten hinzufügen
   // createNodeButtons(funcColumn, funcNodeTypes);
   // createNodeButtons(wordColumn, wordNodeTypes);
@@ -910,3 +907,139 @@ function showNewMachineMenu(graph, canvasElement, placeholderNode,x,y) {
     //console.log("Platzhalter-Node ersetzt durch:", newNode);
   }
 }
+// Funktion, um das neue Menü anzuzeigen
+
+function showFrequentlyUsedFunctionsMenu(graph, canvasElement, clickedNode) {
+  // Erstelle ein Overlay für das Menü
+  const overlay = document.createElement("div");
+  overlay.style.position = "absolute";
+  overlay.style.top = "0";
+  overlay.style.left = "0";
+  overlay.style.width = "100%";
+  overlay.style.height = "100%";
+  overlay.style.backgroundColor = "rgba(26, 29, 41, 0.9)";
+  overlay.style.zIndex = "300";
+  overlay.style.display = "flex";
+  overlay.style.justifyContent = "center";
+  overlay.style.alignItems = "center";
+  overlay.style.color = "#ffffff";
+
+  // Füge das Menü in den Canvas-Container ein
+  canvasElement.parentElement.appendChild(overlay);
+
+  // Menü-Inhalt
+  const menuContent = document.createElement("div");
+  menuContent.class = "inner";
+  menuContent.style.display = "flex";
+  menuContent.style.width = "80%";
+  menuContent.style.justifyContent = "center"; // Zentriert die Elemente horizontal
+  menuContent.style.gap = "20px";
+
+  // Spalte für häufig genutzte Funktionen
+  const functionsColumn = document.createElement("ul");
+  functionsColumn.innerHTML =
+    '<header class="major"> <h3>Einstellungen und häufig genutzte Funktionen</h3></header>';
+
+  // Liste der Funktionen und ihre zu ändernden Eigenschaften
+  const functions = [
+          { name: "FREIE EINGABE IN WIDGET", properties: { widgetVisible: true }},
+          { name: "WIDGET AUSBLENDEN", properties: { widgetVisible: false }},
+          { name: "KONSTANTE FUNKTION: r(x) = 5", properties: { funcName: "r", formula: "5", uvName: "x", completeEquationfromWidget: "r(x) = 5", widgetVisible: false, uvError: true } },
+          { name: "LINEARE FUNKTION: f(x) = x + 2", properties: { funcName: "f", formula: "x + 2", uvName: "x", completeEquationfromWidget: "f(x) = x + 2", widgetVisible: false } },
+          { name: "QUADRATISCHE FUNKTION: g(x) = x^2", properties: { funcName: "g", formula: "x**2", uvName: "x", completeEquationfromWidget: "g(x) = x^2", widgetVisible: false } },
+          { name: "KUBISCHE FUNKTION: h(x) = x^3", properties: { funcName: "h", formula: "x**3", uvName: "x", completeEquationfromWidget: "h(x) = x^3", widgetVisible: false } },
+          { name: "WURZELFUNKTION: j(x) = sqrt(x)", properties: { funcName: "j", formula: "Math.sqrt(x)", uvName: "x", completeEquationfromWidget: "j(x) = sqrt(x)", widgetVisible: false } },
+          { name: "SINUSFUNKTION: k(x) = sin(x)", properties: { funcName: "k", formula: "Math.sin(x)", uvName: "x", completeEquationfromWidget: "k(x) = sin(x)", widgetVisible: false } },
+          { name: "KOSINUSFUNKTION: m(x) = cos(x)", properties: { funcName: "m", formula: "Math.cos(x)", uvName: "x", completeEquationfromWidget: "m(x) = cos(x)", widgetVisible: false } },
+          { name: "BETRAGSFUNKTION: n(x) = abs(x)", properties: { funcName: "n", formula: "Math.abs(x)", uvName: "x", completeEquationfromWidget: "n(x) = abs(x)", widgetVisible: false } },
+          { name: "LOGARITHMUSFUNKTION: p(x) = ln(x)", properties: { funcName: "p", formula: "Math.log(x)", uvName: "x", completeEquationfromWidget: "p(x) = ln(x)", widgetVisible: false } },
+          { name: "EXPONENTIALFUNKTION: q(x) = e^x", properties: { funcName: "q", formula: "Math.exp(x)", uvName: "x", completeEquationfromWidget: "q(x) = e^x", widgetVisible: false } },
+          { name: "QUADRATISCHE FUNKTION MIT PARAMETERN: r(x) = a*x^2 + b", properties: { funcName: "r", formula: "a*x**2 + b", uvName: "x", completeEquationfromWidget: "r(x) = a*x^2 + b", widgetVisible: false } },
+      ];
+
+    // Schließen-Button für das Menü
+    const closeButton = document.createElement("button");
+    closeButton.textContent = "X";
+    closeButton.id = "CloseNewNodeMenu";
+    closeButton.className = "button primary small";
+    closeButton.style.position = "absolute"; // Absolut positionieren
+    closeButton.style.top = "10px"; // Abstand vom oberen Rand
+    closeButton.style.right = "10px"; // Abstand vom rechten Rand
+  
+    closeButton.addEventListener("click", () => {
+      canvasElement.parentElement.removeChild(overlay);
+    });
+  
+    // Schließen-Button hinzufügen
+    overlay.appendChild(closeButton);
+  
+  // Funktion, um Buttons für Funktionen zu erstellen
+  const createFunctionButtons = (parent, functions) => {
+    functions.forEach((func) => {
+      const button = document.createElement("li");
+      button.textContent = func.name;
+      button.class = "links";
+      button.style.margin = "5px";
+      button.className = "machine-button"; // Klasse für Stil hinzufügen
+      button.style.listStyle = "none";
+      //button.style.textTransform = "uppercase";
+      button.style.fontWeight = "600";
+      button.style.fontSize = "0.6em";
+      button.style.letterSpacing = "0.25em";
+      button.style.borderBottom = "1px solid #31344F"; // Dünne Linie
+      button.style.paddingBottom = "10px"; // Abstand vom Text zur Linie
+      button.style.transition = "background-color 0.3s, transform 0.1s"; // Smooth transitions
+
+      // Standard-Stil
+      button.style.backgroundColor = "transparent";
+      button.style.color = "#ffffff";
+
+      // Hover-Effekt
+      button.addEventListener("mouseover", () => {
+        button.style.backgroundColor = "rgba(255, 255, 255, 0.1)"; // Leicht hervorgehoben
+      });
+
+      // Entferne Hover-Effekt
+      button.addEventListener("mouseout", () => {
+        button.style.backgroundColor = "transparent"; // Zurücksetzen
+      });
+
+      // Klick-Effekt
+      button.addEventListener("mousedown", () => {
+        button.style.backgroundColor = "rgba(255, 255, 255, 0.3)"; // Stärker hervorgehoben
+        button.style.transform = "scale(0.98)"; // Leichte Skalierung
+      });
+
+      button.addEventListener("mouseup", () => {
+        button.style.backgroundColor = "rgba(255, 255, 255, 0.1)"; // Zurück zur Hover-Farbe
+        button.style.transform = "scale(1)"; // Skalierung zurücksetzen
+      });
+
+      // Klick-Event für den Button
+      button.addEventListener("click", () => {
+        console.log(`Button clicked: ${func.name}`);
+
+        // Ändere die Eigenschaften der clickedNode
+        Object.assign(clickedNode.properties, func.properties);
+
+        // Menü schließen
+        canvasElement.parentElement.removeChild(overlay);
+        manualDrawFkt(300);
+      });
+
+      parent.appendChild(button);
+    });
+    //MathJax.typesetPromise([parent]);
+    //MathJax.mathml2mmlPromise([parent]);
+    //MathJax.tex2chtml('\\frac{2}{1}', {em: 12, ex: 6, display: false});
+
+  };
+
+  createFunctionButtons(functionsColumn, functions);
+
+  menuContent.appendChild(functionsColumn);
+  overlay.appendChild(menuContent);
+  canvasElement.parentElement.appendChild(overlay);
+
+}
+
