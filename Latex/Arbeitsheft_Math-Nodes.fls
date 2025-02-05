@@ -2,8 +2,8 @@ PWD /Users/nico/Library/Mobile Documents/com~apple~CloudDocs/Promotion/Synthesiz
 INPUT /usr/local/texlive/2020/texmf.cnf
 INPUT /usr/local/texlive/2020/texmf-dist/web2c/texmf.cnf
 INPUT /usr/local/texlive/2020/texmf-var/web2c/pdftex/pdflatex.fmt
-INPUT /Users/nico/Library/Mobile Documents/com~apple~CloudDocs/Promotion/Synthesizer/Code/mathe-synthesizer/Latex/test.tex
-OUTPUT /Users/nico/Library/Mobile Documents/com~apple~CloudDocs/Promotion/Synthesizer/Code/mathe-synthesizer/Latex/test.log
+INPUT /Users/nico/Library/Mobile Documents/com~apple~CloudDocs/Promotion/Synthesizer/Code/mathe-synthesizer/Latex/Arbeitsheft_Math-Nodes.tex
+OUTPUT /Users/nico/Library/Mobile Documents/com~apple~CloudDocs/Promotion/Synthesizer/Code/mathe-synthesizer/Latex/Arbeitsheft_Math-Nodes.log
 INPUT /usr/local/texlive/2020/texmf-dist/tex/latex/base/report.cls
 INPUT /usr/local/texlive/2020/texmf-dist/tex/latex/base/report.cls
 INPUT /usr/local/texlive/2020/texmf-dist/tex/latex/base/size12.clo
@@ -212,9 +212,9 @@ INPUT /usr/local/texlive/2020/texmf-dist/tex/latex/tocloft/tocloft.sty
 INPUT /usr/local/texlive/2020/texmf-dist/tex/latex/tocloft/tocloft.sty
 INPUT /usr/local/texlive/2020/texmf-dist/tex/latex/l3backend/l3backend-pdfmode.def
 INPUT /usr/local/texlive/2020/texmf-dist/tex/latex/l3backend/l3backend-pdfmode.def
-INPUT /Users/nico/Library/Mobile Documents/com~apple~CloudDocs/Promotion/Synthesizer/Code/mathe-synthesizer/Latex/test.aux
-INPUT /Users/nico/Library/Mobile Documents/com~apple~CloudDocs/Promotion/Synthesizer/Code/mathe-synthesizer/Latex/test.aux
-OUTPUT /Users/nico/Library/Mobile Documents/com~apple~CloudDocs/Promotion/Synthesizer/Code/mathe-synthesizer/Latex/test.aux
+INPUT /Users/nico/Library/Mobile Documents/com~apple~CloudDocs/Promotion/Synthesizer/Code/mathe-synthesizer/Latex/Arbeitsheft_Math-Nodes.aux
+INPUT /Users/nico/Library/Mobile Documents/com~apple~CloudDocs/Promotion/Synthesizer/Code/mathe-synthesizer/Latex/Arbeitsheft_Math-Nodes.aux
+OUTPUT /Users/nico/Library/Mobile Documents/com~apple~CloudDocs/Promotion/Synthesizer/Code/mathe-synthesizer/Latex/Arbeitsheft_Math-Nodes.aux
 INPUT /usr/local/texlive/2020/texmf-dist/tex/latex/ly1/ly1ptm.fd
 INPUT /usr/local/texlive/2020/texmf-dist/tex/latex/ly1/ly1ptm.fd
 INPUT /usr/local/texlive/2020/texmf-dist/fonts/tfm/adobe/sourcesanspro/SourceSansPro-Light-lf-t1.tfm
@@ -226,7 +226,7 @@ INPUT /usr/local/texlive/2020/texmf-dist/tex/latex/latexconfig/epstopdf-sys.cfg
 INPUT /usr/local/texlive/2020/texmf-dist/tex/latex/latexconfig/epstopdf-sys.cfg
 INPUT /Users/nico/Library/Mobile Documents/com~apple~CloudDocs/Promotion/Synthesizer/Code/mathe-synthesizer/Latex/../images/MATH-NODES_Logo.png
 INPUT /Users/nico/Library/Mobile Documents/com~apple~CloudDocs/Promotion/Synthesizer/Code/mathe-synthesizer/Latex/../images/MATH-NODES_Logo.png
-OUTPUT /Users/nico/Library/Mobile Documents/com~apple~CloudDocs/Promotion/Synthesizer/Code/mathe-synthesizer/Latex/test.pdf
+OUTPUT /Users/nico/Library/Mobile Documents/com~apple~CloudDocs/Promotion/Synthesizer/Code/mathe-synthesizer/Latex/Arbeitsheft_Math-Nodes.pdf
 INPUT /Users/nico/Library/Mobile Documents/com~apple~CloudDocs/Promotion/Synthesizer/Code/mathe-synthesizer/Latex/../images/MATH-NODES_Logo.png
 INPUT /usr/local/texlive/2020/texmf-dist/fonts/tfm/adobe/sourcesanspro/SourceSansPro-Light-lf-t1.tfm
 INPUT /usr/local/texlive/2020/texmf-dist/fonts/tfm/adobe/sourcesanspro/SourceSansPro-Bold-lf-t1.tfm
@@ -248,8 +248,8 @@ INPUT /usr/local/texlive/2020/texmf-dist/fonts/tfm/adobe/sourcesanspro/SourceSan
 INPUT /usr/local/texlive/2020/texmf-var/fonts/map/pdftex/updmap/pdftex.map
 INPUT /usr/local/texlive/2020/texmf-dist/fonts/vf/adobe/sourcesanspro/SourceSansPro-Bold-lf-t1.vf
 INPUT /usr/local/texlive/2020/texmf-dist/fonts/tfm/adobe/sourcesanspro/SourceSansPro-Bold-lf-t1--base.tfm
-INPUT /Users/nico/Library/Mobile Documents/com~apple~CloudDocs/Promotion/Synthesizer/Code/mathe-synthesizer/Latex/test.toc
-INPUT /Users/nico/Library/Mobile Documents/com~apple~CloudDocs/Promotion/Synthesizer/Code/mathe-synthesizer/Latex/test.toc
+INPUT /Users/nico/Library/Mobile Documents/com~apple~CloudDocs/Promotion/Synthesizer/Code/mathe-synthesizer/Latex/Arbeitsheft_Math-Nodes.toc
+INPUT /Users/nico/Library/Mobile Documents/com~apple~CloudDocs/Promotion/Synthesizer/Code/mathe-synthesizer/Latex/Arbeitsheft_Math-Nodes.toc
 INPUT /usr/local/texlive/2020/texmf-dist/fonts/tfm/public/cm/cmr8.tfm
 INPUT /usr/local/texlive/2020/texmf-dist/fonts/tfm/public/cm/cmr6.tfm
 INPUT /usr/local/texlive/2020/texmf-dist/fonts/tfm/public/cm/cmmi12.tfm
@@ -265,7 +265,7 @@ INPUT /usr/local/texlive/2020/texmf-dist/fonts/vf/adobe/sourcesanspro/SourceSans
 INPUT /usr/local/texlive/2020/texmf-dist/fonts/tfm/adobe/sourcesanspro/SourceSansPro-Bold-lf-t1--base.tfm
 INPUT /usr/local/texlive/2020/texmf-dist/fonts/vf/adobe/sourcesanspro/SourceSansPro-Light-lf-t1.vf
 INPUT /usr/local/texlive/2020/texmf-dist/fonts/tfm/adobe/sourcesanspro/SourceSansPro-Light-lf-t1--base.tfm
-OUTPUT /Users/nico/Library/Mobile Documents/com~apple~CloudDocs/Promotion/Synthesizer/Code/mathe-synthesizer/Latex/test.toc
+OUTPUT /Users/nico/Library/Mobile Documents/com~apple~CloudDocs/Promotion/Synthesizer/Code/mathe-synthesizer/Latex/Arbeitsheft_Math-Nodes.toc
 INPUT /usr/local/texlive/2020/texmf-dist/fonts/tfm/adobe/sourcesanspro/SourceSansPro-Semibold-lf-t1.tfm
 INPUT /usr/local/texlive/2020/texmf-dist/fonts/tfm/adobe/sourcesanspro/SourceSansPro-Semibold-lf-t1.tfm
 INPUT /Users/nico/Library/Mobile Documents/com~apple~CloudDocs/Promotion/Synthesizer/Code/mathe-synthesizer/Latex/Bilder/Wortmaschinen_Titel.png
@@ -294,6 +294,7 @@ INPUT /Users/nico/Library/Mobile Documents/com~apple~CloudDocs/Promotion/Synthes
 INPUT /Users/nico/Library/Mobile Documents/com~apple~CloudDocs/Promotion/Synthesizer/Code/mathe-synthesizer/Latex/Bilder/Wortmaschinen_A3_config.png
 INPUT /Users/nico/Library/Mobile Documents/com~apple~CloudDocs/Promotion/Synthesizer/Code/mathe-synthesizer/Latex/Bilder/Wortmaschinen_A3_config.png
 INPUT /Users/nico/Library/Mobile Documents/com~apple~CloudDocs/Promotion/Synthesizer/Code/mathe-synthesizer/Latex/Bilder/Wortmaschinen_A3_config.png
+INPUT /usr/local/texlive/2020/texmf-dist/fonts/tfm/adobe/sourcesanspro/SourceSansPro-Light-lf-t1.tfm
 INPUT /Users/nico/Library/Mobile Documents/com~apple~CloudDocs/Promotion/Synthesizer/Code/mathe-synthesizer/Latex/../images/MATH-NODES_Logo.png
 INPUT /Users/nico/Library/Mobile Documents/com~apple~CloudDocs/Promotion/Synthesizer/Code/mathe-synthesizer/Latex/../images/MATH-NODES_Logo.png
 INPUT /Users/nico/Library/Mobile Documents/com~apple~CloudDocs/Promotion/Synthesizer/Code/mathe-synthesizer/Latex/Bilder/Wortmaschinen_A4_config.png
@@ -317,15 +318,17 @@ INPUT /Users/nico/Library/Mobile Documents/com~apple~CloudDocs/Promotion/Synthes
 INPUT /Users/nico/Library/Mobile Documents/com~apple~CloudDocs/Promotion/Synthesizer/Code/mathe-synthesizer/Latex/Bilder/Wortmaschinen_A8_config.png
 INPUT /Users/nico/Library/Mobile Documents/com~apple~CloudDocs/Promotion/Synthesizer/Code/mathe-synthesizer/Latex/Bilder/Wortmaschinen_A8_config.png
 INPUT /Users/nico/Library/Mobile Documents/com~apple~CloudDocs/Promotion/Synthesizer/Code/mathe-synthesizer/Latex/Bilder/Wortmaschinen_A8_config.png
-INPUT /Users/nico/Library/Mobile Documents/com~apple~CloudDocs/Promotion/Synthesizer/Code/mathe-synthesizer/Latex/Bilder/Uebersicht_Wortmaschinen.png
-INPUT /Users/nico/Library/Mobile Documents/com~apple~CloudDocs/Promotion/Synthesizer/Code/mathe-synthesizer/Latex/Bilder/Uebersicht_Wortmaschinen.png
-INPUT /Users/nico/Library/Mobile Documents/com~apple~CloudDocs/Promotion/Synthesizer/Code/mathe-synthesizer/Latex/Bilder/Uebersicht_Wortmaschinen.png
 INPUT /Users/nico/Library/Mobile Documents/com~apple~CloudDocs/Promotion/Synthesizer/Code/mathe-synthesizer/Latex/../images/MATH-NODES_Logo.png
 INPUT /Users/nico/Library/Mobile Documents/com~apple~CloudDocs/Promotion/Synthesizer/Code/mathe-synthesizer/Latex/../images/MATH-NODES_Logo.png
+INPUT /Users/nico/Library/Mobile Documents/com~apple~CloudDocs/Promotion/Synthesizer/Code/mathe-synthesizer/Latex/Bilder/Uebersicht_Wortmaschinen.png
+INPUT /Users/nico/Library/Mobile Documents/com~apple~CloudDocs/Promotion/Synthesizer/Code/mathe-synthesizer/Latex/Bilder/Uebersicht_Wortmaschinen.png
+INPUT /Users/nico/Library/Mobile Documents/com~apple~CloudDocs/Promotion/Synthesizer/Code/mathe-synthesizer/Latex/Bilder/Uebersicht_Wortmaschinen.png
 INPUT /Users/nico/Library/Mobile Documents/com~apple~CloudDocs/Promotion/Synthesizer/Code/mathe-synthesizer/Latex/../images/MATH-NODES_Logo.png
 INPUT /Users/nico/Library/Mobile Documents/com~apple~CloudDocs/Promotion/Synthesizer/Code/mathe-synthesizer/Latex/../images/MATH-NODES_Logo.png
 INPUT /Users/nico/Library/Mobile Documents/com~apple~CloudDocs/Promotion/Synthesizer/Code/mathe-synthesizer/Latex/Bilder/Titel_Graph.png
 INPUT /Users/nico/Library/Mobile Documents/com~apple~CloudDocs/Promotion/Synthesizer/Code/mathe-synthesizer/Latex/Bilder/Titel_Graph.png
+INPUT /Users/nico/Library/Mobile Documents/com~apple~CloudDocs/Promotion/Synthesizer/Code/mathe-synthesizer/Latex/../images/MATH-NODES_Logo.png
+INPUT /Users/nico/Library/Mobile Documents/com~apple~CloudDocs/Promotion/Synthesizer/Code/mathe-synthesizer/Latex/../images/MATH-NODES_Logo.png
 INPUT /Users/nico/Library/Mobile Documents/com~apple~CloudDocs/Promotion/Synthesizer/Code/mathe-synthesizer/Latex/../images/MATH-NODES_Logo.png
 INPUT /Users/nico/Library/Mobile Documents/com~apple~CloudDocs/Promotion/Synthesizer/Code/mathe-synthesizer/Latex/../images/MATH-NODES_Logo.png
 INPUT /Users/nico/Library/Mobile Documents/com~apple~CloudDocs/Promotion/Synthesizer/Code/mathe-synthesizer/Latex/../images/MATH-NODES_Logo.png
@@ -359,7 +362,11 @@ INPUT /Users/nico/Library/Mobile Documents/com~apple~CloudDocs/Promotion/Synthes
 INPUT /Users/nico/Library/Mobile Documents/com~apple~CloudDocs/Promotion/Synthesizer/Code/mathe-synthesizer/Latex/../images/MATH-NODES_Logo.png
 INPUT /Users/nico/Library/Mobile Documents/com~apple~CloudDocs/Promotion/Synthesizer/Code/mathe-synthesizer/Latex/../images/MATH-NODES_Logo.png
 INPUT /Users/nico/Library/Mobile Documents/com~apple~CloudDocs/Promotion/Synthesizer/Code/mathe-synthesizer/Latex/../images/MATH-NODES_Logo.png
-INPUT /Users/nico/Library/Mobile Documents/com~apple~CloudDocs/Promotion/Synthesizer/Code/mathe-synthesizer/Latex/test.aux
+INPUT /Users/nico/Library/Mobile Documents/com~apple~CloudDocs/Promotion/Synthesizer/Code/mathe-synthesizer/Latex/../images/MATH-NODES_Logo.png
+INPUT /Users/nico/Library/Mobile Documents/com~apple~CloudDocs/Promotion/Synthesizer/Code/mathe-synthesizer/Latex/../images/MATH-NODES_Logo.png
+INPUT /Users/nico/Library/Mobile Documents/com~apple~CloudDocs/Promotion/Synthesizer/Code/mathe-synthesizer/Latex/../images/N_R_LOGO.png
+INPUT /Users/nico/Library/Mobile Documents/com~apple~CloudDocs/Promotion/Synthesizer/Code/mathe-synthesizer/Latex/../images/N_R_LOGO.png
+INPUT /Users/nico/Library/Mobile Documents/com~apple~CloudDocs/Promotion/Synthesizer/Code/mathe-synthesizer/Latex/Arbeitsheft_Math-Nodes.aux
 INPUT /usr/local/texlive/2020/texmf-dist/fonts/enc/dvips/sourcesanspro/a_sd7igg.enc
 INPUT /usr/local/texlive/2020/texmf-dist/fonts/enc/dvips/sourcesanspro/a_ggs4wk.enc
 INPUT /usr/local/texlive/2020/texmf-dist/fonts/type1/adobe/sourcesanspro/SourceSansPro-Bold.pfb

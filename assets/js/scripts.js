@@ -108,52 +108,65 @@ function loadGraphFromFile(canvasId) {
   // Wenn der Benutzer bestätigt, lade den Graphen
   if (confirmation) {
     const canvas = document.getElementById(canvasId); // Canvas über ID holen
-    if (!canvas) {
+        if (!canvas) {
       alert(`Canvas mit ID "${canvasId}" nicht gefunden.`);
       return;
     }
-
+    
     const graph = canvas.graph; // LGraph-Objekt vom Canvas
     if (!graph) {
       alert(`Kein Graph mit Canvas-ID "${canvasId}" gefunden.`);
       return;
     }
-
+    
     graph.clear();
-
+    // console.log("Graph wurde geleert.");
+    
     const input = document.createElement("input");
     input.type = "file";
     input.accept = "application/json";
-
+    
     input.addEventListener("change", function (event) {
+      // console.log("Event-Listener ausgelöst.");
       const file = event.target.files[0];
       if (file) {
+        // console.log("Datei ausgewählt:", file.name);
         const reader = new FileReader();
-        reader.onload = function (e) {
+        reader.onload = function (e) { // Callback-Funktion für das Laden der Datei
           try {
+            // console.log("Datei wird gelesen...");
             const json = JSON.parse(e.target.result);
-
+            // console.log("JSON erfolgreich geparst:", json);
+            
             // Graph aktualisieren
             graph.stop();
+            // console.log("Graph gestoppt.");
             graph.configure(json);
-            graph.start();
-
-            autoPositionNodes(canvas.id);
-
-           
+            // console.log("Graph konfiguriert.");
+            
+            // Kurze Verzögerung einfügen
+            setTimeout(() => {
+              graph.start();
+              // console.log("Graph gestartet.");
+              autoPositionNodes(canvas.id);
+              // console.log("Knoten automatisch positioniert.");
+            }, 300); // 300 Millisekunden Verzögerung
+    
           } catch (error) {
             console.error("Fehler beim Laden des Graphen:", error);
             alert("Ungültige Datei. Bitte überprüfe das JSON-Format.");
           }
         };
-        reader.readAsText(file);
+        reader.readAsText(file); // Datei als Text einlesen
+      } else {
+        // console.log("Keine Datei ausgewählt.");
       }
     });
-
+    document.body.appendChild(input); // Input-Element zum DOM hinzufügen
+    // console.log("Event-Listener hinzugefügt.");
     input.click();
-  } else {
-   
-  }
+    // console.log("Input-Element geklickt.");
+  } 
 }
 
 function loadGraphFromServerAsync(canvasId, jsonFilePath) {
