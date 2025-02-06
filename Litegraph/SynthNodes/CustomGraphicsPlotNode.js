@@ -24,6 +24,7 @@ export function _CustomGraphicsPlot() {
         savedEquation: "",
         savedUV: "",
         whiteBackground: false,
+        noPlot: false,
       };
 
       // Widgets für xRange und yRange als Knobs
@@ -187,7 +188,11 @@ export function _CustomGraphicsPlot() {
         ctx.lineTo(0, inputPosY + height / 2);
         ctx.closePath();
         // Füllen des Trichters
+        if (this.getInputData(i)) {
+          ctx.fillStyle = this.colors[i];
+        } else {
         ctx.fillStyle = inLabelsColor;
+        }
         ctx.fill();
       }
 
@@ -195,7 +200,7 @@ export function _CustomGraphicsPlot() {
       this.drawGrid(ctx, size, scaleX, scaleY, offsetX, offsetY, marginTop);
 
       // Plotte jede Funktion in einer anderen Farbe
-      if (!(this.properties.whiteBackground === true || this.properties.whiteBackground === "true")) { 
+      if (!(this.properties.noPlot === true || this.properties.noPlot === "true")) { 
       for (let i = 0; i < this.properties.equations.length; i++) {
         const equation = this.properties.equations[i];
         const uvName = this.properties.uvNames[i];
@@ -207,6 +212,7 @@ export function _CustomGraphicsPlot() {
         }
 
         ctx.strokeStyle = color;
+        ctx.lineWidth = 1.7;
         ctx.beginPath();
 
         let step = (xRange[1] - xRange[0]) / (size[0] - 2 * margin);
@@ -326,7 +332,7 @@ export function _CustomGraphicsPlot() {
       } else {
       ctx.strokeStyle = "#FFF";
       }
-      ctx.lineWidth = 1.0;
+      ctx.lineWidth = 1.2;
 
       // X-Achse
       ctx.beginPath();
