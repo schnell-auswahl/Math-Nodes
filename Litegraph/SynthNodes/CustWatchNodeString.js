@@ -1,12 +1,11 @@
 export function _CustWatchNodeString() {
   return class CustWatchNodeString {
     constructor() {
-      this.size = [160, 160]; // Etwas größere Größe, damit genug Platz für die Gleichung ist
       this.color = fbNodesColor;
       this.bgcolor = bgColor2;
 
       this.addInput("value", 0, { label: "" });
-      this.value = null;
+      this.inputData = 0;
       this.lastRenderedEquation = null; // Speichert die zuletzt gerenderte Gleichung
       this.renderedImage = null; // Speichert das gerenderte Bild
       this.title = "Gleichung";
@@ -18,25 +17,47 @@ export function _CustWatchNodeString() {
       this.properties = {
         GleichungvorMathJax: "",
         GleichungvorKaTex: "",
+        savedEquation: "0",
       };
+      this.size = [160, 65]; // Etwas größere Größe, damit genug Platz für die Gleichung ist
     }
 
     onExecute() {
       this.inputs[0].color_off = "#000000";
 
-      if (this.inputs[0]) {
-        this.value = this.getInputData(0); // Holt den Wert der Gleichung
-        this.inputs[0].color_on = adjustColor("#00FF00","#FF0000",this.value["value"]);
+      if (this.getInputData(0)) {
+        this.inputData = this.getInputData(0); // Holt den Wert der Gleichung
+        //console.log(" this.inputData :",  this.inputData );
+        this.inputs[0].color_on = adjustColor(
+          "#00FF00",
+          "#FF0000",
+          this.inputData["value"]
+        );
       }
 
       //console.log(this.properties.GleichungvorMathJax);
-      if (!this.value && !this.properties.GleichungvorMathJax) return;
-
-      if (this.value) {
-        this.properties.GleichungvorMathJax= this.toString(this.value);
+      //if (! this.inputData  && !this.properties.GleichungvorMathJax) return;
+      // Funktion zur Eingabekontrolle hinzufügen
+      function sanitizeEquation(equation) {
+        // Erlaubte Zeichen für MathJax (z.B. Zahlen, Buchstaben, grundlegende mathematische Symbole)
+        const allowedCharacters = /^[0-9a-zA-Z+\-*/^()= ]*$/;
+        return equation
+          .split("")
+          .filter((char) => allowedCharacters.test(char))
+          .join("");
       }
-        let equation =  this.properties.GleichungvorMathJax;
-      
+
+      if (this.getInputData(0)) {
+        this.properties.GleichungvorMathJax = this.toString(this.inputData);
+      } else {
+        // Eingabekontrolle anwenden
+        this.properties.savedEquation = sanitizeEquation(
+          this.properties.savedEquation
+        );
+        this.properties.GleichungvorMathJax = this.properties.savedEquation;
+      }
+
+      let equation = this.properties.GleichungvorMathJax;
 
       // Konvertiere den mathematischen Ausdruck in LaTeX mit MathJS
       let latexEquation = convertToLatex(equation);
@@ -62,10 +83,10 @@ export function _CustWatchNodeString() {
     }
 
     onDrawForeground(ctx) {
-         // Überprüfen, ob die Node "collapsed" ist
-       if (this.flags && this.flags.collapsed) {
-      return; // Zeichne nichts, wenn die Node collapsed ist
-  }
+      // Überprüfen, ob die Node "collapsed" ist
+      if (this.flags && this.flags.collapsed) {
+        return; // Zeichne nichts, wenn die Node collapsed ist
+      }
 
       // Färbe den Eingang oder zeichne einen Kreis darum
       const NODE_SLOT_HEIGHT = LiteGraph.NODE_SLOT_HEIGHT;
@@ -121,7 +142,7 @@ export function _CustWatchNodeString() {
           .replace(/Math\.sqrt/g, "sqrt ") // Ersetzt Quadratwurzel zurück
           .replace(/Math\.log10/g, "log ") // Ersetzt Logarithmus zur Basis 10 zurück
           .replace(/Math\.log\b/g, "ln ") // Ersetzt natürlicher Logarithmus zurück
-          .replace(/Math\.exp/g, "exp ") // Ersetzt Exponentialfunktion zurück
+          .replace(/Math\.exp/g, "e^") // Ersetzt Exponentialfunktion zurück
           .replace(/Math\.abs\(([^()]*|\((?:[^()]*|\([^()]*\))*\))\)/g, "|$1|") // Absolutbetrag
           .replace(/Math\.PI/g, "pi ") // Math.PI durch π
           .replace(/Math\.E/g, "e"); // Math.E durch e

@@ -233,8 +233,9 @@ function clearGraph(canvasId) {
      
       return;
     }
-
+    graph.stop();
     graph.clear(); // Graph löschen
+    graph.start();
   
   }
 }

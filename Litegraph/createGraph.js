@@ -211,7 +211,7 @@ export function createGraphInstance(canvasId) {
         clickedNode &&
         clickedNode.type === "Funktionenmaschinen/Funktion"
       ) {
-        console.log("Node doppelt geklickt:", clickedNode);
+        //console.log("Node doppelt geklickt:", clickedNode);
         e.preventDefault(); // Unterdrücke das Standardverhalten
         showFrequentlyUsedFunctionsMenu(graph, canvasElement, clickedNode);
       } else if (!clickedNode) {
@@ -470,12 +470,14 @@ export function createGraphInstance(canvasId) {
   // Initialisiere Loop-Variablen
   let isVisible = false;
   let isLooping = false;
+  let animationFrameId;
 
-  graph.start(30);
+  graph.start();
 
   function loop() {
     // Schleife läuft kontinuierlich
-    requestAnimationFrame(loop);
+    animationFrameId = requestAnimationFrame(loop);
+    //console.log("Loop running." + canvasId);
 
     // if (manualDraw == true) {
     //   console.log("Manual draw requested.");
@@ -499,38 +501,44 @@ export function createGraphInstance(canvasId) {
       return; // Überspringe das Zeichnen, wenn keine aktive Animation vorhanden und der Timer nicht aktiv ist
     }
 
-    //console.log("Loop running." + canvasId);
+   //console.log("is drawing" + canvasId);
     graph.runStep();
     canvas.draw(true, true); // Redraw every frame
   }
 
+
+  /**
+   * Observer to monitor the visibility of the canvas element.
+   * When the canvas becomes visible, it starts the loop function.
+   * When the canvas is no longer visible, it stops the loop function.
+   *
+   * @param {IntersectionObserverEntry[]} entries - Array of intersection observer entries.
+   */
+
+  const options = {
+    root: null, // Standardmäßig der Viewport
+    rootMargin: '0px', // Margin um den Root
+    threshold: 0.1 // Schwellenwert für die Sichtbarkeit (0.1 bedeutet 10% sichtbar)
+  };
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      const canvas = entry.target;
+      isVisible = entry.isIntersecting; // Prüft, ob das Canvas sichtbar ist
+      if (isVisible) {
+        graph.start(); // Startet den Graphen, wenn das Canvas sichtbar wird
   // Starten der Schleife
-  requestAnimationFrame(loop);
+      animationFrameId = requestAnimationFrame(loop);
+      } else {
+        graph.stop(); // Stoppt den Graphen, wenn das Canvas nicht mehr sichtbar ist
+        cancelAnimationFrame(animationFrameId);
+        animationFrameId = null;
+      }
+    });
+  }, options);
 
-  // /**
-  //  * Observer to monitor the visibility of the canvas element.
-  //  * When the canvas becomes visible, it starts the loop function.
-  //  * When the canvas is no longer visible, it stops the loop function.
-  //  *
-  //  * @param {IntersectionObserverEntry[]} entries - Array of intersection observer entries.
-  //  */
-
-  // const options = {
-  //   root: null, // Standardmäßig der Viewport
-  //   rootMargin: '0px', // Margin um den Root
-  //   threshold: 0.1 // Schwellenwert für die Sichtbarkeit (0.1 bedeutet 10% sichtbar)
-  // };
-
-  // const observer = new IntersectionObserver((entries) => {
-  //   entries.forEach((entry) => {
-  //     const canvas = entry.target;
-  //     isVisible = entry.isIntersecting; // Prüft, ob das Canvas sichtbar ist
-  //     //manualDrawFkt(400); // Startet die manuelle Zeichnung, wenn Graph sichtbar wird für alle aktuell sichtbaren graphen
-  //   });
-  // }, options);
-
-  // // Beobachte den Canvas
-  // observer.observe(canvasElement);
+  // Beobachte den Canvas
+  observer.observe(canvasElement);
 
   // ...existing code...
 
@@ -944,7 +952,7 @@ function showFrequentlyUsedFunctionsMenu(graph, canvasElement, clickedNode) {
   const functions = [
           { name: "FREIE EINGABE IN WIDGET", properties: { widgetVisible: true }},
           { name: "WIDGET AUSBLENDEN", properties: { widgetVisible: false }},
-          { name: "KONSTANTE FUNKTION: r(x) = 5", properties: { funcName: "r", formula: "5", uvName: "x", completeEquationfromWidget: "r(x) = 5", widgetVisible: false, uvError: true } },
+          { name: "KONSTANTE FUNKTION: r(x) = 5", properties: { funcName: "r", formula: "5", uvName: "x", completeEquationfromWidget: "r(x) = 5", widgetVisible: false} },
           { name: "LINEARE FUNKTION: f(x) = x + 2", properties: { funcName: "f", formula: "x + 2", uvName: "x", completeEquationfromWidget: "f(x) = x + 2", widgetVisible: false } },
           { name: "QUADRATISCHE FUNKTION: g(x) = x^2", properties: { funcName: "g", formula: "x**2", uvName: "x", completeEquationfromWidget: "g(x) = x^2", widgetVisible: false } },
           { name: "KUBISCHE FUNKTION: h(x) = x^3", properties: { funcName: "h", formula: "x**3", uvName: "x", completeEquationfromWidget: "h(x) = x^3", widgetVisible: false } },

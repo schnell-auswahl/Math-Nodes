@@ -73,7 +73,7 @@ export function _CustWatchNodeValue() { return(
 
           }  
         } else {
-          this.properties.displayValue = 0;
+          this.properties.displayValue = "";
         }
       };
   

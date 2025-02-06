@@ -418,7 +418,7 @@ export function _FunctionNode() {
           let paramValues = [0, 0, 0, 0];
           for (let i = 0; i < 4; i++) {
             const paramInput = this.getInputData(i + 1); // Hole die Daten vom jeweiligen Eingang
-            this.inputs[i + 1].color_off = "#000000";
+            this.inputs[i + 1].color_off = bgColor2;
 
             if (paramInput !== null && paramInput !== undefined) {
               const paramName = paramInput["leftSide"]; // Name des Parameters

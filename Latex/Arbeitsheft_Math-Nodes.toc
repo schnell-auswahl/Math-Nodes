@@ -14,71 +14,71 @@
 \contentsline {section}{\numberline {1}Von der Wortmaschine zur Funktion}{11}%
 \contentsline {section}{\numberline {2}Funktionsmaschinen verketten}{11}%
 \contentsline {subsection}{\numberline {2 a)}Bonusaufgabe:}{11}%
-\contentsline {section}{\numberline {3}Ergebnisse anders darstellen}{11}%
-\contentsline {section}{\numberline {4}Funktionsgleichungen ablesen}{11}%
-\contentsline {section}{\numberline {5}Funktionen verknüpfen}{12}%
-\contentsline {section}{\numberline {6}Verknüpfen und Verketten}{12}%
-\contentsline {section}{\numberline {7}Den Graphen treffen}{12}%
-\contentsline {section}{\numberline {8}Funktionenpuzzle}{12}%
-\contentsline {chapter}{\numberline {3}Anleitung}{13}%
-\contentsline {section}{\numberline {1}Die Arbeitsoberfläche}{14}%
-\contentsline {subsection}{\numberline {1.1}Maschinen verschieben}{14}%
-\contentsline {subsection}{\numberline {1.2}Maschinen verbinden}{14}%
-\contentsline {subsection}{\numberline {1.3}Maschinen hinzufügen}{14}%
-\contentsline {subsection}{\numberline {1.4}Zwischenwerte am Kabel ablesen}{14}%
-\contentsline {subsection}{\numberline {1.5}Leuchten an den Ein- und Ausgängen}{14}%
-\contentsline {subsection}{\numberline {1.6}Einstellungen von Maschinen ändern}{14}%
-\contentsline {subsection}{\numberline {1.7}Maschinen einklappen}{14}%
-\contentsline {subsection}{\numberline {1.8}Das Menü}{15}%
-\contentsline {subsubsection}{Vollbild}{15}%
-\contentsline {subsubsection}{Als Bild speichern}{15}%
-\contentsline {subsubsection}{Speichern}{15}%
-\contentsline {subsubsection}{Laden}{15}%
-\contentsline {subsubsection}{Alles Löschen}{15}%
-\contentsline {subsubsection}{Neue Maschine}{15}%
-\contentsline {subsubsection}{Zoom}{15}%
-\contentsline {subsubsection}{Maschinen sortieren}{16}%
-\contentsline {subsubsection}{Maschine löschen}{16}%
-\contentsline {section}{\numberline {2}Wortmaschinen}{16}%
-\contentsline {subsection}{\numberline {2.1}Wortmaschinen verketten}{16}%
-\contentsline {subsection}{\numberline {2.2}Einzelne Maschinen im Detail}{16}%
-\contentsline {subsubsection}{Text Eingabe}{16}%
-\contentsline {subsubsection}{Text Anzeige}{16}%
-\contentsline {subsubsection}{Alphabet-Countdown}{16}%
-\contentsline {subsubsection}{Rückwärtslesen}{16}%
-\contentsline {subsubsection}{Vokal-Verwandlung}{16}%
-\contentsline {subsubsection}{Kn Vkl n mnm Txt}{17}%
-\contentsline {subsubsection}{Buchstabenwechsel}{17}%
-\contentsline {subsubsection}{Buchstaben-Sprung}{17}%
-\contentsline {subsubsection}{Alphabetischer Sprung}{17}%
-\contentsline {subsubsection}{Buchstaben-Überlappung}{17}%
-\contentsline {subsubsection}{Vokalwechsel}{17}%
-\contentsline {subsubsection}{Buchstabenballett}{17}%
-\contentsline {subsubsection}{Vokaltanz}{17}%
-\contentsline {subsubsection}{Vokalium}{17}%
-\contentsline {subsubsection}{Konsonanten verdoppeln}{17}%
-\contentsline {subsubsection}{Doppelt hält besser}{17}%
-\contentsline {subsubsection}{Vorwärts Rückwärts}{17}%
-\contentsline {section}{\numberline {3}Funktionsmaschinen}{18}%
-\contentsline {subsection}{\numberline {3.1}Eine Funktionsmaschine verwenden}{18}%
-\contentsline {subsection}{\numberline {3.2}Feedbackmaschinen verwenden}{18}%
-\contentsline {subsubsection}{Wert}{18}%
-\contentsline {subsubsection}{Gleichung}{18}%
-\contentsline {subsubsection}{Graph}{18}%
-\contentsline {subsubsection}{Audio}{18}%
-\contentsline {subsection}{\numberline {3.3}Funktionen verketten}{19}%
-\contentsline {subsection}{\numberline {3.4}Funktionen verknüpfen}{19}%
-\contentsline {subsection}{\numberline {3.5}Parameter verwenden}{19}%
-\contentsline {subsection}{\numberline {3.6}Funktionen hören}{19}%
-\contentsline {subsection}{\numberline {3.7}Einzelne Maschinen im Detail}{19}%
-\contentsline {subsubsection}{Unabhängige Variable}{19}%
-\contentsline {subsubsection}{Parameter}{19}%
-\contentsline {subsubsection}{Funktion}{19}%
-\contentsline {subsubsection}{Operation}{19}%
-\contentsline {subsubsection}{Feedback Gleichung}{20}%
-\contentsline {subsubsection}{Feedback Wert}{20}%
-\contentsline {subsubsection}{Feedback Graph}{20}%
-\contentsline {subsubsection}{Feedback Audio}{21}%
-\contentsline {section}{\numberline {4}Infos für Expert:innen}{21}%
-\contentsline {subsection}{\numberline {4.1}Widgets verstecken}{21}%
-\contentsline {subsection}{\numberline {4.2}Graphen speichern}{21}%
+\contentsline {section}{\numberline {3}Ergebnisse anders darstellen}{12}%
+\contentsline {section}{\numberline {4}Funktionsgleichungen ablesen}{13}%
+\contentsline {section}{\numberline {5}Funktionen verknüpfen}{14}%
+\contentsline {section}{\numberline {6}Verknüpfen und Verketten}{15}%
+\contentsline {section}{\numberline {7}Den Graphen treffen}{15}%
+\contentsline {section}{\numberline {8}Funktionenpuzzle}{16}%
+\contentsline {chapter}{\numberline {3}Anleitung}{17}%
+\contentsline {section}{\numberline {1}Die Arbeitsoberfläche}{18}%
+\contentsline {subsection}{\numberline {1.1}Maschinen verschieben}{18}%
+\contentsline {subsection}{\numberline {1.2}Maschinen verbinden}{18}%
+\contentsline {subsection}{\numberline {1.3}Maschinen hinzufügen}{18}%
+\contentsline {subsection}{\numberline {1.4}Zwischenwerte am Kabel ablesen}{18}%
+\contentsline {subsection}{\numberline {1.5}Leuchten an den Ein- und Ausgängen}{18}%
+\contentsline {subsection}{\numberline {1.6}Einstellungen von Maschinen ändern}{18}%
+\contentsline {subsection}{\numberline {1.7}Maschinen einklappen}{18}%
+\contentsline {subsection}{\numberline {1.8}Das Menü}{19}%
+\contentsline {subsubsection}{Vollbild}{19}%
+\contentsline {subsubsection}{Als Bild speichern}{19}%
+\contentsline {subsubsection}{Speichern}{19}%
+\contentsline {subsubsection}{Laden}{19}%
+\contentsline {subsubsection}{Alles Löschen}{19}%
+\contentsline {subsubsection}{Neue Maschine}{19}%
+\contentsline {subsubsection}{Zoom}{19}%
+\contentsline {subsubsection}{Maschinen sortieren}{20}%
+\contentsline {subsubsection}{Maschine löschen}{20}%
+\contentsline {section}{\numberline {2}Wortmaschinen}{20}%
+\contentsline {subsection}{\numberline {2.1}Wortmaschinen verketten}{20}%
+\contentsline {subsection}{\numberline {2.2}Einzelne Maschinen im Detail}{20}%
+\contentsline {subsubsection}{Text Eingabe}{20}%
+\contentsline {subsubsection}{Text Anzeige}{20}%
+\contentsline {subsubsection}{Alphabet-Countdown}{20}%
+\contentsline {subsubsection}{Rückwärtslesen}{20}%
+\contentsline {subsubsection}{Vokal-Verwandlung}{20}%
+\contentsline {subsubsection}{Kn Vkl n mnm Txt}{21}%
+\contentsline {subsubsection}{Buchstabenwechsel}{21}%
+\contentsline {subsubsection}{Buchstaben-Sprung}{21}%
+\contentsline {subsubsection}{Alphabetischer Sprung}{21}%
+\contentsline {subsubsection}{Buchstaben-Überlappung}{21}%
+\contentsline {subsubsection}{Vokalwechsel}{21}%
+\contentsline {subsubsection}{Buchstabenballett}{21}%
+\contentsline {subsubsection}{Vokaltanz}{21}%
+\contentsline {subsubsection}{Vokalium}{21}%
+\contentsline {subsubsection}{Konsonanten verdoppeln}{21}%
+\contentsline {subsubsection}{Doppelt hält besser}{21}%
+\contentsline {subsubsection}{Vorwärts Rückwärts}{21}%
+\contentsline {section}{\numberline {3}Funktionsmaschinen}{22}%
+\contentsline {subsection}{\numberline {3.1}Eine Funktionsmaschine verwenden}{22}%
+\contentsline {subsection}{\numberline {3.2}Feedbackmaschinen verwenden}{22}%
+\contentsline {subsubsection}{Wert}{22}%
+\contentsline {subsubsection}{Gleichung}{22}%
+\contentsline {subsubsection}{Graph}{22}%
+\contentsline {subsubsection}{Audio}{22}%
+\contentsline {subsection}{\numberline {3.3}Funktionen verketten}{23}%
+\contentsline {subsection}{\numberline {3.4}Funktionen verknüpfen}{23}%
+\contentsline {subsection}{\numberline {3.5}Parameter verwenden}{23}%
+\contentsline {subsection}{\numberline {3.6}Funktionen hören}{23}%
+\contentsline {subsection}{\numberline {3.7}Einzelne Maschinen im Detail}{23}%
+\contentsline {subsubsection}{Unabhängige Variable}{23}%
+\contentsline {subsubsection}{Parameter}{23}%
+\contentsline {subsubsection}{Funktion}{23}%
+\contentsline {subsubsection}{Operation}{23}%
+\contentsline {subsubsection}{Feedback Gleichung}{24}%
+\contentsline {subsubsection}{Feedback Wert}{24}%
+\contentsline {subsubsection}{Feedback Graph}{24}%
+\contentsline {subsubsection}{Feedback Audio}{25}%
+\contentsline {section}{\numberline {4}Infos für Expert:innen}{25}%
+\contentsline {subsection}{\numberline {4.1}Widgets verstecken}{25}%
+\contentsline {subsection}{\numberline {4.2}Graphen speichern}{25}%

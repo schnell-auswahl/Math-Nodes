@@ -79,8 +79,11 @@
     vshift=-.8cm,
     hshift=-1cm,
     contents={\begin{tikzpicture}[remember picture,overlay]
-      \fill[color=#1](current page.south west) rectangle (current page.north east);
-    \end{tikzpicture}
+      \fill[color=bgblue](current page.north west) rectangle (current page.south east);
+        \end{tikzpicture}
+        \begin{tikzpicture}[remember picture,overlay]
+          \fill[color=#1](current page.north west) rectangle ([yshift=-5.5cm]current page.north east);
+        \end{tikzpicture}
     \includegraphics[width=4.31cm, left]{../images/MATH-NODES_Logo.png}}   
   }
 }
@@ -269,21 +272,33 @@ Eine mathematische Funktion kannst du dir vorstellen wie eine Maschine mit einem
 \section{Von der Wortmaschine zur Funktion}
 Funktionsmaschinen funktionieren auf die gleiche Weise wie die Wortmaschinen. Genau genommen sind die Wortmaschinen auch spezielle Funktionsmaschinen.\par
 Auch hier gibt es eine Eingabe in Form einer Maschine für die Unabhängige Variable. Diese wird von einer oder mehreren Funktionsmaschinen verarbeitet und das Ergebnis mit Hilfe von verschiedenen Feedback-Maschinen angezeigt.\par
-Probiere verschiedene Werte aus und beobachte, wie sich das Ergebnis verändert.
+Probiere verschiedene Werte aus und beobachte, wie sich das Ergebnis verändert.\par
+\includegraphics[width=\textwidth]{Bilder/Funktionsmaschinen_1.png}
+
 \section{Funktionsmaschinen verketten}
 Genau wie bei den Wortmaschinen kannst du auch Funktionsmaschinen hintereinander schalten. Die Maschinen bilden dann gemeinsam eine neue Maschine, die deinen Text in der verbundenen Reihenfolge verändert. Probiere verschiedene Kombinationen aus und notiere sie mit den Ergebnissen für die unabhängige Variable  im Arbeitsheft.
+
 \subsection{Bonusaufgabe:}
-Wie viele verschiedene Maschinen kannst du aus den 3 Funktionen bauen?
+Wie viele verschiedene Maschinen kannst du aus den 3 Funktionen bauen?\par
+\includegraphics[width=\textwidth]{Bilder/Funktionsmaschinen_2.png}
+\handwritinglines{3}
 
 \section{Ergebnisse anders darstellen}
-In Math-Nodes kannst du dir außer dem Wert zu einer unabhängigen Variable auch die Gleichung, den Graph und sogar den Ton einer Funktion ausgeben lassen. Dazu gibt es jeweils eine eigene Feedback-Maschine. Feedback-Maschinen sind immer blau. \par
-Verbinde die Funktionen mit den verschiedenen Feedback-Maschinen und gib die Gleichung und den Graphen der verketteten Funktionen an. 
+In Math-Nodes kannst du dir außer dem Wert zu einer unabhängigen Variable auch die Gleichung, den Graph und sogar den Ton einer Funktion ausgeben lassen. Dazu gibt es jeweils eine eigene Feedback-Maschine. Feedback-Maschinen sind immer blau.\par
+Überlege zunächst wie der Graph und die Funktionsgleichung aussehen müssten und notiere deine Vermutungen im Arbeitsheft. Verbinde dann die Funktionen mit den verschiedenen Feedback-Maschinen und überprüfe deine Vermutungen.\par
+\includegraphics[width=\textwidth]{Bilder/Funktionsmaschinen_3.png}
+
 \section{Funktionsgleichungen ablesen}
-Gib die Funktionsgleichung für die verketteten Funktionenmaschinen an
-an. Skizziere den Graph. Überprüfe deine Ergebnisse in Math-Nodes.
+Hier sind die Funktionen \(f\) und \(h\) in zwei verschiedenen Reihenfolgen verkettet. Überlege wie die Funktionsgleichung lauten könnte und der Graph aussehen müsste und probiere dann aus.\par
+Zeichne die Graphen und beschreibe worin sich unterscheiden und warum.\par
+\includegraphics[width=\textwidth]{Bilder/Funktionsmaschinen_4.png}
+\handwritinglines{5}
+
 \section{Funktionen verknüpfen}
-Du kannst zwei Funktionsmaschinen nicht nur verketten, sondern auch mittels einer Operationsmaschine mit den typischen Operationen wie Addition, Multiplikation, usw. verknüpfen. Das siehst du hier im Beispiel.\par
-Gib für die zweite Verknüpfung den Funktionsterm für die verknüpften Funktionenmaschinen an. Wie könnte der Graph aussehen? Diskutiere mit der Person neben dir. Skizziere den Graph.
+Du kannst zwei Funktionsmaschinen nicht nur verketten, sondern auch mittels einer Operationsmaschine mit den typischen Operationen wie Addition, Multiplikation, usw. verknüpfen.\par
+Gib für die verknüpften Maschinen im Arbeitsheft den Funktionsterm an. Wie könnte der Graph aussehen? Diskutiere mit der Person neben dir und skizziere dann den Graph. Kannst du den Funktionsterm noch vereinfachen?\par
+\includegraphics[width=\textwidth]{Bilder/Funktionsmaschinen_5.png}
+\handwritinglines{3}
 \section{Verknüpfen und Verketten}
 Verknüpfe und verkette die Maschinen so, dass du den angegebenen Funktionsterm erhältst. Wie könnte der Graph aussehen? Diskutiere mit der Person neben dir. Skizziere den Graph.
 \section{Den Graphen treffen}
