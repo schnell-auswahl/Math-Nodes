@@ -8,7 +8,7 @@ export function _uvNode() {
         this.color = srcNodesColor;
         this.bgcolor = bgColor2;
         this.addOutput("value", "object");
-        this.properties = { value: 1.0, rightSide: "", widgetVisible: true};
+        this.properties = { value: 1.0, rightSide: "x", widgetVisible: true};
         this.numberWidget = this.addWidget("number", "Wert", 1, "value", { precision: 2 });
         this.nameWidget = this.addWidget("text", "Unabhängige", this.properties.rightSide,   //Testen
          (v) => {
@@ -77,6 +77,7 @@ export function _uvNode() {
             this.size = [180, 35];
           } else if ((this.properties.widgetVisible == true || this.properties.widgetVisible == "true") && this.widgets.length === 0) {
             // Widget neu zeichnen, wenn es vorher entfernt wurde
+            console.log("Widgets werden neu gezeichnet");
             this.widgets = [ this.numberWidget ,   this.nameWidget , this.animationWidget];
             this.size = [180, 100];
           }
@@ -91,6 +92,7 @@ export function _uvNode() {
         //console.log(this.outputValue);
         } else {
           this.outputValue = roundedValue;
+          //console.log(this.outputValue + "aus widget");
         }
 
         var output = {
@@ -110,7 +112,8 @@ export function _uvNode() {
           // funcList: ""
         }
         this.setOutputData(0, output);
-        //this.outputs[0].color_off = "#000000";
+        //console.log("sind am output" + output);
+        //this.outpu""ts[0].color_off = "#000000";
         this.outputs[0].color_on = adjustColor("#00FF00","#FF0000",this.outputValue);
       }
 

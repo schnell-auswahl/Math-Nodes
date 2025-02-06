@@ -1,22 +1,24 @@
 {
-  "last_node_id": 5,
-  "last_link_id": 0,
+  "last_node_id": 19,
+  "last_link_id": 13,
   "nodes": [
     {
-      "id": 1,
+      "id": 12,
       "type": "Funktionenmaschinen/Unabhängige_Variable",
-      "pos": [59, 143],
+      "pos": [20, 632.6733668341708],
       "size": [180, 80],
-      "flags": {},
-      "order": 3,
+      "flags": { "collapsed": false },
+      "order": 0,
       "mode": 0,
       "outputs": [
         {
           "name": "value",
           "type": "object",
-          "links": null,
+          "links": [],
           "color_off": "#000000",
-          "label": ""
+          "label": "",
+          "color_on": "#00B100",
+          "slot_index": 0
         }
       ],
       "properties": {
@@ -29,47 +31,114 @@
       "shape": 2
     },
     {
-      "id": 5,
+      "id": 14,
       "type": "Funktionenmaschinen/Feedback_Wert",
-      "pos": [1005, 445],
+      "pos": [919.0755467196818, 272.98994974874364],
       "size": [180, 105],
       "flags": {},
-      "order": 4,
+      "order": 1,
       "mode": 0,
       "inputs": [
-        { "name": "", "type": "object", "link": null, "color_off": "#000000" }
+        {
+          "name": "",
+          "type": "object",
+          "link": null,
+          "color_off": "#000000",
+          "color_on": "#00B500"
+        }
       ],
       "title": "Wert",
       "properties": {
-        "FormulaFromInput": "",
-        "uvValueFromInput": 0,
-        "uvNameFromInput": "",
+        "FormulaFromInput": "Math.sqrt((5))",
+        "uvValueFromInput": 2,
+        "uvNameFromInput": "x",
         "displayValue": 0
       },
       "color": "#879BCE",
       "bgcolor": "#7C8693"
     },
     {
-      "id": 4,
+      "id": 17,
       "type": "Funktionenmaschinen/Funktion",
-      "pos": [715, 119],
-      "size": [160, 140],
+      "pos": [654.5775347912524, 354.73618090452254],
+      "size": [165, 120],
       "flags": {},
-      "order": 1,
+      "order": 2,
       "mode": 0,
       "inputs": [
-        { "name": "UV", "type": "object", "link": null, "label": "x" },
+        {
+          "name": "UV",
+          "type": "object",
+          "link": null,
+          "label": "x",
+          "color_off": "#000000"
+        },
         { "name": "", "type": "object", "link": null, "label": "" },
         { "name": "", "type": "object", "link": null, "label": "" },
         { "name": "", "type": "object", "link": null, "label": "" },
         { "name": "", "type": "object", "link": null, "label": "" }
       ],
       "outputs": [
-        { "name": "", "type": "object", "links": null, "label": "h(x)" }
+        {
+          "name": "",
+          "type": "object",
+          "links": null,
+          "color_off": "#000000",
+          "label": "f(x)"
+        }
       ],
       "title": "Funktion",
       "properties": {
-        "funcName": "h",
+        "funcName": "f",
+        "formula": "x + 2",
+        "leftSide": "",
+        "rightSide": "",
+        "uvName": "x",
+        "paramsFromWidget": ["", "", "", ""],
+        "paramNames": ["", "", "", ""],
+        "paramValues": [0, 0, 0, 0],
+        "evaluatedFormula": "",
+        "uvError": false,
+        "completeEquationfromWidget": "f(x) = x + 2",
+        "finalEquation": "",
+        "widgetVisible": false
+      },
+      "color": "#88B19B",
+      "bgcolor": "#7C8693"
+    },
+    {
+      "id": 19,
+      "type": "Funktionenmaschinen/Funktion",
+      "pos": [275, 436],
+      "size": [160, 120],
+      "flags": {},
+      "order": 4,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "UV",
+          "type": "object",
+          "link": null,
+          "label": "x",
+          "color_off": "#000000"
+        },
+        { "name": "", "type": "object", "link": null, "label": "" },
+        { "name": "", "type": "object", "link": null, "label": "" },
+        { "name": "", "type": "object", "link": null, "label": "" },
+        { "name": "", "type": "object", "link": null, "label": "" }
+      ],
+      "outputs": [
+        {
+          "name": "",
+          "type": "object",
+          "links": null,
+          "color_off": "#000000",
+          "label": "j(x)"
+        }
+      ],
+      "title": "Funktion",
+      "properties": {
+        "funcName": "j",
         "formula": "Math.sqrt(x)",
         "leftSide": "",
         "rightSide": "",
@@ -79,7 +148,7 @@
         "paramValues": [0, 0, 0, 0],
         "evaluatedFormula": "",
         "uvError": false,
-        "completeEquationfromWidget": "h(x)=sqrt(x)",
+        "completeEquationfromWidget": "j(x) = sqrt(x)",
         "finalEquation": "",
         "widgetVisible": false
       },
@@ -87,27 +156,39 @@
       "bgcolor": "#7C8693"
     },
     {
-      "id": 3,
+      "id": 18,
       "type": "Funktionenmaschinen/Funktion",
-      "pos": [630, 405],
-      "size": [167, 140],
+      "pos": [441, 253],
+      "size": [160, 120],
       "flags": {},
-      "order": 2,
+      "order": 3,
       "mode": 0,
       "inputs": [
-        { "name": "UV", "type": "object", "link": null, "label": "x" },
+        {
+          "name": "UV",
+          "type": "object",
+          "link": null,
+          "label": "x",
+          "color_off": "#000000"
+        },
         { "name": "", "type": "object", "link": null, "label": "" },
         { "name": "", "type": "object", "link": null, "label": "" },
         { "name": "", "type": "object", "link": null, "label": "" },
         { "name": "", "type": "object", "link": null, "label": "" }
       ],
       "outputs": [
-        { "name": "", "type": "object", "links": null, "label": "g(x)" }
+        {
+          "name": "",
+          "type": "object",
+          "links": null,
+          "color_off": "#000000",
+          "label": "r(x)"
+        }
       ],
       "title": "Funktion",
       "properties": {
-        "funcName": "g",
-        "formula": "x-3",
+        "funcName": "r",
+        "formula": "5",
         "leftSide": "",
         "rightSide": "",
         "uvName": "x",
@@ -116,44 +197,7 @@
         "paramValues": [0, 0, 0, 0],
         "evaluatedFormula": "",
         "uvError": false,
-        "completeEquationfromWidget": "g(x)=x-3",
-        "finalEquation": "",
-        "widgetVisible": false
-      },
-      "color": "#88B19B",
-      "bgcolor": "#7C8693"
-    },
-    {
-      "id": 2,
-      "type": "Funktionenmaschinen/Funktion",
-      "pos": [402, 211],
-      "size": [160, 140],
-      "flags": {},
-      "order": 0,
-      "mode": 0,
-      "inputs": [
-        { "name": "UV", "type": "object", "link": null, "label": "x" },
-        { "name": "", "type": "object", "link": null, "label": "" },
-        { "name": "", "type": "object", "link": null, "label": "" },
-        { "name": "", "type": "object", "link": null, "label": "" },
-        { "name": "", "type": "object", "link": null, "label": "" }
-      ],
-      "outputs": [
-        { "name": "", "type": "object", "links": null, "label": "f(x)" }
-      ],
-      "title": "Funktion",
-      "properties": {
-        "funcName": "f",
-        "formula": "x**2",
-        "leftSide": "",
-        "rightSide": "",
-        "uvName": "x",
-        "paramsFromWidget": ["", "", "", ""],
-        "paramNames": ["", "", "", ""],
-        "paramValues": [0, 0, 0, 0],
-        "evaluatedFormula": "",
-        "uvError": false,
-        "completeEquationfromWidget": "f(x)=x^2",
+        "completeEquationfromWidget": "r(x) = 5",
         "finalEquation": "",
         "widgetVisible": false
       },

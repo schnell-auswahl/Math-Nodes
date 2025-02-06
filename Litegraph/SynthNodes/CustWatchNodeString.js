@@ -1,12 +1,12 @@
 export function _CustWatchNodeString() {
   return class CustWatchNodeString {
     constructor() {
-      this.size = [160, 160]; // Etwas größere Größe, damit genug Platz für die Gleichung ist
+     
       this.color = fbNodesColor;
       this.bgcolor = bgColor2;
 
       this.addInput("value", 0, { label: "" });
-      this.value = null;
+      this.inputData = 0;
       this.lastRenderedEquation = null; // Speichert die zuletzt gerenderte Gleichung
       this.renderedImage = null; // Speichert das gerenderte Bild
       this.title = "Gleichung";
@@ -19,21 +19,23 @@ export function _CustWatchNodeString() {
         GleichungvorMathJax: "",
         GleichungvorKaTex: "",
       };
+      this.size = [160, 65]; // Etwas größere Größe, damit genug Platz für die Gleichung ist
     }
 
     onExecute() {
       this.inputs[0].color_off = "#000000";
 
-      if (this.inputs[0]) {
-        this.value = this.getInputData(0); // Holt den Wert der Gleichung
-        this.inputs[0].color_on = adjustColor("#00FF00","#FF0000",this.value["value"]);
+      if (this.getInputData(0)) {
+         this.inputData  = this.getInputData(0); // Holt den Wert der Gleichung
+        //console.log(" this.inputData :",  this.inputData );
+        this.inputs[0].color_on = adjustColor("#00FF00","#FF0000", this.inputData["value"]);
       }
 
       //console.log(this.properties.GleichungvorMathJax);
-      if (!this.value && !this.properties.GleichungvorMathJax) return;
+      if (! this.inputData  && !this.properties.GleichungvorMathJax) return;
 
-      if (this.value) {
-        this.properties.GleichungvorMathJax= this.toString(this.value);
+      if ( this.inputData ) {
+        this.properties.GleichungvorMathJax= this.toString( this.inputData );
       }
         let equation =  this.properties.GleichungvorMathJax;
       

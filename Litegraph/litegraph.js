@@ -8552,6 +8552,7 @@ if (!this.timeoutRunning) {
 }
 
 this.dirty_canvas = true; //to force to repaint the front canvas with the bgcanvas
+
     };
 
     var temp_vec2 = new Float32Array(2);
