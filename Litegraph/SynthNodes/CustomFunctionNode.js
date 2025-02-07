@@ -167,7 +167,7 @@ export function _FunctionNode() {
     // Liefert den Titel des Knotens basierend auf der Funktionsgleichung
     getTitle() {
       // Wenn ein Fehler mit der UV aufgetreten ist, setze den Titel auf "Fehler mit UV"
-      if (this.properties.uvError) {
+      if (this.properties.uvError && this.properties.uvName.length > 0) {
         return "UV stimmt nicht";
       }
 
