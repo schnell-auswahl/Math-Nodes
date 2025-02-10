@@ -1,0 +1,22 @@
+on: push
+name: 🚀 Deploy website on push
+
+jobs:
+  web-deploy:
+    name: 🎉 Deploy to Strato ssh
+    runs-on: ubuntu-latest
+    steps:
+    - name: 🚚 Get latest code
+      uses: actions/checkout@v3
+    
+    - name: 📂 Sync files
+      uses: wlixcc/SFTP-Deploy-Action@v1.2.5
+      with:
+        server: ${{ secrets.FTP_SERVER }}
+        username: ${{ secrets.FTP_USERNAME }}
+        password: ${{ secrets.FTP_PASSWORD }}
+        remote_path: '/Math-Nodes/'
+        sftp_only: true
+        local_path: './static/*'
+        port: ${{ secrets.FTP_PORT }}
+        
