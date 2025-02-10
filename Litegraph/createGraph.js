@@ -242,13 +242,21 @@ export function createGraphInstance(canvasId) {
         if (
           clickedNode &&
           clickedNode.type !== "Funktionenmaschinen/Unabhängige_Variable" &&
-          clickedNode.type !== "Funktionenmaschinen/Parameter"
+          clickedNode.type !== "Funktionenmaschinen/Parameter" &&
+          clickedNode.type !== "Funktionenmaschinen/Funktion"
         ) {
           // Hier können Sie den gewünschten Code einfügen, der bei einem Doppeltipp auf eine Node ausgeführt werden soll
           //console.log("Node doppelt getippt:", clickedNode);
           e.preventDefault(); // Unterdrücke das Standardverhalten
           showNewMachineMenu(graph, canvasElement, clickedNode);
-        } else {
+        } else if (
+          clickedNode &&
+          clickedNode.type === "Funktionenmaschinen/Funktion"
+        ) {
+          //console.log("Node doppelt geklickt:", clickedNode);
+          e.preventDefault(); // Unterdrücke das Standardverhalten
+          showFrequentlyUsedFunctionsMenu(graph, canvasElement, clickedNode);
+        } else if (!clickedNode) {
           showNewMachineMenu(graph, canvasElement, "", x, y);
         }
       }
