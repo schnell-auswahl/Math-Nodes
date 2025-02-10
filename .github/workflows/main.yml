@@ -9,17 +9,16 @@ jobs:
     - name: 🚚 Get latest code
       uses: actions/checkout@v3
     
-    - name: �️ Clean remote directory
+    - name:  Clean remote directory
       uses: appleboy/ssh-action@master
       with:
         host: ${{ secrets.FTP_SERVER }}
         username: ${{ secrets.FTP_USERNAME }}
         password: ${{ secrets.FTP_PASSWORD }}
         port: ${{ secrets.FTP_PORT }}
-        script: |
-          rm -rf /Math-Nodes/*
+        script: rm -rf /Math-Nodes/* 
     
-    - name: �📂 Sync files
+    - name: Sync files
       uses: wlixcc/SFTP-Deploy-Action@v1.2.5
       with:
         server: ${{ secrets.FTP_SERVER }}
