@@ -41,7 +41,7 @@ export function _AudioNode() {
 
       // Lade den AudioWorkletProcessor
       this.context.audioWorklet
-        .addModule("AudioProcessor.js")
+        .addModule("Litegraph/SynthNodes/AudioProcessor.js") 
         .then(() => {
           //console.log("AudioNode: AudioProcessor erfolgreich geladen");
           this.workletNode = new AudioWorkletNode(
