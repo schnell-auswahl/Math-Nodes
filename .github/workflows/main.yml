@@ -17,6 +17,6 @@ jobs:
         password: ${{ secrets.FTP_PASSWORD }}
         remote_path: '/Math-Nodes/'
         sftp_only: true
-        local_path: './static/*'
+        local_path: './'
         port: ${{ secrets.FTP_PORT }}
         
