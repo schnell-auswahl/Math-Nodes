@@ -1,0 +1,210 @@
+<!DOCTYPE HTML>
+<!--
+	Forty by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+
+<head>
+	<title>Eigene Aufgaben</title>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+	<link rel="stylesheet" href="assets/css/main.css" />
+	<noscript>
+		<link rel="stylesheet" href="assets/css/noscript.css" />
+	</noscript>
+
+	<!-- Ab hier brauchen wir alles für Litegraph -->
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.13.11/dist/katex.min.css">
+
+	<!-- Einbinden der KaTeX JavaScript-Datei, die für das Rendern von mathematischen Ausdrücken verantwortlich ist -->
+	<script src="https://cdn.jsdelivr.net/npm/katex@0.13.11/dist/katex.min.js"></script>
+
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/10.2.0/math.min.js"></script>
+
+	<!-- Mathjax als KAtex Alternative -->
+	<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
+
+	<!-- Stile für den LiteGraph Inspector (kann angepasst werden) -->
+	<link rel="stylesheet" type="text/css" href="./inspector.css">
+	<link rel="stylesheet" type="text/css" href="./Litegraph/litegraph.css">
+	<script type="text/javascript" src="./Litegraph/litegraph.js"></script>
+	<script type="module" src="./Litegraph/createGraph.js" ;></script>
+
+
+</head>
+
+<body class="is-preload">
+
+	<!-- Wrapper -->
+	<div id="wrapper">
+
+		<!-- Header -->
+		<!-- Header -->
+		<header id="header" class="alt">
+			<a href="index.html" class="logo"><strong>Math-Nodes</strong> <span>Nicolas Regel</span></a>
+			<nav>
+				<a href="#menu">Menu</a>
+			</nav>
+		</header>
+		<!-- Menu -->
+		<nav id="menu">
+			<ul class="links">
+				<li><a href="Wortmaschinen.html">1: Wortmaschinen</a></li>
+				<li><a href="Funktionsmaschinen.html">2: Funktionsmaschinen</a></li>
+				<li><a href="Funktionsmaschinen.html">3: Funktionsmaschinen</a></li>
+				<li><a href="FunktionenHoeren.html">4: Funktionen hören</a></li>
+				<li><a href="Eigene_Aufgaben.html">Eigene Aufgaben erstellen</a></li>
+				<li><a href="Anleitung_Landing.html">Anleitung</a></li>
+				<li><a href="Impressum.html">Impressum</a></li>
+			</ul>
+			<ul class="actions stacked">
+				<li><a href="index.html" class="button primary fit">Startseite</a></li>
+			</ul>
+		</nav>
+
+		<!-- Banner -->
+		<!-- Note: The "styleN" class below should match that of the header element. -->
+		<section id="banner" class="style5">
+			<div class="inner">
+				<span class="image">
+					<img src="images/pic07.jpg" alt="" />
+				</span>
+				<header class="major">
+					<h1>Eigene Aufgaben</h1>
+				</header>
+				<div class="content">
+					<p>Deine eigenen Inhalte mit Math-Nodes</p>
+				</div>
+			</div>
+		</section>
+
+		<!-- Main -->
+		<div id="main">
+			<!-- One -->
+			<section id="one" class="aufgabenEnde">
+				<div class="inner">
+					<header class="major" class="liteGraph">
+						<h2>Werde selbst kreativ</h2>
+					</header>
+
+					<p>In Math-Nodes kannst du selbst Aufgaben erstellen und Sie anderen als Datei oder als Bild zur Verfügung stellen. Im Menü findest du dazu den <i>Speichern</i> bzw. den <i>Als Bild speichern</i> Knopf. Du kannst deine Projekte über den <i>Laden</i> Knopf dann in jedem Arbeitsfenster öffnen.</p>
+
+					<p>Damit das Menü übersichtlicher bleibt, stehen in manchen Arbeitsfenstern nur entweder die Funktionsmaschinen oder die Wortmaschinen zur Verfügung. Auf dieser Seite hast du dafür zwei getrennte Arbeitsfenster.</p>
+					
+				</div>
+
+			</section>
+
+			
+			<!-- Two -->
+			<section id="two" style="position: relative;" class="styleoneColor">
+				<div class="inner">
+					<header class="major">
+						<h2> Wortmaschinen</h2>
+					</header>
+					<p>Erstelle deine eigenen Aufgaben mit den Wortmaschinen. 
+					</p>
+					
+
+				</div>
+				<!-- LiteGraph Canvas -->
+				<section id="litegraph">
+					<div id="graphstylefulldouble">
+						<canvas id="graphCanvas1" data-resize="true" 	data-zoom="0.9"lgtype="Wortmaschinen"
+							></canvas>
+					</div>
+					<script type="module">
+						import { createGraphInstance } from './Litegraph/createGraph.js';
+						// Erstelle die Graphen für beide Canvas-Elemente
+						createGraphInstance("graphCanvas1");
+					</script>
+				</section>
+			</section>
+					<!-- Three -->
+					<section id="three" style="position: relative;" class="styletwoColor">
+						<div class="inner">
+							<header class="major">
+								<h2>Funktionsmaschinen</h2>
+							</header>
+							<p>Erstelle deine eigenen Aufgaben mit den Funktionsmaschinen.
+							</p>
+							
+		
+						</div>
+						<!-- LiteGraph Canvas -->
+						<section id="litegraph">
+							<div id="graphstylefulldouble">
+								<canvas id="graphCanvas2" data-resize="true" 	data-zoom="0.9"lgtype="Funktionsmaschinen"
+									></canvas>
+							</div>
+							<script type="module">
+								import { createGraphInstance } from './Litegraph/createGraph.js';
+								// Erstelle die Graphen für beide Canvas-Elemente
+								createGraphInstance("graphCanvas2");
+							</script>
+						</section>
+					</section>
+		</div>
+
+		<!-- Contact -->
+		<section id="contact">
+			<div class="inner">
+
+				<section>
+					<section>
+						<div class="contact-method">
+							<span class="icon solid alt fa-envelope"></span>
+							<h3>Mail</h3>
+							<a href="mailto:Nicolas.Regel@TU-Dresden.de">Nicolas.Regel@TU-Dresden.de</a>
+						</div>
+					</section>
+					<section>
+						<div class="contact-method">
+							<span class="icon solid alt fa-phone"></span>
+							<h3>Telefon</h3>
+							<span>0351 46332074</span>
+						</div>
+					</section>
+
+				</section>
+			</div>
+		</section>
+
+
+
+		<!-- Footer -->
+		<footer id="footer">
+			<div class="inner">
+				<ul class="icons">
+					<li><a href="#" class="icon brands alt fa-twitter"><span class="label">Twitter</span></a></li>
+					<li><a href="#" class="icon brands alt fa-facebook-f"><span class="label">Facebook</span></a></li>
+					<li><a href="#" class="icon brands alt fa-instagram"><span class="label">Instagram</span></a></li>
+					<li><a href="#" class="icon brands alt fa-github"><span class="label">GitHub</span></a></li>
+					<li><a href="#" class="icon brands alt fa-linkedin-in"><span class="label">LinkedIn</span></a></li>
+				</ul>
+				<ul class="copyright">
+					<li>&copy; Nicolas Regel 2024</li>
+					<li>Designtemplate: <a href="https://html5up.net">HTML5 UP</a></li>
+				</ul>
+			</div>
+		</footer>
+
+	</div>
+
+	<!-- Scripts -->
+	<script src="assets/js/jquery.min.js"></script>
+	<script src="assets/js/jquery.scrolly.min.js"></script>
+	<script src="assets/js/jquery.scrollex.min.js"></script>
+	<script src="assets/js/browser.min.js"></script>
+	<script src="assets/js/breakpoints.min.js"></script>
+	<script src="assets/js/util.js"></script>
+	<script src="assets/js/main.js"></script>
+	<script src="assets/js/scripts.js"></script>
+
+
+
+</body>
+
+</html>
