@@ -10,7 +10,7 @@ export function _uvNode() {
         this.addOutput("value", "object");
         this.properties = { value: 1.0, rightSide: "x", widgetVisible: true};
         this.numberWidget = this.addWidget("number", "Wert", 1, "value", { precision: 2 });
-        this.nameWidget = this.addWidget("text", "Unabhängige", this.properties.rightSide,   //Testen
+        this.nameWidget = this.addWidget("text", "Unabhängige","",   //Testen
          (v) => {
           //console.log("Callback wurde aufgerufen");
           const lowerCaseValue = v.toLowerCase();

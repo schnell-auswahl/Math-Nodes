@@ -40,7 +40,7 @@
 	<!-- Wrapper -->
 	<div id="wrapper">
 
-		<!-- Header -->
+
 		<!-- Header -->
 		<header id="header" class="alt">
 			<a href="index.html" class="logo"><strong>Math-Nodes</strong> <span>Nicolas Regel</span></a>
@@ -51,13 +51,13 @@
 		<!-- Menu -->
 		<nav id="menu">
 			<ul class="links">
-				<li><a href="landing.html">Wortmaschinen</a></li>
-				<li><a href="generic.html">Funktionsmaschinen</a></li>
-				<li><a href="generic.html">Workshop 1</a></li>
-				<li><a href="generic.html">Workshop 2</a></li>
-				<li><a href="generic.html">Workshop 3</a></li>
-				<li><a href="generic.html">Material</a></li>
-				<li><a href="elements.html">Anleitung</a></li>
+				<li><a href="Wortmaschinen.html">1: Wortmaschinen</a></li>
+				<li><a href="Funktionsmaschinen.html">2: Funktionsmaschinen</a></li>
+				<li><a href="Funktionsmaschinen.html">3: Funktionsmaschinen</a></li>
+				<li><a href="FunktionenHoeren.html">4: Funktionen hören</a></li>
+				<li><a href="Eigene_Aufgaben.html">Eigene Aufgaben erstellen</a></li>
+				<li><a href="Anleitung_Landing.html">Anleitung</a></li>
+				<li><a href="Impressum.html">Impressum</a></li>
 			</ul>
 			<ul class="actions stacked">
 				<li><a href="index.html" class="button primary fit">Startseite</a></li>
@@ -110,7 +110,7 @@
 							createGraphInstance("graphCanvas1");
 						</script>
 					</div>
-					<div class="content">
+					<div class="content stylefourColor">
 						<div class="inner">
 							<header class="major">
 								<h3>Der erste Ton</h3>
@@ -118,8 +118,7 @@
 							<p>Um in Math-Nodes einen Ton zu erzeugen, brauchst du mindestens 3 Maschinen: Eine
 								Unabhängige-Variable-Maschine, eine Funktion-Maschine und eine Audio-Maschine.
 								Die Sinusfunktion in diesem Beispiel schwingt 440 mal in der Sekunde hin und her, hat
-								also eine Frequenz von 440 Hz. Klicke in der Audio-Maschine auf Start und schaue, ob du
-								etwas hörst. </p>
+								also eine Frequenz von 440 Hz. Klicke in der Audio-Maschine auf <i>Ton Ein</i>, starte die Animation der Funktion in der Unabhängige-Variable-Maschine und schaue, ob du etwas hörst. </p>
 						</div>
 					</div>
 				</section>
@@ -132,7 +131,7 @@
 							createGraphInstance("graphCanvas2");
 						</script>
 					</div>
-					<div class="content">
+					<div class="content stylefourColor">
 						<div class="inner">
 							<header class="major">
 								<h3>Der Einfluss von Parametern</h3>
@@ -151,7 +150,7 @@
 					</div>
 				</section>
 			</section>
-			<section id="three">
+			<section id="three" class="stylefourColor">
 				<div class="inner">
 					<header class="major">
 						<h2>Maschinen verknüpfen und mit dem Graph-Modul analysieren</h2>
@@ -179,36 +178,81 @@
 					//createGraphInstance("graphCanvas3");
 				</script>
 			</section>
-			<!-- Four -->
-			<section id="one" class="tiles">
-				<article>
-					<span class="image">
-						<img src="images/pic01.jpg" alt="" />
-					</span>
-					<header class="major">
-						<h3><a href="FunktionenHoerenC1.html" class="link">Kapitel 1</a></h3>
-						<p>Hier startest du mit einer Funktionsgleichung, setzt diese in Math-Nodes mit Maschinen um und forschst wie diese Funktion klingt.</p>
-					</header>
-				</article>
-				<article>
-					<span class="image">
-						<img src="images/pic02.jpg" alt="" />
-					</span>
-					<header class="major">
-						<h3><a href="FunktionenHoerenC2.html" class="link">Kapitel 2</a></h3>
-						<p>Hier startest du mit der Funktionsmaschinen-Darstellung in Math-Nodes, untersuchst wie die Funktionsgleichung dazu lauten würde und forschst wie diese Funktion klingt.</p>
-					</header>
-				</article>
-				<article>
-					<span class="image">
-						<img src="images/pic06.jpg" alt="" />
-					</span>
-					<header class="major">
-						<h3><a href="FunktionenHoeren.html" class="link">Kapitel 3</a></h3>
-						<p>In Kapitel drei startest du mit einem Klang, den du mit Math-Nodes modellieren sollst. Welche Funktionsgleichung beschreibt den gehörten Ton?</p>
-					</header>
-				</article>
+
+				<!-- Four -->
+				<section id="Four" class="stylefourColor">
+					<div class="inner">
+						<header class="major">
+							<h2>Wie klingt die Funktion?</h2>
+						</header>
+						<p>  
+						<ul>
+							<li>Entwirf jeweils einen Math-Nodes-Patch, welcher der Funktionsgleichung in der Gleichung-Maschine entspricht. Du kannst die zweite zum Vergleichen nutzen.</li>
+							<li>Bevor du dir den resultierenden Ton anhörst, stelle zunächst Vermutungen zum Höreindruck und zum Verlauf des Graphen auf. </li>
+						</ul>
+						</p>
+					</div>
+				</section>
+				<!-- LiteGraph Canvas -->
+				<section id="litegraph">
+					<div id="graphstylefull">
+						<canvas id="graphCanvas4" data-resize="true"
+							data-config-path="Litegraph/configs/FunktionenHoerenCh1A2_config.json"></canvas>
+					</div>
+					<script type="module">
+						import { createGraphInstance } from './Litegraph/createGraph.js';
+						// Erstelle die Graphen für beide Canvas-Elemente
+						createGraphInstance("graphCanvas4");
+			
+					</script>
+				</section>
 			</section>
+			<!-- LiteGraph Canvas -->
+			<section id="litegraph">
+				<div id="graphstylefull">
+					<canvas id="graphCanvas5" data-resize="true"
+						data-config-path="Litegraph/configs/FunktionenHoerenCh1A2_config.json"></canvas>
+				</div>
+				<script type="module">
+					import { createGraphInstance } from './Litegraph/createGraph.js';
+					// Erstelle die Graphen für beide Canvas-Elemente
+					createGraphInstance("graphCanvas5");
+				
+				</script>
+			</section>
+			<section id="Five" class="stylefourColor">
+				<div class="inner">
+					<header class="major">
+						<h2>Maschinen verknüpfen und mit der Graph-Maschine analysieren</h2>
+					</header>
+					<p>
+					<ul>
+						<li>Finde je eine Funktionsgleichung für die dargestellten Patches. Du kannst dein Ergebnis und
+							Zwischenergebnisse überprüfen, indem du die Gleichungsmaschine an der entsprechenden Stelle
+							anschließt.</li>
+						<li>Vermute wie der dargestellte Patch klingen könnte. Falls du Schwierigkeiten hast, kannst du
+							die Graph-Maschine verbinden. Überprüfe dein Ergebnis, indem du mit der Audio-Maschine den
+							Ton ausgeben lässt.</li>
+					</ul>
+					</p>
+				</div>
+			</section>
+			<!-- LiteGraph Canvas -->
+			<section id="litegraph">
+				<div id="graphstylefull">
+					<canvas id="graphCanvas6" data-resize="true"
+						data-config-path="Litegraph/configs/FunktionenHoerenCh2A1_config.json"></canvas>
+				</div>
+				<script type="module">
+					import { createGraphInstance } from './Litegraph/createGraph.js';
+					// Erstelle die Graphen für beide Canvas-Elemente
+					createGraphInstance("graphCanvas6");
+					//createGraphInstance("graphCanvas2");
+					//createGraphInstance("graphCanvas3");
+				</script>
+			</section>
+
+
 
 
 		</div>

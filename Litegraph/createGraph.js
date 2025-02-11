@@ -56,6 +56,7 @@ import { createTextManipulationNode } from "./WordNodes/TextManipulationNode.js"
  * Creates and initializes a LiteGraph instance on a specified canvas element.
  *
  * @param {string} canvasId - The ID of the canvas element where the graph will be rendered.
+ *
  * @returns {Object} An object containing the created graph and canvas instances.
  *
  * @example
@@ -373,13 +374,17 @@ export function createGraphInstance(canvasId) {
                 autoPositionNodes('${canvasId}');
                 }
                 "class="button fit small" style="margin-bottom: 10px;">Maschinen sortieren</button>
-                <button id="delnode" onclick="delNode('${canvasId}')"  class="button fit small">Maschine löschen</button>
+               
+                <button id="delnode" onclick="delNode('${canvasId}')"  style="margin-bottom: 10px;" class="button fit small">Maschine löschen</button>
+    
+						      
+               <button onclick="loadGraphFromServerAsync('${canvasId}', getCanvasConfigPath('${canvasId}')).then(() => { for(let i=0; i<5; i++) { autoPositionNodes('${canvasId}'); } })" class="button fit small">Neustart</button>
+
                 
             </ul>
         </nav>       
     `;
 
-  //  <button onclick="copyNode('${canvasId}')"  class="button fit small" style="margin-bottom: 10px;">Maschine kopieren</button>
   // Füge das Menü in den Canvas-Container ein
   canvasElement.parentElement.appendChild(menu);
 
@@ -509,11 +514,10 @@ export function createGraphInstance(canvasId) {
       return; // Überspringe das Zeichnen, wenn keine aktive Animation vorhanden und der Timer nicht aktiv ist
     }
 
-   //console.log("is drawing" + canvasId);
+    //console.log("is drawing" + canvasId);
     graph.runStep();
     canvas.draw(true, true); // Redraw every frame
   }
-
 
   /**
    * Observer to monitor the visibility of the canvas element.
@@ -525,8 +529,8 @@ export function createGraphInstance(canvasId) {
 
   const options = {
     root: null, // Standardmäßig der Viewport
-    rootMargin: '0px', // Margin um den Root
-    threshold: 0.1 // Schwellenwert für die Sichtbarkeit (0.1 bedeutet 10% sichtbar)
+    rootMargin: "0px", // Margin um den Root
+    threshold: 0.1, // Schwellenwert für die Sichtbarkeit (0.1 bedeutet 10% sichtbar)
   };
 
   const observer = new IntersectionObserver((entries) => {
@@ -535,8 +539,8 @@ export function createGraphInstance(canvasId) {
       isVisible = entry.isIntersecting; // Prüft, ob das Canvas sichtbar ist
       if (isVisible) {
         graph.start(); // Startet den Graphen, wenn das Canvas sichtbar wird
-  // Starten der Schleife
-      animationFrameId = requestAnimationFrame(loop);
+        // Starten der Schleife
+        animationFrameId = requestAnimationFrame(loop);
       } else {
         graph.stop(); // Stoppt den Graphen, wenn das Canvas nicht mehr sichtbar ist
         cancelAnimationFrame(animationFrameId);
@@ -958,37 +962,136 @@ function showFrequentlyUsedFunctionsMenu(graph, canvasElement, clickedNode) {
 
   // Liste der Funktionen und ihre zu ändernden Eigenschaften
   const functions = [
-          { name: "FREIE EINGABE IN WIDGET", properties: { widgetVisible: true }},
-          { name: "WIDGET AUSBLENDEN", properties: { widgetVisible: false }},
-          { name: "KONSTANTE FUNKTION: r(x) = 5", properties: { funcName: "r", formula: "5", uvName: "x", completeEquationfromWidget: "r(x) = 5", widgetVisible: false} },
-          { name: "LINEARE FUNKTION: f(x) = x + 2", properties: { funcName: "f", formula: "x + 2", uvName: "x", completeEquationfromWidget: "f(x) = x + 2", widgetVisible: false } },
-          { name: "QUADRATISCHE FUNKTION: g(x) = x^2", properties: { funcName: "g", formula: "x**2", uvName: "x", completeEquationfromWidget: "g(x) = x^2", widgetVisible: false } },
-          { name: "KUBISCHE FUNKTION: h(x) = x^3", properties: { funcName: "h", formula: "x**3", uvName: "x", completeEquationfromWidget: "h(x) = x^3", widgetVisible: false } },
-          { name: "WURZELFUNKTION: j(x) = sqrt(x)", properties: { funcName: "j", formula: "Math.sqrt(x)", uvName: "x", completeEquationfromWidget: "j(x) = sqrt(x)", widgetVisible: false } },
-          { name: "SINUSFUNKTION: k(x) = sin(x)", properties: { funcName: "k", formula: "Math.sin(x)", uvName: "x", completeEquationfromWidget: "k(x) = sin(x)", widgetVisible: false } },
-          { name: "KOSINUSFUNKTION: m(x) = cos(x)", properties: { funcName: "m", formula: "Math.cos(x)", uvName: "x", completeEquationfromWidget: "m(x) = cos(x)", widgetVisible: false } },
-          { name: "BETRAGSFUNKTION: n(x) = abs(x)", properties: { funcName: "n", formula: "Math.abs(x)", uvName: "x", completeEquationfromWidget: "n(x) = abs(x)", widgetVisible: false } },
-          { name: "LOGARITHMUSFUNKTION: p(x) = ln(x)", properties: { funcName: "p", formula: "Math.log(x)", uvName: "x", completeEquationfromWidget: "p(x) = ln(x)", widgetVisible: false } },
-          { name: "EXPONENTIALFUNKTION: q(x) = e^x", properties: { funcName: "q", formula: "Math.exp(x)", uvName: "x", completeEquationfromWidget: "q(x) = e^x", widgetVisible: false } },
-          { name: "QUADRATISCHE FUNKTION MIT PARAMETERN: r(x) = a*x^2 + b", properties: { funcName: "r", formula: "a*x**2 + b", uvName: "x", completeEquationfromWidget: "r(x) = a*x^2 + b", widgetVisible: false } },
-      ];
+    { name: "FREIE EINGABE IN WIDGET", properties: { widgetVisible: true } },
+    { name: "WIDGET AUSBLENDEN", properties: { widgetVisible: false } },
+    {
+      name: "KONSTANTE FUNKTION: r(x) = 5",
+      properties: {
+        funcName: "r",
+        formula: "5",
+        uvName: "x",
+        completeEquationfromWidget: "r(x) = 5",
+        widgetVisible: false,
+      },
+    },
+    {
+      name: "LINEARE FUNKTION: f(x) = x + 2",
+      properties: {
+        funcName: "f",
+        formula: "x + 2",
+        uvName: "x",
+        completeEquationfromWidget: "f(x) = x + 2",
+        widgetVisible: false,
+      },
+    },
+    {
+      name: "QUADRATISCHE FUNKTION: g(x) = x^2",
+      properties: {
+        funcName: "g",
+        formula: "x**2",
+        uvName: "x",
+        completeEquationfromWidget: "g(x) = x^2",
+        widgetVisible: false,
+      },
+    },
+    {
+      name: "KUBISCHE FUNKTION: h(x) = x^3",
+      properties: {
+        funcName: "h",
+        formula: "x**3",
+        uvName: "x",
+        completeEquationfromWidget: "h(x) = x^3",
+        widgetVisible: false,
+      },
+    },
+    {
+      name: "WURZELFUNKTION: j(x) = sqrt(x)",
+      properties: {
+        funcName: "j",
+        formula: "Math.sqrt(x)",
+        uvName: "x",
+        completeEquationfromWidget: "j(x) = sqrt(x)",
+        widgetVisible: false,
+      },
+    },
+    {
+      name: "SINUSFUNKTION: k(x) = sin(x)",
+      properties: {
+        funcName: "k",
+        formula: "Math.sin(x)",
+        uvName: "x",
+        completeEquationfromWidget: "k(x) = sin(x)",
+        widgetVisible: false,
+      },
+    },
+    {
+      name: "KOSINUSFUNKTION: m(x) = cos(x)",
+      properties: {
+        funcName: "m",
+        formula: "Math.cos(x)",
+        uvName: "x",
+        completeEquationfromWidget: "m(x) = cos(x)",
+        widgetVisible: false,
+      },
+    },
+    {
+      name: "BETRAGSFUNKTION: n(x) = abs(x)",
+      properties: {
+        funcName: "n",
+        formula: "Math.abs(x)",
+        uvName: "x",
+        completeEquationfromWidget: "n(x) = abs(x)",
+        widgetVisible: false,
+      },
+    },
+    {
+      name: "LOGARITHMUSFUNKTION: p(x) = ln(x)",
+      properties: {
+        funcName: "p",
+        formula: "Math.log(x)",
+        uvName: "x",
+        completeEquationfromWidget: "p(x) = ln(x)",
+        widgetVisible: false,
+      },
+    },
+    {
+      name: "EXPONENTIALFUNKTION: q(x) = e^x",
+      properties: {
+        funcName: "q",
+        formula: "Math.exp(x)",
+        uvName: "x",
+        completeEquationfromWidget: "q(x) = e^x",
+        widgetVisible: false,
+      },
+    },
+    {
+      name: "QUADRATISCHE FUNKTION MIT PARAMETERN: r(x) = a*x^2 + b",
+      properties: {
+        funcName: "r",
+        formula: "a*x**2 + b",
+        uvName: "x",
+        completeEquationfromWidget: "r(x) = a*x^2 + b",
+        widgetVisible: false,
+      },
+    },
+  ];
 
-    // Schließen-Button für das Menü
-    const closeButton = document.createElement("button");
-    closeButton.textContent = "X";
-    closeButton.id = "CloseNewNodeMenu";
-    closeButton.className = "button primary small";
-    closeButton.style.position = "absolute"; // Absolut positionieren
-    closeButton.style.top = "10px"; // Abstand vom oberen Rand
-    closeButton.style.right = "10px"; // Abstand vom rechten Rand
-  
-    closeButton.addEventListener("click", () => {
-      canvasElement.parentElement.removeChild(overlay);
-    });
-  
-    // Schließen-Button hinzufügen
-    overlay.appendChild(closeButton);
-  
+  // Schließen-Button für das Menü
+  const closeButton = document.createElement("button");
+  closeButton.textContent = "X";
+  closeButton.id = "CloseNewNodeMenu";
+  closeButton.className = "button primary small";
+  closeButton.style.position = "absolute"; // Absolut positionieren
+  closeButton.style.top = "10px"; // Abstand vom oberen Rand
+  closeButton.style.right = "10px"; // Abstand vom rechten Rand
+
+  closeButton.addEventListener("click", () => {
+    canvasElement.parentElement.removeChild(overlay);
+  });
+
+  // Schließen-Button hinzufügen
+  overlay.appendChild(closeButton);
+
   // Funktion, um Buttons für Funktionen zu erstellen
   const createFunctionButtons = (parent, functions) => {
     functions.forEach((func) => {
@@ -1048,7 +1151,6 @@ function showFrequentlyUsedFunctionsMenu(graph, canvasElement, clickedNode) {
     //MathJax.typesetPromise([parent]);
     //MathJax.mathml2mmlPromise([parent]);
     //MathJax.tex2chtml('\\frac{2}{1}', {em: 12, ex: 6, display: false});
-
   };
 
   createFunctionButtons(functionsColumn, functions);
@@ -1056,6 +1158,15 @@ function showFrequentlyUsedFunctionsMenu(graph, canvasElement, clickedNode) {
   menuContent.appendChild(functionsColumn);
   overlay.appendChild(menuContent);
   canvasElement.parentElement.appendChild(overlay);
-
 }
 
+function getCanvasConfigPath(canvasId) {
+  const canvasElement = document.getElementById(canvasId);
+  if (!canvasElement) {
+    console.error(`Canvas with ID "${canvasId}" not found.`);
+    return null;
+  }
+  return canvasElement.getAttribute("data-config-path");
+}
+// Mache die Funktion global verfügbar
+window.getCanvasConfigPath = getCanvasConfigPath;
