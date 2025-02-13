@@ -6,6 +6,7 @@ export function _TextInputNode() {
           geheim: false,
           widgetVisible: true,
         };
+        this.constructor.collapsable = false;
         this.textInput_widget = this.addWidget("text", "", "", (v) => {
           // Ersetze die speziellen Zeichen
           this.properties.text = v

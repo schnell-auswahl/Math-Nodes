@@ -115,8 +115,9 @@ export function createGraphInstance(canvasId) {
   LiteGraph.registerNodeType("Funktionenmaschinen/Feedback_Audio", AudioNode);
 
   //Wortmaschinen
-  LiteGraph.registerNodeType("Wortmaschinen/TextInputNode", TextInputNode);
-  LiteGraph.registerNodeType("Wortmaschinen/TextDisplayNode", TextDisplayNode);
+  LiteGraph.registerNodeType("Wortmaschinen/Text_Anzeige", TextDisplayNode);
+  LiteGraph.registerNodeType("Wortmaschinen/Text_Eingabe", TextInputNode);
+
 
   // Hilfsfunktion zum Ersetzen von Umlauten in den Folgenden nodes
   function replaceUmlauts(string) {

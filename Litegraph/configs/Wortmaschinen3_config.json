@@ -4,7 +4,7 @@
   "nodes": [
     {
       "id": 10,
-      "type": "Wortmaschinen/TextDisplayNode",
+      "type": "Wortmaschinen/Text_Anzeige",
       "pos": [648.2197770116221, 55],
       "size": [220, 100],
       "flags": {},
@@ -17,22 +17,8 @@
       "bgcolor": "#879BCE"
     },
     {
-      "id": 14,
-      "type": "Wortmaschinen/TextDisplayNode",
-      "pos": [660.7493188010899, 426.07506702412866],
-      "size": [220, 100],
-      "flags": {},
-      "order": 3,
-      "mode": 0,
-      "inputs": [{ "name": "", "type": "string", "link": null }],
-      "title": "Text Anzeige",
-      "properties": { "displayedText": "", "savedText": "" },
-      "color": "#879BCE",
-      "bgcolor": "#879BCE"
-    },
-    {
       "id": 15,
-      "type": "Wortmaschinen/alphabetischersprung",
+      "type": "Wortmaschinen/alphabetischer_sprung",
       "pos": [342, 364],
       "size": [220, 100],
       "flags": {},
@@ -47,7 +33,7 @@
     },
     {
       "id": 9,
-      "type": "Wortmaschinen/TextInputNode",
+      "type": "Wortmaschinen/Text_Eingabe",
       "pos": [8, 191],
       "size": [220, 90],
       "flags": {},
@@ -65,7 +51,7 @@
     },
     {
       "id": 12,
-      "type": "Wortmaschinen/knvklnmnmtxt",
+      "type": "Wortmaschinen/kn_vkl_n_mnm_txt",
       "pos": [322, 84],
       "size": [220, 100],
       "flags": {},

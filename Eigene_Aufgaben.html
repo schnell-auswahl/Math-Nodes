@@ -92,6 +92,10 @@
 					<p>In Math-Nodes kannst du selbst Aufgaben erstellen und Sie anderen als Datei oder als Bild zur Verfügung stellen. Im Menü findest du dazu den <i>Speichern</i> bzw. den <i>Als Bild speichern</i> Knopf. Du kannst deine Projekte über den <i>Laden</i> Knopf dann in jedem Arbeitsfenster öffnen.</p>
 
 					<p>Damit das Menü übersichtlicher bleibt, stehen in manchen Arbeitsfenstern nur entweder die Funktionsmaschinen oder die Wortmaschinen zur Verfügung. Auf dieser Seite hast du dafür zwei getrennte Arbeitsfenster.</p>
+
+					<p>Bei Problemen oder Fragen schau mal in die <a href="Anleitung_Landing.html">Anleitung</a>. 
+						Wenn du da nicht weiterkommst oder deine Aufgaben gern zu Math-Nodes.com beisteuern möchtest, schreib mir gern eine Mail.
+					</p>
 					
 				</div>
 
@@ -113,6 +117,7 @@
 				<section id="litegraph">
 					<div id="graphstylefulldouble">
 						<canvas id="graphCanvas1" data-resize="true" 	data-zoom="0.9"lgtype="Wortmaschinen"
+						data-config-path="Litegraph/configs/Eigene_Aufgaben_Words.json"
 							></canvas>
 					</div>
 					<script type="module">
@@ -137,7 +142,8 @@
 						<section id="litegraph">
 							<div id="graphstylefulldouble">
 								<canvas id="graphCanvas2" data-resize="true" 	data-zoom="0.9"lgtype="Funktionsmaschinen"
-									></canvas>
+								data-config-path="Litegraph/configs/Eigene_Aufgaben_Func.json"	
+								></canvas>
 							</div>
 							<script type="module">
 								import { createGraphInstance } from './Litegraph/createGraph.js';

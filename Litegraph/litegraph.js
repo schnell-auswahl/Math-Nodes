@@ -5371,7 +5371,7 @@ LGraphNode.prototype.executeAction = function(action)
         this.clear_background_color = "#222";
 
 		this.read_only = false; //if set to true users cannot modify the graph
-        this.render_only_selected = true;
+        this.render_only_selected = false;
         this.live_mode = false;
         this.show_info = false; // renderinfos unten links auf dem canvas
         this.allow_dragcanvas = true;
