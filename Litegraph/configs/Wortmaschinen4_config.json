@@ -55,7 +55,7 @@
     },
     {
       "id": 4,
-      "type": "Wortmaschinen/TextDisplayNode",
+      "type": "Wortmaschinen/Text_Anzeige",
       "pos": [638, 178],
       "size": [220, 100],
       "flags": {},
@@ -72,7 +72,7 @@
     },
     {
       "id": 3,
-      "type": "Wortmaschinen/TextDisplayNode",
+      "type": "Wortmaschinen/Text_Anzeige",
       "pos": [839, 379],
       "size": [220, 100],
       "flags": {},
@@ -89,7 +89,7 @@
     },
     {
       "id": 2,
-      "type": "Wortmaschinen/TextInputNode",
+      "type": "Wortmaschinen/Text_Eingabe",
       "pos": [35, 162],
       "size": [220, 90],
       "flags": {},
@@ -107,7 +107,7 @@
     },
     {
       "id": 1,
-      "type": "Wortmaschinen/TextInputNode",
+      "type": "Wortmaschinen/Text_Eingabe",
       "pos": [34, 369],
       "size": [220, 100],
       "flags": {},

@@ -4,7 +4,7 @@
   "nodes": [
     {
       "id": 4,
-      "type": "Wortmaschinen/TextInputNode",
+      "type": "Wortmaschinen/Text_Eingabe",
       "pos": [83, 149],
       "size": [220, 150],
       "flags": {},
@@ -20,7 +20,7 @@
     },
     {
       "id": 5,
-      "type": "Wortmaschinen/TextDisplayNode",
+      "type": "Wortmaschinen/Text_Anzeige",
       "pos": [1231, 126],
       "size": [220, 100],
       "flags": {},

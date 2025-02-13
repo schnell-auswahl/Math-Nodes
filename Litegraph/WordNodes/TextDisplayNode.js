@@ -13,6 +13,7 @@ export function _TextDisplayNode() {
             this.padding = 15; // Abstand vom Rand der Box
             this.bgcolor = fbNodesColor;
             this.color = fbNodesColor;
+            this.constructor.collapsable = false;
         }
 
      

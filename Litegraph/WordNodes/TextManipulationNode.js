@@ -20,6 +20,7 @@ export function createTextManipulationNode({ title, description, logic }) {
         //this.color = "#CCF5DF"; // Passe den Wert nach Bedarf an
         this.bgcolor = "#BFCAD7"; // Passe den Wert nach Bedarf an
         this.properties = {titelfortitle: "\u200B"};
+        this.constructor.collapsable = false;
       }
     }
 

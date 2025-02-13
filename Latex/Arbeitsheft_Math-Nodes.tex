@@ -17,6 +17,7 @@
 \usepackage[margin=2cm]{geometry}
 \usepackage[ngerman]{babel}
 \usepackage{tocloft}
+\usepackage{hyperref} % For hyperlinks in the table of contents and elsewhere. Always load last.  
 
 
 \backgroundsetup{
@@ -106,11 +107,11 @@
 }
 
 \renewcommand{\thesection}{\arabic{section}} 
-\renewcommand{\thesubsection}{\arabic{section} \alph{subsection})}
+\renewcommand{\thesubsection}{\alph{subsection})}
 
 \titleformat{\section}
   {\color{black}\sffamily\sbseries\fontsize{13}{30}\selectfont } % Format of the section title. Schriftgroeße 16. Zielenabstand 20
-  {Aufgabe \thesection} % Section number
+  {\thesection} % Section number
   {10pt} % Space between section number and title
   {} % Format of the section title text
   [\titlerule] % Add a black line under the section title
@@ -225,19 +226,28 @@ Verbinde die unteren Maschinen wie im Beispiel oben, indem du ein Kabel vom Ausg
   Texteingabe zum Eingang des Textdisplays ziehst. Wenn du das geschafft hast, klicke auf
   das Texteingabefeld auf der Texteingabe-Maschine und gib etwas ein. Siehst du es auf dem
   Display? Du kannst Verbindungen auch wieder lösen, indem du am Ausgang anfasst und die
-  Verbindung von da wieder löst. Versuche es!
+  Verbindung von da wieder löst. Versuche es!\par
+  Wenn du zu wenig Platz auf deinem Bildschirm hast, kannst du die Maschinen über das Menü verkleinern oder den Vollbildmodus nutzen.
 \section{Deinen ersten Text verschlüsseln}
 Du kannst deinen Text mit verschiedenen Maschinen manipulieren. Verbinde dazu die Texteingabe-Maschine mit der Vokaltanz-Maschine und diese dann mit der Text-Anzeige-Maschine. Was passiert mit deinem Text?
 \par
-Du kannst natürlich auch mehrere Maschinen hintereinander verwenden. Das nennt man in der Mathematik verketten. Die Maschinen bilden dann gemeinsam eine neue Maschine, die deinen Text in der verbundenen Reihenfolge verändert. Probiere es in MATH-NODES aus! Notiere in der Text Anzeige deine Ergebnisse:\par
+Neue Maschinen kannst du über einen Doppelklick ins Arbeitsfenster laden. Verschaffe dir einen Überblick welche es gibt!\par
+
+Du kannst natürlich auch mehrere Maschinen hintereinander verwenden. Das nennt man in der Mathematik verketten. Die Maschinen bilden dann gemeinsam eine neue Maschine, die deinen Text in der verbundenen Reihenfolge verändert. Probiere es in Math-Nodes aus! Notiere in der Text Anzeige deine Ergebnisse:\par
 \includegraphics[width=\textwidth]{Bilder/Wortmaschinen_A1_config.png}
 
-\section{ Maschinen verketten}
+\section*{Übersicht über alle Wortmaschinen}
+%\addcontentsline{toc}{section}{Übersicht über alle Wortmaschinen} % Add the chapter title to the table of contents 
+\includegraphics[width=\textwidth]{Bilder/Uebersicht_Wortmaschinen.png}
+
+\section{Maschinen verketten}
 Zwei Maschinen kannst du in unterschiedlicher Reihenfolge verbinden. Spielt die Reihenfolge eine Rolle für das Ergebnis? Probiere es aus und begründe deine Antwort.\par
 \includegraphics[width=\textwidth]{Bilder/Wortmaschinen_A2_config.png}
 \handwritinglines{3}\\
-Ist das immer so? Findest du zwei, bei denen die Reihenfolge egal ist? Gib die gefundenen Maschinen an, notiere den Ergebnis-Text und erkläre, was hier anders ist. Eine Übersicht über alle Wortmaschinen findest du am Ende dieses Arbeitsmaterials.\par
+Ist das immer so? Findest du zwei, bei denen die Reihenfolge egal ist? \par
+Gib die gefundenen Maschinen an, notiere den Ergebnis-Text und erkläre, was hier anders ist. Eine Übersicht über alle Wortmaschinen findest du am Ende dieses Arbeitsmaterials.\par
 \includegraphics[width=\textwidth]{Bilder/Wortmaschinen_A2b_config.png}
+\handwritinglines{3}
 
 \section{Welche Maschine war es?}
 Hier sind zwei Nachrichten verschlüsselt worden. Einmal mit einer Maschine und einmal mit zwei Maschinen hintereinander.\par
@@ -248,17 +258,18 @@ Hier sind zwei Nachrichten verschlüsselt worden. Einmal mit einer Maschine und 
 \section{Entschlüsseln einer Nachricht}
 Mit der Alphabet-Countdown-Maschine wurde eine Nachricht verschlüsselt. Entwickle eine Maschine, um die Nachricht wieder zu entschlüsseln. Gib ihr einen Namen und beschreibe ihre Funktionsweise auf der Karte.\par
 \includegraphics[width=\textwidth]{Bilder/Wortmaschinen_A4_config.png}\\
-Genau die richtige Maschine zum Entschlüsseln der Botschaft scheint es in MATH-NODES nicht zu geben. Kannst du Sie aus anderen Maschinen zusammenbauen? Wie lautet die Botschaft? \\
+Genau die richtige Maschine zum Entschlüsseln der Botschaft scheint es in Math-Nodes nicht zu geben. Kannst du Sie aus anderen Maschinen zusammenbauen? Wie lautet die Botschaft? \\
 \handwritinglines{2}
 
-\section{ Umkehrbar oder nicht?}
-Kannst du dir zu jeder Maschine eine Maschine ausdenken, die die damit verschlüsselte Nachricht wieder entschlüsselt?\par
-Finde in MATH-NODES mindestens ein Beispiel, bei dem es nicht geht und begründe warum.\\
-\handwritinglines{4}
-\subsection{Bonusaufgabe:}
-Mit welcher Maschine wurde hier verschlüsselt und wie kannst du das Rückgängig machen?\par
+
+\section{Wie wurde verschlüsselt?}
+Mit welcher Maschine wurde hier verschlüsselt und wie kannst du das rückgängig machen?\par
 \includegraphics[width=\textwidth]{Bilder/Wortmaschinen_A5_config.png}
 \handwritinglines{2}
+\section{Umkehrbar oder nicht?}
+Kannst du dir zu jeder Maschine eine Maschine ausdenken, die die damit verschlüsselte Nachricht wieder entschlüsselt? Notiere deine Überlegungen im Arbeitsheft.\par
+Versuche in Math-Nodes ein Beispiel zu finden, um deine Theorie zu bestätigen.
+\handwritinglines{4}
 \section{Umkehrfunktionen}
 Überlege welche der Wortmaschinen Umkehrfunktionen zueinander sind. Gib Sie an, begründe deine Entscheidung und prüfe an einem Beispiel. Eine Übersicht über alle Maschinen findest du am Ende des Kapitels.\par
 \includegraphics[width=\textwidth]{Bilder/Wortmaschinen_A6_config.png}
@@ -269,9 +280,6 @@ Mit welcher Maschine wurde hier verschlüsselt und wie kannst du das Rückgängi
 \section{Geheime Nachrichten empfangen}
 Tauscht eure verschlüsselten Nachrichten aus und probiert sie wieder zu entschlüsseln. Notiere deine empfangene Nachricht und deine Lösung.\par
 \includegraphics[width=\textwidth]{Bilder/Wortmaschinen_A8_config.png} 
-\section*{Übersicht über alle Wortmaschinen}
-\addcontentsline{toc}{section}{Übersicht über alle Wortmaschinen} % Add the chapter title to the table of contents 
-\includegraphics[width=\textwidth]{Bilder/Uebersicht_Wortmaschinen.png}
 \chapterstartpage{Funktionsmaschinen}{MATHEMATISCHE FUNKTIONEN VERKNÜPFEN UND VERKETTEN LERNEN}{customlightpurple}{Bilder/Titel_Graph.png}
 \section*{Funktionen als Maschinen}
 Eine mathematische Funktion kannst du dir vorstellen wie eine Maschine mit einem Eingang und einem Ausgang. Man gibt etwas in die Maschine hinein und erhält dann etwas am Ausgang der Maschine. Eine wichtige Eigenschaft von Funktionen ist dabei, dass immer das Gleiche am Ausgang rauskommt, wenn wir das Gleiche am Eingang einwerfen. Auf dieser Seite lernst du damit umzugehen.
@@ -294,7 +302,7 @@ In Math-Nodes kannst du dir außer dem Wert zu einer unabhängigen Variable auch
 Überlege zunächst wie der Graph und die Funktionsgleichung aussehen müssten und notiere deine Vermutungen im Arbeitsheft. Verbinde dann die Funktionen mit den verschiedenen Feedback-Maschinen und überprüfe deine Vermutungen.\par
 \includegraphics[width=\textwidth]{Bilder/Funktionsmaschinen_3.png}
 
-\section{Funktionsgleichungen ablesen}
+\section{Wo ist der Unterschied?}
 Hier sind die Funktionen \(f\) und \(h\) in zwei verschiedenen Reihenfolgen verkettet. Überlege wie die Funktionsgleichung lauten könnte und der Graph aussehen müsste und probiere dann aus.\par
 Zeichne die Graphen und beschreibe worin sich unterscheiden und warum.\par
 \includegraphics[width=\textwidth]{Bilder/Funktionsmaschinen_4.png}
@@ -332,11 +340,11 @@ Verknüpfe und/oder verkette die Maschinen so, dass die weißen Graphen entstehe
 \chapterstartpage{Anleitung}{HIER FINDEST DU EINE DETAILLIERTE ANLEITUNG ZU ALLEN FUNKTIONEN VON MATH-NODES
 }{customgreen}{Bilder/Wortmaschinen_Titel.png}
 \section{Die Arbeitsoberfläche}
-Die Arbeitsoberfläche von Math Nodes bietet eine intuitive und interaktive Umgebung zur Arbeit mit mathematischen Maschinen den MATH-NODES. Hier sind die grundlegenden Funktionen und Interaktionen, die auf der Arbeitsoberfläche möglich sind:
+Die Arbeitsoberfläche von Math Nodes bietet eine intuitive und interaktive Umgebung zur Arbeit mit mathematischen Maschinen den Math-Nodes. Hier sind die grundlegenden Funktionen und Interaktionen, die auf der Arbeitsoberfläche möglich sind:
 \subsection{Maschinen verschieben}
 Maschinen können mit der Maus oder dem Finger frei in der Arbeitsfläche verschoben werden.
 \subsection{Maschinen verbinden}
-In MATH-NODES haben Maschinen Ein- und Ausgänge, die es ermöglichen, sie mit anderen Maschinen zu verbinden. Dazu benutzt du Kabel. An jedem Eingang darf nur ein Kabel angeschlossen werden, während an einem Ausgang beliebig viele Kabel angeschlossen werden können. Ausgänge sind blau und Eingänge orange markiert. Das Verbinden ist von beiden Seiten möglich. Wenn bereits ein Kabel vorhanden ist, kannst du es lösen, indem du es am Ende anfasst, oder ein neues Kabel erstellen, indem du es am Anfang anfasst.
+In Math-Nodes haben Maschinen Ein- und Ausgänge, die es ermöglichen, sie mit anderen Maschinen zu verbinden. Dazu benutzt du Kabel. An jedem Eingang darf nur ein Kabel angeschlossen werden, während an einem Ausgang beliebig viele Kabel angeschlossen werden können. Ausgänge sind blau und Eingänge orange markiert. Das Verbinden ist von beiden Seiten möglich. Wenn bereits ein Kabel vorhanden ist, kannst du es lösen, indem du es am Ende anfasst, oder ein neues Kabel erstellen, indem du es am Anfang anfasst.
 \subsection{Maschinen hinzufügen}
 Um eine neue Maschine hinzuzufügen, doppelklicke auf eine leere Stelle in der Arbeitsfläche oder auf eine bestehende Maschine, um sie zu ersetzen. Dadurch öffnet sich ein Menü, in dem du die gewünschte Maschinenart auswählen kannst. Alternativ kannst du das Menü auch über den Button "Neue Maschine" öffnen. Eine Maschine entfernen kannst du über die Zurücktaste deiner Tastatur oder das Menü.
 \subsection{Zwischenwerte am Kabel ablesen}

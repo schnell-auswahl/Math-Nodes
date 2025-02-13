@@ -4,7 +4,7 @@
   "nodes": [
     {
       "id": 14,
-      "type": "Wortmaschinen/knvklnmnmtxt",
+      "type": "Wortmaschinen/kn_vkl_n_mnm_txt",
       "pos": [695, 504],
       "size": [220, 100],
       "flags": {},
@@ -19,7 +19,7 @@
     },
     {
       "id": 10,
-      "type": "Wortmaschinen/TextDisplayNode",
+      "type": "Wortmaschinen/Text_Anzeige",
       "pos": [917, 174],
       "size": [220, 100],
       "flags": {},
@@ -33,7 +33,7 @@
     },
     {
       "id": 12,
-      "type": "Wortmaschinen/TextInputNode",
+      "type": "Wortmaschinen/Text_Eingabe",
       "pos": [73, 263],
       "size": [220, 90],
       "flags": {},
@@ -43,13 +43,13 @@
         { "name": "", "type": "string", "links": [], "slot_index": 0 }
       ],
       "title": "Text Eingabe",
-      "properties": { "text": "Die Zahlwörter ungerader Zahlen enthalten alle ein e" , "widgetVisible" : false},
+      "properties": { "text": "Die Zahlwoerter ungerader Zahlen enthalten alle ein e" , "widgetVisible" : false},
       "color": "#D0AF8B",
       "bgcolor": "#D0AF8B"
     },
     {
       "id": 13,
-      "type": "Wortmaschinen/TextDisplayNode",
+      "type": "Wortmaschinen/Text_Anzeige",
       "pos": [967, 497],
       "size": [220, 100],
       "flags": {},
@@ -79,7 +79,7 @@
     },
     {
       "id": 15,
-      "type": "Wortmaschinen/konsonantenverdoppeln",
+      "type": "Wortmaschinen/konsonanten_verdoppeln",
       "pos": [390, 505],
       "size": [220, 100],
       "flags": {},
