@@ -1,3 +1,4 @@
+//Main File for creating the Graph and the Canvas
 //window.fbNodesColor = "#D0AF8B"; //Orange
 window.fbNodesColor = "#879BCE"; //Blau
 //window.srcNodesColor = "#879BCE"; //Blau
