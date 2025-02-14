@@ -6,7 +6,7 @@ export function createTextManipulationNode({ title, description, logic }) {
       this.addOutput("OUT", "string");
       // Platzhalter ohne Titel anzeigen, sonst Titel dynamisch vergeben
       this.nodeName = title;
-      this.title = this.nodeName;
+      this.title = this.nodeName.replace(/_/g, " ");
       this.size = [220, 100];
       this.resizable = false;
       if (title == "Platzhalter") {

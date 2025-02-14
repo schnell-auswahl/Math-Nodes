@@ -346,15 +346,15 @@ export function createGraphInstance(canvasId) {
   const menu = document.createElement("div");
   menu.id = "canvas-menu";
   menu.style.position = "absolute";
-  menu.style.top = "10px";
-  menu.style.left = "10px";
-  //menu.style.width = "260px";
+  menu.style.top = "20px";
+  menu.style.left = "20px";
+  //menu.style.width = "400px";
   //menu.style.height = "400px";
   menu.style.backgroundColor = canvasbgColor;
   //enu.style.border = "1px solid #ccc";
   //menu.style.borderRadius = "1px";
   //menu.style.padding = "10px";
-  menu.style.zIndex = "100";
+  menu.style.zIndex = "100"; 
   //menu.style.boxShadow = "0 2px 5px rgba(0, 0, 0, 0.2)";
   menu.innerHTML = `
         <button id="menu-toggle" class="button primary small">Menü</button>
