@@ -184,7 +184,7 @@
 
             const prev = this.registered_node_types[type];
             if(prev) {
-                console.log("replacing node type: " + type);
+                //console.log("replacing node type: " + type);
             }
             if( !Object.prototype.hasOwnProperty.call( base_class.prototype, "shape") ) {
                 Object.defineProperty(base_class.prototype, "shape", {
@@ -8548,10 +8548,18 @@ if (!this.timeoutRunning) {
         this.dirty_bgcanvas = false;
         this.timeoutRunning = false;
         //console.log(this.dirty_bgcanvas);
+     
     }, 400);
 }
 
+// der graph wird nicht im Nachlauf nicht nur neu gezeichnet, sondern auch neu berechnet:
+if(this.graph){ 
+   // console.log(this.graph);
+    this.graph.runStep(); // Berechnungen ausführen
+}
+
 this.dirty_canvas = true; //to force to repaint the front canvas with the bgcanvas
+//console.log("nachlauf läuft" + this.dirty_bgcanvas);
 
     };
 

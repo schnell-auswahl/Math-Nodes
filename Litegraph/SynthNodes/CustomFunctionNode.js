@@ -5,6 +5,7 @@ export function _FunctionNode() {
       this.color = opNodesColor;
       this.bgcolor = bgColor2;
       this.inputError = false;
+      this.nameError = false;
       // Füge den Hauptinput für die unabhängige Variable (UV) hinzu, Typ "object"
       this.addInput("UV", "object");
 
@@ -170,7 +171,9 @@ export function _FunctionNode() {
       if (this.properties.uvError && this.properties.uvName.length > 0) {
         return "UV stimmt nicht";
       }
-
+      if (this.nameError) {
+        return "Fehler Funktionsname";
+      }
       // Wenn die Funktionsgleichung, UV und Funktionsname vorhanden sind
       if (
         this.properties["formula"] &&
@@ -399,6 +402,21 @@ export function _FunctionNode() {
         this.properties["rightSide"] =
           rightSideFromInput ?? this.properties["rightSide"];
 
+
+          if (
+            leftSideFromInput &&
+            this.properties["funcName"] &&
+            leftSideFromInput.includes(this.properties["funcName"])
+          ) {
+            console.error("Funktionsname bereits in leftSide vorhanden. Berechnung abgebrochen.");
+            this.nameError = true;
+            this.boxcolor = "red";
+            return;
+          } else {
+            this.nameError = false;
+          }
+
+
         // Definiere die linke Seite der Gleichung als funcName(leftSide)
         if (this.properties["funcName"]) {
           this.properties[
@@ -563,7 +581,7 @@ export function _FunctionNode() {
           } catch (err) {
             //console.error("Fehler in der Formel:", err); // Fehlerbehandlung bei Problemen mit der Formel
             this.boxcolor = "red"; // Fehlerfarbmarkierung
-            //this.setOutputData(0, { uvValue: inputData["uvValue"], value: null, leftSide: this.properties["leftSide"], rightSide: finalEquation, uvName: this.properties.uvName });
+            this.setOutputData(0, null);
           }
         }
       }

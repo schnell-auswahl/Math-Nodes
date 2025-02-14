@@ -14,6 +14,7 @@ export function _TextDisplayNode() {
             this.bgcolor = fbNodesColor;
             this.color = fbNodesColor;
             this.constructor.collapsable = false;
+            this.textGrey = false;
         }
 
      
@@ -23,13 +24,17 @@ export function _TextDisplayNode() {
             // Wenn Text vorhanden ist, anzeigen; andernfalls Text löschen
             if ( this.properties.textVisible == false || this.properties.textVisible == "false" ) {
                 this.properties.displayedText = "";
+                this.textGrey = false;
             } else if (inputText && inputText.includes("\u200B")) {
+                this.textGrey = false;
                 this.properties.displayedText = "verschlüsselt";
             } else if (inputText) {
+                this.textGrey = false;
                 this.properties.displayedText = inputText;
                 //console.log("input text: " + inputText);
             } else {
                 this.properties.displayedText = this.properties.savedText;
+                this.textGrey = true;
             }
         }
 
@@ -94,7 +99,11 @@ export function _TextDisplayNode() {
         
             // Text-Styles einstellen
             ctx.font = "12px Arial";
+            if (this.textGrey) {
+                ctx.fillStyle = "#CCCCCC";
+            } else {
             ctx.fillStyle = "#FFFFFF";
+            }
         
             const words = this.properties.displayedText.split(" "); // Zerlege den Text in Wörter
             const lineHeight = 14; // Höhe für jede Textzeile

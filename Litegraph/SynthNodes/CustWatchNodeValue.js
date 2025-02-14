@@ -221,13 +221,15 @@ export function _CustWatchNodeValue() { return(
       }
 // Text nach Hintergrund schreiben, aber vorher berechnen
 ctx.fillStyle = "#FFFFFF";    
+
+if (this.getInputData(0)) {
 ctx.fillText(
       this.displayString,
       3 * inputPosX,
       2 * LiteGraph.NODE_SLOT_HEIGHT - 5
       //(this.size[1] + LiteGraph.NODE_TITLE_HEIGHT) * 0.5
       );
-
+    }
 
         // Beginne mit dem Zeichnen des Dreiecks
         ctx.beginPath();

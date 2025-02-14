@@ -350,6 +350,8 @@ export function _OperationNode() {
             this.properties["Result_Value"]
           );
           this.boxcolor = null; // Zurücksetzen der Farbe bei Erfolg
+        } else {
+          this.setOutputData(0, null);
         }
       }
     }

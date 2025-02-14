@@ -71,7 +71,7 @@ export function _CustomGraphicsPlot() {
       // Node-Eigenschaften
       this.title = "Graph";
       this.desc = "Plots up to 4 mathematical functions with different colors";
-      this.colors = ["#FFA", "#F99", "#9F9", "#99F","#FFFFFF"]; // Vier Farben für vier Funktionen
+      this.colors = ["#FFA", "#F99", "#9F9", "#99F", "#888888"]; // Vier Farben für vier Funktionen
       this.size = [350, 380]; // Vergrößertes Plot-Fenster
       //this.collapsed = false;
       //this.color = "#CE8A53";
@@ -99,35 +99,55 @@ export function _CustomGraphicsPlot() {
       return a > v ? a : b < v ? b : v;
     }
 
-
-
     onExecute() {
       this.equations = [];
       this.uvNames = [];
+      this.uvValuesFromInput = [];
 
       // Überprüfe alle vier Eingänge
       for (let i = 0; i < 4; i++) {
         const inputData = this.getInputData(i);
         this.inputs[i].color_off = "#000000";
 
+        
+
         if (inputData) {
           const equation = inputData["rightSide"];
           const uvName = inputData["uvName"] || "x";
-          this.inputs[i].color_on = adjustColor("#00FF00","#FF0000",inputData["value"]);
+          const uvValuefromInput = inputData["uvValue"];
+          this.inputs[i].color_on = adjustColor(
+            "#00FF00",
+            "#FF0000",
+            inputData["value"]
+          );
 
           if (equation) {
             this.equations[i] = equation;
             this.uvNames[i] = uvName;
+            this.uvValuesFromInput[i] = uvValuefromInput;
             //if (this.equations[i]) { //Möglichkeit gespeicherte mit nicht neuen zu
             this.properties.uvNames[i] = this.uvNames[i];
             this.properties.equations[i] = this.equations[i];
-            //}
+            if (equation == this.properties.savedEquation) {
+              this.boxcolor = "#00FF00";
+            } else {
+              this.boxcolor = "#000000";
+            }
+        
+            
           }
         } else {
-          this.properties.uvNames[i] =  "";
+          this.properties.uvNames[i] = "";
           this.properties.equations[i] = "";
+          
         }
+
+       
       }
+      if (!(this.getInputData(0)||this.getInputData(1)||this.getInputData(2)||this.getInputData(3))) {
+        this.boxcolor = "#000000";
+      }
+
     }
 
     onDrawForeground(ctx) {
@@ -167,10 +187,13 @@ export function _CustomGraphicsPlot() {
       const inputPosY = 0 * NODE_SLOT_HEIGHT + 14;
 
       // Hintergrund zeichnen
-      if (this.properties.whiteBackground === true || this.properties.whiteBackground === "true") {
+      if (
+        this.properties.whiteBackground === true ||
+        this.properties.whiteBackground === "true"
+      ) {
         ctx.fillStyle = "#FFF";
       } else {
-      ctx.fillStyle = "#000";
+        ctx.fillStyle = "#000";
       }
       ctx.fillRect(0, 0, size[0], size[1]);
 
@@ -191,7 +214,7 @@ export function _CustomGraphicsPlot() {
         if (this.getInputData(i)) {
           ctx.fillStyle = this.colors[i];
         } else {
-        ctx.fillStyle = inLabelsColor;
+          ctx.fillStyle = inLabelsColor;
         }
         ctx.fill();
       }
@@ -200,75 +223,113 @@ export function _CustomGraphicsPlot() {
       this.drawGrid(ctx, size, scaleX, scaleY, offsetX, offsetY, marginTop);
 
       // Plotte jede Funktion in einer anderen Farbe
-      if (!(this.properties.noPlot === true || this.properties.noPlot === "true")) { 
-      for (let i = 0; i < this.properties.equations.length; i++) {
-        const equation = this.properties.equations[i];
-        const uvName = this.properties.uvNames[i];
-        const color = this.colors[i];
+      if (
+        !(this.properties.noPlot === true || this.properties.noPlot === "true")
+      ) {
+        for (let i = 0; i < this.properties.equations.length; i++) {
+          const equation = this.properties.equations[i];
+          const uvName = this.properties.uvNames[i];
+          const color = this.colors[i];
 
-        if (!equation || !uvName) {
-          // Überspringe diese Funktion, wenn die Gleichung oder UV-Name ungültig sind
-          continue;
-        }
+          if (!equation || !uvName) {
+            // Überspringe diese Funktion, wenn die Gleichung oder UV-Name ungültig sind
+            continue;
+          }
 
-        ctx.strokeStyle = color;
-        ctx.lineWidth = 1.7;
-        ctx.beginPath();
+          ctx.strokeStyle = color;
+          if (ctx.strokeStyle === "#888888") {
+            ctx.lineWidth = 1.4;
+          } else {
+          ctx.lineWidth = 1.9;
+          }
+          ctx.beginPath();
 
-        let step = (xRange[1] - xRange[0]) / (size[0] - 2 * margin);
-        let uvValue = xRange[0];
-        let y = this.evaluateFunction(equation, uvValue, uvName);
-        let previousY = y;
+          let step = (xRange[1] - xRange[0]) / (size[0] - 2 * margin);
+          let uvValue = xRange[0];
+          let y = this.evaluateFunction(equation, uvValue, uvName);
+          let previousY = y;
 
-        if (y !== null) {
-          let plotX = (uvValue - xRange[0]) * scaleX + margin;
-          let plotY = (yRange[1] - y) * scaleY + marginTop;
-          ctx.moveTo(
-            this.clamp(plotX, margin, size[0] - margin),
-            this.clamp(plotY, marginTop, size[1] - margin)
-          );
+          if (y !== null) {
+            let plotX = (uvValue - xRange[0]) * scaleX + margin;
+            let plotY = (yRange[1] - y) * scaleY + marginTop;
+            ctx.moveTo(
+              this.clamp(plotX, margin, size[0] - margin),
+              this.clamp(plotY, marginTop, size[1] - margin)
+            );
 
-          for (let j = 1; j < size[0] - 2 * margin; ++j) {
-            uvValue += step;
-            y = this.evaluateFunction(equation, uvValue, uvName);
+            for (let j = 1; j < size[0] - 2 * margin; ++j) {
+              uvValue += step;
+              y = this.evaluateFunction(equation, uvValue, uvName);
 
-            if (y === null) continue;
+              if (y === null) continue;
 
-            plotX = (uvValue - xRange[0]) * scaleX + margin;
-            plotY = (yRange[1] - y) * scaleY + marginTop;
+              plotX = (uvValue - xRange[0]) * scaleX + margin;
+              plotY = (yRange[1] - y) * scaleY + marginTop;
 
-            // Prüfe, ob der Punkt innerhalb des sichtbaren Bereichs liegt
-            if (plotY >= marginTop && plotY <= size[1] - margin) {
-              // Prüfe auf Diskontinuität anhand des Änderungswertes von y
-              if (
-                Math.abs(y - previousY) > this.properties.discontinuityThreshold
-              ) {
+              // Prüfe, ob der Punkt innerhalb des sichtbaren Bereichs liegt
+              if (plotY >= marginTop && plotY <= size[1] - margin) {
+                // Prüfe auf Diskontinuität anhand des Änderungswertes von y
+                if (
+                  Math.abs(y - previousY) >
+                  this.properties.discontinuityThreshold
+                ) {
+                  ctx.moveTo(
+                    this.clamp(plotX, margin, size[0] - margin),
+                    this.clamp(plotY, marginTop, size[1] - margin)
+                  );
+                } else {
+                  // Zeichne Linie nur, wenn der aktuelle Punkt im sichtbaren Bereich ist
+                  ctx.lineTo(
+                    this.clamp(plotX, margin, size[0] - margin),
+                    this.clamp(plotY, marginTop, size[1] - margin)
+                  );
+                }
+              } else {
+                // Beginne einen neuen Pfad, sobald die Funktion wieder im sichtbaren Bereich ist
                 ctx.moveTo(
                   this.clamp(plotX, margin, size[0] - margin),
                   this.clamp(plotY, marginTop, size[1] - margin)
                 );
-              } else {
-                // Zeichne Linie nur, wenn der aktuelle Punkt im sichtbaren Bereich ist
-                ctx.lineTo(
-                  this.clamp(plotX, margin, size[0] - margin),
-                  this.clamp(plotY, marginTop, size[1] - margin)
-                );
               }
-            } else {
-              // Beginne einen neuen Pfad, sobald die Funktion wieder im sichtbaren Bereich ist
-              ctx.moveTo(
-                this.clamp(plotX, margin, size[0] - margin),
-                this.clamp(plotY, marginTop, size[1] - margin)
-              );
+
+              previousY = y;
             }
 
-            previousY = y;
+            ctx.stroke();
           }
-
-          ctx.stroke();
+          // Ergänzung für das Kreuz:
+          if (
+            this.uvValuesFromInput &&
+            typeof this.uvValuesFromInput[i] === "number"
+          ) {
+            const crossUv = this.uvValuesFromInput[i];
+            const crossVal = this.evaluateFunction(equation, crossUv, uvName);
+            if (crossVal !== null) {
+              const crossX = (crossUv - xRange[0]) * scaleX + margin;
+              const crossY = (yRange[1] - crossVal) * scaleY + marginTop;
+              const crossSize = 5;
+              ctx.beginPath();
+              ctx.moveTo(
+                this.clamp(crossX - crossSize, margin, size[0] - margin),
+                this.clamp(crossY, marginTop, size[1] - margin)
+              );
+              ctx.lineTo(
+                this.clamp(crossX + crossSize, margin, size[0] - margin),
+                this.clamp(crossY, marginTop, size[1] - margin)
+              );
+              ctx.moveTo(
+                this.clamp(crossX, margin, size[0] - margin),
+                this.clamp(crossY - crossSize, marginTop, size[1] - margin)
+              );
+              ctx.lineTo(
+                this.clamp(crossX, margin, size[0] - margin),
+                this.clamp(crossY + crossSize, marginTop, size[1] - margin)
+              );
+              ctx.stroke();
+            }
+          }
         }
       }
-    }
 
       // Achsenbeschriftungen hinzufügen
       this.drawLabels(
@@ -288,10 +349,13 @@ export function _CustomGraphicsPlot() {
     // Gitternetzlinien zeichnen
     drawGrid(ctx, size, scaleX, scaleY, offsetX, offsetY, marginTop) {
       const margin = this.properties.margin;
-      if (this.properties.whiteBackground === true || this.properties.whiteBackground === "true") {
+      if (
+        this.properties.whiteBackground === true ||
+        this.properties.whiteBackground === "true"
+      ) {
         ctx.strokeStyle = "#000";
       } else {
-      ctx.strokeStyle = "#555";
+        ctx.strokeStyle = "#555";
       }
       ctx.lineWidth = 0.5;
 
@@ -327,10 +391,13 @@ export function _CustomGraphicsPlot() {
           ctx.stroke();
         }
       }
-      if (this.properties.whiteBackground === true || this.properties.whiteBackground === "true") {
+      if (
+        this.properties.whiteBackground === true ||
+        this.properties.whiteBackground === "true"
+      ) {
         ctx.strokeStyle = "#000";
       } else {
-      ctx.strokeStyle = "#FFF";
+        ctx.strokeStyle = "#FFF";
       }
       ctx.lineWidth = 1.2;
 
@@ -360,10 +427,13 @@ export function _CustomGraphicsPlot() {
       margin,
       marginTop
     ) {
-      if (this.properties.whiteBackground === true || this.properties.whiteBackground === "true") {
+      if (
+        this.properties.whiteBackground === true ||
+        this.properties.whiteBackground === "true"
+      ) {
         ctx.fillStyle = "#000";
       } else {
-      ctx.fillStyle = "#FFF";
+        ctx.fillStyle = "#FFF";
       }
       ctx.font = "10px Arial";
       ctx.textAlign = "center";
