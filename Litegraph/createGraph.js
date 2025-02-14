@@ -1140,7 +1140,7 @@ function showFrequentlyUsedFunctionsMenu(graph, canvasElement, clickedNode) {
 
       // Klick-Event für den Button
       button.addEventListener("click", () => {
-        console.log(`Button clicked: ${func.name}`);
+        //console.log(`Button clicked: ${func.name}`);
 
         // Ändere die Eigenschaften der clickedNode
         Object.assign(clickedNode.properties, func.properties);
