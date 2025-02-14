@@ -542,6 +542,8 @@ export function createGraphInstance(canvasId) {
       if (isVisible) {
         graph.start(); // Startet den Graphen, wenn das Canvas sichtbar wird
         // Starten der Schleife
+
+  //console.log(graph);
         animationFrameId = requestAnimationFrame(loop);
       } else {
         graph.stop(); // Stoppt den Graphen, wenn das Canvas nicht mehr sichtbar ist
@@ -566,7 +568,7 @@ export function createGraphInstance(canvasId) {
     return graph._nodes.some((node) => node.animationActive);
   }
 
-  //console.log(`Graph für Canvas "${canvasId}" erstellt.`);
+
   return { graph, canvas };
 }
 

@@ -581,7 +581,7 @@ export function _FunctionNode() {
           } catch (err) {
             //console.error("Fehler in der Formel:", err); // Fehlerbehandlung bei Problemen mit der Formel
             this.boxcolor = "red"; // Fehlerfarbmarkierung
-            //this.setOutputData(0, { uvValue: inputData["uvValue"], value: null, leftSide: this.properties["leftSide"], rightSide: finalEquation, uvName: this.properties.uvName });
+            this.setOutputData(0, null);
           }
         }
       }

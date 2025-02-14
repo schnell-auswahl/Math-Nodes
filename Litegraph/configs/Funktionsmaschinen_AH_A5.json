@@ -709,7 +709,7 @@
           "label": ""
         }
       ],
-      "properties": { "value": 1, "rightSide": "x", "widgetVisible": false },
+      "properties": { "value": 20, "rightSide": "x", "widgetVisible": false },
       "color": "#D0AF8B",
       "bgcolor": "#7C8693",
       "shape": 2
