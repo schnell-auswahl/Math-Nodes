@@ -6,40 +6,42 @@ export function _CustWatchNodeString() {
 
       this.addInput("value", 0, { label: "" });
       this.inputData = 0;
-      this.lastRenderedEquation = null; // Speichert die zuletzt gerenderte Gleichung
-      this.renderedImage = null; // Speichert das gerenderte Bild
+
+      // neu: separate gerenderte Bilder
+      this.renderedImageInput = null;
+      this.renderedImageSaved = null;
+
       this.title = "Gleichung";
       this.desc = "Show Equation of input";
-      this.Pause = false;
-      this.offsetX = 20; // Verschiebung nach rechts
+
+      this.offsetX = 20;
       this.offsetY = 20;
 
       this.properties = {
         GleichungvorMathJax: "",
         GleichungvorKaTex: "",
-        savedEquation: "0",
+        savedEquation: "",
       };
-      this.size = [160, 65]; // Etwas größere Größe, damit genug Platz für die Gleichung ist
+
+      this.size = [160, 65];
     }
 
     onExecute() {
       this.inputs[0].color_off = "#000000";
 
+      // Input übernehmen oder aus savedEquation nutzen
+      let inputEquation = null;
       if (this.getInputData(0)) {
-        this.inputData = this.getInputData(0); // Holt den Wert der Gleichung
-        //console.log(" this.inputData :",  this.inputData );
+        this.inputData = this.getInputData(0);
         this.inputs[0].color_on = adjustColor(
           "#00FF00",
           "#FF0000",
           this.inputData["value"]
         );
+        inputEquation = this.toString(this.inputData);
       }
 
-      //console.log(this.properties.GleichungvorMathJax);
-      //if (! this.inputData  && !this.properties.GleichungvorMathJax) return;
-      // Funktion zur Eingabekontrolle hinzufügen
       function sanitizeEquation(equation) {
-        // Erlaubte Zeichen für MathJax (z.B. Zahlen, Buchstaben, grundlegende mathematische Symbole)
         const allowedCharacters = /^[0-9a-zA-Z+\-*/^()= ]*$/;
         return equation
           .split("")
@@ -47,86 +49,110 @@ export function _CustWatchNodeString() {
           .join("");
       }
 
-      if (this.getInputData(0)) {
-        this.properties.GleichungvorMathJax = this.toString(this.inputData);
-      } else {
-        // Eingabekontrolle anwenden
-        this.properties.savedEquation = sanitizeEquation(
-          this.properties.savedEquation
-        );
-        this.properties.GleichungvorMathJax = this.properties.savedEquation;
-      }
+      let savedEquation = this.properties.savedEquation
+        ? sanitizeEquation(this.properties.savedEquation)
+        : "";
 
-      let equation = this.properties.GleichungvorMathJax;
+      // Latex aus Input
+      let latexInput = inputEquation ? convertToLatex(inputEquation) : null;
+      // Latex aus Saved
+      let latexSaved = savedEquation ? convertToLatex(savedEquation) : null;
 
-      // Konvertiere den mathematischen Ausdruck in LaTeX mit MathJS
-      let latexEquation = convertToLatex(equation);
-      this.properties.GleichungvorKaTex = latexEquation;
-
+      // Kombinierte Abfrage zum Erkennen von Änderungen
+      let combinedEquation =
+        (inputEquation || "") + "||" + (savedEquation || "");
       // Prüfen, ob die Gleichung sich geändert hat
-      if (this.lastRenderedEquation !== equation) {
-        this.lastRenderedEquation = equation;
+      if (this.lastRenderedEquation !== combinedEquation) {
+        this.lastRenderedEquation = combinedEquation;
 
-        // Gleichung rendern und Bild speichern
-        this.renderedImage = renderWithMathJax(latexEquation, "white"); // Kein Canvas hier notwendig
+        // Neue Bilder nur dann rendern
+        this.renderedImageInput = inputEquation
+          ? renderWithMathJax(latexInput, "white")
+          : null;
+        this.renderedImageSaved = savedEquation
+          ? renderWithMathJax(latexSaved, "#ccc")
+          : null;
+      }
 
-        setTimeout(() => {
-          this.Pause = true;
-        }, 100);
+      // Node-Größe anpassen
+      let widthNeeded = 0;
+      let heightNeeded = 0;
+      if (this.renderedImageInput) {
+        widthNeeded = Math.max(widthNeeded, this.renderedImageInput.width);
+        heightNeeded += this.renderedImageInput.height;
       }
-      if (this.size[0] < this.renderedImage.width + 2 * this.offsetX) {
-        this.size[0] = this.renderedImage.width + 2 * this.offsetX;
+      if (this.renderedImageInput && this.renderedImageSaved) {
+        heightNeeded += 10;
       }
-      if (this.size[1] < this.renderedImage.height + 2 * this.offsetY) {
-        this.size[1] = this.renderedImage.height + 2 * this.offsetY;
+      if (this.renderedImageSaved) {
+        widthNeeded = Math.max(widthNeeded, this.renderedImageSaved.width);
+        heightNeeded += this.renderedImageSaved.height;
       }
+      this.size[0] = Math.max(this.size[0], widthNeeded + 2 * this.offsetX);
+      this.size[1] = Math.max(this.size[1], heightNeeded + 2 * this.offsetY);
+
+      if (this.savedEquation && this.inputEquation) {   
+      console.log(this.savedEquation + " und " + this.inputEquation);
+      }
+
+    //   // Box-Farbe abhängig von Gleichheit setzen
+    //   if (
+    //     this.properties.GleichungvorMathJax &&
+    //     this.properties.savedEquation// &&
+    //     //this.savedEquation.split("=")[1] == this.inputEquation.split("=")[1] // Nur rechte Seite vergleichen
+    //   ) {
+    //     this.boxColor = "green";
+    //   } else {
+    //     this.boxColor = null;
+    //   }
     }
 
     onDrawForeground(ctx) {
-      // Überprüfen, ob die Node "collapsed" ist
       if (this.flags && this.flags.collapsed) {
-        return; // Zeichne nichts, wenn die Node collapsed ist
+        return;
       }
 
-      // Färbe den Eingang oder zeichne einen Kreis darum
+      // Trichter am Input
       const NODE_SLOT_HEIGHT = LiteGraph.NODE_SLOT_HEIGHT;
-
-      // Relativer x-Wert für Eingänge (meistens am linken Rand der Node)
       const inputPosX = labelInputPosX;
-
-      // Relativer y-Wert basierend auf Titelhöhe und Slot-Höhe
       const inputPosY = 0 * NODE_SLOT_HEIGHT + 14;
-
-      // Parameter für die Trichterform
-      const width = labelWidth; // Breite der Basis (linke Seite)
-      const height = labelHeight; // Höhe des Trichters (von Basis bis Spitze)
-
-      // Beginne mit dem Zeichnen des Dreiecks
+      const width = labelWidth;
+      const height = labelHeight;
       ctx.beginPath();
-
-      // Input Trichter
       ctx.moveTo(0, inputPosY - height / 2);
       ctx.lineTo(inputPosX, inputPosY - height / 2);
       ctx.arc(inputPosX, inputPosY, height / 2, 0, 2 * Math.PI);
       ctx.lineTo(inputPosX, inputPosY + height / 2);
       ctx.lineTo(0, inputPosY + height / 2);
-      ctx.lineTo(0, inputPosY + height / 2);
       ctx.closePath();
-
-      // Füllen des Trichters
       ctx.fillStyle = inLabelsColor;
       ctx.fill();
 
-      if (this.Pause == false) {
-        return;
+      let currentY = this.offsetY;
+
+      // Input-Plot
+      if (this.renderedImageInput) {
+        ctx.drawImage(this.renderedImageInput, this.offsetX, currentY);
+        currentY += this.renderedImageInput.height;
       }
 
-      //console.log("this.renderedImage:", this.renderedImage);
-      //console.log("Instance of Image:", this.renderedImage instanceof Image);
-      //ctx.fillStyle = "#000FF0";
-      //ctx.fillRect(0, 0, this.size[0], this.size[1]);
-      if (this.getInputData(0)) {
-      ctx.drawImage(this.renderedImage, this.offsetX, this.offsetY);
+      // nur Linie ziehen, wenn beide existieren
+      if (this.renderedImageInput && this.renderedImageSaved) {
+        currentY += 10; // kleiner Abstand
+        ctx.beginPath();
+        ctx.moveTo(this.offsetX, currentY);
+        ctx.lineTo(
+          this.offsetX + (this.renderedImageInput.width || 100),
+          currentY
+        );
+        ctx.strokeStyle = "#999";
+        ctx.stroke();
+        currentY += 10;
+      }
+
+      // Gespeicherte Gleichung
+      if (this.renderedImageSaved) {
+        ctx.drawImage(this.renderedImageSaved, this.offsetX, currentY);
       }
     }
 

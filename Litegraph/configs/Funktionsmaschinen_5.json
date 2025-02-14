@@ -1,1 +1,327 @@
-{"last_node_id":23,"last_link_id":19,"nodes":[{"id":16,"type":"Funktionenmaschinen/Feedback_Gleichung","pos":[823,111],"size":[297,82],"flags":{},"order":5,"mode":0,"inputs":[{"name":"value","type":0,"link":18,"label":"","color_off":"#000000","color_on":"#00C000"}],"title":"Gleichung","properties":{"GleichungvorMathJax":"h(x) / g(x) = (x^3) / (x^2)","GleichungvorKaTex":"\\frac{\\mathrm{h}\\left( x\\right)}{\\mathrm{g}\\left( x\\right)} = \\frac{\\left({ x}^{3}\\right)}{\\left({ x}^{2}\\right)}","savedEquation":"0"},"color":"#879BCE","bgcolor":"#7C8693"},{"id":20,"type":"Funktionenmaschinen/Funktion","pos":[308,137],"size":[175,120],"flags":{},"order":2,"mode":0,"inputs":[{"name":"UV","type":"object","link":10,"label":"x","color_off":"#000000","slot_index":0,"color_on":"#00C000"},{"name":"","type":"object","link":null,"label":"","color_off":"#7C8693"},{"name":"","type":"object","link":null,"label":"","color_off":"#7C8693"},{"name":"","type":"object","link":null,"label":"","color_off":"#7C8693"},{"name":"","type":"object","link":null,"label":"","color_off":"#7C8693"}],"outputs":[{"name":"","type":"object","links":[11],"color_off":"#000000","label":"h(x)","color_on":"#00E800","slot_index":0}],"title":"Funktion","properties":{"funcName":"h","formula":"x**3","leftSide":"h(x)","rightSide":"x","uvName":"x","paramsFromWidget":["","","",""],"paramNames":["","","",""],"paramValues":[0,0,0,0],"evaluatedFormula":"x**3","uvError":false,"completeEquationfromWidget":"h(x) = x^3","finalEquation":"x**3","widgetVisible":false},"color":"#88B19B","bgcolor":"#7C8693"},{"id":17,"type":"Funktionenmaschinen/Feedback_Graph","pos":[773.6582861856558,292.5984571259025],"size":[350,380],"flags":{},"order":4,"mode":0,"inputs":[{"name":"","type":"object","link":15,"color_off":"#000000","color_on":"#00C000"},{"name":"","type":"object","link":null,"color_off":"#000000","color_on":"#00CD00"},{"name":"","type":"object","link":null,"color_off":"#000000","color_on":"#00D200"},{"name":"","type":"object","link":null,"color_off":"#000000"}],"title":"Graph","properties":{"xRangeValue":10.2,"yRangeValue":10.2,"scaleX":1,"scaleY":1,"gridSize":1.02,"discontinuityThreshold":100,"margin":30,"marginTop":80,"xRange":[-10.2,10.2],"yRange":[-10.2,10.2],"equations":["(x**3) / (x**2)","","","",""],"uvNames":["x","","","",""],"savedEquation":"","savedUV":"","whiteBackground":false,"noPlot":false},"color":"#879BCE","bgcolor":"#000000"},{"id":12,"type":"Funktionenmaschinen/Unabhängige_Variable","pos":[87,318],"size":[180,80],"flags":{"collapsed":false},"order":0,"mode":0,"outputs":[{"name":"value","type":"object","links":[8,10],"color_off":"#000000","label":"","color_on":"#00C000","slot_index":0}],"properties":{"value":3.100000000000002,"rightSide":"x","widgetVisible":true},"color":"#D0AF8B","bgcolor":"#7C8693","shape":2},{"id":13,"type":"Funktionenmaschinen/Funktion","pos":[367,402],"size":[165,120],"flags":{},"order":1,"mode":0,"inputs":[{"name":"UV","type":"object","link":8,"label":"x","color_off":"#000000","color_on":"#00C000"},{"name":"","type":"object","link":null,"label":"","color_off":"#7C8693","color_on":"#A60000"},{"name":"","type":"object","link":null,"label":"","color_off":"#7C8693"},{"name":"","type":"object","link":null,"label":"","color_off":"#7C8693"},{"name":"","type":"object","link":null,"label":"","color_off":"#7C8693"}],"outputs":[{"name":"","type":"object","links":[12],"color_off":"#000000","slot_index":0,"label":"g(x)","color_on":"#00DA00"}],"title":"Funktion","properties":{"funcName":"g","formula":"x**2","leftSide":"g(x)","rightSide":"x","uvName":"x","paramsFromWidget":["","","",""],"paramNames":["","","",""],"paramValues":[0,0,0,0],"evaluatedFormula":"x**2","uvError":false,"completeEquationfromWidget":"g(x) = x^2","finalEquation":"x**2","widgetVisible":false},"color":"#88B19B","bgcolor":"#7C8693"},{"id":19,"type":"Funktionenmaschinen/Operation","pos":[576,265],"size":{"0":150,"1":78},"flags":{},"order":3,"mode":0,"inputs":[{"name":"","type":"object","link":11,"color_off":"#000000","color_on":"#00E800"},{"name":"","type":"object","link":12,"color_off":"#000000","color_on":"#00DA00"}],"outputs":[{"name":"","type":"object","links":[15,18],"color_off":"#000000","color_on":"#00C000","slot_index":0}],"title":"Operation","properties":{"Out_leftSideOfEquation":"h(x) / g(x)","Out_rightSideOfEquation":"(x**3) / (x**2)","Result_Value":3.1,"Operation":"/","Fehlermeldung":"","widgetVisible":true},"color":"#88B19B","bgcolor":"#7C8693"}],"links":[[8,12,0,13,0,"object"],[10,12,0,20,0,"object"],[11,20,0,19,0,"object"],[12,13,0,19,1,"object"],[15,19,0,17,0,"object"],[18,19,0,16,0,"object"]],"groups":[],"config":{},"extra":{},"version":0.4}
+{
+  "last_node_id": 23,
+  "last_link_id": 19,
+  "nodes": [
+    {
+      "id": 16,
+      "type": "Funktionenmaschinen/Feedback_Gleichung",
+      "pos": [823, 111],
+      "size": [297, 82],
+      "flags": {},
+      "order": 5,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "value",
+          "type": 0,
+          "link": 18,
+          "label": "",
+          "color_off": "#000000",
+          "color_on": "#00C000"
+        }
+      ],
+      "title": "Gleichung",
+      "properties": {
+        "GleichungvorMathJax": "h(x) / g(x) = (x^3) / (x^2)",
+        "GleichungvorKaTex": "\\frac{\\mathrm{h}\\left( x\\right)}{\\mathrm{g}\\left( x\\right)} = \\frac{\\left({ x}^{3}\\right)}{\\left({ x}^{2}\\right)}",
+        "savedEquation": ""
+      },
+      "color": "#879BCE",
+      "bgcolor": "#7C8693"
+    },
+    {
+      "id": 20,
+      "type": "Funktionenmaschinen/Funktion",
+      "pos": [308, 137],
+      "size": [175, 120],
+      "flags": {},
+      "order": 2,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "UV",
+          "type": "object",
+          "link": 10,
+          "label": "x",
+          "color_off": "#000000",
+          "slot_index": 0,
+          "color_on": "#00C000"
+        },
+        {
+          "name": "",
+          "type": "object",
+          "link": null,
+          "label": "",
+          "color_off": "#7C8693"
+        },
+        {
+          "name": "",
+          "type": "object",
+          "link": null,
+          "label": "",
+          "color_off": "#7C8693"
+        },
+        {
+          "name": "",
+          "type": "object",
+          "link": null,
+          "label": "",
+          "color_off": "#7C8693"
+        },
+        {
+          "name": "",
+          "type": "object",
+          "link": null,
+          "label": "",
+          "color_off": "#7C8693"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "",
+          "type": "object",
+          "links": [11],
+          "color_off": "#000000",
+          "label": "h(x)",
+          "color_on": "#00E800",
+          "slot_index": 0
+        }
+      ],
+      "title": "Funktion",
+      "properties": {
+        "funcName": "h",
+        "formula": "x**3",
+        "leftSide": "h(x)",
+        "rightSide": "x",
+        "uvName": "x",
+        "paramsFromWidget": ["", "", "", ""],
+        "paramNames": ["", "", "", ""],
+        "paramValues": [0, 0, 0, 0],
+        "evaluatedFormula": "x**3",
+        "uvError": false,
+        "completeEquationfromWidget": "h(x) = x^3",
+        "finalEquation": "x**3",
+        "widgetVisible": false
+      },
+      "color": "#88B19B",
+      "bgcolor": "#7C8693"
+    },
+    {
+      "id": 17,
+      "type": "Funktionenmaschinen/Feedback_Graph",
+      "pos": [773.6582861856558, 292.5984571259025],
+      "size": [350, 380],
+      "flags": {},
+      "order": 4,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "",
+          "type": "object",
+          "link": 15,
+          "color_off": "#000000",
+          "color_on": "#00C000"
+        },
+        {
+          "name": "",
+          "type": "object",
+          "link": null,
+          "color_off": "#000000",
+          "color_on": "#00CD00"
+        },
+        {
+          "name": "",
+          "type": "object",
+          "link": null,
+          "color_off": "#000000",
+          "color_on": "#00D200"
+        },
+        { "name": "", "type": "object", "link": null, "color_off": "#000000" }
+      ],
+      "title": "Graph",
+      "properties": {
+        "xRangeValue": 10.2,
+        "yRangeValue": 10.2,
+        "scaleX": 1,
+        "scaleY": 1,
+        "gridSize": 1.02,
+        "discontinuityThreshold": 100,
+        "margin": 30,
+        "marginTop": 80,
+        "xRange": [-10.2, 10.2],
+        "yRange": [-10.2, 10.2],
+        "equations": ["(x**3) / (x**2)", "", "", "", ""],
+        "uvNames": ["x", "", "", "", ""],
+        "savedEquation": "",
+        "savedUV": "",
+        "whiteBackground": false,
+        "noPlot": false
+      },
+      "color": "#879BCE",
+      "bgcolor": "#000000"
+    },
+    {
+      "id": 12,
+      "type": "Funktionenmaschinen/Unabhängige_Variable",
+      "pos": [87, 318],
+      "size": [180, 80],
+      "flags": { "collapsed": false },
+      "order": 0,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "value",
+          "type": "object",
+          "links": [8, 10],
+          "color_off": "#000000",
+          "label": "",
+          "color_on": "#00C000",
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "value": 3.100000000000002,
+        "rightSide": "x",
+        "widgetVisible": true
+      },
+      "color": "#D0AF8B",
+      "bgcolor": "#7C8693",
+      "shape": 2
+    },
+    {
+      "id": 13,
+      "type": "Funktionenmaschinen/Funktion",
+      "pos": [367, 402],
+      "size": [165, 120],
+      "flags": {},
+      "order": 1,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "UV",
+          "type": "object",
+          "link": 8,
+          "label": "x",
+          "color_off": "#000000",
+          "color_on": "#00C000"
+        },
+        {
+          "name": "",
+          "type": "object",
+          "link": null,
+          "label": "",
+          "color_off": "#7C8693",
+          "color_on": "#A60000"
+        },
+        {
+          "name": "",
+          "type": "object",
+          "link": null,
+          "label": "",
+          "color_off": "#7C8693"
+        },
+        {
+          "name": "",
+          "type": "object",
+          "link": null,
+          "label": "",
+          "color_off": "#7C8693"
+        },
+        {
+          "name": "",
+          "type": "object",
+          "link": null,
+          "label": "",
+          "color_off": "#7C8693"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "",
+          "type": "object",
+          "links": [12],
+          "color_off": "#000000",
+          "slot_index": 0,
+          "label": "g(x)",
+          "color_on": "#00DA00"
+        }
+      ],
+      "title": "Funktion",
+      "properties": {
+        "funcName": "g",
+        "formula": "x**2",
+        "leftSide": "g(x)",
+        "rightSide": "x",
+        "uvName": "x",
+        "paramsFromWidget": ["", "", "", ""],
+        "paramNames": ["", "", "", ""],
+        "paramValues": [0, 0, 0, 0],
+        "evaluatedFormula": "x**2",
+        "uvError": false,
+        "completeEquationfromWidget": "g(x) = x^2",
+        "finalEquation": "x**2",
+        "widgetVisible": false
+      },
+      "color": "#88B19B",
+      "bgcolor": "#7C8693"
+    },
+    {
+      "id": 19,
+      "type": "Funktionenmaschinen/Operation",
+      "pos": [576, 265],
+      "size": { "0": 150, "1": 78 },
+      "flags": {},
+      "order": 3,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "",
+          "type": "object",
+          "link": 11,
+          "color_off": "#000000",
+          "color_on": "#00E800"
+        },
+        {
+          "name": "",
+          "type": "object",
+          "link": 12,
+          "color_off": "#000000",
+          "color_on": "#00DA00"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "",
+          "type": "object",
+          "links": [15, 18],
+          "color_off": "#000000",
+          "color_on": "#00C000",
+          "slot_index": 0
+        }
+      ],
+      "title": "Operation",
+      "properties": {
+        "Out_leftSideOfEquation": "h(x) / g(x)",
+        "Out_rightSideOfEquation": "(x**3) / (x**2)",
+        "Result_Value": 3.1,
+        "Operation": "/",
+        "Fehlermeldung": "",
+        "widgetVisible": true
+      },
+      "color": "#88B19B",
+      "bgcolor": "#7C8693"
+    }
+  ],
+  "links": [
+    [8, 12, 0, 13, 0, "object"],
+    [10, 12, 0, 20, 0, "object"],
+    [11, 20, 0, 19, 0, "object"],
+    [12, 13, 0, 19, 1, "object"],
+    [15, 19, 0, 17, 0, "object"],
+    [18, 19, 0, 16, 0, "object"]
+  ],
+  "groups": [],
+  "config": {},
+  "extra": {},
+  "version": 0.4
+}

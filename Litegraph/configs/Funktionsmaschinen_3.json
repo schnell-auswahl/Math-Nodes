@@ -278,7 +278,7 @@
       "properties": {
         "GleichungvorMathJax": "0",
         "GleichungvorKaTex": "0",
-        "savedEquation": "0"
+        "savedEquation": ""
       },
       "color": "#879BCE",
       "bgcolor": "#7C8693"
