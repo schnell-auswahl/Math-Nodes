@@ -1,0 +1,256 @@
+<!DOCTYPE HTML>
+<!--
+	Forty by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+
+<head>
+	<title>Funktionsmaschinen_2</title>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+	<link rel="stylesheet" href="assets/css/main.css" />
+	<noscript>
+		<link rel="stylesheet" href="assets/css/noscript.css" />
+	</noscript>
+
+	<!-- Ab hier brauchen wir alles für Litegraph -->
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.13.11/dist/katex.min.css">
+
+	<!-- Einbinden der KaTeX JavaScript-Datei, die für das Rendern von mathematischen Ausdrücken verantwortlich ist -->
+	<script src="https://cdn.jsdelivr.net/npm/katex@0.13.11/dist/katex.min.js"></script>
+
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/10.2.0/math.min.js"></script>
+
+	<!-- Mathjax als KAtex Alternative -->
+	<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
+
+	<!-- Stile für den LiteGraph Inspector (kann angepasst werden) -->
+	<link rel="stylesheet" type="text/css" href="./inspector.css">
+	<link rel="stylesheet" type="text/css" href="./Litegraph/litegraph.css">
+	<script type="text/javascript" src="./Litegraph/litegraph.js"></script>
+	<script type="module" src="./Litegraph/createGraph.js" ;></script>
+
+
+</head>
+
+<body class="is-preload">
+
+	<!-- Wrapper -->
+	<div id="wrapper">
+
+		<!-- Header -->
+		<!-- Header -->
+		<header id="header" class="alt">
+			<a href="index.html" class="logo"><strong>Math-Nodes</strong> <span>Nicolas Regel</span></a>
+			<nav>
+				<a href="#menu">Menü</a>
+			</nav>
+		</header>
+		<!-- Menu -->
+		<nav id="menu">
+			<ul class="links">
+				<li><a href="Wortmaschinen.html">1: Wortmaschinen</a></li>
+				<li><a href="Funktionsmaschinen.html">2: Funktionsmaschinen</a></li>
+				<li><a href="Funktionsmaschinen.html">3: Funktionsmaschinen</a></li>
+				<li><a href="FunktionenHoeren.html">4: Funktionen hören</a></li>
+				<li><a href="Eigene_Aufgaben.html">Eigene Aufgaben erstellen</a></li>
+				<li><a href="Anleitung_Landing.html">Anleitung</a></li>
+				<li><a href="Impressum.html">Impressum</a></li>
+			</ul>
+			<ul class="actions stacked">
+				<li><a href="index.html" class="button primary fit">Startseite</a></li>
+			</ul>
+		</nav>
+
+		<!-- Banner -->
+		<!-- Note: The "styleN" class below should match that of the header element. -->
+		<section id="banner" class="style3">
+			<div class="inner">
+				<span class="image">
+					<img src="images/pic07.jpg" alt="" />
+				</span>
+				<header class="major">
+					<h1>Funktionsmaschinen</h1>
+				</header>
+				<div class="content">
+					<p>Funktionsmaschinen für Fortgeschrittene</p>
+				</div>
+			</div>
+		</section>
+
+		<!-- Main -->
+		<div id="main">
+			<!-- One -->
+			<section id="one" class="aufgabenEnde">
+				<div class="inner">
+					<header class="major" class="liteGraph">
+						<h2>Funktionen als Maschinen</h2>
+					</header>
+
+					<p>Hier findest du weiterführende Aufgaben zu den Funktionsmaschinen. Insbesondere neu dazukommen Parameter und die Idee der Modulation.</p>
+					<p>Zu dieser Seite gehört das dritte Kapitel im Arbeitsheft. Dort sollst du deine Ergebnisse festhalten. Du kannst es
+						hier herunterladen: </p>
+					<ul class="actions">
+						<a href="Latex/Arbeitsheft_Math-Nodes.pdf" class="button icon solid fa-download">Arbeitsheft Download</a>
+					</ul>
+				</div>
+
+			</section>
+
+			<!-- Two -->
+			<section id="two" class="spotlights">
+				<section>
+
+					<div class="content stylethreeColor">
+						<div class="inner">
+							<header class="major">
+								<h3>1 Parameter</h3>
+							</header>
+							<p>In Math-Nodes haben Funktionsmaschinen zusätzlich zur unabhängigen Variable noch weitere Eingänge. Dort kannst du Parameter-Maschinen anschließen, die du dann in der Funktionsmaschine verwenden kannst. </p>
+							<p>Solange der Name des Parameters mit dem in der Funktionsgleichung übereinstimmt, kannst du jeden der vier Parametereingänge nutzen.
+							</p>
+							<p>Schließe den Parameter \(a\) aus dem Beispiel an die Funktionsmaschine an und verändere den eingestellten Wert. Beschreibe, wie sich der Graph der Funktion abhängig vom Parameterwert ändert.</p>
+						</div>
+					</div>
+					<div class="image">
+						<canvas id="graphCanvas1" data-resize="true" data-zoom="1" lgtype="Funktionsmaschinen"
+								data-config-path="Litegraph/configs/FunktionsmaschinenC2_1.json"></canvas>
+						<script type="module">
+							import { createGraphInstance } from './Litegraph/createGraph.js';
+							createGraphInstance("graphCanvas1");
+						</script>
+					</div>
+
+				</section>
+				<section>
+					<div class="content stylethreeColor">
+						<div class="inner">
+							<header class="major">
+								<h3>2 Modulation</h3>
+							</header>
+							<p>Betrachte zunächst die Funktion \(g\). Welchen Einfluss auf den Graphen hat der Parameter \(b\)? Probiere aus und beschreibe im Arbeitsheft.</p>
+							<p>Die Funktion \(f\) sieht beinahe aus wie \(g\). Statt des Parameters \(b\) ist hier aber eine Funktion \(c\) an den Parametereingang angeschlossen. Beschreibe den Verlauf des Graphen von \(f\). Nutze dein Wissen über den Einfluss des Parameters \(b\) bei der Funktion \(g\), um den Einfluss der Funktion \(c\) auf die Funktion \(f\) zu beschreiben.   </p>
+						
+						</div>
+					
+					</div>
+					<div class="image">
+						<canvas id="graphCanvas2" data-resize="true" data-zoom="0.9"
+						data-config-path="Litegraph/configs/FunktionsmaschinenC2_2.json"
+							lgtype="Funktionsmaschinen"></canvas>
+						<script type="module">
+							import { createGraphInstance } from './Litegraph/createGraph.js';
+							createGraphInstance("graphCanvas2");
+						</script>
+					</div>
+				</section>
+				
+			</section>
+
+		<!-- Fourb -->
+		<section id="fourb" style="position: relative;" class="stylethreeColor">
+			<div class="inner">
+				<header class="major">
+					<h2>7 Modulation</h2>
+				</header>
+				<p>Betrachte zunächst die Funktionen \(f\) und \(g\) im ersten Fenster. Welchen Einfluss auf den Graphen haben jeweils die Parameter \(a\) und \(b\)? Probiere aus und beschreibe im Arbeitsheft.</p>
+				<p>Die Funktionen \(f\) und \(g\) im zweiten Fenster sehen beinahe aus wie im ersten. Statt der Parameter sind hier aber Funktionen \(a\) und \(b\) an die Parametereingänge angeschlossen. Beschreibe den Verlauf der Graphen von \(f\) und \(g\) und den Einfluss der Funktionen \(a\) und \(b\) auf den Verlauf. </p>
+				<p>Kann dir dein Wissen zum Einfluss der Parameter helfen?</p>
+			</div>
+		</section>
+		<!-- LiteGraph Canvas -->
+		<section id="litegraph">
+			<div id="graphstylehalfheight">
+				<canvas id="graphCanvas6" data-resize="true" lgtype="Funktionsmaschinen"
+				data-config-path="Litegraph/configs/FunktionsmaschinenC2_2a.json"
+					></canvas>
+			</div>
+			<script type="module">
+				import { createGraphInstance } from './Litegraph/createGraph.js';
+				createGraphInstance("graphCanvas6");
+			</script>
+		</section>
+			<!-- LiteGraph Canvas -->
+			<section id="litegraph">
+				<div id="graphstylehalfheight">
+					<canvas id="graphCanvas7" data-resize="true" lgtype="Funktionsmaschinen"
+					data-config-path="Litegraph/configs/FunktionsmaschinenC2_2b.json"
+						></canvas>
+				</div>
+				<script type="module">
+					import { createGraphInstance } from './Litegraph/createGraph.js';
+					createGraphInstance("graphCanvas7");
+				</script>
+			</section>
+
+			<section id="Tipp1" class="aufgabenEnde">
+				<div class="inner">
+					<h4>Tipp:</h4>
+					<p>Parameter kannst du dir vorstellen wie Drehknöpfe, mit denen du an einer Funktion "rumschrauben" kannst. Du kannst dir Fragen stellen wie: "Was macht es mit der Funktion, wenn dieser Parameter sehr groß oder nahe null ist?"</p>
+					
+					<p>Manchmal ist es hilfreich, sich Teile einer Funktion vorzustellen, als würden sie einen dieser Drehknöpfe ersetzen. Bei \(g(x)=sin(b(x)\cdot x)\) kannst du dir z.B. vorstellen, dass jemand den Drehknopf so bewegt, wie die angeschlossene Funktion \(b(x)\) verläuft. In diesem Beispiel wird der Knopf z.B. linear immer weiter hochgedreht. Wenn du weißt, was ein Parameter an der Stelle der Funktion \(g\) beeinflussen würde, weißt du auch, was die Funktion \(b\) dort macht.</p>
+					
+				
+				</div>
+			</section>
+
+			
+
+		<!-- Contact -->
+		<section id="contact">
+			<div class="inner">
+
+				<section>
+					<section>
+						<div class="contact-method">
+							<span class="icon solid alt fa-envelope"></span>
+							<h3>Mail</h3>
+							<a href="mailto:Nicolas.Regel@TU-Dresden.de">Nicolas.Regel@TU-Dresden.de</a>
+						</div>
+					</section>
+					<section>
+						<div class="contact-method">
+							<span class="icon solid alt fa-phone"></span>
+							<h3>Telefon</h3>
+							<span>0351 46332074</span>
+						</div>
+					</section>
+
+				</section>
+			</div>
+		</section>
+
+
+
+		<!-- Footer -->
+		<footer id="footer">
+			<div class="inner">
+				<ul class="icons">
+					<li><a href="https://github.com/schnell-auswahl/Math-Nodes" class="icon brands alt fa-github"><span class="label">GitHub</span></a></li>
+				</ul>
+				<ul class="copyright">
+					<li>&copy; Nicolas Regel 2024</li>
+					<li>Designtemplate: <a href="https://html5up.net">HTML5 UP</a></li>
+				</ul>
+			</div>
+		</footer>
+
+	</div>
+
+	<!-- Scripts -->
+	<script src="assets/js/jquery.min.js"></script>
+	<script src="assets/js/jquery.scrolly.min.js"></script>
+	<script src="assets/js/jquery.scrollex.min.js"></script>
+	<script src="assets/js/browser.min.js"></script>
+	<script src="assets/js/breakpoints.min.js"></script>
+	<script src="assets/js/util.js"></script>
+	<script src="assets/js/main.js"></script>
+	<script src="assets/js/scripts.js"></script>
+
+
+
+</body>
+
+</html>

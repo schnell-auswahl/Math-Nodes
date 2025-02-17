@@ -10001,11 +10001,11 @@ this.dirty_canvas = true; //to force to repaint the front canvas with the bgcanv
                         ctx.textAlign = "center";
                         ctx.fillStyle = text_color;
                         ctx.fillText(
-                            w.label || w.name + "  " + Number(w.value).toFixed(
-                                                            w.options.precision != null
-                                                                ? w.options.precision
-                                                                : 3
-                                                        ),
+                            w.label || w.name, // + "  " + Number(w.value).toFixed(
+                                                        //     w.options.precision != null
+                                                        //         ? w.options.precision
+                                                        //         : 3
+                                                        // ),
                             widget_width * 0.5,
                             y + H * 0.7
                         );

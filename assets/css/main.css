@@ -4305,3 +4305,14 @@ div.tableofcontents a.toggle:hover {
 .paginationsolocontent {
 	margin-top: 20px;
 }
+
+
+/* body {
+    counter-reset: a;
+}
+
+.aufgabe h3::before,
+.aufgabe h4::before {
+    content: counter(a) " ";
+	counter-increment: a;
+} */
