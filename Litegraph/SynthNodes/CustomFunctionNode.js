@@ -43,7 +43,7 @@ export function _FunctionNode() {
           // Callback-Funktion für Eingabeänderungen
 
           // Überprüfung der Eingabe:
-          const functionRegex = /^[a-zA-Z]\([a-zA-Z]\)\s*=\s*[-+*/^()0-9a-zA-Z\s]*$/;
+                const functionRegex = /^[a-zA-Z]\([a-zA-Z]\)\s*=\s*[-+*/^()0-9a-zA-Z.\s]*$/;
 
           // ^                - Start des Strings
           // [a-zA-Z]        - Ein Buchstabe (Funktionsname)

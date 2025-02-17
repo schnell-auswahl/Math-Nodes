@@ -27,16 +27,15 @@ export function _CustomGraphicsPlot() {
         noPlot: false,
       };
 
-      // Widgets für xRange und yRange als Knobs
+           // Widgets für xRange und yRange als Knobs
       this.addWidget(
         "slider",
         "Zoom X-Richtung",
-        this.properties.xRangeValue,
+        Math.round(((Math.pow(101,this.properties.xRangeValue  / 100) - 1) + Number.EPSILON) * 10) / 10,
         (value) => {
           this.properties.xRangeValue =
-            Math.round((value + Number.EPSILON) * 10) / 10;
-          //const roundedValue = Math.round((parseFloat(this.properties["value"]) + Number.EPSILON) * 100) / 100;
-
+            Math.round(((Math.pow(101, value / 100) - 1) + Number.EPSILON) * 10) / 10;
+      
           this.properties.xRange = [
             -this.properties.xRangeValue,
             this.properties.xRangeValue,
@@ -47,14 +46,15 @@ export function _CustomGraphicsPlot() {
         },
         { min: 0.1, max: 100, step: 0.1, precision: 1 }
       );
-
+      
       this.addWidget(
         "slider",
         "Zoom Y-Richtung",
-        this.properties.yRangeValue,
+        Math.round(((Math.pow(101,this.properties.yRangeValue  / 100) - 1) + Number.EPSILON) * 10) / 10,
         (value) => {
           this.properties.yRangeValue =
-            Math.round((value + Number.EPSILON) * 10) / 10;
+            Math.round(((Math.pow(101, value / 100) - 1) + Number.EPSILON) * 10) / 10;
+      
           this.properties.yRange = [
             -this.properties.yRangeValue,
             this.properties.yRangeValue,
@@ -63,7 +63,7 @@ export function _CustomGraphicsPlot() {
             this.properties.gridSize = this.properties.yRangeValue / 10;
           }
         },
-        { min: 0.1, max: 100, step: 0.1, precision: 1 }
+        { min: 0.001, max: 100, step: 0.001, precision: 1 }
       );
 
       this.widgets_start_y = 10; //Widgets sitzen neben ins
@@ -131,7 +131,7 @@ export function _CustomGraphicsPlot() {
             if (equation == this.properties.savedEquation) {
               this.boxcolor = "#00FF00";
             } else {
-              this.boxcolor = "#000000";
+              this.boxcolor = null;
             }
         
             
@@ -145,7 +145,7 @@ export function _CustomGraphicsPlot() {
        
       }
       if (!(this.getInputData(0)||this.getInputData(1)||this.getInputData(2)||this.getInputData(3))) {
-        this.boxcolor = "#000000";
+        this.boxcolor = null;
       }
 
     }

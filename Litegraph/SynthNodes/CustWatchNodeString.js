@@ -91,20 +91,22 @@ export function _CustWatchNodeString() {
       this.size[0] = Math.max(this.size[0], widthNeeded + 2 * this.offsetX);
       this.size[1] = Math.max(this.size[1], heightNeeded + 2 * this.offsetY);
 
-      if (this.savedEquation && this.inputEquation) {   
-      console.log(this.savedEquation + " und " + this.inputEquation);
-      }
-
-    //   // Box-Farbe abhängig von Gleichheit setzen
-    //   if (
-    //     this.properties.GleichungvorMathJax &&
-    //     this.properties.savedEquation// &&
-    //     //this.savedEquation.split("=")[1] == this.inputEquation.split("=")[1] // Nur rechte Seite vergleichen
-    //   ) {
-    //     this.boxColor = "green";
-    //   } else {
-    //     this.boxColor = null;
-    //   }
+     
+      // Box-Farbe abhängig von Gleichheit setzen
+      if (
+        inputEquation &&
+        this.properties.savedEquation &&
+        inputEquation.includes("=") &&
+        this.properties.savedEquation.includes("=")
+      ) {
+        if (
+          this.properties.savedEquation.split("=")[1].replace(/\s+/g, '') == inputEquation.split("=")[1].replace(/\s+/g, '')
+        ) {
+          this.boxcolor = "#00FF00";
+        } else {
+          this.boxcolor = null;
+        }
+      } 
     }
 
     onDrawForeground(ctx) {
