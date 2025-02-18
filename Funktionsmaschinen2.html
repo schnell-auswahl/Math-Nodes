@@ -128,10 +128,11 @@
 					<div class="content stylethreeColor">
 						<div class="inner">
 							<header class="major">
-								<h3>2 Modulation</h3>
+								<h3>2 Triff den Graph</h3>
 							</header>
-							<p>Betrachte zunächst die Funktion \(g\). Welchen Einfluss auf den Graphen hat der Parameter \(b\)? Probiere aus und beschreibe im Arbeitsheft.</p>
-							<p>Die Funktion \(f\) sieht beinahe aus wie \(g\). Statt des Parameters \(b\) ist hier aber eine Funktion \(c\) an den Parametereingang angeschlossen. Beschreibe den Verlauf des Graphen von \(f\). Nutze dein Wissen über den Einfluss des Parameters \(b\) bei der Funktion \(g\), um den Einfluss der Funktion \(c\) auf die Funktion \(f\) zu beschreiben.   </p>
+							<p> In der Graph-Maschine siehst du den Graphen einer quadratischen Funktion. Stelle die Parameter der Funktion \(f\) so ein, dass der Graph von \(f\) dem in der Maschine entspricht. Gib die eingestellten Werte der Parameter im Arbeitsheft an und beschreibe, was die 3 Parameter jeweils am Graphen verändern.</p>
+							
+							<p>Finde möglichst viele quadratische Funktionen/ Einstellungen für die Parameter, sodass \( f(-2.5)=4\) ist. Skizziere 3 möglichst verschiedene Lösungen. Gib die Parameterwerte an.</p>
 						
 						</div>
 					
@@ -194,6 +195,30 @@
 					
 				
 				</div>
+			</section>
+			<!-- Fourc -->
+			<section id="three" style="position: relative;" class="stylethreeColor">
+				<div class="inner">
+					<header class="major">
+						<h2>8 Funktionenpuzzle</h2>
+					</header>
+					<p>Verknüpfe und/oder verkette die Maschinen so, dass die weißen Graphen entstehen. Gib jeweils den zugehörigen Funktionsterm an. Du brauchst nicht ganz alle Maschinen.
+					</p>
+					
+
+				</div>
+				<!-- LiteGraph Canvas -->
+				<section id="litegraph">
+					<div id="graphstylefulldouble">
+						<canvas id="graphCanvas8" data-resize="true" 	data-zoom="0.9"lgtype="Funktionsmaschinen"
+							data-config-path="Litegraph/configs/Funktionsmaschinen_AH_A5.json"></canvas>
+					</div>
+					<script type="module">
+						import { createGraphInstance } from './Litegraph/createGraph.js';
+						// Erstelle die Graphen für beide Canvas-Elemente
+						createGraphInstance("graphCanvas8");
+					</script>
+				</section>
 			</section>
 
 			

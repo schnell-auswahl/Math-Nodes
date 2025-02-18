@@ -1078,6 +1078,16 @@ function showFrequentlyUsedFunctionsMenu(graph, canvasElement, clickedNode) {
         widgetVisible: false,
       },
     },
+    {
+      name: "STANDARD-HYPERBEL: s(x) = 1/x",
+      properties: {
+        funcName: "s",
+        formula: "1/x",
+        uvName: "x",
+        completeEquationfromWidget: "s(x) = 1/x",
+        widgetVisible: false,
+      },
+    },
   ];
 
   // Schließen-Button für das Menü
