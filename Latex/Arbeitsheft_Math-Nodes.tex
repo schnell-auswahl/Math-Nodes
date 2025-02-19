@@ -12,6 +12,8 @@
 \usepackage{background}
 \usepackage[skip=10pt plus1pt]{parskip}
 \usepackage{amsmath}
+\usepackage{tikz,lipsum,lmodern}
+\usepackage[most]{tcolorbox}
 \usepackage[export]{adjustbox}
 
 \usepackage[margin=2cm]{geometry}
@@ -171,6 +173,17 @@
 }
 
 
+% Definition der Tipp-Umgebung
+\newenvironment{tipp}[1][Tipp]
+{\begin{tcolorbox}[center,colback=bgblue,colframe=bgblue,sharp corners,colupper=white,collower=white,width=\paperwidth, left=(\paperwidth-\textwidth)/2,right=(\paperwidth-\textwidth)/2, bottom=\baselineskip, top=\baselineskip, parbox=false  ]
+  {\sffamily\sbseries\fontsize{12}{11}\selectfont #1} 
+  \tcblower
+  
+
+}
+{
+\end{tcolorbox}
+}
 
 \begin{document}
 
@@ -221,6 +234,9 @@
 
 \chapterstartpage{Wortmaschinen}{NACHRICHTEN VER- UND ENTSCHLÜSSELN}{customlightblue}{Bilder/Wortmaschinen_Titel.png}
 
+
+
+
 \section{Deine erste Verbindung}
 Verbinde die unteren Maschinen wie im Beispiel oben, indem du ein Kabel vom Ausgang der
   Texteingabe zum Eingang des Textdisplays ziehst. Wenn du das geschafft hast, klicke auf
@@ -228,6 +244,7 @@ Verbinde die unteren Maschinen wie im Beispiel oben, indem du ein Kabel vom Ausg
   Display? Du kannst Verbindungen auch wieder lösen, indem du am Ausgang anfasst und die
   Verbindung von da wieder löst. Versuche es!\par
   Wenn du zu wenig Platz auf deinem Bildschirm hast, kannst du die Maschinen über das Menü verkleinern oder den Vollbildmodus nutzen.
+
 \section{Deinen ersten Text verschlüsseln}
 Du kannst deinen Text mit verschiedenen Maschinen manipulieren. Verbinde dazu die Texteingabe-Maschine mit der Vokaltanz-Maschine und diese dann mit der Text-Anzeige-Maschine. Was passiert mit deinem Text?
 \par
@@ -315,6 +332,13 @@ Im Arbeitsheft findest du ein zweites Beispiel. Gib dafür die Funktionsgleichun
 \textsb{Beachte:} Die Feedbackmaschine in Math-Nodes vereinfacht die Funktionsterme nicht. Kannst du den Term noch vereinfachen?\par
 \includegraphics[width=\textwidth]{Bilder/Funktionsmaschinen_5.png}
 \handwritinglines{3}
+\newpage
+\begin{tipp}
+  In vielen Aufgaben in Math-Nodes ist die Struktur, in der verkettet und verknüpft wird, schon vorgegeben und du sollst die passenden Funktionen und Operationen für die gegebene Struktur auswählen.\par
+Klickst du doppelt auf eine Funktionsmaschine, werden dir ein paar häufig verwendete Funktionen vorgeschlagen. Wenn es nicht explizit anders in der Aufgabe steht, kannst du die Aufgabe mit diesen Funktionen lösen. Die verschiedenen Operationen kannst du einfach im Widget der Operationsmaschine auswählen.\par
+In vielen Aufgaben ist in der Gleichungs-Maschine eine Funktionsgleichung vorgegeben, die du verkabeln sollst. Schließt du zusätzlich eine Lösung an, siehst du beide Gleichungen untereinander.
+\end{tipp}
+
 \section{Verknüpfen und Verketten}
 Wähle die Funktionen und die Operation so, dass du den angegebenen Funktionsterm erhältst. Notiere deine Lösung und skizziere den Graph. Beschreibe, welchen Einfluss die Terme $x^3$ und $ln(x)$ auf den Graph haben.\par
 \includegraphics[width=\textwidth]{Bilder/Funktionsmaschinen_6.png}
