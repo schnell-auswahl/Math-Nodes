@@ -92,7 +92,7 @@
 					<p>Eine mathematische Funktion kannst du dir vorstellen wie eine Maschine mit einem Eingang und
 						einem Ausgang. Man gibt etwas in die Maschine hinein und erhält dann etwas am Ausgang der
 						Maschine. Eine wichtige Eigenschaft von Funktionen ist dabei, dass immer das Gleiche am Ausgang
-						rauskommt, wenn wir das Gleiche am Eingang einwerfen. Auf dieser Seite lernst du damit umzugehen.</p>
+						herauskommt, wenn wir das Gleiche am Eingang einwerfen. Auf dieser Seite lernst du damit umzugehen.</p>
 					<p>Zu dieser Seite gehört das zweite Kapitel im Arbeitsheft. Dort sollst du deine Ergebnisse festhalten. Du kannst es
 						hier herunterladen: </p>
 					<ul class="actions">
@@ -109,12 +109,11 @@
 					<div class="content styletwoColor">
 						<div class="inner">
 							<header class="major">
-								<h3>1 Von der Wortmaschine zur Funktion</h3>
+								<h3>1 Von Wortmaschine zur Funktion</h3>
 							</header>
 							<p>Funktionsmaschinen funktionieren auf die gleiche Weise wie die Wortmaschinen. Genau genommen sind die Wortmaschinen auch spezielle Funktionsmaschinen.</p>
-							<p> Auch hier gibt es eine Eingabe in Form einer Maschine für die <b>Unabhängige Variable</b>. Diese wird von einer oder mehreren <b>Funktionsmaschinen</b> verarbeitet und das Ergebnis mit Hilfe von verschiedenen <b>Feedback-Maschinen</b> angezeigt. </p>
-							<p> Probiere verschiedene Werte aus und beobachte, wie sich das Ergebnis verändert.
-							</p>
+							<p>Auch hier gibt es eine Eingabe in Form einer Maschine für die <b>unabhängige Variable</b>. Diese wird von einer oder mehreren <b>Funktionsmaschinen</b> verarbeitet und das Ergebnis mit Hilfe von verschiedenen <b>Feedback-Maschinen</b> angezeigt.</p>
+							<p>Probiere verschiedene Werte aus und beobachte, wie sich das Ergebnis verändert.</p>
 						</div>
 					</div>
 					<div class="image">
@@ -133,10 +132,9 @@
 							<header class="major">
 								<h3>2 Funktionsmaschinen verketten</h3>
 							</header>
-							<p>Genau wie bei den Wortmaschinen kannst du auch Funktionsmaschinen hintereinander schalten. Die Maschinen bilden dann gemeinsam eine neue Maschine, die deinen Wert in der verbundenen Reihenfolge verändert. Probiere verschiedene Kombinationen aus und notiere sie mit den Ergebnissen für die unabhängige Variable \(x=2\) im Arbeitsheft. </p>
-							<h4> Bonusaufgabe: </h4>
+							<p>Genau wie bei den Wortmaschinen kannst du auch Funktionsmaschinen hintereinander schalten. Die Maschinen bilden dann gemeinsam eine neue Maschine, die deinen Wert in der verbundenen Reihenfolge verändert. Probiere verschiedene Kombinationen aus und notiere sie mit den Ergebnissen für die unabhängige Variable \(x=2\) im Arbeitsheft.</p>
+							<h4>Bonusaufgabe:</h4>
 							<p>Wie viele verschiedene Maschinen kannst du aus den 3 Funktionen bauen?</p>
-						
 						</div>
 					
 					</div>
@@ -176,13 +174,14 @@
                             <header class="major">
                                 <h3>4 Wo ist der Unterschied?</h3>
                             </header>
-                            <p>Hier sind die Funktionen \(f\) und \(h\) in zwei verschiedenen Reihenfolgen verkettet. Überlege wie die Funktionsgleichung lauten könnte und der Graph aussehen müsste und probiere dann aus.</p> 
+                            <p>Hier sind je zwei Funktionen in zwei verschiedenen Reihenfolgen verkettet worden. Überlege wie die Funktionsgleichung lauten könnte und der Graph aussehen müsste und probiere dann aus.</p> 
 							<p>Zeichne die Graphen und beschreibe worin sich unterscheiden und warum.</p>
+							<ul class="pagination graphCanvas4"></ul>
                         </div>
                     </div>
                     <div class="image">
                         <canvas id="graphCanvas4" data-resize="true" data-zoom="0.9"
-						data-config-path="Litegraph/configs/Funktionsmaschinen_4.json"
+						data-config-path="Litegraph/configs/Funktionsmaschinen_graphCanvas4_1.json"
                             lgtype="Funktionsmaschinen"></canvas>
                         <script type="module">
                             import { createGraphInstance } from './Litegraph/createGraph.js';
@@ -345,6 +344,7 @@
 
 				<script>
 			const totalPages = {
+				graphCanvas4: 4,
 				graphCanvas8: 4,
 				graphCanvas9: 5,
 				// Füge hier weitere Paginierungen hinzu
@@ -428,9 +428,9 @@
 			// Initiale Paginierung und Laden der ersten Seite für jede Paginierung
 			updatePagination(1, 'graphCanvas8');
 			loadPageContent(1, 'graphCanvas8');
-		
-			updatePagination(1, 'graphCanvas9');
-			loadPageContent(1, 'graphCanvas9');
+			
+			updatePagination(1, 'graphCanvas4');
+			loadPageContent(1, 'graphCanvas4');
 		</script>
 
 </body>
