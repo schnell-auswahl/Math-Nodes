@@ -128,7 +128,7 @@
 					<div class="content stylethreeColor">
 						<div class="inner">
 							<header class="major">
-								<h3>2 Triff den Graph</h3>
+								<h3>2 Triff den Graphen</h3>
 							</header>
 							<p> In der Graph-Maschine siehst du den Graphen einer quadratischen Funktion. Stelle die Parameter der Funktion \(f\) so ein, dass der Graph von \(f\) dem in der Maschine entspricht. Gib die eingestellten Werte der Parameter im Arbeitsheft an und beschreibe, was die 3 Parameter jeweils am Graphen verändern.</p>
 							
@@ -249,7 +249,7 @@
 					<div class="content stylethreeColor">
 						<div class="inner">
 							<header class="major">
-								<h3>5 Triff den Graph</h3>
+								<h3>5 Triff den Graphen</h3>
 							</header>
 							<p> In der Graph-Maschine siehst du den Graphen einer quadratischen Funktion. Stelle die Parameter der Funktion \(f\) so ein, dass der Graph von \(f\) dem in der Maschine entspricht. Gib die eingestellten Werte der Parameter im Arbeitsheft an und beschreibe, was die 3 Parameter jeweils am Graphen verändern.</p>
 							
@@ -369,66 +369,84 @@
 		}
 	
 		function updatePagination(currentPage, canvasId) {
-			const pagination = document.querySelector(`.${canvasId}`);
-			pagination.innerHTML = '';
-	
-			const prevButton = document.createElement('li');
-			prevButton.innerHTML = `<a href="#" class="button small prev ${currentPage === 1 ? 'disabled' : ''}">zurück</a>`;
-			pagination.appendChild(prevButton);
-	
-			const createPageItem = (page) => {
-				const li = document.createElement('li');
-				li.innerHTML = `<a href="#" class="page ${page === currentPage ? 'active' : ''}" data-page="${page}">${page}</a>`;
-				li.querySelector('a').addEventListener('click', function (e) {
+				const pagination = document.querySelector(`.${canvasId}`);
+				pagination.innerHTML = '';
+			
+				const prevButton = document.createElement('li');
+				prevButton.innerHTML = `<a href="#" class="button small prev ${currentPage === 1 ? 'disabled' : ''}">zurück</a>`;
+				pagination.appendChild(prevButton);
+			
+				const createPageItem = (page) => {
+					const li = document.createElement('li');
+					li.innerHTML = `<a href="#" class="page ${page === currentPage ? 'active' : ''}" data-page="${page}">${page}</a>`;
+					li.querySelector('a').addEventListener('click', function (e) {
+						e.preventDefault();
+						loadPageContent(page, canvasId);
+					});
+					return li;
+				};
+			
+				const total = totalPages[canvasId];
+				pagination.appendChild(createPageItem(1));
+			
+				// Seite 2 nur anfügen, wenn total >= 2
+				if (total >= 2) {
+					pagination.appendChild(createPageItem(2));
+				}
+			
+				// Erstes Ellipsis nur zeigen, wenn total > 4 und currentPage > 4
+				if (total > 4 && currentPage > 4) {
+					const ellipsis = document.createElement('li');
+					ellipsis.innerHTML = '<span>&hellip;</span>';
+					pagination.appendChild(ellipsis);
+				}
+			
+				// Mittelteil nur durchlaufen, wenn total > 2
+				if (total > 2) {
+					for (let i = Math.max(3, currentPage - 1); i <= Math.min(total - 2, currentPage + 1); i++) {
+						if (i <= total) {
+							pagination.appendChild(createPageItem(i));
+						}
+					}
+				}
+			
+				// Zweites Ellipsis nur zeigen, wenn total > 4 und currentPage < total - 3
+				if (total > 4 && currentPage < total - 3) {
+					const ellipsis = document.createElement('li');
+					ellipsis.innerHTML = '<span>&hellip;</span>';
+					pagination.appendChild(ellipsis);
+				}
+			
+				// "total-1" nur anfügen, wenn total > 3
+				if (total > 3) {
+					pagination.appendChild(createPageItem(total - 1));
+				}
+			
+				// Letzte Seite nur anfügen, wenn total > 1
+				if (total > 1) {
+					pagination.appendChild(createPageItem(total));
+				}
+			
+				const naechsteButton = document.createElement('li');
+				naechsteButton.innerHTML = `<a href="#" class="button small naechste ${currentPage === total ? 'disabled' : ''}">weiter</a>`;
+				pagination.appendChild(naechsteButton);
+			
+				document.querySelector(`.${canvasId} .button.naechste`).addEventListener('click', function (e) {
 					e.preventDefault();
-					loadPageContent(page, canvasId);
+					const naechstePage = currentPage + 1;
+					if (naechstePage <= total) {
+						loadPageContent(naechstePage, canvasId);
+					}
 				});
-				return li;
-			};
-	
-			const total = totalPages[canvasId];
-			pagination.appendChild(createPageItem(1));
-			pagination.appendChild(createPageItem(2));
-	
-			if (currentPage > 4) {
-				const ellipsis = document.createElement('li');
-				ellipsis.innerHTML = '<span>&hellip;</span>';
-				pagination.appendChild(ellipsis);
+			
+				document.querySelector(`.${canvasId} .button.prev`).addEventListener('click', function (e) {
+					e.preventDefault();
+					const prevPage = currentPage - 1;
+					if (prevPage >= 1) {
+						loadPageContent(prevPage, canvasId);
+					}
+				});
 			}
-	
-			for (let i = Math.max(3, currentPage - 1); i <= Math.min(total - 2, currentPage + 1); i++) {
-				pagination.appendChild(createPageItem(i));
-			}
-	
-			if (currentPage < total - 3) {
-				const ellipsis = document.createElement('li');
-				ellipsis.innerHTML = '<span>&hellip;</span>';
-				pagination.appendChild(ellipsis);
-			}
-	
-			pagination.appendChild(createPageItem(total - 1));
-			pagination.appendChild(createPageItem(total));
-	
-			const naechsteButton = document.createElement('li');
-			naechsteButton.innerHTML = `<a href="#" class="button small naechste ${currentPage === total ? 'disabled' : ''}">weiter</a>`;
-			pagination.appendChild(naechsteButton);
-	
-			document.querySelector(`.${canvasId} .button.naechste`).addEventListener('click', function (e) {
-				e.preventDefault();
-				const naechstePage = currentPage + 1;
-				if (naechstePage <= total) {
-					loadPageContent(naechstePage, canvasId);
-				}
-			});
-	
-			document.querySelector(`.${canvasId} .button.prev`).addEventListener('click', function (e) {
-				e.preventDefault();
-				const prevPage = currentPage - 1;
-				if (prevPage >= 1) {
-					loadPageContent(prevPage, canvasId);
-				}
-			});
-		}
 	
 		// Initiale Paginierung und Laden der ersten Seite für jede Paginierung
 		updatePagination(1, 'graphCanvas3');

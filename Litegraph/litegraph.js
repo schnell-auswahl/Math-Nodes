@@ -5387,7 +5387,7 @@ LGraphNode.prototype.executeAction = function(action)
 
         this.filter = null; //allows to filter to only accept some type of nodes in a graph
 
-        this.process_right_click = true //if context menu should not be used, aktivate this flag
+        this.process_right_click = false //if context menu should not be used, aktivate this flag
         this.shouldShowLinkMenu = false; //if the link menu should be shown, when left clicking on it
 
 		this.set_canvas_dirty_on_mouse_event = true; //forces to redraw the canvas if the mouse does anything

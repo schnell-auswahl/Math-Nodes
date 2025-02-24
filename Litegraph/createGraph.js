@@ -203,21 +203,51 @@ export function createGraphInstance(canvasId) {
       if (
         clickedNode &&
         clickedNode.type !== "Funktionenmaschinen/Unabhängige_Variable" &&
-        clickedNode.type !== "Funktionenmaschinen/Parameter" &&
-        clickedNode.type !== "Funktionenmaschinen/Funktion"
+        clickedNode.type !== "Funktionenmaschinen/Parameter"
       ) {
         // Hier können Sie den gewünschten Code einfügen, der bei einem Doppelklick auf eine Node ausgeführt werden soll
         //console.log("Node doppelt geklickt:", clickedNode);
         e.preventDefault(); // Unterdrücke das Standardverhalten
         showNewMachineMenu(graph, canvasElement, clickedNode);
-      } else if (
+      } else if (!clickedNode) {
+        showNewMachineMenu(graph, canvasElement, "", x, y);
+      }
+    },
+    false
+  );
+
+
+  // Eventlstener für rechtsklick auf Node
+  canvasElement.addEventListener(
+    "contextmenu",
+    (e) => {
+      e.preventDefault();
+      const rect = canvasElement.getBoundingClientRect();
+      const x = (e.clientX - rect.left) / canvasElement.zoom;
+      const y = (e.clientY - rect.top) / canvasElement.zoom;
+      const clickedNode = graph.getNodeOnPos(x, y);
+  
+     if (
         clickedNode &&
         clickedNode.type === "Funktionenmaschinen/Funktion"
       ) {
-        //console.log("Node doppelt geklickt:", clickedNode);
-        e.preventDefault(); // Unterdrücke das Standardverhalten
+        e.preventDefault();
         showFrequentlyUsedFunctionsMenu(graph, canvasElement, clickedNode);
-      } else if (!clickedNode) {
+      } else if (
+        clickedNode &&
+        clickedNode.type === "Funktionenmaschinen/Feedback_Gleichung"
+      ) {
+        e.preventDefault();
+        showEquationNodeMenu(graph, canvasElement, clickedNode);
+        } else if (
+        clickedNode && clickedNode.type === "Funktionenmaschinen/Feedback_Graph"
+      ) {
+        e.preventDefault();
+        showGraphNodeMenu(graph, canvasElement, clickedNode);
+      } 
+
+      else if (!clickedNode) {
+        e.preventDefault();
         showNewMachineMenu(graph, canvasElement, "", x, y);
       }
     },
@@ -941,7 +971,7 @@ function showFrequentlyUsedFunctionsMenu(graph, canvasElement, clickedNode) {
   overlay.style.left = "0";
   overlay.style.width = "100%";
   overlay.style.height = "100%";
-  overlay.style.backgroundColor = "rgba(26, 29, 41, 0.9)";
+  overlay.style.backgroundColor = "rgba(132, 177, 156, 0.9)";
   overlay.style.zIndex = "300";
   overlay.style.display = "flex";
   overlay.style.justifyContent = "center";
@@ -962,12 +992,10 @@ function showFrequentlyUsedFunctionsMenu(graph, canvasElement, clickedNode) {
   // Spalte für häufig genutzte Funktionen
   const functionsColumn = document.createElement("ul");
   functionsColumn.innerHTML =
-    '<header class="major"> <h3>Einstellungen und häufig genutzte Funktionen</h3></header>';
+    '<header class="major"> <h3>Einstellungen Funktionsmaschine</h3></header>';
 
   // Liste der Funktionen und ihre zu ändernden Eigenschaften
   const functions = [
-    { name: "FREIE EINGABE IN WIDGET", properties: { widgetVisible: true } },
-    { name: "WIDGET AUSBLENDEN", properties: { widgetVisible: false } },
     {
       name: "KONSTANTE FUNKTION: r(x) = 5",
       properties: {
@@ -1088,6 +1116,8 @@ function showFrequentlyUsedFunctionsMenu(graph, canvasElement, clickedNode) {
         widgetVisible: false,
       },
     },
+    { name: "FREIE EINGABE IN WIDGET", properties: { widgetVisible: true } },
+    { name: "WIDGET AUSBLENDEN", properties: { widgetVisible: false } },
   ];
 
   // Schließen-Button für das Menü
@@ -1119,7 +1149,7 @@ function showFrequentlyUsedFunctionsMenu(graph, canvasElement, clickedNode) {
       button.style.fontWeight = "600";
       button.style.fontSize = "0.6em";
       button.style.letterSpacing = "0.25em";
-      button.style.borderBottom = "1px solid #31344F"; // Dünne Linie
+      button.style.borderBottom = "1px rgba(255, 255, 255,1)"; // Dünne Linie
       button.style.paddingBottom = "10px"; // Abstand vom Text zur Linie
       button.style.transition = "background-color 0.3s, transform 0.1s"; // Smooth transitions
 
@@ -1173,6 +1203,233 @@ function showFrequentlyUsedFunctionsMenu(graph, canvasElement, clickedNode) {
   overlay.appendChild(menuContent);
   canvasElement.parentElement.appendChild(overlay);
 }
+
+
+function showGraphNodeMenu(graph, canvasElement, clickedNode) {
+  // Erstelle Overlay
+  const overlay = document.createElement("div");
+  overlay.style.position = "absolute";
+  overlay.style.top = "0";
+  overlay.style.left = "0";
+  overlay.style.width = "100%";
+  overlay.style.height = "100%";
+  overlay.style.backgroundColor = "rgba(139, 154, 202, 0.9)";
+  overlay.style.zIndex = "300";
+  overlay.style.display = "flex";
+  overlay.style.justifyContent = "center";
+  overlay.style.alignItems = "center";
+  overlay.style.color = "#ffffff";
+  canvasElement.parentElement.appendChild(overlay);
+
+  // Menü-Inhalt
+  const menuContent = document.createElement("div");
+  menuContent.className = "inner";
+  menuContent.style.display = "flex";
+  menuContent.style.flexDirection = "column";
+  menuContent.style.gap = "20px";
+
+  // Schließen-Button
+  const closeButton = document.createElement("button");
+  closeButton.textContent = "X";
+  closeButton.className = "button primary small";
+  closeButton.style.position = "absolute";
+  closeButton.style.top = "10px";
+  closeButton.style.right = "10px";
+  closeButton.addEventListener("click", () => {
+    canvasElement.parentElement.removeChild(overlay);
+  });
+  overlay.appendChild(closeButton);
+
+  // Aktionen
+  const actions = [
+    {
+      name: "OBERSTE FUNKTION SPEICHERN",
+      onClick: () => {
+        clickedNode.properties.savedEquation = clickedNode.properties.equations[0];
+        clickedNode.properties.savedUV = clickedNode.properties.uvNames[0];
+        canvasElement.parentElement.removeChild(overlay);
+      },
+    },
+    {
+      name: "GESPEICHERTE FUNKTION LÖSCHEN",
+      onClick: () => {
+        clickedNode.properties.savedEquation = "";
+        clickedNode.properties.savedUV = "";
+        canvasElement.parentElement.removeChild(overlay);
+      },
+    },
+    {
+      name: "HINTERGRUND WEIß/SCHWARZ",
+      onClick: () => {
+        clickedNode.properties.whiteBackground = typeof clickedNode.properties.whiteBackground === 'boolean' ? !clickedNode.properties.whiteBackground : true;
+        canvasElement.parentElement.removeChild(overlay);
+      },
+    },
+    {
+      name: "GRAPHEN ZEICHEN EIN/AUS",
+      onClick: () => {
+        clickedNode.properties.noPlot = typeof clickedNode.properties.noPlot === 'boolean' ? !clickedNode.properties.noPlot : true;
+        canvasElement.parentElement.removeChild(overlay);
+      },
+    },
+  ];
+
+  // Überschrift hinzufügen
+  const header = document.createElement("header");
+  header.className = "major";
+  header.innerHTML = "<h3>Einstellungen für Feedback Graph</h3>";
+  menuContent.insertBefore(header, menuContent.firstChild);
+  
+  // Buttons erstellen – Design entsprechend dem markierten Bereich
+  actions.forEach((action) => {
+    const button = document.createElement("li");
+    button.textContent = action.name;
+    button.className = "links machine-button";
+    button.style.margin = "5px";
+    button.style.listStyle = "none";
+    button.style.fontWeight = "600";
+    button.style.fontSize = "0.6em";
+    button.style.letterSpacing = "0.25em";
+    button.style.borderBottom = "1px rgba(255, 255, 255, 1)";
+    button.style.paddingBottom = "10px";
+    button.style.transition = "background-color 0.3s, transform 0.1s";
+    button.style.backgroundColor = "transparent";
+    button.style.color = "#ffffff";
+
+    // Hover-Effekt
+    button.addEventListener("mouseover", () => {
+      button.style.backgroundColor = "rgba(255, 255, 255, 0.1)";
+    });
+
+    // Entferne Hover-Effekt
+    button.addEventListener("mouseout", () => {
+      button.style.backgroundColor = "transparent";
+    });
+
+    // Klick-Effekt
+    button.addEventListener("mousedown", () => {
+      button.style.backgroundColor = "rgba(255, 255, 255, 0.3)";
+      button.style.transform = "scale(0.98)";
+    });
+
+    button.addEventListener("mouseup", () => {
+      button.style.backgroundColor = "rgba(255, 255, 255, 0.1)";
+      button.style.transform = "scale(1)";
+    });
+
+    // Klick-Funktion
+    button.addEventListener("click", action.onClick);
+    menuContent.appendChild(button);
+  });
+
+  overlay.appendChild(menuContent);
+}
+
+function showEquationNodeMenu(graph, canvasElement, clickedNode) {
+  // Erstelle Overlay
+  const overlay = document.createElement("div");
+  overlay.style.position = "absolute";
+  overlay.style.top = "0";
+  overlay.style.left = "0";
+  overlay.style.width = "100%";
+  overlay.style.height = "100%";
+  overlay.style.backgroundColor = "rgba(132, 177, 156, 0.9)";
+  overlay.style.zIndex = "300";
+  overlay.style.display = "flex";
+  overlay.style.justifyContent = "center";
+  overlay.style.alignItems = "center";
+  overlay.style.color = "#ffffff";
+  canvasElement.parentElement.appendChild(overlay);
+
+  // Menü-Inhalt
+  const menuContent = document.createElement("div");
+  menuContent.className = "inner";
+  menuContent.style.display = "flex";
+  menuContent.style.flexDirection = "column";
+  menuContent.style.gap = "20px";
+
+  // Schließen-Button
+  const closeButton = document.createElement("button");
+  closeButton.textContent = "X";
+  closeButton.className = "button primary small";
+  closeButton.style.position = "absolute";
+  closeButton.style.top = "10px";
+  closeButton.style.right = "10px";
+  closeButton.addEventListener("click", () => {
+    canvasElement.parentElement.removeChild(overlay);
+  });
+  overlay.appendChild(closeButton);
+
+  // Aktionen
+  const actions = [
+    {
+      name: "AKTUELLE GLEICHUNG SPEICHERN",
+      onClick: () => {
+        clickedNode.properties.savedEquation = clickedNode.inputToSaveFrom;
+        canvasElement.parentElement.removeChild(overlay);
+      },
+    },
+    {
+      name: "GESPEICHERTE GLEICHUNG LÖSCHEN",
+      onClick: () => {
+        clickedNode.properties.savedEquation = "";
+        canvasElement.parentElement.removeChild(overlay);
+      },
+    },
+  ];
+
+    // Überschrift hinzufügen
+    const header = document.createElement("header");
+    header.className = "major";
+    header.innerHTML = "<h3>Einstellungen für Feedback Gleichung</h3>";
+    menuContent.insertBefore(header, menuContent.firstChild);
+  // Buttons erstellen – Design entsprechend dem markierten Bereich
+  actions.forEach((action) => {
+    const button = document.createElement("li");
+    button.textContent = action.name;
+    button.className = "links machine-button";
+    button.style.margin = "5px";
+    button.style.listStyle = "none";
+    button.style.fontWeight = "600";
+    button.style.fontSize = "0.6em";
+    button.style.letterSpacing = "0.25em";
+    button.style.borderBottom = "1px rgba(255, 255, 255, 1)";
+    button.style.paddingBottom = "10px";
+    button.style.transition = "background-color 0.3s, transform 0.1s";
+    button.style.backgroundColor = "transparent";
+    button.style.color = "#ffffff";
+
+    // Hover-Effekt
+    button.addEventListener("mouseover", () => {
+      button.style.backgroundColor = "rgba(255, 255, 255, 0.1)";
+    });
+
+    // Entferne Hover-Effekt
+    button.addEventListener("mouseout", () => {
+      button.style.backgroundColor = "transparent";
+    });
+
+    // Klick-Effekt
+    button.addEventListener("mousedown", () => {
+      button.style.backgroundColor = "rgba(255, 255, 255, 0.3)";
+      button.style.transform = "scale(0.98)";
+    });
+
+    button.addEventListener("mouseup", () => {
+      button.style.backgroundColor = "rgba(255, 255, 255, 0.1)";
+      button.style.transform = "scale(1)";
+    });
+
+    // Klick-Funktion
+    button.addEventListener("click", action.onClick);
+    menuContent.appendChild(button);
+  });
+
+  overlay.appendChild(menuContent);
+}
+
+
+
 
 function getCanvasConfigPath(canvasId) {
   const canvasElement = document.getElementById(canvasId);
