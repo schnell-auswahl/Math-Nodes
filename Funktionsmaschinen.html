@@ -117,7 +117,8 @@
 						</div>
 					</div>
 					<div class="image">
-						<canvas id="graphCanvas1" data-resize="true" data-zoom="1" lgtype="Funktionsmaschinen"
+						<canvas id="graphCanvas1" data-resize="true" data-zoom="1" lgtype="Funktionsmaschinen" 	allowContextMenu="false"
+						allowNodeLoad="false"
 								data-config-path="Litegraph/configs/Funktionsmaschinen_1.json"></canvas>
 						<script type="module">
 							import { createGraphInstance } from './Litegraph/createGraph.js';
@@ -140,7 +141,8 @@
 					</div>
 					<div class="image">
 						<canvas id="graphCanvas2" data-resize="true"
-						data-config-path="Litegraph/configs/Funktionsmaschinen_2.json"
+						data-config-path="Litegraph/configs/Funktionsmaschinen_2.json" 	allowContextMenu="false"
+						allowNodeLoad="false"
 							lgtype="Funktionsmaschinen"></canvas>
 						<script type="module">
 							import { createGraphInstance } from './Litegraph/createGraph.js';
@@ -154,13 +156,14 @@
                             <header class="major">
                                 <h3>3 Ergebnisse anders darstellen</h3>
                             </header>
-                            <p>In Math-Nodes kannst du dir außer dem Wert zu einer unabhängigen Variable auch die Gleichung, den Graph und sogar den Ton (Kapitel 4) einer Funktion ausgeben lassen. Dazu gibt es jeweils eine eigene Feedback-Maschine. Feedback-Maschinen sind immer blau.</p>
+                            <p>In Math-Nodes kannst du dir außer dem Wert zu einer unabhängigen Variable auch die Gleichung, den Graphen und sogar den Klang (Kapitel 4) einer Funktion ausgeben lassen. Dazu gibt es jeweils eine eigene Feedback-Maschine. Feedback-Maschinen sind immer blau.</p>
                             <p>Überlege zunächst wie der Graph und die Funktionsgleichung aussehen müssten und notiere deine Vermutungen im Arbeitsheft. Verbinde dann die Funktionen mit den verschiedenen Feedback-Maschinen und überprüfe deine Vermutungen.</p>
                         </div>
                     </div>
                     <div class="image">
                         <canvas id="graphCanvas3" data-resize="true"
-						data-config-path="Litegraph/configs/Funktionsmaschinen_3.json"
+						data-config-path="Litegraph/configs/Funktionsmaschinen_3.json" 	allowContextMenu="false"
+						allowNodeLoad="false"
                             lgtype="Funktionsmaschinen" data-zoom="0.9"></canvas>
                         <script type="module">
                             import { createGraphInstance } from './Litegraph/createGraph.js';
@@ -174,14 +177,15 @@
                             <header class="major">
                                 <h3>4 Wo ist der Unterschied?</h3>
                             </header>
-                            <p>Hier sind je zwei Funktionen in zwei verschiedenen Reihenfolgen verkettet worden. Überlege wie die Funktionsgleichung lauten könnte und der Graph aussehen müsste und probiere dann aus.</p> 
+                            <p>Hier sind zwei Funktionen in zwei verschiedenen Reihenfolgen verkettet worden. Überlege wie die Funktionsgleichung der Verkettung lauten könnte und der Graph aussehen müsste und probiere dann aus.</p> 
 							<p>Zeichne die Graphen und beschreibe worin sich unterscheiden und warum.</p>
 							<ul class="pagination graphCanvas4"></ul>
                         </div>
                     </div>
                     <div class="image">
                         <canvas id="graphCanvas4" data-resize="true" data-zoom="0.9"
-						data-config-path="Litegraph/configs/Funktionsmaschinen_graphCanvas4_1.json"
+						data-config-path="Litegraph/configs/Funktionsmaschinen_graphCanvas4_1.json" 	allowContextMenu="false"
+						allowNodeLoad="false"
                             lgtype="Funktionsmaschinen"></canvas>
                         <script type="module">
                             import { createGraphInstance } from './Litegraph/createGraph.js';
@@ -195,31 +199,27 @@
                             <header class="major">
                                 <h3>5 Funktionen verknüpfen</h3>
                             </header>
-                            <p>Du kannst zwei Funktionsmaschinen nicht nur verketten, sondern auch mittels einer Operationsmaschine mit den typischen Operationen wie Addition, Multiplikation, usw. verknüpfen. </p>
-                            <p>Im Arbeitsheft findest du ein zweites Beispiel. Gib dafür die Funktionsgleichung an. Wie könnte der Graph aussehen? Diskutiere mit der Person neben dir und skizziere dann den Graph.</p>
-							<p><strong>Beachte:</strong> Die Feedbackmaschine in Math-Nodes vereinfacht die Funktionsterme nicht. Kannst du den Term noch vereinfachen?</p>
+                            <p>Du kannst zwei Funktionsmaschinen nicht nur verketten, sondern auch mittels einer Operationsmaschine mit den Operationen Addition, Multiplikation, usw. verknüpfen. </p>
+                            <p>Im Arbeitsheft findest du ein zweites Beispiel. Gib dafür die Funktionsgleichung an. Wie könnte der Graph aussehen? Diskutiere mit der Person neben dir und skizziere dann den Graphen.</p>
+							<p><strong>Beachte:</strong> Wenn du das Feedback als Gleichung anschließt, vereinfacht Math-Nodes die Funktionsterme nicht. Kannst du den Term noch vereinfachen?</p>
                         </div>
                     </div>
-                    <div class="image">
-                        <canvas id="graphCanvas5" data-resize="true"
-						data-config-path="Litegraph/configs/Funktionsmaschinen_5.json"
-                            lgtype="Funktionsmaschinen"></canvas>
-                        <script type="module">
-                            import { createGraphInstance } from './Litegraph/createGraph.js';
-                            createGraphInstance("graphCanvas5");
-                        </script>
-                    </div>
+                  mage">
+						<canvas id="graphCanvas5" data-resize="true" data-config-path="Litegraph/configs/Funktionsmaschinen_5.json"
+							allowContextMenu="false" allowNodeLoad="false" lgtype="Funktionsmaschinen"></canvas>
+						<script type="module">
+							import { createGraphInstance } from './Litegraph/createGraph.js';
+							createGraphInstance("graphCanvas5");
+						</script>
+					</div>
                 </section>
 			</section>
 
 			<section id="one" class="aufgabenEnde">
 				<div class="inner">
 					<h4>Tipp:</h4>
-					<p>	In vielen Aufgaben in Math-Nodes ist die Struktur, in der verkettet und verknüpft wird, schon vorgegeben und du sollst die passenden Funktionen und Operationen für die gegebene Struktur auswählen. </p>
-					<p>Klickst du doppelt auf eine Funktionsmaschine, werden dir ein paar häufig verwendete Funktionen vorgeschlagen. Wenn es nicht explizit anders in der Aufgabe steht, kannst du die Aufgabe mit diesen Funktionen lösen. Die verschiedenen Operationen kannst du einfach im Widget der Operationsmaschine auswählen.</p>
-
-					<h4>Tipp:</h4>
-					<p>In vielen Aufgaben ist in der Gleichungs-Maschine eine Funktionsgleichung vorgegeben, die du verkabeln sollst. Schließt du zusätzlich eine Lösung an, siehst du beide Gleichungen untereinander.</p>
+					<p>	In vielen Aufgaben in Math-Nodes ist die Struktur, in der verkettet und verknüpft wird, schon vorgegeben und du sollst die passenden Funktionen und Operationen auswählen. </p>
+					<p>Klickst du doppelt auf eine Funktionsmaschine, werden dir ein paar Funktionen vorgeschlagen, mit denen du die Aufgabe lösen kannst. Die verschiedenen Operationen kannst du einfach in der Schaltfläche der Operationsmaschine auswählen.</p>
 				</div>	
 			</section>
 
@@ -232,12 +232,14 @@
                             <header class="major">
                                 <h3>6 Verknüpfen und Verketten</h3>
                             </header>
-                            <p>Wähle die Funktionen und die Operation so, dass du den angegebenen Funktionsterm erhältst. Notiere deine Lösung und skizziere den Graph. Beschreibe, welchen Einfluss die Terme \(x^3\) und \(ln(x)\) auf den Graph haben.</p>
+                            <p>Wähle die Funktionen und die Operation so, dass du den angegebenen Funktionsterm erhältst. Notiere deine Lösung und skizziere den Graphen. Beschreibe, welchen Einfluss die einzelnen Maschinen auf den Graphen der Gesamtfunktion haben.</p>
+							<p>Verbinde Funktionsmaschinen zusätzlich einzeln mit dem Graphen. So kannst du den Graphen der resultierenden Gesamtfunktion mit den Teilfunktionen vergleichen.</p>
+							<ul class="pagination graphCanvas6"></ul>
                         </div>
                     </div>
                     <div class="image">
                         <canvas id="graphCanvas6" data-resize="true"
-						data-config-path="Litegraph/configs/Funktionsmaschinen_6.json" data-zoom="0.9"
+						data-config-path="Litegraph/configs/Funktionsmaschinen_graphCanvas6_1.json" data-zoom="0.9" allowContextMenu="true" allowNodeLoad="true"
                             lgtype="Funktionsmaschinen"></canvas>
                         <script type="module">
                             import { createGraphInstance } from './Litegraph/createGraph.js';
@@ -256,7 +258,7 @@
                     </div>
                     <div class="image">
                         <canvas id="graphCanvas7" data-resize="true"
-						data-config-path="Litegraph/configs/Funktionsmaschinen_7.json" data-zoom="0.9"
+						data-config-path="Litegraph/configs/Funktionsmaschinen_7.json" data-zoom="0.9" allowContextMenu="true" allowNodeLoad="true"
                             lgtype="Funktionsmaschinen"></canvas>
                         <script type="module">
                             import { createGraphInstance } from './Litegraph/createGraph.js';
@@ -271,7 +273,7 @@
 					<header class="major">
 						<h2>8 Graphenwirrwarr </h2>
 					</header>
-					<p> Beschreibe für die 3 verketteten Funktionen jeweils -welchen Einfluss eine Funktion auf den Graphen der vorherigen Funktion hat-/ den Zusammenhang zwischen den einzelnen Graphen. Finde besondere Werte für die unabhängige Variable an denen du das Verhalten des Graphs erklären kannst.  
+					<p> Beschreibe für die 3 verketteten Funktionen jeweils -welchen Einfluss eine Funktion auf den Graphen der vorherigen Funktion hat-/ den Zusammenhang zwischen den einzelnen Graphen. Finde besondere Werte für die unabhängige Variable an denen du das Verhalten des Graphen erklären kannst.  
 					</p>
 					<ul class="pagination graphCanvas8"></ul>
 
@@ -345,6 +347,7 @@
 				<script>
 			const totalPages = {
 				graphCanvas4: 4,
+				graphCanvas6: 3,
 				graphCanvas8: 4,
 				graphCanvas9: 5,
 				// Füge hier weitere Paginierungen hinzu
@@ -363,14 +366,15 @@
 				updatePagination(pageNumber, canvasId);
 			}
 		
+				
 			function updatePagination(currentPage, canvasId) {
 				const pagination = document.querySelector(`.${canvasId}`);
 				pagination.innerHTML = '';
-		
+			
 				const prevButton = document.createElement('li');
 				prevButton.innerHTML = `<a href="#" class="button small prev ${currentPage === 1 ? 'disabled' : ''}">zurück</a>`;
 				pagination.appendChild(prevButton);
-		
+			
 				const createPageItem = (page) => {
 					const li = document.createElement('li');
 					li.innerHTML = `<a href="#" class="page ${page === currentPage ? 'active' : ''}" data-page="${page}">${page}</a>`;
@@ -380,34 +384,52 @@
 					});
 					return li;
 				};
-		
+			
 				const total = totalPages[canvasId];
 				pagination.appendChild(createPageItem(1));
-				pagination.appendChild(createPageItem(2));
-		
-				if (currentPage > 4) {
+			
+				// Seite 2 nur anfügen, wenn total >= 2
+				if (total >= 2) {
+					pagination.appendChild(createPageItem(2));
+				}
+			
+				// Erstes Ellipsis nur zeigen, wenn total > 4 und currentPage > 4
+				if (total > 4 && currentPage > 4) {
 					const ellipsis = document.createElement('li');
 					ellipsis.innerHTML = '<span>&hellip;</span>';
 					pagination.appendChild(ellipsis);
 				}
-		
-				for (let i = Math.max(3, currentPage - 1); i <= Math.min(total - 2, currentPage + 1); i++) {
-					pagination.appendChild(createPageItem(i));
+			
+				// Mittelteil nur durchlaufen, wenn total > 2
+				if (total > 2) {
+					for (let i = Math.max(3, currentPage - 1); i <= Math.min(total - 2, currentPage + 1); i++) {
+						if (i <= total) {
+							pagination.appendChild(createPageItem(i));
+						}
+					}
 				}
-		
-				if (currentPage < total - 3) {
+			
+				// Zweites Ellipsis nur zeigen, wenn total > 4 und currentPage < total - 3
+				if (total > 4 && currentPage < total - 3) {
 					const ellipsis = document.createElement('li');
 					ellipsis.innerHTML = '<span>&hellip;</span>';
 					pagination.appendChild(ellipsis);
 				}
-		
-				pagination.appendChild(createPageItem(total - 1));
-				pagination.appendChild(createPageItem(total));
-		
+			
+				// "total-1" nur anfügen, wenn total > 3
+				if (total > 3) {
+					pagination.appendChild(createPageItem(total - 1));
+				}
+			
+				// Letzte Seite nur anfügen, wenn total > 1
+				if (total > 1) {
+					pagination.appendChild(createPageItem(total));
+				}
+			
 				const naechsteButton = document.createElement('li');
 				naechsteButton.innerHTML = `<a href="#" class="button small naechste ${currentPage === total ? 'disabled' : ''}">weiter</a>`;
 				pagination.appendChild(naechsteButton);
-		
+			
 				document.querySelector(`.${canvasId} .button.naechste`).addEventListener('click', function (e) {
 					e.preventDefault();
 					const naechstePage = currentPage + 1;
@@ -415,7 +437,7 @@
 						loadPageContent(naechstePage, canvasId);
 					}
 				});
-		
+			
 				document.querySelector(`.${canvasId} .button.prev`).addEventListener('click', function (e) {
 					e.preventDefault();
 					const prevPage = currentPage - 1;
@@ -425,12 +447,17 @@
 				});
 			}
 		
+		
 			// Initiale Paginierung und Laden der ersten Seite für jede Paginierung
 			updatePagination(1, 'graphCanvas8');
 			loadPageContent(1, 'graphCanvas8');
 			
 			updatePagination(1, 'graphCanvas4');
 			loadPageContent(1, 'graphCanvas4');
+
+			
+			updatePagination(1, 'graphCanvas6');
+			loadPageContent(1, 'graphCanvas6');
 		</script>
 
 </body>

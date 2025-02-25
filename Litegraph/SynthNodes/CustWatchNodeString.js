@@ -17,6 +17,8 @@ export function _CustWatchNodeString() {
       this.offsetX = 20;
       this.offsetY = 20;
 
+      this.inputToSaveFrom = "";
+
       this.properties = {
         GleichungvorMathJax: "",
         GleichungvorKaTex: "",
@@ -39,10 +41,12 @@ export function _CustWatchNodeString() {
           this.inputData["value"]
         );
         inputEquation = this.toString(this.inputData);
+        this.inputToSaveFrom = "s(" + this.inputData["uvName"] + ")=" + inputEquation.split("=")[1].replace(/\s+/g, '');
+        // console.log( this.inputToSaveFrom);
       }
 
       function sanitizeEquation(equation) {
-        const allowedCharacters = /^[0-9a-zA-Z+\-*/^()= ]*$/;
+        const allowedCharacters = /^[0-9a-zA-Z+\-*/^()=| ]*$/;
         return equation
           .split("")
           .filter((char) => allowedCharacters.test(char))
@@ -106,7 +110,9 @@ export function _CustWatchNodeString() {
         } else {
           this.boxcolor = null;
         }
-      } 
+      } else if (inputEquation && !this.properties.savedEquation) {
+        this.boxcolor = null;
+      }
     }
 
     onDrawForeground(ctx) {
@@ -173,7 +179,7 @@ export function _CustWatchNodeString() {
           .replace(/Math\.log10/g, "log ") // Ersetzt Logarithmus zur Basis 10 zurück
           .replace(/Math\.log\b/g, "ln ") // Ersetzt natürlicher Logarithmus zurück
           .replace(/Math\.exp/g, "e^") // Ersetzt Exponentialfunktion zurück
-          .replace(/Math\.abs\(([^()]*|\((?:[^()]*|\([^()]*\))*\))\)/g, "|$1|") // Absolutbetrag
+          //.replace(/Math\.abs\(([^()]*|\((?:[^()]*|\([^()]*\))*\))\)/g, "\|$1\|") // Absolutbetrag
           .replace(/Math\.PI/g, "pi ") // Math.PI durch π
           .replace(/Math\.E/g, "e"); // Math.E durch e
 

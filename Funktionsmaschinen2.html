@@ -115,7 +115,7 @@
 						</div>
 					</div>
 					<div class="image">
-						<canvas id="graphCanvas1" data-resize="true" data-zoom="1" lgtype="Funktionsmaschinen"
+						<canvas id="graphCanvas1" data-resize="true" data-zoom="1" lgtype="Funktionsmaschinen" allowContextMenu="false" allowNodeLoad="false"
 								data-config-path="Litegraph/configs/FunktionsmaschinenC2_1.json"></canvas>
 						<script type="module">
 							import { createGraphInstance } from './Litegraph/createGraph.js';
@@ -128,7 +128,7 @@
 					<div class="content stylethreeColor">
 						<div class="inner">
 							<header class="major">
-								<h3>2 Triff den Graph</h3>
+								<h3>2 Triff den Graphen</h3>
 							</header>
 							<p> In der Graph-Maschine siehst du den Graphen einer quadratischen Funktion. Stelle die Parameter der Funktion \(f\) so ein, dass der Graph von \(f\) dem in der Maschine entspricht. Gib die eingestellten Werte der Parameter im Arbeitsheft an und beschreibe, was die 3 Parameter jeweils am Graphen verändern.</p>
 							
@@ -138,7 +138,7 @@
 					
 					</div>
 					<div class="image">
-						<canvas id="graphCanvas2" data-resize="true" data-zoom="0.9"
+						<canvas id="graphCanvas2" data-resize="true" data-zoom="0.9" allowContextMenu="false" allowNodeLoad="false"
 						data-config-path="Litegraph/configs/FunktionsmaschinenC2_2.json"
 							lgtype="Funktionsmaschinen"></canvas>
 						<script type="module">
@@ -147,37 +147,39 @@
 						</script>
 					</div>
 				</section>
-				<section>
-					<div class="content stylethreeColor">
-						<div class="inner">
-							<header class="major">
-								<h3>3 Funktionenschar</h3>
-							</header>
-							<p>Du hast eben gesehen, dass du Funktionen mit Parametern verändern kannst. Eine Funktionsgleichung mit den allgemeinen Parametern, z.B. \(f(x)=a\cdot x^2\), beschreibt dann alle möglichen konkreten Funktionen, die diese Form haben, z.B. \(f(x)=2\cdot x\). Wir nennen das dann eine Funktionenschar und verdeutlichen das, indem wir \(f_{a}(x)\) schreiben. In Math-Nodes kannst du dir einen Überblick über eine Funktionenschar verschaffen, indem du den Parameter animierst.</p>
-							
-							<p>Besondere Funktionenscharen - sogenannte Bündel - sind solche, bei denen alle Funktionen der Schar durch mindestens einen bestimmten Punkt gehen. Finde solche Punkte, gib sie an und begründe, warum sich der Funktionswert dort unabhängig vom Parameterwert nicht ändert.</p>
-							<ul class="pagination graphCanvas3"></ul>
-						</div>
-					
-					</div>
-					<div class="image">
-						<canvas id="graphCanvas3" data-resize="true" data-zoom="0.9"
-						data-config-path="Litegraph/configs/FunktionsmaschinenC2_graphCanvas3_1.json"
-							lgtype="Funktionsmaschinen"></canvas>
-						<script type="module">
-							import { createGraphInstance } from './Litegraph/createGraph.js';
-							createGraphInstance("graphCanvas3");
-						</script>
-					</div>
-				</section>
-				
 			</section>
 
 		<!-- Fourb -->
 		<section id="fourb" style="position: relative;" class="stylethreeColor">
 			<div class="inner">
 				<header class="major">
-					<h2>3 Modulation</h2>
+					<h3>3 Funktionenschar</h3>
+				</header>
+				<p>Du hast eben gesehen, dass du Funktionen mit Parametern verändern kannst. Eine Funktionsgleichung mit den allgemeinen Parametern, z.B. \(f(x)=a\cdot x^2\), beschreibt dann alle möglichen konkreten Funktionen, die diese Form haben, z.B. \(f(x)=2\cdot x\). Wir nennen das dann eine Funktionenschar und verdeutlichen das, indem wir \(f_{a}(x)\) schreiben. In Math-Nodes kannst du dir einen Überblick über eine Funktionenschar verschaffen, indem du den Parameter animierst.</p>
+				
+				<p>Besondere Funktionenscharen - sogenannte Bündel - sind solche, bei denen alle Funktionen der Schar durch mindestens einen bestimmten Punkt gehen. Finde solche Punkte, gib sie an und begründe, warum sich der Funktionswert dort unabhängig vom Parameterwert nicht ändert.</p>
+				<ul class="pagination graphCanvas3"></ul>
+			</div>
+		</section>
+		<!-- LiteGraph Canvas -->
+		<section id="litegraph">
+			<div id="graphstylehalfheight">
+				<canvas id="graphCanvas3" data-resize="true" lgtype="Funktionsmaschinen"
+				data-config-path="Litegraph/configs/FunktionsmaschinenC2_graphCanvas3_1.json" allowContextMenu="false" allowNodeLoad="false"
+					></canvas>
+			</div>
+			<script type="module">
+				import { createGraphInstance } from './Litegraph/createGraph.js';
+				createGraphInstance("graphCanvas3");
+			</script>
+		</section>
+
+
+		<!-- Fourb -->
+		<section id="fourb" style="position: relative;" class="stylethreeColor">
+			<div class="inner">
+				<header class="major">
+					<h2>4 Modulation</h2>
 				</header>
 				<p>Betrachte zunächst die Funktionen \(f\) und \(g\) im ersten Fenster. Welchen Einfluss auf den Graphen haben jeweils die Parameter \(a\) und \(b\)? Probiere aus und beschreibe im Arbeitsheft.</p>
 				<p>Die Funktionen \(f\) und \(g\) im zweiten Fenster sehen beinahe aus wie im ersten. Statt der Parameter sind hier aber Funktionen \(a\) und \(b\) an die Parametereingänge angeschlossen. Beschreibe den Verlauf der Graphen von \(f\) und \(g\) und den Einfluss der Funktionen \(a\) und \(b\) auf den Verlauf. </p>
@@ -188,7 +190,7 @@
 		<section id="litegraph">
 			<div id="graphstylehalfheight">
 				<canvas id="graphCanvas6" data-resize="true" lgtype="Funktionsmaschinen"
-				data-config-path="Litegraph/configs/FunktionsmaschinenC2_2a.json"
+				data-config-path="Litegraph/configs/FunktionsmaschinenC2_2a.json" allowContextMenu="false" allowNodeLoad="false"
 					></canvas>
 			</div>
 			<script type="module">
@@ -200,7 +202,7 @@
 			<section id="litegraph">
 				<div id="graphstylehalfheight">
 					<canvas id="graphCanvas7" data-resize="true" lgtype="Funktionsmaschinen"
-					data-config-path="Litegraph/configs/FunktionsmaschinenC2_2b.json"
+					data-config-path="Litegraph/configs/FunktionsmaschinenC2_2b.json" allowContextMenu="false" allowNodeLoad="false"
 						></canvas>
 				</div>
 				<script type="module">
@@ -220,56 +222,6 @@
 				</div>
 			</section>
 
-			<!-- Two -->
-			<section id="two" class="spotlights">
-				<section>
-
-					<div class="content stylethreeColor">
-						<div class="inner">
-							<header class="major">
-								<h3>4 Parameter</h3>
-							</header>
-							<p>In Math-Nodes haben Funktionsmaschinen zusätzlich zur unabhängigen Variable noch weitere Eingänge. Dort kannst du Parameter-Maschinen anschließen, die du dann in der Funktionsmaschine verwenden kannst. </p>
-							<p>Solange der Name des Parameters mit dem in der Funktionsgleichung übereinstimmt, kannst du jeden der vier Parametereingänge nutzen.
-							</p>
-							<p>Schließe den Parameter \(a\) aus dem Beispiel an die Funktionsmaschine an und verändere den eingestellten Wert. Beschreibe, wie sich der Graph der Funktion abhängig vom Parameterwert ändert.</p>
-						</div>
-					</div>
-					<div class="image">
-						<canvas id="graphCanvas8" data-resize="true" data-zoom="1" lgtype="Funktionsmaschinen"
-								data-config-path="Litegraph/configs/FunktionsmaschinenC2_1.json"></canvas>
-						<script type="module">
-							import { createGraphInstance } from './Litegraph/createGraph.js';
-							createGraphInstance("graphCanvas8");
-						</script>
-					</div>
-
-				</section>
-				<section>
-					<div class="content stylethreeColor">
-						<div class="inner">
-							<header class="major">
-								<h3>5 Triff den Graph</h3>
-							</header>
-							<p> In der Graph-Maschine siehst du den Graphen einer quadratischen Funktion. Stelle die Parameter der Funktion \(f\) so ein, dass der Graph von \(f\) dem in der Maschine entspricht. Gib die eingestellten Werte der Parameter im Arbeitsheft an und beschreibe, was die 3 Parameter jeweils am Graphen verändern.</p>
-							
-							<p>Finde möglichst viele quadratische Funktionen/ Einstellungen für die Parameter, sodass \( f(1)=4\) ist. Skizziere 3 möglichst verschiedene Lösungen. Gib die Parameterwerte an.</p>
-						
-						</div>
-					
-					</div>
-					<div class="image">
-						<canvas id="graphCanvas9" data-resize="true" data-zoom="0.9"
-						data-config-path="Litegraph/configs/FunktionsmaschinenC2_2.json"
-							lgtype="Funktionsmaschinen"></canvas>
-						<script type="module">
-							import { createGraphInstance } from './Litegraph/createGraph.js';
-							createGraphInstance("graphCanvas9");
-						</script>
-					</div>
-				</section>
-				
-			</section>
 
 
 			<!-- Fourc -->
@@ -286,7 +238,7 @@
 				<!-- LiteGraph Canvas -->
 				<section id="litegraph">
 					<div id="graphstylefulldouble">
-						<canvas id="graphCanvas12" data-resize="true" 	data-zoom="0.9"lgtype="Funktionsmaschinen"
+						<canvas id="graphCanvas12" data-resize="true" 	data-zoom="0.9"lgtype="Funktionsmaschinen" allowContextMenu="false" allowNodeLoad="false"
 							data-config-path="Litegraph/configs/Funktionsmaschinen_AH_A5.json"></canvas>
 					</div>
 					<script type="module">
@@ -369,66 +321,84 @@
 		}
 	
 		function updatePagination(currentPage, canvasId) {
-			const pagination = document.querySelector(`.${canvasId}`);
-			pagination.innerHTML = '';
-	
-			const prevButton = document.createElement('li');
-			prevButton.innerHTML = `<a href="#" class="button small prev ${currentPage === 1 ? 'disabled' : ''}">zurück</a>`;
-			pagination.appendChild(prevButton);
-	
-			const createPageItem = (page) => {
-				const li = document.createElement('li');
-				li.innerHTML = `<a href="#" class="page ${page === currentPage ? 'active' : ''}" data-page="${page}">${page}</a>`;
-				li.querySelector('a').addEventListener('click', function (e) {
+				const pagination = document.querySelector(`.${canvasId}`);
+				pagination.innerHTML = '';
+			
+				const prevButton = document.createElement('li');
+				prevButton.innerHTML = `<a href="#" class="button small prev ${currentPage === 1 ? 'disabled' : ''}">zurück</a>`;
+				pagination.appendChild(prevButton);
+			
+				const createPageItem = (page) => {
+					const li = document.createElement('li');
+					li.innerHTML = `<a href="#" class="page ${page === currentPage ? 'active' : ''}" data-page="${page}">${page}</a>`;
+					li.querySelector('a').addEventListener('click', function (e) {
+						e.preventDefault();
+						loadPageContent(page, canvasId);
+					});
+					return li;
+				};
+			
+				const total = totalPages[canvasId];
+				pagination.appendChild(createPageItem(1));
+			
+				// Seite 2 nur anfügen, wenn total >= 2
+				if (total >= 2) {
+					pagination.appendChild(createPageItem(2));
+				}
+			
+				// Erstes Ellipsis nur zeigen, wenn total > 4 und currentPage > 4
+				if (total > 4 && currentPage > 4) {
+					const ellipsis = document.createElement('li');
+					ellipsis.innerHTML = '<span>&hellip;</span>';
+					pagination.appendChild(ellipsis);
+				}
+			
+				// Mittelteil nur durchlaufen, wenn total > 2
+				if (total > 2) {
+					for (let i = Math.max(3, currentPage - 1); i <= Math.min(total - 2, currentPage + 1); i++) {
+						if (i <= total) {
+							pagination.appendChild(createPageItem(i));
+						}
+					}
+				}
+			
+				// Zweites Ellipsis nur zeigen, wenn total > 4 und currentPage < total - 3
+				if (total > 4 && currentPage < total - 3) {
+					const ellipsis = document.createElement('li');
+					ellipsis.innerHTML = '<span>&hellip;</span>';
+					pagination.appendChild(ellipsis);
+				}
+			
+				// "total-1" nur anfügen, wenn total > 3
+				if (total > 3) {
+					pagination.appendChild(createPageItem(total - 1));
+				}
+			
+				// Letzte Seite nur anfügen, wenn total > 1
+				if (total > 1) {
+					pagination.appendChild(createPageItem(total));
+				}
+			
+				const naechsteButton = document.createElement('li');
+				naechsteButton.innerHTML = `<a href="#" class="button small naechste ${currentPage === total ? 'disabled' : ''}">weiter</a>`;
+				pagination.appendChild(naechsteButton);
+			
+				document.querySelector(`.${canvasId} .button.naechste`).addEventListener('click', function (e) {
 					e.preventDefault();
-					loadPageContent(page, canvasId);
+					const naechstePage = currentPage + 1;
+					if (naechstePage <= total) {
+						loadPageContent(naechstePage, canvasId);
+					}
 				});
-				return li;
-			};
-	
-			const total = totalPages[canvasId];
-			pagination.appendChild(createPageItem(1));
-			pagination.appendChild(createPageItem(2));
-	
-			if (currentPage > 4) {
-				const ellipsis = document.createElement('li');
-				ellipsis.innerHTML = '<span>&hellip;</span>';
-				pagination.appendChild(ellipsis);
+			
+				document.querySelector(`.${canvasId} .button.prev`).addEventListener('click', function (e) {
+					e.preventDefault();
+					const prevPage = currentPage - 1;
+					if (prevPage >= 1) {
+						loadPageContent(prevPage, canvasId);
+					}
+				});
 			}
-	
-			for (let i = Math.max(3, currentPage - 1); i <= Math.min(total - 2, currentPage + 1); i++) {
-				pagination.appendChild(createPageItem(i));
-			}
-	
-			if (currentPage < total - 3) {
-				const ellipsis = document.createElement('li');
-				ellipsis.innerHTML = '<span>&hellip;</span>';
-				pagination.appendChild(ellipsis);
-			}
-	
-			pagination.appendChild(createPageItem(total - 1));
-			pagination.appendChild(createPageItem(total));
-	
-			const naechsteButton = document.createElement('li');
-			naechsteButton.innerHTML = `<a href="#" class="button small naechste ${currentPage === total ? 'disabled' : ''}">weiter</a>`;
-			pagination.appendChild(naechsteButton);
-	
-			document.querySelector(`.${canvasId} .button.naechste`).addEventListener('click', function (e) {
-				e.preventDefault();
-				const naechstePage = currentPage + 1;
-				if (naechstePage <= total) {
-					loadPageContent(naechstePage, canvasId);
-				}
-			});
-	
-			document.querySelector(`.${canvasId} .button.prev`).addEventListener('click', function (e) {
-				e.preventDefault();
-				const prevPage = currentPage - 1;
-				if (prevPage >= 1) {
-					loadPageContent(prevPage, canvasId);
-				}
-			});
-		}
 	
 		// Initiale Paginierung und Laden der ersten Seite für jede Paginierung
 		updatePagination(1, 'graphCanvas3');

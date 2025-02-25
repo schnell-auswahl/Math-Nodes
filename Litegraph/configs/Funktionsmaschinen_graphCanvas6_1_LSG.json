@@ -1,0 +1,331 @@
+{
+  "last_node_id": 11,
+  "last_link_id": 30,
+  "nodes": [
+    {
+      "id": 10,
+      "type": "Funktionenmaschinen/Funktion",
+      "pos": [264.58098540673313, 404.27570427570424],
+      "size": [165, 120],
+      "flags": {},
+      "order": 1,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "UV",
+          "type": "object",
+          "link": 11,
+          "label": "x",
+          "color_off": "#000000",
+          "slot_index": 0,
+          "color_on": "#9C0000"
+        },
+        {
+          "name": "",
+          "type": "object",
+          "link": null,
+          "label": "",
+          "color_off": "#7C8693"
+        },
+        {
+          "name": "",
+          "type": "object",
+          "link": null,
+          "label": "",
+          "color_off": "#7C8693"
+        },
+        {
+          "name": "",
+          "type": "object",
+          "link": null,
+          "label": "",
+          "color_off": "#7C8693"
+        },
+        {
+          "name": "",
+          "type": "object",
+          "link": null,
+          "label": "",
+          "color_off": "#7C8693"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "",
+          "type": "object",
+          "links": [25, 27],
+          "color_off": "#000000",
+          "slot_index": 0,
+          "color_on": "#008800",
+          "label": "f(x)"
+        }
+      ],
+      "title": "Funktion",
+      "properties": {
+        "funcName": "f",
+        "formula": "x + 2",
+        "leftSide": "f(x)",
+        "rightSide": "x",
+        "uvName": "x",
+        "paramsFromWidget": ["", "", "", ""],
+        "paramNames": ["", "", "", ""],
+        "paramValues": [0, 0, 0, 0],
+        "evaluatedFormula": "x + 2",
+        "uvError": false,
+        "completeEquationfromWidget": "f(x) = x + 2",
+        "finalEquation": "x + 2",
+        "widgetVisible": false
+      },
+      "color": "#88B19B",
+      "bgcolor": "#7C8693"
+    },
+    {
+      "id": 8,
+      "type": "Funktionenmaschinen/Funktion",
+      "pos": [277.17743100707986, 161.87616187616186],
+      "size": [160, 120],
+      "flags": {},
+      "order": 2,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "UV",
+          "type": "object",
+          "link": 13,
+          "label": "x",
+          "color_off": "#000000",
+          "color_on": "#9C0000"
+        },
+        {
+          "name": "",
+          "type": "object",
+          "link": null,
+          "label": "",
+          "color_off": "#7C8693"
+        },
+        {
+          "name": "",
+          "type": "object",
+          "link": null,
+          "label": "",
+          "color_off": "#7C8693"
+        },
+        {
+          "name": "",
+          "type": "object",
+          "link": null,
+          "label": "",
+          "color_off": "#7C8693"
+        },
+        {
+          "name": "",
+          "type": "object",
+          "link": null,
+          "label": "",
+          "color_off": "#7C8693"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "",
+          "type": "object",
+          "links": [24, 30],
+          "color_off": "#000000",
+          "slot_index": 0,
+          "color_on": "#00A400",
+          "label": "g(x)"
+        }
+      ],
+      "title": "Funktion",
+      "properties": {
+        "funcName": "g",
+        "formula": "x**2",
+        "leftSide": "g(x)",
+        "rightSide": "x",
+        "uvName": "x",
+        "paramsFromWidget": ["", "", "", ""],
+        "paramNames": ["", "", "", ""],
+        "paramValues": [0, 0, 0, 0],
+        "evaluatedFormula": "x**2",
+        "uvError": false,
+        "completeEquationfromWidget": "g(x) = x^2",
+        "finalEquation": "x**2",
+        "widgetVisible": false
+      },
+      "color": "#88B19B",
+      "bgcolor": "#7C8693"
+    },
+    {
+      "id": 11,
+      "type": "Funktionenmaschinen/Operation",
+      "pos": [788.383181621153, 183.9124839124839],
+      "size": { "0": 150, "1": 78 },
+      "flags": {},
+      "order": 3,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "",
+          "type": "object",
+          "link": 24,
+          "color_off": "#000000",
+          "color_on": "#00A400"
+        },
+        {
+          "name": "",
+          "type": "object",
+          "link": 25,
+          "color_off": "#000000",
+          "color_on": "#008800",
+          "slot_index": 1
+        }
+      ],
+      "outputs": [
+        {
+          "name": "",
+          "type": "object",
+          "links": [28, 29],
+          "color_off": "#000000",
+          "color_on": "#009A00",
+          "slot_index": 0
+        }
+      ],
+      "title": "Operation",
+      "properties": {
+        "Out_leftSideOfEquation": "g(x) * f(x)",
+        "Out_rightSideOfEquation": "(x**2) * (x + 2)",
+        "Result_Value": 1.152,
+        "Operation": "*",
+        "Fehlermeldung": "",
+        "widgetVisible": true
+      },
+      "color": "#88B19B",
+      "bgcolor": "#7C8693"
+    },
+    {
+      "id": 5,
+      "type": "Funktionenmaschinen/Feedback_Graph",
+      "pos": [1267.04811443433, 492.4209924209923],
+      "size": [350, 380],
+      "flags": {},
+      "order": 5,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "",
+          "type": "object",
+          "link": 29,
+          "color_off": "#000000",
+          "color_on": "#009A00",
+          "slot_index": 0
+        },
+        {
+          "name": "",
+          "type": "object",
+          "link": 30,
+          "color_off": "#000000",
+          "color_on": "#00A400"
+        },
+        {
+          "name": "",
+          "type": "object",
+          "link": 27,
+          "color_off": "#000000",
+          "color_on": "#008800"
+        },
+        { "name": "", "type": "object", "link": null, "color_off": "#000000" }
+      ],
+      "title": "Graph",
+      "properties": {
+        "xRangeValue": 2.6,
+        "yRangeValue": 2,
+        "scaleX": 1,
+        "scaleY": 1,
+        "gridSize": 0.26,
+        "discontinuityThreshold": 100,
+        "margin": 30,
+        "marginTop": 80,
+        "xRange": [-2.6, 2.6],
+        "yRange": [-2, 2],
+        "equations": ["(x**2) * (x + 2)", "x**2", "x + 2", "", ""],
+        "uvNames": ["x", "x", "x", "", ""],
+        "savedEquation": "",
+        "savedUV": "",
+        "whiteBackground": "false",
+        "noPlot": false
+      },
+      "color": "#879BCE",
+      "bgcolor": "#000000"
+    },
+    {
+      "id": 6,
+      "type": "Funktionenmaschinen/Feedback_Gleichung",
+      "pos": [1271.2469296344457, 55],
+      "size": [285, 122],
+      "flags": {},
+      "order": 4,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "value",
+          "type": 0,
+          "link": 28,
+          "label": "",
+          "color_off": "#000000",
+          "color_on": "#009A00"
+        }
+      ],
+      "title": "Gleichung",
+      "properties": {
+        "GleichungvorMathJax": "s(x) = (ln (x)) - (sin ((x^3)))",
+        "GleichungvorKaTex": "\\mathrm{s}\\left( x\\right) = \\left(\\mathrm{ln}\\left( x\\right)\\right)-\\left(\\sin\\left(\\left({ x}^{3}\\right)\\right)\\right)",
+        "savedEquation": "s(x) = (x^2) *(x+2)"
+      },
+      "color": "#879BCE",
+      "bgcolor": "#7C8693",
+      "boxcolor": "#00FF00"
+    },
+    {
+      "id": 7,
+      "type": "Funktionenmaschinen/Unabhängige_Variable",
+      "pos": [20, 338],
+      "size": [180, 80],
+      "flags": { "collapsed": false },
+      "order": 0,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "value",
+          "type": "object",
+          "links": [11, 13],
+          "color_off": "#000000",
+          "label": "",
+          "color_on": "#9C0000",
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "value": -1.1999999999999997,
+        "rightSide": "x",
+        "widgetVisible": "true"
+      },
+      "color": "#D0AF8B",
+      "bgcolor": "#7C8693",
+      "shape": 2
+    }
+  ],
+  "links": [
+    [11, 7, 0, 10, 0, "object"],
+    [13, 7, 0, 8, 0, "object"],
+    [24, 8, 0, 11, 0, "object"],
+    [25, 10, 0, 11, 1, "object"],
+    [27, 10, 0, 5, 2, "object"],
+    [28, 11, 0, 6, 0, "object"],
+    [29, 11, 0, 5, 0, "object"],
+    [30, 8, 0, 5, 1, "object"]
+  ],
+  "groups": [],
+  "config": {},
+  "extra": {},
+  "version": 0.4
+}
