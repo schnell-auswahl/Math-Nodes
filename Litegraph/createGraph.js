@@ -119,7 +119,6 @@ export function createGraphInstance(canvasId) {
   LiteGraph.registerNodeType("Wortmaschinen/Text_Anzeige", TextDisplayNode);
   LiteGraph.registerNodeType("Wortmaschinen/Text_Eingabe", TextInputNode);
 
-
   // Hilfsfunktion zum Ersetzen von Umlauten in den Folgenden nodes
   function replaceUmlauts(string) {
     return string
@@ -192,6 +191,7 @@ export function createGraphInstance(canvasId) {
     "dblclick",
     (e) => {
       const rect = canvasElement.getBoundingClientRect();
+      const allowNodeLoad = canvasElement.getAttribute("allowNodeLoad");
 
       // Berechne die unskalierten Koordinaten
       const x = (e.clientX - rect.left) / canvasElement.zoom;
@@ -203,19 +203,19 @@ export function createGraphInstance(canvasId) {
       if (
         clickedNode &&
         clickedNode.type !== "Funktionenmaschinen/Unabhängige_Variable" &&
-        clickedNode.type !== "Funktionenmaschinen/Parameter"
+        clickedNode.type !== "Funktionenmaschinen/Parameter" &&
+        allowNodeLoad !== "false"
       ) {
         // Hier können Sie den gewünschten Code einfügen, der bei einem Doppelklick auf eine Node ausgeführt werden soll
         //console.log("Node doppelt geklickt:", clickedNode);
         e.preventDefault(); // Unterdrücke das Standardverhalten
         showNewMachineMenu(graph, canvasElement, clickedNode);
-      } else if (!clickedNode) {
+      } else if (!clickedNode && allowNodeLoad !== "false") {
         showNewMachineMenu(graph, canvasElement, "", x, y);
       }
     },
     false
   );
-
 
   // Eventlstener für rechtsklick auf Node
   canvasElement.addEventListener(
@@ -226,29 +226,37 @@ export function createGraphInstance(canvasId) {
       const x = (e.clientX - rect.left) / canvasElement.zoom;
       const y = (e.clientY - rect.top) / canvasElement.zoom;
       const clickedNode = graph.getNodeOnPos(x, y);
-  
-     if (
-        clickedNode &&
-        clickedNode.type === "Funktionenmaschinen/Funktion"
-      ) {
-        e.preventDefault();
-        showFrequentlyUsedFunctionsMenu(graph, canvasElement, clickedNode);
-      } else if (
-        clickedNode &&
-        clickedNode.type === "Funktionenmaschinen/Feedback_Gleichung"
-      ) {
-        e.preventDefault();
-        showEquationNodeMenu(graph, canvasElement, clickedNode);
-        } else if (
-        clickedNode && clickedNode.type === "Funktionenmaschinen/Feedback_Graph"
-      ) {
-        e.preventDefault();
-        showGraphNodeMenu(graph, canvasElement, clickedNode);
-      } 
+      const allowContextMenu = canvasElement.getAttribute("allowContextMenu");
 
-      else if (!clickedNode) {
-        e.preventDefault();
-        showNewMachineMenu(graph, canvasElement, "", x, y);
+      if (allowContextMenu !== "false") {
+        if (
+          clickedNode &&
+          clickedNode.type === "Funktionenmaschinen/Funktion"
+        ) {
+          e.preventDefault();
+          showFrequentlyUsedFunctionsMenu(graph, canvasElement, clickedNode);
+        } else if (
+          clickedNode &&
+          clickedNode.type === "Funktionenmaschinen/Feedback_Gleichung"
+        ) {
+          e.preventDefault();
+          showEquationNodeMenu(graph, canvasElement, clickedNode);
+        } else if (
+          clickedNode &&
+          clickedNode.type === "Funktionenmaschinen/Feedback_Graph"
+        ) {
+          e.preventDefault();
+          showGraphNodeMenu(graph, canvasElement, clickedNode);
+        } else if (
+          clickedNode &&
+          clickedNode.type === "Funktionenmaschinen/Operation"
+        ) {
+          e.preventDefault();
+          showOperationNodeMenu(graph, canvasElement, clickedNode);
+        } else if (!clickedNode) {
+          e.preventDefault();
+          showNewMachineMenu(graph, canvasElement, "", x, y);
+        }
       }
     },
     false
@@ -384,7 +392,7 @@ export function createGraphInstance(canvasId) {
   //enu.style.border = "1px solid #ccc";
   //menu.style.borderRadius = "1px";
   //menu.style.padding = "10px";
-  menu.style.zIndex = "100"; 
+  menu.style.zIndex = "100";
   //menu.style.boxShadow = "0 2px 5px rgba(0, 0, 0, 0.2)";
   menu.innerHTML = `
         <button id="menu-toggle" class="button primary small">Menü</button>
@@ -573,7 +581,7 @@ export function createGraphInstance(canvasId) {
         graph.start(); // Startet den Graphen, wenn das Canvas sichtbar wird
         // Starten der Schleife
 
-  //console.log(graph);
+        //console.log(graph);
         animationFrameId = requestAnimationFrame(loop);
       } else {
         graph.stop(); // Stoppt den Graphen, wenn das Canvas nicht mehr sichtbar ist
@@ -597,7 +605,6 @@ export function createGraphInstance(canvasId) {
     // console.log("Current nodes in graph:", graph._nodes);
     return graph._nodes.some((node) => node.animationActive);
   }
-
 
   return { graph, canvas };
 }
@@ -1383,6 +1390,104 @@ function showEquationNodeMenu(graph, canvasElement, clickedNode) {
     header.className = "major";
     header.innerHTML = "<h3>Einstellungen für Feedback Gleichung</h3>";
     menuContent.insertBefore(header, menuContent.firstChild);
+  // Buttons erstellen – Design entsprechend dem markierten Bereich
+  actions.forEach((action) => {
+    const button = document.createElement("li");
+    button.textContent = action.name;
+    button.className = "links machine-button";
+    button.style.margin = "5px";
+    button.style.listStyle = "none";
+    button.style.fontWeight = "600";
+    button.style.fontSize = "0.6em";
+    button.style.letterSpacing = "0.25em";
+    button.style.borderBottom = "1px rgba(255, 255, 255, 1)";
+    button.style.paddingBottom = "10px";
+    button.style.transition = "background-color 0.3s, transform 0.1s";
+    button.style.backgroundColor = "transparent";
+    button.style.color = "#ffffff";
+
+    // Hover-Effekt
+    button.addEventListener("mouseover", () => {
+      button.style.backgroundColor = "rgba(255, 255, 255, 0.1)";
+    });
+
+    // Entferne Hover-Effekt
+    button.addEventListener("mouseout", () => {
+      button.style.backgroundColor = "transparent";
+    });
+
+    // Klick-Effekt
+    button.addEventListener("mousedown", () => {
+      button.style.backgroundColor = "rgba(255, 255, 255, 0.3)";
+      button.style.transform = "scale(0.98)";
+    });
+
+    button.addEventListener("mouseup", () => {
+      button.style.backgroundColor = "rgba(255, 255, 255, 0.1)";
+      button.style.transform = "scale(1)";
+    });
+
+    // Klick-Funktion
+    button.addEventListener("click", action.onClick);
+    menuContent.appendChild(button);
+  });
+
+  overlay.appendChild(menuContent);
+}
+
+
+function showOperationNodeMenu(graph, canvasElement, clickedNode) {
+  // Erstelle Overlay
+  const overlay = document.createElement("div");
+  overlay.style.position = "absolute";
+  overlay.style.top = "0";
+  overlay.style.left = "0";
+  overlay.style.width = "100%";
+  overlay.style.height = "100%";
+  overlay.style.backgroundColor = "rgba(132, 177, 156, 0.9)";
+  overlay.style.zIndex = "300";
+  overlay.style.display = "flex";
+  overlay.style.justifyContent = "center";
+  overlay.style.alignItems = "center";
+  overlay.style.color = "#ffffff";
+  canvasElement.parentElement.appendChild(overlay);
+
+  // Menü-Inhalt
+  const menuContent = document.createElement("div");
+  menuContent.className = "inner";
+  menuContent.style.display = "flex";
+  menuContent.style.flexDirection = "column";
+  menuContent.style.gap = "20px";
+
+  // Schließen-Button
+  const closeButton = document.createElement("button");
+  closeButton.textContent = "X";
+  closeButton.className = "button primary small";
+  closeButton.style.position = "absolute";
+  closeButton.style.top = "10px";
+  closeButton.style.right = "10px";
+  closeButton.addEventListener("click", () => {
+    canvasElement.parentElement.removeChild(overlay);
+  });
+  overlay.appendChild(closeButton);
+
+  // Aktionen
+  const actions = [
+    {
+      name: "SCHALTFLÄCHE EIN-/AUSBLENDEN",
+      onClick: () => {
+        clickedNode.properties.widgetVisible = typeof clickedNode.properties.widgetVisible === 'boolean' ? !clickedNode.properties.widgetVisible : true;
+        canvasElement.parentElement.removeChild(overlay);
+      },
+    },
+  ];
+
+  // Überschrift hinzufügen
+  const header = document.createElement("header");
+  header.className = "major";
+  header.innerHTML = "<h3>Einstellungen für Feedback Graph</h3>";
+  menuContent.insertBefore(header, menuContent.firstChild);
+  
   // Buttons erstellen – Design entsprechend dem markierten Bereich
   actions.forEach((action) => {
     const button = document.createElement("li");

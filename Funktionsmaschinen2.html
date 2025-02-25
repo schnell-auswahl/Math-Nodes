@@ -115,7 +115,7 @@
 						</div>
 					</div>
 					<div class="image">
-						<canvas id="graphCanvas1" data-resize="true" data-zoom="1" lgtype="Funktionsmaschinen"
+						<canvas id="graphCanvas1" data-resize="true" data-zoom="1" lgtype="Funktionsmaschinen" allowContextMenu="false" allowNodeLoad="false"
 								data-config-path="Litegraph/configs/FunktionsmaschinenC2_1.json"></canvas>
 						<script type="module">
 							import { createGraphInstance } from './Litegraph/createGraph.js';
@@ -138,7 +138,7 @@
 					
 					</div>
 					<div class="image">
-						<canvas id="graphCanvas2" data-resize="true" data-zoom="0.9"
+						<canvas id="graphCanvas2" data-resize="true" data-zoom="0.9" allowContextMenu="false" allowNodeLoad="false"
 						data-config-path="Litegraph/configs/FunktionsmaschinenC2_2.json"
 							lgtype="Funktionsmaschinen"></canvas>
 						<script type="module">
@@ -147,37 +147,39 @@
 						</script>
 					</div>
 				</section>
-				<section>
-					<div class="content stylethreeColor">
-						<div class="inner">
-							<header class="major">
-								<h3>3 Funktionenschar</h3>
-							</header>
-							<p>Du hast eben gesehen, dass du Funktionen mit Parametern verändern kannst. Eine Funktionsgleichung mit den allgemeinen Parametern, z.B. \(f(x)=a\cdot x^2\), beschreibt dann alle möglichen konkreten Funktionen, die diese Form haben, z.B. \(f(x)=2\cdot x\). Wir nennen das dann eine Funktionenschar und verdeutlichen das, indem wir \(f_{a}(x)\) schreiben. In Math-Nodes kannst du dir einen Überblick über eine Funktionenschar verschaffen, indem du den Parameter animierst.</p>
-							
-							<p>Besondere Funktionenscharen - sogenannte Bündel - sind solche, bei denen alle Funktionen der Schar durch mindestens einen bestimmten Punkt gehen. Finde solche Punkte, gib sie an und begründe, warum sich der Funktionswert dort unabhängig vom Parameterwert nicht ändert.</p>
-							<ul class="pagination graphCanvas3"></ul>
-						</div>
-					
-					</div>
-					<div class="image">
-						<canvas id="graphCanvas3" data-resize="true" data-zoom="0.9"
-						data-config-path="Litegraph/configs/FunktionsmaschinenC2_graphCanvas3_1.json"
-							lgtype="Funktionsmaschinen"></canvas>
-						<script type="module">
-							import { createGraphInstance } from './Litegraph/createGraph.js';
-							createGraphInstance("graphCanvas3");
-						</script>
-					</div>
-				</section>
-				
 			</section>
 
 		<!-- Fourb -->
 		<section id="fourb" style="position: relative;" class="stylethreeColor">
 			<div class="inner">
 				<header class="major">
-					<h2>3 Modulation</h2>
+					<h3>3 Funktionenschar</h3>
+				</header>
+				<p>Du hast eben gesehen, dass du Funktionen mit Parametern verändern kannst. Eine Funktionsgleichung mit den allgemeinen Parametern, z.B. \(f(x)=a\cdot x^2\), beschreibt dann alle möglichen konkreten Funktionen, die diese Form haben, z.B. \(f(x)=2\cdot x\). Wir nennen das dann eine Funktionenschar und verdeutlichen das, indem wir \(f_{a}(x)\) schreiben. In Math-Nodes kannst du dir einen Überblick über eine Funktionenschar verschaffen, indem du den Parameter animierst.</p>
+				
+				<p>Besondere Funktionenscharen - sogenannte Bündel - sind solche, bei denen alle Funktionen der Schar durch mindestens einen bestimmten Punkt gehen. Finde solche Punkte, gib sie an und begründe, warum sich der Funktionswert dort unabhängig vom Parameterwert nicht ändert.</p>
+				<ul class="pagination graphCanvas3"></ul>
+			</div>
+		</section>
+		<!-- LiteGraph Canvas -->
+		<section id="litegraph">
+			<div id="graphstylehalfheight">
+				<canvas id="graphCanvas3" data-resize="true" lgtype="Funktionsmaschinen"
+				data-config-path="Litegraph/configs/FunktionsmaschinenC2_graphCanvas3_1.json" allowContextMenu="false" allowNodeLoad="false"
+					></canvas>
+			</div>
+			<script type="module">
+				import { createGraphInstance } from './Litegraph/createGraph.js';
+				createGraphInstance("graphCanvas3");
+			</script>
+		</section>
+
+
+		<!-- Fourb -->
+		<section id="fourb" style="position: relative;" class="stylethreeColor">
+			<div class="inner">
+				<header class="major">
+					<h2>4 Modulation</h2>
 				</header>
 				<p>Betrachte zunächst die Funktionen \(f\) und \(g\) im ersten Fenster. Welchen Einfluss auf den Graphen haben jeweils die Parameter \(a\) und \(b\)? Probiere aus und beschreibe im Arbeitsheft.</p>
 				<p>Die Funktionen \(f\) und \(g\) im zweiten Fenster sehen beinahe aus wie im ersten. Statt der Parameter sind hier aber Funktionen \(a\) und \(b\) an die Parametereingänge angeschlossen. Beschreibe den Verlauf der Graphen von \(f\) und \(g\) und den Einfluss der Funktionen \(a\) und \(b\) auf den Verlauf. </p>
@@ -188,7 +190,7 @@
 		<section id="litegraph">
 			<div id="graphstylehalfheight">
 				<canvas id="graphCanvas6" data-resize="true" lgtype="Funktionsmaschinen"
-				data-config-path="Litegraph/configs/FunktionsmaschinenC2_2a.json"
+				data-config-path="Litegraph/configs/FunktionsmaschinenC2_2a.json" allowContextMenu="false" allowNodeLoad="false"
 					></canvas>
 			</div>
 			<script type="module">
@@ -200,7 +202,7 @@
 			<section id="litegraph">
 				<div id="graphstylehalfheight">
 					<canvas id="graphCanvas7" data-resize="true" lgtype="Funktionsmaschinen"
-					data-config-path="Litegraph/configs/FunktionsmaschinenC2_2b.json"
+					data-config-path="Litegraph/configs/FunktionsmaschinenC2_2b.json" allowContextMenu="false" allowNodeLoad="false"
 						></canvas>
 				</div>
 				<script type="module">
@@ -220,56 +222,6 @@
 				</div>
 			</section>
 
-			<!-- Two -->
-			<section id="two" class="spotlights">
-				<section>
-
-					<div class="content stylethreeColor">
-						<div class="inner">
-							<header class="major">
-								<h3>4 Parameter</h3>
-							</header>
-							<p>In Math-Nodes haben Funktionsmaschinen zusätzlich zur unabhängigen Variable noch weitere Eingänge. Dort kannst du Parameter-Maschinen anschließen, die du dann in der Funktionsmaschine verwenden kannst. </p>
-							<p>Solange der Name des Parameters mit dem in der Funktionsgleichung übereinstimmt, kannst du jeden der vier Parametereingänge nutzen.
-							</p>
-							<p>Schließe den Parameter \(a\) aus dem Beispiel an die Funktionsmaschine an und verändere den eingestellten Wert. Beschreibe, wie sich der Graph der Funktion abhängig vom Parameterwert ändert.</p>
-						</div>
-					</div>
-					<div class="image">
-						<canvas id="graphCanvas8" data-resize="true" data-zoom="1" lgtype="Funktionsmaschinen"
-								data-config-path="Litegraph/configs/FunktionsmaschinenC2_1.json"></canvas>
-						<script type="module">
-							import { createGraphInstance } from './Litegraph/createGraph.js';
-							createGraphInstance("graphCanvas8");
-						</script>
-					</div>
-
-				</section>
-				<section>
-					<div class="content stylethreeColor">
-						<div class="inner">
-							<header class="major">
-								<h3>5 Triff den Graphen</h3>
-							</header>
-							<p> In der Graph-Maschine siehst du den Graphen einer quadratischen Funktion. Stelle die Parameter der Funktion \(f\) so ein, dass der Graph von \(f\) dem in der Maschine entspricht. Gib die eingestellten Werte der Parameter im Arbeitsheft an und beschreibe, was die 3 Parameter jeweils am Graphen verändern.</p>
-							
-							<p>Finde möglichst viele quadratische Funktionen/ Einstellungen für die Parameter, sodass \( f(1)=4\) ist. Skizziere 3 möglichst verschiedene Lösungen. Gib die Parameterwerte an.</p>
-						
-						</div>
-					
-					</div>
-					<div class="image">
-						<canvas id="graphCanvas9" data-resize="true" data-zoom="0.9"
-						data-config-path="Litegraph/configs/FunktionsmaschinenC2_2.json"
-							lgtype="Funktionsmaschinen"></canvas>
-						<script type="module">
-							import { createGraphInstance } from './Litegraph/createGraph.js';
-							createGraphInstance("graphCanvas9");
-						</script>
-					</div>
-				</section>
-				
-			</section>
 
 
 			<!-- Fourc -->
@@ -286,7 +238,7 @@
 				<!-- LiteGraph Canvas -->
 				<section id="litegraph">
 					<div id="graphstylefulldouble">
-						<canvas id="graphCanvas12" data-resize="true" 	data-zoom="0.9"lgtype="Funktionsmaschinen"
+						<canvas id="graphCanvas12" data-resize="true" 	data-zoom="0.9"lgtype="Funktionsmaschinen" allowContextMenu="false" allowNodeLoad="false"
 							data-config-path="Litegraph/configs/Funktionsmaschinen_AH_A5.json"></canvas>
 					</div>
 					<script type="module">

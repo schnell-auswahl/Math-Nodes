@@ -117,7 +117,8 @@
 						</div>
 					</div>
 					<div class="image">
-						<canvas id="graphCanvas1" data-resize="true" data-zoom="1" lgtype="Funktionsmaschinen"
+						<canvas id="graphCanvas1" data-resize="true" data-zoom="1" lgtype="Funktionsmaschinen" 	allowContextMenu="false"
+						allowNodeLoad="false"
 								data-config-path="Litegraph/configs/Funktionsmaschinen_1.json"></canvas>
 						<script type="module">
 							import { createGraphInstance } from './Litegraph/createGraph.js';
@@ -140,7 +141,8 @@
 					</div>
 					<div class="image">
 						<canvas id="graphCanvas2" data-resize="true"
-						data-config-path="Litegraph/configs/Funktionsmaschinen_2.json"
+						data-config-path="Litegraph/configs/Funktionsmaschinen_2.json" 	allowContextMenu="false"
+						allowNodeLoad="false"
 							lgtype="Funktionsmaschinen"></canvas>
 						<script type="module">
 							import { createGraphInstance } from './Litegraph/createGraph.js';
@@ -160,7 +162,8 @@
                     </div>
                     <div class="image">
                         <canvas id="graphCanvas3" data-resize="true"
-						data-config-path="Litegraph/configs/Funktionsmaschinen_3.json"
+						data-config-path="Litegraph/configs/Funktionsmaschinen_3.json" 	allowContextMenu="false"
+						allowNodeLoad="false"
                             lgtype="Funktionsmaschinen" data-zoom="0.9"></canvas>
                         <script type="module">
                             import { createGraphInstance } from './Litegraph/createGraph.js';
@@ -181,7 +184,8 @@
                     </div>
                     <div class="image">
                         <canvas id="graphCanvas4" data-resize="true" data-zoom="0.9"
-						data-config-path="Litegraph/configs/Funktionsmaschinen_graphCanvas4_1.json"
+						data-config-path="Litegraph/configs/Funktionsmaschinen_graphCanvas4_1.json" 	allowContextMenu="false"
+						allowNodeLoad="false"
                             lgtype="Funktionsmaschinen"></canvas>
                         <script type="module">
                             import { createGraphInstance } from './Litegraph/createGraph.js';
@@ -197,18 +201,17 @@
                             </header>
                             <p>Du kannst zwei Funktionsmaschinen nicht nur verketten, sondern auch mittels einer Operationsmaschine mit den Operationen Addition, Multiplikation, usw. verknüpfen. </p>
                             <p>Im Arbeitsheft findest du ein zweites Beispiel. Gib dafür die Funktionsgleichung an. Wie könnte der Graph aussehen? Diskutiere mit der Person neben dir und skizziere dann den Graphen.</p>
-							<p><strong>Beachte:</strong> Die Feedbackmaschine in Math-Nodes vereinfacht die Funktionsterme nicht. Kannst du den Term noch vereinfachen?</p>
+							<p><strong>Beachte:</strong> Wenn du das Feedback als Gleichung anschließt, vereinfacht Math-Nodes die Funktionsterme nicht. Kannst du den Term noch vereinfachen?</p>
                         </div>
                     </div>
-                    <div class="image">
-                        <canvas id="graphCanvas5" data-resize="true"
-						data-config-path="Litegraph/configs/Funktionsmaschinen_5.json"
-                            lgtype="Funktionsmaschinen"></canvas>
-                        <script type="module">
-                            import { createGraphInstance } from './Litegraph/createGraph.js';
-                            createGraphInstance("graphCanvas5");
-                        </script>
-                    </div>
+                  mage">
+						<canvas id="graphCanvas5" data-resize="true" data-config-path="Litegraph/configs/Funktionsmaschinen_5.json"
+							allowContextMenu="false" allowNodeLoad="false" lgtype="Funktionsmaschinen"></canvas>
+						<script type="module">
+							import { createGraphInstance } from './Litegraph/createGraph.js';
+							createGraphInstance("graphCanvas5");
+						</script>
+					</div>
                 </section>
 			</section>
 
@@ -236,7 +239,7 @@
                     </div>
                     <div class="image">
                         <canvas id="graphCanvas6" data-resize="true"
-						data-config-path="Litegraph/configs/Funktionsmaschinen_graphCanvas6_1.json" data-zoom="0.9"
+						data-config-path="Litegraph/configs/Funktionsmaschinen_graphCanvas6_1.json" data-zoom="0.9" allowContextMenu="true" allowNodeLoad="true"
                             lgtype="Funktionsmaschinen"></canvas>
                         <script type="module">
                             import { createGraphInstance } from './Litegraph/createGraph.js';
@@ -255,7 +258,7 @@
                     </div>
                     <div class="image">
                         <canvas id="graphCanvas7" data-resize="true"
-						data-config-path="Litegraph/configs/Funktionsmaschinen_7.json" data-zoom="0.9"
+						data-config-path="Litegraph/configs/Funktionsmaschinen_7.json" data-zoom="0.9" allowContextMenu="true" allowNodeLoad="true"
                             lgtype="Funktionsmaschinen"></canvas>
                         <script type="module">
                             import { createGraphInstance } from './Litegraph/createGraph.js';
