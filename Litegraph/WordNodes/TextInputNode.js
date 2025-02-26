@@ -47,7 +47,7 @@ export function _TextInputNode() {
           this.paddingtop = 0;
         } else if ((this.properties.widgetVisible == true || this.properties.widgetVisible == "true") && this.widgets.length === 0) {
           // Widget neu zeichnen, wenn es vorher entfernt wurde
-          this.widgets = [textInput_widget];
+          this.widgets = [this.textInput_widget];
           this.paddingtop = 40;
         }
    

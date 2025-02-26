@@ -253,7 +253,19 @@ export function createGraphInstance(canvasId) {
         ) {
           e.preventDefault();
           showOperationNodeMenu(graph, canvasElement, clickedNode);
-        } else if (!clickedNode) {
+        }  else if (
+          clickedNode &&
+          clickedNode.type === "Wortmaschinen/Text_Anzeige"
+        ) {
+          e.preventDefault();
+          showTextAnzeigeNodeMenu(graph, canvasElement, clickedNode);
+          } else if (
+            clickedNode &&
+            clickedNode.type === "Wortmaschinen/Text_Eingabe"
+          ) {
+            e.preventDefault();
+            showTextEingabeNodeMenu(graph, canvasElement, clickedNode);
+            } else if (!clickedNode) {
           e.preventDefault();
           showNewMachineMenu(graph, canvasElement, "", x, y);
         }
@@ -283,8 +295,7 @@ export function createGraphInstance(canvasId) {
         if (
           clickedNode &&
           clickedNode.type !== "Funktionenmaschinen/Unabhängige_Variable" &&
-          clickedNode.type !== "Funktionenmaschinen/Parameter" &&
-          clickedNode.type !== "Funktionenmaschinen/Funktion"
+          clickedNode.type !== "Funktionenmaschinen/Parameter"
         ) {
           // Hier können Sie den gewünschten Code einfügen, der bei einem Doppeltipp auf eine Node ausgeführt werden soll
           //console.log("Node doppelt getippt:", clickedNode);
@@ -332,6 +343,71 @@ export function createGraphInstance(canvasId) {
         clientY: touch.clientY,
       });
       canvasElement.dispatchEvent(simulatedEvent);
+    },
+    false
+  );
+
+  canvasElement.addEventListener(
+    "touchstart",
+    (e) => {
+      const allowContextMenu = canvasElement.getAttribute("allowContextMenu");
+      if (e.touches.length > 1 && allowContextMenu !== "false") {
+        const touch = e.touches[0];
+        const rect = canvasElement.getBoundingClientRect();
+
+        // Berechne die unskalierten Koordinaten
+        const x = (touch.clientX - rect.left) / canvasElement.zoom;
+        const y = (touch.clientY - rect.top) / canvasElement.zoom;
+
+        // Prüfen, ob eine Node getroffen wurde
+        const touchedNode = graph.getNodeOnPos(x, y);
+
+        if (touchedNode) {
+          //console.log("Node getroffen:", touchedNode.title);
+          e.preventDefault(); // Unterdrücke das Scrollen
+
+          if (
+            touchedNode &&
+            touchedNode.type === "Funktionenmaschinen/Funktion"
+          ) {
+            e.preventDefault();
+            showFrequentlyUsedFunctionsMenu(graph, canvasElement, touchedNode);
+          } else if (
+            touchedNode &&
+            touchedNode.type === "Funktionenmaschinen/Feedback_Gleichung"
+          ) {
+            e.preventDefault();
+            showEquationNodeMenu(graph, canvasElement, touchedNode);
+          } else if (
+            touchedNode &&
+            touchedNode.type === "Funktionenmaschinen/Feedback_Graph"
+          ) {
+            e.preventDefault();
+            showGraphNodeMenu(graph, canvasElement, touchedNode);
+          } else if (
+            touchedNode &&
+            touchedNode.type === "Funktionenmaschinen/Operation"
+          ) {
+            e.preventDefault();
+            showOperationNodeMenu(graph, canvasElement, touchedNode);
+          } else if (
+            touchedNode &&
+            touchedNode.type === "Wortmaschinen/Text_Anzeige"
+          ) {
+            e.preventDefault();
+            showTextAnzeigeNodeMenu(graph, canvasElement, touchedNode);
+            } else if (
+              touchedNode &&
+              touchedNode.type === "Wortmaschinen/Text_Eingabe"
+            ) {
+              e.preventDefault();
+              showTextEingabeNodeMenu(graph, canvasElement, touchedNode);
+              } else if (!touchedNode) {
+            e.preventDefault();
+            showNewMachineMenu(graph, canvasElement, "", x, y);
+          }
+        }        
+      }
     },
     false
   );
@@ -968,7 +1044,7 @@ function showNewMachineMenu(graph, canvasElement, placeholderNode, x, y) {
     //console.log("Platzhalter-Node ersetzt durch:", newNode);
   }
 }
-// Funktion, um das neue Menü anzuzeigen
+// Funktion, um das neue Node Menü anzuzeigen
 
 function showFrequentlyUsedFunctionsMenu(graph, canvasElement, clickedNode) {
   // Erstelle ein Overlay für das Menü
@@ -1211,7 +1287,7 @@ function showFrequentlyUsedFunctionsMenu(graph, canvasElement, clickedNode) {
   canvasElement.parentElement.appendChild(overlay);
 }
 
-
+// Menü für die Einstellungen des Feedback-Graphen
 function showGraphNodeMenu(graph, canvasElement, clickedNode) {
   // Erstelle Overlay
   const overlay = document.createElement("div");
@@ -1331,7 +1407,7 @@ function showGraphNodeMenu(graph, canvasElement, clickedNode) {
 
   overlay.appendChild(menuContent);
 }
-
+// Menü für die Einstellungen des Feedback-Gleichung
 function showEquationNodeMenu(graph, canvasElement, clickedNode) {
   // Erstelle Overlay
   const overlay = document.createElement("div");
@@ -1340,7 +1416,7 @@ function showEquationNodeMenu(graph, canvasElement, clickedNode) {
   overlay.style.left = "0";
   overlay.style.width = "100%";
   overlay.style.height = "100%";
-  overlay.style.backgroundColor = "rgba(132, 177, 156, 0.9)";
+  overlay.style.backgroundColor = "rgba(139, 154, 202, 0.9)";
   overlay.style.zIndex = "300";
   overlay.style.display = "flex";
   overlay.style.justifyContent = "center";
@@ -1435,7 +1511,7 @@ function showEquationNodeMenu(graph, canvasElement, clickedNode) {
   overlay.appendChild(menuContent);
 }
 
-
+// Menü für die Einstellungen der Operation-Node
 function showOperationNodeMenu(graph, canvasElement, clickedNode) {
   // Erstelle Overlay
   const overlay = document.createElement("div");
@@ -1533,8 +1609,213 @@ function showOperationNodeMenu(graph, canvasElement, clickedNode) {
   overlay.appendChild(menuContent);
 }
 
+function showTextAnzeigeNodeMenu(graph, canvasElement, clickedNode) {
+  // Erstelle Overlay
+  const overlay = document.createElement("div");
+  overlay.style.position = "absolute";
+  overlay.style.top = "0";
+  overlay.style.left = "0";
+  overlay.style.width = "100%";
+  overlay.style.height = "100%";
+  overlay.style.backgroundColor = "rgba(139, 154, 202, 0.9)";
+  overlay.style.zIndex = "300";
+  overlay.style.display = "flex";
+  overlay.style.justifyContent = "center";
+  overlay.style.alignItems = "center";
+  overlay.style.color = "#ffffff";
+  canvasElement.parentElement.appendChild(overlay);
 
+  // Menü-Inhalt
+  const menuContent = document.createElement("div");
+  menuContent.className = "inner";
+  menuContent.style.display = "flex";
+  menuContent.style.flexDirection = "column";
+  menuContent.style.gap = "20px";
 
+  // Schließen-Button
+  const closeButton = document.createElement("button");
+  closeButton.textContent = "X";
+  closeButton.className = "button primary small";
+  closeButton.style.position = "absolute";
+  closeButton.style.top = "10px";
+  closeButton.style.right = "10px";
+  closeButton.addEventListener("click", () => {
+    canvasElement.parentElement.removeChild(overlay);
+  });
+  overlay.appendChild(closeButton);
+
+  // Aktionen
+  const actions = [
+    {
+      name: "AKTUELLEN TEXT SPEICHERN",
+      onClick: () => {
+        clickedNode.properties.savedText = clickedNode.properties.displayedText;
+        canvasElement.parentElement.removeChild(overlay);
+      },
+    },
+    {
+      name: "GESPEICHERTEN TEXT LÖSCHEN",
+      onClick: () => {
+        clickedNode.properties.savedText = "";
+        canvasElement.parentElement.removeChild(overlay);
+      },
+    },
+  ];
+
+  // Überschrift hinzufügen
+  const header = document.createElement("header");
+  header.className = "major";
+  header.innerHTML = "<h3>Einstellungen für die Text Anzeige</h3>";
+  menuContent.insertBefore(header, menuContent.firstChild);
+  
+  // Buttons erstellen – Design entsprechend dem markierten Bereich
+  actions.forEach((action) => {
+    const button = document.createElement("li");
+    button.textContent = action.name;
+    button.className = "links machine-button";
+    button.style.margin = "5px";
+    button.style.listStyle = "none";
+    button.style.fontWeight = "600";
+    button.style.fontSize = "0.6em";
+    button.style.letterSpacing = "0.25em";
+    button.style.borderBottom = "1px rgba(255, 255, 255, 1)";
+    button.style.paddingBottom = "10px";
+    button.style.transition = "background-color 0.3s, transform 0.1s";
+    button.style.backgroundColor = "transparent";
+    button.style.color = "#ffffff";
+
+    // Hover-Effekt
+    button.addEventListener("mouseover", () => {
+      button.style.backgroundColor = "rgba(255, 255, 255, 0.1)";
+    });
+
+    // Entferne Hover-Effekt
+    button.addEventListener("mouseout", () => {
+      button.style.backgroundColor = "transparent";
+    });
+
+    // Klick-Effekt
+    button.addEventListener("mousedown", () => {
+      button.style.backgroundColor = "rgba(255, 255, 255, 0.3)";
+      button.style.transform = "scale(0.98)";
+    });
+
+    button.addEventListener("mouseup", () => {
+      button.style.backgroundColor = "rgba(255, 255, 255, 0.1)";
+      button.style.transform = "scale(1)";
+    });
+
+    // Klick-Funktion
+    button.addEventListener("click", action.onClick);
+    menuContent.appendChild(button);
+  });
+
+  overlay.appendChild(menuContent);
+}
+
+function showTextEingabeNodeMenu(graph, canvasElement, clickedNode) {
+  // Erstelle Overlay
+  const overlay = document.createElement("div");
+  overlay.style.position = "absolute";
+  overlay.style.top = "0";
+  overlay.style.left = "0";
+  overlay.style.width = "100%";
+  overlay.style.height = "100%";
+  overlay.style.backgroundColor = "rgba(203, 176, 143, 0.9)";
+  overlay.style.zIndex = "300";
+  overlay.style.display = "flex";
+  overlay.style.justifyContent = "center";
+  overlay.style.alignItems = "center";
+  overlay.style.color = "#ffffff";
+  canvasElement.parentElement.appendChild(overlay);
+
+  // Menü-Inhalt
+  const menuContent = document.createElement("div");
+  menuContent.className = "inner";
+  menuContent.style.display = "flex";
+  menuContent.style.flexDirection = "column";
+  menuContent.style.gap = "20px";
+
+  // Schließen-Button
+  const closeButton = document.createElement("button");
+  closeButton.textContent = "X";
+  closeButton.className = "button primary small";
+  closeButton.style.position = "absolute";
+  closeButton.style.top = "10px";
+  closeButton.style.right = "10px";
+  closeButton.addEventListener("click", () => {
+    canvasElement.parentElement.removeChild(overlay);
+  });
+  overlay.appendChild(closeButton);
+
+  // Aktionen
+  const actions = [
+    {
+      name: "SCHALTFLÄCHE EIN-/AUSBLENDEN",
+      onClick: () => {
+        clickedNode.properties.widgetVisible = typeof clickedNode.properties.widgetVisible === 'boolean' ? !clickedNode.properties.widgetVisible : true;
+        canvasElement.parentElement.removeChild(overlay);
+      },
+    },
+    {
+      name: "TEXT ALS GEHEIM MARKIEREN",
+      onClick: () => {
+        clickedNode.properties.geheim = "true";
+        canvasElement.parentElement.removeChild(overlay);
+      },
+    },
+  ];
+
+  // Überschrift hinzufügen
+  const header = document.createElement("header");
+  header.className = "major";
+  header.innerHTML = "<h3>Einstellungen für die Text Anzeige</h3>";
+  menuContent.insertBefore(header, menuContent.firstChild);
+  
+  // Buttons erstellen – Design entsprechend dem markierten Bereich
+  actions.forEach((action) => {
+    const button = document.createElement("li");
+    button.textContent = action.name;
+    button.className = "links machine-button";
+    button.style.margin = "5px";
+    button.style.listStyle = "none";
+    button.style.fontWeight = "600";
+    button.style.fontSize = "0.6em";
+    button.style.letterSpacing = "0.25em";
+    button.style.borderBottom = "1px rgba(255, 255, 255, 1)";
+    button.style.paddingBottom = "10px";
+    button.style.transition = "background-color 0.3s, transform 0.1s";
+    button.style.backgroundColor = "transparent";
+    button.style.color = "#ffffff";
+
+    // Hover-Effekt
+    button.addEventListener("mouseover", () => {
+      button.style.backgroundColor = "rgba(255, 255, 255, 0.1)";
+    });
+
+    // Entferne Hover-Effekt
+    button.addEventListener("mouseout", () => {
+      button.style.backgroundColor = "transparent";
+    });
+
+    // Klick-Effekt
+    button.addEventListener("mousedown", () => {
+      button.style.backgroundColor = "rgba(255, 255, 255, 0.3)";
+      button.style.transform = "scale(0.98)";
+    });
+
+    button.addEventListener("mouseup", () => {
+      button.style.backgroundColor = "rgba(255, 255, 255, 0.1)";
+      button.style.transform = "scale(1)";
+    });
+
+    // Klick-Funktion
+    button.addEventListener("click", action.onClick);
+    menuContent.appendChild(button);
+  });
+
+  overlay.appendChild(menuContent);
+}
 
 function getCanvasConfigPath(canvasId) {
   const canvasElement = document.getElementById(canvasId);

@@ -204,6 +204,13 @@
 	<script src="assets/js/util.js"></script>
 	<script src="assets/js/main.js"></script>
 	<script src="assets/js/scripts.js"></script>
+	<script>
+		// Besucherzähler aufrufen
+		fetch('counter.php')
+			.then(response => response.text())
+			.then(data => console.log(data))
+			.catch(error => console.error('Error:', error));
+	</script>
 
 
 
