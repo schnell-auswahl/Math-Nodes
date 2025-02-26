@@ -1416,7 +1416,7 @@ function showEquationNodeMenu(graph, canvasElement, clickedNode) {
   overlay.style.left = "0";
   overlay.style.width = "100%";
   overlay.style.height = "100%";
-  overlay.style.backgroundColor = "rgba(132, 177, 156, 0.9)";
+  overlay.style.backgroundColor = "rgba(139, 154, 202, 0.9)";
   overlay.style.zIndex = "300";
   overlay.style.display = "flex";
   overlay.style.justifyContent = "center";

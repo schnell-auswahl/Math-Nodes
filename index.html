@@ -5,196 +5,201 @@
 	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
 -->
 <html>
-	<head>
-		<title>Math Nodes</title>
-		<meta charset="utf-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-		<link rel="stylesheet" href="assets/css/main.css" />
-		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
-		  <!-- Ab hier brauchen wir alles für Litegraph -->
-		  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.13.11/dist/katex.min.css">
-    
-		  <!-- Einbinden der KaTeX JavaScript-Datei, die für das Rendern von mathematischen Ausdrücken verantwortlich ist -->
-		  <script src="https://cdn.jsdelivr.net/npm/katex@0.13.11/dist/katex.min.js"></script>
-	  
-		  <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/10.2.0/math.min.js"></script>
-	  
-		  <!-- MathJax-Konfiguration -->
-			
 
-<!-- MathJax-Bibliothek -->
-<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
-	  
-		  <!-- Stile für den LiteGraph Inspector (kann angepasst werden) -->
-		  <link rel="stylesheet" type="text/css" href="./inspector.css">
-		  <link rel="stylesheet" type="text/css" href="./Litegraph/litegraph.css">
-		<script type="text/javascript" src="./Litegraph/litegraph.js"></script>
-		<script type="module" src="./Litegraph/createGraph.js"; ></script>
+<head>
+	<title>Math Nodes</title>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+	<link rel="stylesheet" href="assets/css/main.css" />
+	<noscript>
+		<link rel="stylesheet" href="assets/css/noscript.css" />
+	</noscript>
+	<!-- Ab hier brauchen wir alles für Litegraph -->
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.13.11/dist/katex.min.css">
 
-	</head>
-	<body class="is-preload">
+	<!-- Einbinden der KaTeX JavaScript-Datei, die für das Rendern von mathematischen Ausdrücken verantwortlich ist -->
+	<script src="https://cdn.jsdelivr.net/npm/katex@0.13.11/dist/katex.min.js"></script>
 
-		<!-- Wrapper -->
-			<div id="wrapper">
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/10.2.0/math.min.js"></script>
 
-				<!-- Header -->
-					<header id="header" class="alt">
-						<a href="index.html" class="logo"><strong>Math-Nodes</strong> <span>Nicolas Regel</span></a>
-						<nav>
-							<a href="#menu">Menü</a>
-						</nav>
+	<!-- MathJax-Konfiguration -->
+
+
+	<!-- MathJax-Bibliothek -->
+	<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
+
+	<!-- Stile für den LiteGraph Inspector (kann angepasst werden) -->
+	<link rel="stylesheet" type="text/css" href="./inspector.css">
+	<link rel="stylesheet" type="text/css" href="./Litegraph/litegraph.css">
+	<script type="text/javascript" src="./Litegraph/litegraph.js"></script>
+	<script type="module" src="./Litegraph/createGraph.js" ;></script>
+
+</head>
+
+<body class="is-preload">
+
+	<!-- Wrapper -->
+	<div id="wrapper">
+
+		<!-- Header -->
+		<header id="header" class="alt">
+			<a href="index.html" class="logo"><strong>Math-Nodes</strong> <span>Nicolas Regel</span></a>
+			<nav>
+				<a href="#menu">Menü</a>
+			</nav>
+		</header>
+
+		<!-- Menu -->
+		<nav id="menu">
+			<ul class="links">
+				<li><a href="Wortmaschinen.html">1: Wortmaschinen</a></li>
+				<li><a href="Funktionsmaschinen.html">2: Funktionsmaschinen</a></li>
+				<li><a href="Funktionsmaschinen.html">3: Funktionsmaschinen</a></li>
+				<li><a href="FunktionenHoeren.html">4: Funktionen hören</a></li>
+				<li><a href="Eigene_Aufgaben.html">Eigene Aufgaben erstellen</a></li>
+				<li><a href="Anleitung_Landing.html">Anleitung</a></li>
+				<li><a href="Impressum.html">Impressum</a></li>
+			</ul>
+			<ul class="actions stacked">
+				<li><a href="index.html" class="button primary fit">Startseite</a></li>
+			</ul>
+		</nav>
+
+		<!-- Banner -->
+		<section id="banner" class="major">
+			<div class="inner">
+				<header class="major">
+					<h1>Math-Nodes</h1>
+				</header>
+				<div class="content">
+					<p>Spielerisch Lernen mit Funktionsmaschinen<br />
+						ein Projekt von Nicolas Regel</p>
+					<ul class="actions">
+						<li><a href="#litegraph" class="button next scrolly">Freies Experimentieren</a></li>
+					</ul>
+					<ul class="actions">
+						<li><a href="#one" class="button next scrolly">Zu den Aufgaben</a></li>
+					</ul>
+				</div>
+			</div>
+		</section>
+		<!-- LiteGraph Canvas -->
+		<section id="litegraph">
+			<div id="graphstylefull">
+				<canvas id="graphCanvas1" Interaction="true" data-config-path="Litegraph/configs/Test_config1.json"
+					data-zoom="1" allowContextMenu="true" allowNodeLoad="true" lgtype="Funktionsmaschinen">
+				</canvas>
+			</div>
+			<script type="module">
+				import { createGraphInstance } from './Litegraph/createGraph.js';
+				// Erstelle die Graphen für beide Canvas-Elemente
+				createGraphInstance("graphCanvas1");
+				//createGraphInstance("graphCanvas2");
+				//createGraphInstance("graphCanvas3");
+			</script>
+		</section>
+
+
+		<!-- Main -->
+		<div id="main">
+
+			<!-- One -->
+			<section id="one" class="tiles">
+				<article>
+					<span class="image">
+						<img src="images/pic01.jpg" alt="" />
+					</span>
+					<header class="major">
+						<h3><a href="Wortmaschinen.html" class="link">Kapitel 1: Wortmaschinen</a></h3>
+						<p>Hier lernst du wie du MATH-NODES benutzt. Dazu wirst du mit den Wortmaschinen Texte ver- und
+							entschlüsseln und lernen was das mit verketteten Funktionen zu tun hat.</p>
 					</header>
+				</article>
+				<article>
+					<span class="image">
+						<img src="images/pic02.jpg" alt="" />
+					</span>
+					<header class="major">
+						<h3><a href="Funktionsmaschinen.html" class="link">Kapitel 2: Funktionsmaschinen</a></h3>
+						<p>Hier lernst du wie die Funktionsmaschinen funktionieren und wie du damit komplizierte
+							Funktionen verstehen kannst.</p>
+					</header>
+				</article>
+				<article>
+					<span class="image">
+						<img src="images/pic06.jpg" alt="" />
+					</span>
+					<header class="major">
+						<h3><a href="Funktionsmaschinen2.html" class="link">Kapitel 3: Funktionsmaschinen</a></h3>
+						<p>Hier geht es mit fortgeschrittenen Aufgaben für die Funktionsmaschinen weiter.</p>
+					</header>
+				</article>
+				<article>
+					<span class="image">
+						<img src="images/pic03.jpg" alt="" />
+					</span>
+					<header class="major">
+						<h3><a href="FunktionenHoeren.html" class="link">Kapitel 4: Funktionen hören</a></h3>
+						<p>Mit den Funktionsmaschinen kannst du Funktionen hörbar machen. Hier lernst du wie!</p>
+					</header>
+				</article>
+				<article>
+					<span class="image">
+						<img src="images/pic04.jpg" alt="" />
+					</span>
+					<header class="major">
+						<h3><a href="Eigene_Aufgaben.html" class="link">Eigene Aufgaben erstellen</a></h3>
+						<p>Hier kannst frei in MATH-NODES arbeiten und z.B. eigene Aufgaben für und mit MATH-NODES
+							erstellen</p>
+					</header>
+				</article>
+				<article>
+					<span class="image">
+						<img src="images/pic05.jpg" alt="" />
+					</span>
+					<header class="major">
+						<h3><a href="Anleitung_Landing.html" class="link">Anleitung</a></h3>
+						<p>Hier findest du eine detaillierte Anleitung zu allen Funktionen von MATH-NODES.</p>
+					</header>
+				</article>
+			</section>
 
-				<!-- Menu -->
-					<nav id="menu">
-						<ul class="links">
-							<li><a href="Wortmaschinen.html">1: Wortmaschinen</a></li>
-							<li><a href="Funktionsmaschinen.html">2: Funktionsmaschinen</a></li>
-                            <li><a href="Funktionsmaschinen.html">3: Funktionsmaschinen</a></li>
-                            <li><a href="FunktionenHoeren.html">4: Funktionen hören</a></li>
-                            <li><a href="Eigene_Aufgaben.html">Eigene Aufgaben erstellen</a></li>
-                            <li><a href="Anleitung_Landing.html">Anleitung</a></li>
-							<li><a href="Impressum.html">Impressum</a></li>
-						</ul>
-						<ul class="actions stacked">
-							<li><a href="index.html" class="button primary fit">Startseite</a></li>
-						</ul>
-					</nav>
+			<!-- Two -->
 
-				<!-- Banner -->
-					<section id="banner" class="major">
-						<div class="inner">
+			<section id="two">
+				<div class="inner">
+					<div class="row">
+						<div class="col-6 col-12-small">
 							<header class="major">
-								<h1>Math-Nodes</h1>
+								<h3>Arbeitsheft</h3>
 							</header>
-							<div class="content">
-								<p>Spielerisch Lernen mit Funktionsmaschinen<br />
-								ein Projekt von Nicolas Regel</p>
-								<ul class="actions">
-									<li><a href="#litegraph" class="button next scrolly">Freies Experimentieren</a></li>
-								</ul>
-                                <ul class="actions">
-									<li><a href="#one" class="button next scrolly">Zu den Aufgaben</a></li>
-								</ul>
-							</div>
+							<p>Zu allen MATH-NODES Kapitels gibt es passendes Arbeitsmaterial. Du kannst es hier
+								herunterladen. Viel Spaß damit.</p>
+							<ul class="actions">
+								<a href="Latex/Arbeitsheft_Math-Nodes.pdf"
+									class="button icon solid fa-download">Arbeitsheft Download</a>
+							</ul>
 						</div>
-					</section>
-					<!-- LiteGraph Canvas -->
-					<section id="litegraph" >
-						<div id="graphstylefull">
-							<canvas 
-							id="graphCanvas1" 
-							Interaction="true" 
-							data-config-path="Litegraph/configs/Test_config1.json" 
-							data-zoom="1"
-							allowContextMenu="true"
-							allowNodeLoad="true"
-							lgtype="Funktionsmaschinen">
-						</canvas>
+						<div class="col-6 col-12-small">
+							<header class="major">
+								<h3>Forschung zu MATH-NODES</h3>
+							</header>
+							<p>Zu MATH-NODES gibt es mehrere wissenschaftliche Veröffentlichungen. Du findest Sie hier.
+							</p>
+							<ul class="actions">
+								<li><a href="https://tu-dresden.de/mn/math/analysis/didaktik/die-professur/nicolas-regel"
+										class="button next" target="_blank">Veröffentlichungen</a></li>
+							</ul>
+						</div>
 					</div>
-						<script type="module">
-							import { createGraphInstance } from './Litegraph/createGraph.js';
-							// Erstelle die Graphen für beide Canvas-Elemente
-							createGraphInstance("graphCanvas1");
-							//createGraphInstance("graphCanvas2");
-							//createGraphInstance("graphCanvas3");
-						</script>
-					</section>
-					
+				</div>
+			</section>
+		</div>
 
-				<!-- Main -->
-					<div id="main">
-
-						<!-- One -->
-							<section id="one" class="tiles">
-								<article>
-									<span class="image">
-										<img src="images/pic01.jpg" alt="" />
-									</span>
-									<header class="major">
-										<h3><a href="Wortmaschinen.html" class="link">Kapitel 1: Wortmaschinen</a></h3>
-										<p>Hier lernst du wie du MATH-NODES benutzt. Dazu wirst du mit den Wortmaschinen Texte ver- und entschlüsseln und lernen was das mit verketteten Funktionen zu tun hat.</p>
-									</header>
-								</article>
-								<article>
-									<span class="image">
-										<img src="images/pic02.jpg" alt="" />
-									</span>
-									<header class="major">
-										<h3><a href="Funktionsmaschinen.html" class="link">Kapitel 2: Funktionsmaschinen</a></h3>
-										<p>Hier lernst du wie die Funktionsmaschinen funktionieren und wie du damit komplizierte Funktionen verstehen kannst.</p>
-									</header>
-								</article>
-								<article>
-									<span class="image">
-										<img src="images/pic06.jpg" alt="" />
-									</span>
-									<header class="major">
-										<h3><a href="Funktionsmaschinen2.html" class="link">Kapitel 3: Funktionsmaschinen</a></h3>
-										<p>Hier geht es mit fortgeschrittenen Aufgaben für die Funktionsmaschinen weiter.</p>
-									</header>
-								</article>
-								<article>
-									<span class="image">
-										<img src="images/pic03.jpg" alt="" />
-									</span>
-									<header class="major">
-										<h3><a href="FunktionenHoeren.html" class="link">Kapitel 4: Funktionen hören</a></h3>
-										<p>Mit den Funktionsmaschinen kannst du Funktionen hörbar machen. Hier lernst du wie!</p>
-									</header>
-								</article>
-								<article>
-									<span class="image">
-										<img src="images/pic04.jpg" alt="" />
-									</span>
-									<header class="major">
-										<h3><a href="Eigene_Aufgaben.html" class="link">Eigene Aufgaben erstellen</a></h3>
-										<p>Hier kannst frei in MATH-NODES arbeiten und z.B. eigene Aufgaben für und mit MATH-NODES erstellen</p>
-									</header>
-								</article>
-								<article>
-									<span class="image">
-										<img src="images/pic05.jpg" alt="" />
-									</span>
-									<header class="major">
-										<h3><a href="Anleitung_Landing.html" class="link">Anleitung</a></h3>
-										<p>Hier findest du eine detaillierte Anleitung zu allen Funktionen von MATH-NODES.</p>
-									</header>
-								</article>
-							</section>
-
-						<!-- Two -->
-			
-							<section id="two">
-								<div class="inner">
-										<div class="row">
-											<div class="col-6 col-12-small">
-												<header class="major">
-												<h3>Arbeitsheft</h3>
-												</header>
-												<p>Zu allen MATH-NODES Kapitels gibt es passendes Arbeitsmaterial. Du kannst es hier herunterladen. Viel Spaß damit.</p>
-												<ul class="actions">
-													<a href="Latex/Arbeitsheft_Math-Nodes.pdf" class="button icon solid fa-download">Arbeitsheft Download</a>
-												</ul>
-											</div>
-											<div class="col-6 col-12-small">
-												<header class="major">
-												<h3>Forschung zu MATH-NODES</h3>
-												</header>
-												<p>Zu MATH-NODES gibt es mehrere wissenschaftliche Veröffentlichungen. Du findest Sie hier.</p>
-												<ul class="actions">
-													<li><a href="https://tu-dresden.de/mn/math/analysis/didaktik/die-professur/nicolas-regel" class="button next" target="_blank">Veröffentlichungen</a></li>
-												</ul>
-											</div>
-										</div>
-								</div>
-							</section>
-					</div>
-
-				<!-- Contact -->
+		<!-- Contact -->
 		<section id="contact">
 			<div class="inner">
-				
+
 				<section>
 					<section>
 						<div class="contact-method">
@@ -215,33 +220,44 @@
 			</div>
 		</section>
 
-                  
-
-				<!-- Footer -->
-					<footer id="footer">
-						<div class="inner">
-							<ul class="icons">
-								<li><a href="https://github.com/schnell-auswahl/Math-Nodes" class="icon brands alt fa-github"><span class="label">GitHub</span></a></li>
-							</ul>
-							<ul class="copyright">
-								<li>&copy; Nicolas Regel 2024</li><li><a href="Impressum.html" >Impressum</a></li><li>Designtemplate: <a href="https://html5up.net">HTML5 UP</a></li>
-							</ul>
-					</footer>
-
-			</div>
-
-		<!-- Scripts -->
-			<script src="assets/js/jquery.min.js"></script>
-			<script src="assets/js/jquery.scrolly.min.js"></script>
-			<script src="assets/js/jquery.scrollex.min.js"></script>
-			<script src="assets/js/browser.min.js"></script>
-			<script src="assets/js/breakpoints.min.js"></script>
-			<script src="assets/js/util.js"></script>
-			<script src="assets/js/main.js"></script>
-			<script src="assets/js/scripts.js"></script>
-			
 
 
+		<!-- Footer -->
+		<footer id="footer">
+			<div class="inner">
+				<ul class="icons">
+					<li><a href="https://github.com/schnell-auswahl/Math-Nodes" class="icon brands alt fa-github"><span
+								class="label">GitHub</span></a></li>
+				</ul>
+				<ul class="copyright">
+					<li>&copy; Nicolas Regel 2024</li>
+					<li><a href="Impressum.html">Impressum</a></li>
+					<li>Designtemplate: <a href="https://html5up.net">HTML5 UP</a></li>
+				</ul>
+		</footer>
 
-	</body>
+	</div>
+
+	<!-- Scripts -->
+	<script src="assets/js/jquery.min.js"></script>
+	<script src="assets/js/jquery.scrolly.min.js"></script>
+	<script src="assets/js/jquery.scrollex.min.js"></script>
+	<script src="assets/js/browser.min.js"></script>
+	<script src="assets/js/breakpoints.min.js"></script>
+	<script src="assets/js/util.js"></script>
+	<script src="assets/js/main.js"></script>
+	<script src="assets/js/scripts.js"></script>
+	<!-- In jeder HTML-Datei, z.B. index.html -->
+	<script>
+		// Besucherzähler aufrufen
+		fetch('counter.php')
+			.then(response => response.text())
+			.then(data => console.log(data))
+			.catch(error => console.error('Error:', error));
+	</script>
+
+
+
+</body>
+
 </html>
