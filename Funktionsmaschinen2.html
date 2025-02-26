@@ -58,6 +58,7 @@
 				<li><a href="Eigene_Aufgaben.html">Eigene Aufgaben erstellen</a></li>
 				<li><a href="Anleitung_Landing.html">Anleitung</a></li>
 				<li><a href="Impressum.html">Impressum</a></li>
+				<li><a href="stats.php">Statistik</a></li>
 			</ul>
 			<ul class="actions stacked">
 				<li><a href="index.html" class="button primary fit">Startseite</a></li>
@@ -405,14 +406,14 @@
 		loadPageContent(1, 'graphCanvas3');
 		
 	</script>
-		<script>
-			// Besucherzähler aufrufen
-			fetch('counter.php')
+			<script>
+			// Besucherzähler aufrufen mit aktuellem Seitennamen
+			const pageName = window.location.pathname.split('/').pop().replace('.html', '');
+			fetch(`counter.php?page=${pageName}`)
 				.then(response => response.text())
 				.then(data => console.log(data))
 				.catch(error => console.error('Error:', error));
 		</script>
-
 
 </body>
 

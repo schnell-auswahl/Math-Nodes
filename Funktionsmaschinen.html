@@ -58,6 +58,7 @@
 				<li><a href="Eigene_Aufgaben.html">Eigene Aufgaben erstellen</a></li>
 				<li><a href="Anleitung_Landing.html">Anleitung</a></li>
 				<li><a href="Impressum.html">Impressum</a></li>
+				<li><a href="stats.php">Statistik</a></li>
 			</ul>
 			<ul class="actions stacked">
 				<li><a href="index.html" class="button primary fit">Startseite</a></li>
@@ -204,7 +205,7 @@
 							<p><strong>Beachte:</strong> Wenn du das Feedback als Gleichung anschließt, vereinfacht Math-Nodes die Funktionsterme nicht. Kannst du den Term noch vereinfachen?</p>
                         </div>
                     </div>
-                  mage">
+					<div class="image">
 						<canvas id="graphCanvas5" data-resize="true" data-config-path="Litegraph/configs/Funktionsmaschinen_5.json"
 							allowContextMenu="false" allowNodeLoad="false" lgtype="Funktionsmaschinen"></canvas>
 						<script type="module">
@@ -349,7 +350,6 @@
 				graphCanvas4: 4,
 				graphCanvas6: 3,
 				graphCanvas8: 4,
-				graphCanvas9: 5,
 				// Füge hier weitere Paginierungen hinzu
 			};
 		
@@ -459,9 +459,10 @@
 			updatePagination(1, 'graphCanvas6');
 			loadPageContent(1, 'graphCanvas6');
 		</script>
-			<script>
-				// Besucherzähler aufrufen
-				fetch('counter.php')
+						<script>
+				// Besucherzähler aufrufen mit aktuellem Seitennamen
+				const pageName = window.location.pathname.split('/').pop().replace('.html', '');
+				fetch(`counter.php?page=${pageName}`)
 					.then(response => response.text())
 					.then(data => console.log(data))
 					.catch(error => console.error('Error:', error));
