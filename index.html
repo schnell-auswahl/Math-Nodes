@@ -59,6 +59,7 @@
 				<li><a href="Eigene_Aufgaben.html">Eigene Aufgaben erstellen</a></li>
 				<li><a href="Anleitung_Landing.html">Anleitung</a></li>
 				<li><a href="Impressum.html">Impressum</a></li>
+				<li><a href="stats.php">Statistik</a></li>
 			</ul>
 			<ul class="actions stacked">
 				<li><a href="index.html" class="button primary fit">Startseite</a></li>
@@ -249,8 +250,9 @@
 	<script src="assets/js/scripts.js"></script>
 	<!-- In jeder HTML-Datei, z.B. index.html -->
 	<script>
-		// Besucherzähler aufrufen
-		fetch('counter.php')
+		// Besucherzähler aufrufen mit aktuellem Seitennamen
+		const pageName = window.location.pathname.split('/').pop().replace('.html', '');
+		fetch(`counter.php?page=${pageName}`)
 			.then(response => response.text())
 			.then(data => console.log(data))
 			.catch(error => console.error('Error:', error));

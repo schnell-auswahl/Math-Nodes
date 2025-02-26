@@ -11,6 +11,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
     <link rel="stylesheet" href="assets/css/main.css" />
+        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <noscript>
         <link rel="stylesheet" href="assets/css/noscript.css" />
     </noscript>
@@ -38,6 +39,7 @@
                 <li><a href="Eigene_Aufgaben.html">Eigene Aufgaben erstellen</a></li>
                 <li><a href="Anleitung_Landing.html">Anleitung</a></li>
                 <li><a href="Impressum.html">Impressum</a></li>
+                <li><a href="stats.php">Statistik</a></li>
             </ul>
             <ul class="actions stacked">
                 <li><a href="index.html" class="button primary fit">Startseite</a></li>
@@ -55,7 +57,12 @@
                         <h1>Statistik</h1>
                     </header>
                     
+                                              <!-- Canvas für die Graphen -->
+        <canvas id="monthlyChart" width="400" height="200"></canvas>
+        <canvas id="yearlyChart" width="400" height="200"></canvas>
                     <?php include 'display_stats.php'; ?>
+
+  
 
                 </div>
             </section>
@@ -106,6 +113,92 @@
     <script src="assets/js/breakpoints.min.js"></script>
     <script src="assets/js/util.js"></script>
     <script src="assets/js/main.js"></script>
+
+    <script>
+    // Konfiguration für den monatlichen Graphen
+    const monthlyConfig = {
+        type: 'line',
+        data: {
+            labels: monthlyData.labels,
+            datasets: [{
+                label: 'Zugriffe im letzten Monat',
+                data: monthlyData.data,
+                borderColor: 'rgba(75, 192, 192, 1)',
+                borderWidth: 1
+            }]
+        },
+        options: {
+            scales: {
+                y: {
+                    beginAtZero: true,
+                    ticks: {
+                        color: 'white' // Schriftfarbe auf Weiß setzen
+                    }
+                },
+                x: {
+                    ticks: {
+                        color: 'white' // Schriftfarbe auf Weiß setzen
+                    }
+                }
+            },
+            plugins: {
+                legend: {
+                    labels: {
+                        color: 'white' // Schriftfarbe auf Weiß setzen
+                    }
+                }
+            }
+        }
+    };
+
+    // Konfiguration für den jährlichen Graphen
+    const yearlyConfig = {
+        type: 'line',
+        data: {
+            labels: yearlyData.labels,
+            datasets: [{
+                label: 'Zugriffe im Jahr',
+                data: yearlyData.data,
+                borderColor: 'rgba(153, 102, 255, 1)',
+                borderWidth: 1
+            }]
+        },
+        options: {
+            scales: {
+                y: {
+                    beginAtZero: true,
+                    ticks: {
+                        color: 'white' // Schriftfarbe auf Weiß setzen
+                    }
+                },
+                x: {
+                    ticks: {
+                        color: 'white' // Schriftfarbe auf Weiß setzen
+                    }
+                }
+            },
+            plugins: {
+                legend: {
+                    labels: {
+                        color: 'white' // Schriftfarbe auf Weiß setzen
+                    }
+                }
+            }
+        }
+    };
+
+    // Initialisierung der Graphen
+    const monthlyChart = new Chart(
+        document.getElementById('monthlyChart'),
+        monthlyConfig
+    );
+
+    const yearlyChart = new Chart(
+        document.getElementById('yearlyChart'),
+        yearlyConfig
+    );
+</script>
+
 
 </body>
 
